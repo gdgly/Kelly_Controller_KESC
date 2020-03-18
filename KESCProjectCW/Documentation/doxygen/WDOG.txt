@@ -1,0 +1,209 @@
+/*!
+\page WDOG WDOG (Init_WDOG)
+**          This file implements the WDOG (WDOG) module initialization
+**          according to the Peripheral Initialization settings, and
+**          defines interrupt service routines prototypes.
+
+- \subpage WDOG_settings
+- \subpage WDOG_regs_overview  
+- \subpage WDOG_regs_details
+- \ref WDOG_module "Component documentation" 
+
+\page WDOG_regs_overview Registers Initialization Overview
+This page initialization values for the registers of the peripheral(s) configured
+by the component. 
+<table>
+<tr><td colspan="4" class="ttitle1">WDOG Initialization</td></tr>
+<tr><td class="ttitle2">Address</td><td class="ttitle2">Register</td><td class="ttitle2">Register Value</td><td class="ttitle2">Register Description</td></tr>
+<tr><td>0x40052002</td><td>WDOG_CNT</td><td>
+    0x000028DD
+ </td><td>WDOG_CNT register, peripheral WDOG.</td></tr>
+<tr><td>0x40052006</td><td>WDOG_WIN</td><td>
+    0x00000000
+ </td><td>WDOG_WIN register, peripheral WDOG.</td></tr>
+<tr><td>0x40052004</td><td>WDOG_TOVAL</td><td>
+    0x00008F01
+ </td><td>WDOG_TOVAL register, peripheral WDOG.</td></tr>
+<tr><td>0x40052001</td><td>WDOG_CS2</td><td>
+    0x00000051
+ </td><td>WDOG_CS2 register, peripheral WDOG.</td></tr>
+<tr><td>0x40052000</td><td>WDOG_CS1</td><td>
+    0x000000A3
+ </td><td>WDOG_CS1 register, peripheral WDOG.</td></tr>
+</table>
+<br/>
+\page WDOG_regs_details Register Initialization Details
+This page contains detailed description of initialization values for the 
+registers of the peripheral(s) configured by the component. 
+
+<div class="reghdr1">WDOG_CNT</div>
+<div class="regdiag">
+<table class="regtbl">
+<tr class="trd1r">
+<td class="trd1c">Bit</td><td>15</td><td>14</td><td>13</td><td>12</td><td>11</td><td>10</td><td>9</td><td>8</td><td>7</td>
+<td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
+</tr>
+<tr>
+<td class="trd1c">R</td><td colspan="16" rowspan="2">CNT</td>
+</tr>
+<tr>
+<td class="trd1c">W</td>
+</tr>
+<tr class="trd1r">
+<td class="trd1c">Reset</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+<td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+</tr>
+</table>
+        
+</div>
+<table class="regtbl2"><tr><td class="trowtit" colspan="2">Address</td><td colspan="2">0x40052002</td></tr>
+<tr class="trowtit"><td  class="trowtit" colspan="2">Initial value</td><td colspan="2">0x000028DD</td></tr>
+<tr class="trowtit"><td  class="trowtit" colspan="2">After-reset value</td><td colspan="2">0x00000000</td></tr>
+<tr><td class="ttitle2">Bit</td><td class="ttitle2">Field</td><td class="ttitle2">Value</td><td class="ttitle2">Description</td></tr>
+<tr><td>0 - 15</td><td>CNT</td><td>0x00</td><td>Watchdog Counter Value</td>
+</tr></table>
+<div class="reghdr1">WDOG_WIN</div>
+<div class="regdiag">
+<table class="regtbl">
+<tr class="trd1r">
+<td class="trd1c">Bit</td><td>15</td><td>14</td><td>13</td><td>12</td><td>11</td><td>10</td><td>9</td><td>8</td><td>7</td>
+<td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
+</tr>
+<tr>
+<td class="trd1c">R</td><td colspan="16" rowspan="2">WIN</td>
+</tr>
+<tr>
+<td class="trd1c">W</td>
+</tr>
+<tr class="trd1r">
+<td class="trd1c">Reset</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+<td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+</tr>
+</table>
+        
+</div>
+<table class="regtbl2"><tr><td class="trowtit" colspan="2">Address</td><td colspan="2">0x40052006</td></tr>
+<tr class="trowtit"><td  class="trowtit" colspan="2">Initial value</td><td colspan="2">0x00000000</td></tr>
+<tr class="trowtit"><td  class="trowtit" colspan="2">After-reset value</td><td colspan="2">0x00000000</td></tr>
+<tr><td class="ttitle2">Bit</td><td class="ttitle2">Field</td><td class="ttitle2">Value</td><td class="ttitle2">Description</td></tr>
+<tr><td>0 - 15</td><td>WIN</td><td>0x00</td><td>Watchdog Window Value</td>
+</tr></table>
+<div class="reghdr1">WDOG_TOVAL</div>
+<div class="regdiag">
+<table class="regtbl">
+<tr class="trd1r">
+<td class="trd1c">Bit</td><td>15</td><td>14</td><td>13</td><td>12</td><td>11</td><td>10</td><td>9</td><td>8</td><td>7</td>
+<td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
+</tr>
+<tr>
+<td class="trd1c">R</td><td colspan="16" rowspan="2">TOVAL</td>
+</tr>
+<tr>
+<td class="trd1c">W</td>
+</tr>
+<tr class="trd1r">
+<td class="trd1c">Reset</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+<td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+</tr>
+</table>
+        
+</div>
+<table class="regtbl2"><tr><td class="trowtit" colspan="2">Address</td><td colspan="2">0x40052004</td></tr>
+<tr class="trowtit"><td  class="trowtit" colspan="2">Initial value</td><td colspan="2">0x00008F01</td></tr>
+<tr class="trowtit"><td  class="trowtit" colspan="2">After-reset value</td><td colspan="2">0x00000000</td></tr>
+<tr><td class="ttitle2">Bit</td><td class="ttitle2">Field</td><td class="ttitle2">Value</td><td class="ttitle2">Description</td></tr>
+<tr><td>0 - 15</td><td>TOVAL</td><td>0x8000</td><td>Watchdog Timeout Value</td>
+</tr></table>
+<div class="reghdr1">WDOG_CS2</div>
+<div class="regdiag">
+<table class="regtbl">
+<tr class="trd1r">
+<td class="trd1c">Bit</td><td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
+</tr>
+<tr>
+<td class="trd1c">R</td><td colspan="1" rowspan="2">WIN</td><td colspan="1" rowspan="2">FLG</td>
+<td colspan="1" rowspan="2">-</td><td colspan="1" rowspan="2">PRES</td><td colspan="1" rowspan="2">-</td>
+<td colspan="1" rowspan="2">-</td><td colspan="2" rowspan="2">CLK</td>
+</tr>
+<tr>
+<td class="trd1c">W</td>
+</tr>
+<tr class="trd1r">
+<td class="trd1c">Reset</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+</tr>
+</table>
+        
+</div>
+<table class="regtbl2"><tr><td class="trowtit" colspan="2">Address</td><td colspan="2">0x40052001</td></tr>
+<tr class="trowtit"><td  class="trowtit" colspan="2">Initial value</td><td colspan="2">0x00000051</td></tr>
+<tr class="trowtit"><td  class="trowtit" colspan="2">After-reset value</td><td colspan="2">0x00000001</td></tr>
+<tr><td class="ttitle2">Bit</td><td class="ttitle2">Field</td><td class="ttitle2">Value</td><td class="ttitle2">Description</td></tr>
+<tr><td>7</td><td>WIN</td><td>0x00</td><td>Watchdog Window</td>
+<tr><td>6</td><td>FLG</td><td>0x01</td><td>Watchdog Interrupt Flag</td>
+<tr><td>4</td><td>PRES</td><td>0x01</td><td>Watchdog Prescalar</td>
+<tr><td>0 - 1</td><td>CLK</td><td>0x00</td><td>Watchdog Clock</td>
+</tr></table>
+<div class="reghdr1">WDOG_CS1</div>
+<div class="regdiag">
+<table class="regtbl">
+<tr class="trd1r">
+<td class="trd1c">Bit</td><td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
+</tr>
+<tr>
+<td class="trd1c">R</td><td colspan="1" rowspan="2">EN</td><td colspan="1" rowspan="2">INT</td>
+<td colspan="1" rowspan="2">UPDATE</td><td colspan="2" rowspan="2">TST</td><td colspan="1" rowspan="2">DBG</td>
+<td colspan="1" rowspan="2">WAIT</td><td colspan="1" rowspan="2">STOP</td>
+</tr>
+<tr>
+<td class="trd1c">W</td>
+</tr>
+<tr class="trd1r">
+<td class="trd1c">Reset</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+</tr>
+</table>
+        
+</div>
+<table class="regtbl2"><tr><td class="trowtit" colspan="2">Address</td><td colspan="2">0x40052000</td></tr>
+<tr class="trowtit"><td  class="trowtit" colspan="2">Initial value</td><td colspan="2">0x000000A3</td></tr>
+<tr class="trowtit"><td  class="trowtit" colspan="2">After-reset value</td><td colspan="2">0x00000080</td></tr>
+<tr><td class="ttitle2">Bit</td><td class="ttitle2">Field</td><td class="ttitle2">Value</td><td class="ttitle2">Description</td></tr>
+<tr><td>7</td><td>EN</td><td>0x01</td><td>Watchdog Enable</td>
+<tr><td>6</td><td>INT</td><td>0x00</td><td>Watchdog Interrupt</td>
+<tr><td>5</td><td>UPDATE</td><td>0x01</td><td>Allow updates</td>
+<tr><td>3 - 4</td><td>TST</td><td>0x00</td><td>Watchdog Test</td>
+<tr><td>2</td><td>DBG</td><td>0x00</td><td>Debug Enable</td>
+<tr><td>1</td><td>WAIT</td><td>0x01</td><td>Wait Enable</td>
+<tr><td>0</td><td>STOP</td><td>0x01</td><td>Stop Enable</td>
+</tr></table>
+*/
+/*!
+\page WDOG_settings Component Settings
+\code
+**          Component name                                 : WDOG
+**          Device                                         : WDOG
+**          Settings                                       : 
+**            Clock settings                               : 
+**              Watchdog Configuration Time (WCT)          : 12.800 us
+**              Clock select                               : Bus clock
+**              Prescaler                                  : divide by 256
+**              Time-out value                             : 400
+**              Time-out period                            : 5.120 ms
+**            Window mode settings                         : 
+**              Windowing mode                             : Disabled
+**              Window value                               : 0
+**              Window                                     : STOPPED
+**            Wait mode                                    : Enabled
+**            Stop mode                                    : Enabled
+**            Debug mode                                   : Disabled
+**            Allow update                                 : Enabled
+**          Interrupts                                     : 
+**            Interrupt                                    : INT_Watchdog
+**            Interrupt request                            : Disabled
+**            Interrupt priority                           : 0 (Highest)
+**            ISR name                                     : 
+**            Watchdog interrupt                           : Disabled
+**          Initialization                                 : 
+**            Enable WDOG                                  : no
+**            Call Init method                             : no
+\endcode
+*/

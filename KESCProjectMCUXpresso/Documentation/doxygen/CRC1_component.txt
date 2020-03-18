@@ -1,0 +1,261 @@
+/*!
+  \page CRC1 CRC1 (CRC_LDD)
+**         This component implements the Cyclic Redundancy Check (CRC) code calculation.
+**
+
+- \subpage CRC1_settings
+- \subpage CRC1_regs_overview  
+- \subpage CRC1_regs_details
+- \ref CRC1_module "Component documentation" 
+\page CRC1_regs_overview Registers Initialization Overview
+This page contains the initialization values for the registers of the peripheral(s) configured
+by the component. 
+<table>
+<tr><td colspan="4" class="ttitle1">CRC1 Initialization</td></tr>
+<tr><td class="ttitle2">Address</td><td class="ttitle2">Register</td><td class="ttitle2">Register Value</td><td class="ttitle2">Register Description</td></tr>
+<tr><td>0x4004800C</td><td>SIM_SCGC</td>
+<td class="regNotResetVal">0x001034C0</td>
+ <td>SIM_SCGC register, peripheral CRC1.</td></tr>
+<tr><td>0x40032008</td><td>CRC_CTRL</td>
+<td class="regNotResetVal">0x62000000</td>
+ <td>CRC_CTRL register, peripheral CRC1.</td></tr>
+<tr><td>0x40032000</td><td>CRC_DATA</td>
+<td class="regNotResetVal">0xFFFF0000</td>
+ <td>CRC_DATA register, peripheral CRC1.</td></tr>
+<tr><td>0x40032004</td><td>CRC_GPOLY</td>
+<td class="regNotResetVal">0x00008005</td>
+ <td>CRC_GPOLY register, peripheral CRC1.</td></tr>
+</table>
+Color Denotes Reset Value
+<br/>
+\page CRC1_regs_details Register Initialization Details
+This page contains detailed description of initialization values for the 
+registers of the peripheral(s) configured by the component. 
+
+<div class="reghdr1">SIM_SCGC</div>
+<div class="regdiag">
+<table class="regtbl">
+<tr class="trd1r">
+<td class="trd1c">Bit</td><td>31</td><td>30</td><td>29</td><td>28</td><td>27</td><td>26</td><td>25</td><td>24</td><td>23</td>
+<td>22</td><td>21</td><td>20</td><td>19</td><td>18</td><td>17</td><td>16</td>
+</tr>
+<tr>
+<td class="trd1c">R</td><td colspan="1" rowspan="2">ACMP1</td><td colspan="1" rowspan="2">ACMP0</td>
+<td colspan="1" rowspan="2">ADC</td><td colspan="1" rowspan="2">-</td><td colspan="1" rowspan="2">IRQ</td>
+<td colspan="1" rowspan="2">-</td><td colspan="1" rowspan="2">KBI1</td><td colspan="1" rowspan="2">KBI0</td>
+<td colspan="1" rowspan="2">-</td><td colspan="1" rowspan="2">UART2</td><td colspan="1" rowspan="2">UART1</td>
+<td colspan="1" rowspan="2">UART0</td><td colspan="1" rowspan="2">SPI1</td><td colspan="1" rowspan="2">SPI0</td>
+<td colspan="1" rowspan="2">I2C</td><td colspan="1" rowspan="2">-</td>
+</tr>
+<tr>
+<td class="trd1c">W</td>
+</tr>
+<tr class="trd1r">
+<td class="trd1c">Reset</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+<td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+</tr>
+</table>
+<table class="regtbl">
+<tr class="trd1r">
+<td class="trd1c">Bit</td><td>15</td><td>14</td><td>13</td><td>12</td><td>11</td><td>10</td><td>9</td><td>8</td><td>7</td>
+<td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
+</tr>
+<tr>
+<td class="trd1c">R</td><td colspan="1" rowspan="2">-</td><td colspan="1" rowspan="2">-</td><td colspan="1" rowspan="2">SWD</td>
+<td colspan="1" rowspan="2">FLASH</td><td colspan="1" rowspan="2">-</td><td colspan="1" rowspan="2">CRC</td>
+<td colspan="1" rowspan="2">-</td><td colspan="1" rowspan="2">-</td><td colspan="1" rowspan="2">FTM2</td>
+<td colspan="1" rowspan="2">FTM1</td><td colspan="1" rowspan="2">FTM0</td><td colspan="1" rowspan="2">-</td>
+<td colspan="1" rowspan="2">-</td><td colspan="1" rowspan="2">-</td><td colspan="1" rowspan="2">PIT</td>
+<td colspan="1" rowspan="2">RTC</td>
+</tr>
+<tr>
+<td class="trd1c">W</td>
+</tr>
+<tr class="trd1r">
+<td class="trd1c">Reset</td><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+<td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+</tr>
+</table>
+        
+</div>
+<table class="regtbl2"><tr><td class="trowtit" colspan="2">Address</td><td colspan="2">0x4004800C</td></tr>
+<tr class="trowtit"><td  class="trowtit" colspan="2">Initial value</td><td colspan="2">0x001034C0</td></tr>
+<tr class="trowtit"><td  class="trowtit" colspan="2">After-reset value</td><td colspan="2">0x00003000</td></tr>
+<tr><td class="ttitle2">Bit</td><td class="ttitle2">Field</td><td class="ttitle2">Value</td><td class="ttitle2">Description</td></tr>
+<tr><td>31</td><td>ACMP1</td><td>0x00</td><td>ACMP1 Clock Gate Control</td>
+<tr><td>30</td><td>ACMP0</td><td>0x00</td><td>ACMP0 Clock Gate Control</td>
+<tr><td>29</td><td>ADC</td><td>0x00</td><td>ADC Clock Gate Control</td>
+<tr><td>27</td><td>IRQ</td><td>0x00</td><td>IRQ Clock Gate Control</td>
+<tr><td>25</td><td>KBI1</td><td>0x00</td><td>KBI1 Clock Gate Control</td>
+<tr><td>24</td><td>KBI0</td><td>0x00</td><td>KBI0 Clock Gate Control</td>
+<tr><td>22</td><td>UART2</td><td>0x00</td><td>UART2 Clock Gate Control</td>
+<tr><td>21</td><td>UART1</td><td>0x00</td><td>UART1 Clock Gate Control</td>
+<tr><td>20</td><td>UART0</td><td>0x01</td><td>UART0 Clock Gate Control</td>
+<tr><td>19</td><td>SPI1</td><td>0x00</td><td>SPI1 Clock Gate Control</td>
+<tr><td>18</td><td>SPI0</td><td>0x00</td><td>SPI0 Clock Gate Control</td>
+<tr><td>17</td><td>I2C</td><td>0x00</td><td>I2C Clock Gate Control</td>
+<tr><td>13</td><td>SWD</td><td>0x01</td><td>SWD (single wire debugger) Clock Gate Control</td>
+<tr><td>12</td><td>FLASH</td><td>0x01</td><td>Flash Clock Gate Control</td>
+<tr><td>10</td><td>CRC</td><td>0x01</td><td>CRC Clock Gate Control</td>
+<tr><td>7</td><td>FTM2</td><td>0x01</td><td>FTM2 Clock Gate Control</td>
+<tr><td>6</td><td>FTM1</td><td>0x01</td><td>FTM1 Clock Gate Control</td>
+<tr><td>5</td><td>FTM0</td><td>0x00</td><td>FTM0 Clock Gate Control</td>
+<tr><td>1</td><td>PIT</td><td>0x00</td><td>PIT Clock Gate Control</td>
+<tr><td>0</td><td>RTC</td><td>0x00</td><td>RTC Clock Gate Control</td>
+</tr></table>
+<div class="reghdr1">CRC_CTRL</div>
+<div class="regdiag">
+<table class="regtbl">
+<tr class="trd1r">
+<td class="trd1c">Bit</td><td>31</td><td>30</td><td>29</td><td>28</td><td>27</td><td>26</td><td>25</td><td>24</td><td>23</td>
+<td>22</td><td>21</td><td>20</td><td>19</td><td>18</td><td>17</td><td>16</td>
+</tr>
+<tr>
+<td class="trd1c">R</td><td colspan="2" rowspan="2">TOT</td><td colspan="2" rowspan="2">TOTR</td>
+<td colspan="1" rowspan="2">-</td><td colspan="1" rowspan="2">FXOR</td><td colspan="1" rowspan="2">WAS</td>
+<td colspan="1" rowspan="2">TCRC</td><td colspan="1" rowspan="2">-</td><td colspan="1" rowspan="2">-</td>
+<td colspan="1" rowspan="2">-</td><td colspan="1" rowspan="2">-</td><td colspan="1" rowspan="2">-</td>
+<td colspan="1" rowspan="2">-</td><td colspan="1" rowspan="2">-</td><td colspan="1" rowspan="2">-</td>
+</tr>
+<tr>
+<td class="trd1c">W</td>
+</tr>
+<tr class="trd1r">
+<td class="trd1c">Reset</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+<td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+</tr>
+</table>
+<table class="regtbl">
+<tr class="trd1r">
+<td class="trd1c">Bit</td><td>15</td><td>14</td><td>13</td><td>12</td><td>11</td><td>10</td><td>9</td><td>8</td><td>7</td>
+<td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
+</tr>
+<tr>
+<td class="trd1c">R</td><td colspan="1" rowspan="2">-</td><td colspan="1" rowspan="2">-</td><td colspan="1" rowspan="2">-</td>
+<td colspan="1" rowspan="2">-</td><td colspan="1" rowspan="2">-</td><td colspan="1" rowspan="2">-</td>
+<td colspan="1" rowspan="2">-</td><td colspan="1" rowspan="2">-</td><td colspan="1" rowspan="2">-</td>
+<td colspan="1" rowspan="2">-</td><td colspan="1" rowspan="2">-</td><td colspan="1" rowspan="2">-</td>
+<td colspan="1" rowspan="2">-</td><td colspan="1" rowspan="2">-</td><td colspan="1" rowspan="2">-</td>
+<td colspan="1" rowspan="2">-</td>
+</tr>
+<tr>
+<td class="trd1c">W</td>
+</tr>
+<tr class="trd1r">
+<td class="trd1c">Reset</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+<td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+</tr>
+</table>
+        
+</div>
+<table class="regtbl2"><tr><td class="trowtit" colspan="2">Address</td><td colspan="2">0x40032008</td></tr>
+<tr class="trowtit"><td  class="trowtit" colspan="2">Initial value</td><td colspan="2">0x62000000</td></tr>
+<tr class="trowtit"><td  class="trowtit" colspan="2">After-reset value</td><td colspan="2">0x00000000</td></tr>
+<tr><td class="ttitle2">Bit</td><td class="ttitle2">Field</td><td class="ttitle2">Value</td><td class="ttitle2">Description</td></tr>
+<tr><td>30 - 31</td><td>TOT</td><td>0x00</td><td>Type Of Transpose For Writes</td>
+<tr><td>28 - 29</td><td>TOTR</td><td>0x02</td><td>Type Of Transpose For Read</td>
+<tr><td>26</td><td>FXOR</td><td>0x00</td><td>Complement Read Of CRC Data Register</td>
+<tr><td>25</td><td>WAS</td><td>0x01</td><td>Write CRC Data Register As Seed</td>
+<tr><td>24</td><td>TCRC</td><td>0x00</td><td>Width of CRC protocol</td>
+</tr></table>
+<div class="reghdr1">CRC_DATA</div>
+<div class="regdiag">
+<table class="regtbl">
+<tr class="trd1r">
+<td class="trd1c">Bit</td><td>31</td><td>30</td><td>29</td><td>28</td><td>27</td><td>26</td><td>25</td><td>24</td><td>23</td>
+<td>22</td><td>21</td><td>20</td><td>19</td><td>18</td><td>17</td><td>16</td>
+</tr>
+<tr>
+<td class="trd1c">R</td><td colspan="8" rowspan="2">HU</td><td colspan="8" rowspan="2">HL</td>
+</tr>
+<tr>
+<td class="trd1c">W</td>
+</tr>
+<tr class="trd1r">
+<td class="trd1c">Reset</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td>
+<td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td>
+</tr>
+</table>
+<table class="regtbl">
+<tr class="trd1r">
+<td class="trd1c">Bit</td><td>15</td><td>14</td><td>13</td><td>12</td><td>11</td><td>10</td><td>9</td><td>8</td><td>7</td>
+<td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
+</tr>
+<tr>
+<td class="trd1c">R</td><td colspan="8" rowspan="2">LU</td><td colspan="8" rowspan="2">LL</td>
+</tr>
+<tr>
+<td class="trd1c">W</td>
+</tr>
+<tr class="trd1r">
+<td class="trd1c">Reset</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td>
+<td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td>
+</tr>
+</table>
+        
+</div>
+<table class="regtbl2"><tr><td class="trowtit" colspan="2">Address</td><td colspan="2">0x40032000</td></tr>
+<tr class="trowtit"><td  class="trowtit" colspan="2">Initial value</td><td colspan="2">0xFFFF0000</td></tr>
+<tr class="trowtit"><td  class="trowtit" colspan="2">After-reset value</td><td colspan="2">0xFFFFFFFF</td></tr>
+<tr><td class="ttitle2">Bit</td><td class="ttitle2">Field</td><td class="ttitle2">Value</td><td class="ttitle2">Description</td></tr>
+<tr><td>24 - 31</td><td>HU</td><td>0x80</td><td>CRC High Upper Byte</td>
+<tr><td>16 - 23</td><td>HL</td><td>0x80</td><td>CRC High Lower Byte</td>
+<tr><td>8 - 15</td><td>LU</td><td>0x00</td><td>CRC Low Upper Byte</td>
+<tr><td>0 - 7</td><td>LL</td><td>0x00</td><td>CRC Low Lower Byte</td>
+</tr></table>
+<div class="reghdr1">CRC_GPOLY</div>
+<div class="regdiag">
+<table class="regtbl">
+<tr class="trd1r">
+<td class="trd1c">Bit</td><td>31</td><td>30</td><td>29</td><td>28</td><td>27</td><td>26</td><td>25</td><td>24</td><td>23</td>
+<td>22</td><td>21</td><td>20</td><td>19</td><td>18</td><td>17</td><td>16</td>
+</tr>
+<tr>
+<td class="trd1c">R</td><td colspan="16" rowspan="2">HIGH</td>
+</tr>
+<tr>
+<td class="trd1c">W</td>
+</tr>
+<tr class="trd1r">
+<td class="trd1c">Reset</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+<td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+</tr>
+</table>
+<table class="regtbl">
+<tr class="trd1r">
+<td class="trd1c">Bit</td><td>15</td><td>14</td><td>13</td><td>12</td><td>11</td><td>10</td><td>9</td><td>8</td><td>7</td>
+<td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
+</tr>
+<tr>
+<td class="trd1c">R</td><td colspan="16" rowspan="2">LOW</td>
+</tr>
+<tr>
+<td class="trd1c">W</td>
+</tr>
+<tr class="trd1r">
+<td class="trd1c">Reset</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+<td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td>
+</tr>
+</table>
+        
+</div>
+<table class="regtbl2"><tr><td class="trowtit" colspan="2">Address</td><td colspan="2">0x40032004</td></tr>
+<tr class="trowtit"><td  class="trowtit" colspan="2">Initial value</td><td colspan="2">0x00008005</td></tr>
+<tr class="trowtit"><td  class="trowtit" colspan="2">After-reset value</td><td colspan="2">0x00001021</td></tr>
+<tr><td class="ttitle2">Bit</td><td class="ttitle2">Field</td><td class="ttitle2">Value</td><td class="ttitle2">Description</td></tr>
+<tr><td>16 - 31</td><td>HIGH</td><td>0x00</td><td>High Polynominal Half-word</td>
+<tr><td>0 - 15</td><td>LOW</td><td>0x8000</td><td>Low Polynominal Half-word</td>
+</tr></table>
+*/
+/*!
+\page CRC1_settings Component Settings
+\code
+**          Component name                                 : CRC1
+**          Device                                         : CRC
+**          Settings                                       : 
+**            CRC standard                                 : CRC16
+**          Initialization                                 : 
+**            Auto initialization                          : no
+<h1>
+\endcode
+*/

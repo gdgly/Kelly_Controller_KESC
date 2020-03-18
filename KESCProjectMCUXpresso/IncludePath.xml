@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cdtprojectproperties>
+<section name="org.eclipse.cdt.internal.ui.wizards.settingswizards.IncludePaths">
+<language name="C Source File">
+<includepath>board</includepath>
+<includepath>source</includepath>
+<includepath>CMSIS</includepath>
+<includepath>device</includepath>
+<includepath/>
+<includepath>${ProjDirPath}/Generated_Code</includepath>
+<includepath>${ProjDirPath}/Sources</includepath>
+<includepath>${ProjDirPath}/Static_Code/PDD</includepath>
+<includepath>${ProjDirPath}/Static_Code/IO_Map</includepath>
+<includepath workspace_path="true">/${ProjName}/SourceGroup/Bootloader</includepath>
+<includepath workspace_path="true">/${ProjName}/SourceGroup/KESC</includepath>
+<includepath workspace_path="true">/${ProjName}/SourceGroup/Kelly_BLDC</includepath>
+<includepath workspace_path="true">/${ProjName}/SourceGroup/Kelly_SKEAZN64</includepath>
+<includepath workspace_path="true">/${ProjName}/SourceGroup/Utility</includepath>
+<includepath workspace_path="true">/${ProjName}/SourceGroup/Utility/OS</includepath>
+<includepath workspace_path="true">/${ProjName}/SourceGroup/Utility/PID</includepath>
+<includepath workspace_path="true">/${ProjName}/SourceGroup/Utility/VoltageDivider</includepath>
+<includepath workspace_path="true">/${ProjName}/SourceGroup/Utility/Millis</includepath>
+
+</language>
+<language name="Additional Assembly Source Files">
+<includepath>board</includepath>
+<includepath>source</includepath>
+<includepath>CMSIS</includepath>
+<includepath>device</includepath>
+<includepath/>
+
+</language>
+<language name="Assembly Source File">
+<includepath>board</includepath>
+<includepath>source</includepath>
+<includepath>CMSIS</includepath>
+<includepath>device</includepath>
+<includepath/>
+
+</language>
+<language name="Object File">
+
+</language>
+</section>
+</cdtprojectproperties>

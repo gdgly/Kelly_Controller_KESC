@@ -1,0 +1,67 @@
+<CodeGenerationInfo>
+  <ToolchainSettings>
+    <option>
+      <name>PE_G_4PEx_ToolChain_Compiler_SearchUserPaths</name>
+      <values lines_count="4">
+        <Line>"${ProjDirPath}/Static_Code\PDD"</Line>
+        <Line>"${ProjDirPath}/Static_Code\IO_Map"</Line>
+        <Line>"${ProjDirPath}/Sources"</Line>
+        <Line>"${ProjDirPath}/Generated_Code"</Line>
+      </values>
+    </option>
+  </ToolchainSettings>
+  <GeneratedFilesList>
+    <GeneratedByPE>
+      <File Name="Static_Code/PDD/PORT_PDD.h" FileDate="2019-02-22, 12:31:10" FileAge="1550867470336" FileType="1048576" />
+      <File Name="Generated_Code/Vectors.c" FileDate="2019-10-10, 15:53:13" FileAge="1570747993772" FileType="45637" CompNumb="2" />
+      <File Name="Generated_Code/GPIOA.h" FileDate="2019-10-02, 16:40:13" FileAge="1570059613010" FileType="45637" CompNumb="33" />
+      <File Name="Generated_Code/PE_LDD.h" FileDate="2019-10-10, 15:53:13" FileAge="1570747993764" FileType="45637" CompNumb="2" />
+      <File Name="Static_Code/PDD/PIT_PDD.h" FileDate="2019-02-22, 12:31:10" FileAge="1550867470315" FileType="1048576" />
+      <File Name="Static_Code/PDD/UART_PDD.h" FileDate="2019-02-22, 12:31:10" FileAge="1550867470394" FileType="1048576" />
+      <File Name="Generated_Code/GPIOA.c" FileDate="2019-10-02, 16:40:12" FileAge="1570059612997" FileType="45637" CompNumb="33" />
+      <File Name="Generated_Code/PE_LDD.c" FileDate="2019-10-02, 16:40:13" FileAge="1570059613792" FileType="45637" CompNumb="2" />
+      <File Name="Static_Code/PDD/CRC_PDD.h" FileDate="2019-02-22, 12:31:10" FileAge="1550867470250" FileType="1048576" />
+      <File Name="Documentation/doxygen/pex.css" FileDate="2019-02-22, 12:31:09" FileAge="1550867469700" FileType="16384" CompNumb="2" />
+      <File Name="Static_Code/PDD/RTC0_PDD.h" FileDate="2019-02-22, 12:31:10" FileAge="1550867470345" FileType="1048576" />
+      <File Name="Static_Code/IO_Map/SKEAZN642.h" FileDate="2019-02-22, 12:31:09" FileAge="1550867469788" FileType="1048576" CompNumb="2" />
+      <File Name="Static_Code/PDD/ADC_PDD.h" FileDate="2019-02-22, 12:31:09" FileAge="1550867469809" FileType="1048576" />
+      <File Name="Static_Code/PDD/MCM_PDD.h" FileDate="2019-02-22, 12:31:10" FileAge="1550867470308" FileType="1048576" />
+      <File Name="Generated_Code/FTM0.h" FileDate="2019-10-10, 15:53:13" FileAge="1570747993664" FileType="45637" CompNumb="34" />
+      <File Name="Static_Code/PDD/SIM_PDD.h" FileDate="2019-02-22, 12:31:10" FileAge="1550867470352" FileType="1048576" />
+      <File Name="Static_Code/PDD/PDD_Types.h" FileDate="2019-02-22, 12:31:09" FileAge="1550867469802" FileType="1048576" CompNumb="2" />
+      <File Name="Static_Code/PDD/PMC_PDD.h" FileDate="2019-02-22, 12:31:10" FileAge="1550867470322" FileType="1048576" />
+      <File Name="Generated_Code/FTM0.c" FileDate="2019-10-10, 15:53:13" FileAge="1570747993662" FileType="45637" CompNumb="34" />
+      <File Name="Static_Code/PDD/KBI_PDD.h" FileDate="2019-02-22, 12:31:10" FileAge="1550867470301" FileType="1048576" />
+      <File Name="Documentation/KEAZN64_Settings.xml" FileDate="2019-10-10, 19:43:40" FileAge="1570761820314" FileType="3072" />
+      <File Name="Static_Code/PDD/SysTick_PDD.h" FileDate="2019-02-22, 12:31:10" FileAge="1550867470386" FileType="1048576" />
+      <File Name="Static_Code/PDD/FTMRH_PDD.h" FileDate="2019-02-22, 12:31:10" FileAge="1550867470258" FileType="1048576" />
+      <File Name="Documentation/doxygen/RoutingReport.txt" FileDate="2019-02-22, 12:31:10" FileAge="1550867470448" FileType="45637" CompNumb="2" />
+      <File Name="Static_Code/PDD/WDOG_PDD.h" FileDate="2019-02-22, 12:31:10" FileAge="1550867470409" FileType="1048576" />
+      <File Name="Project_Settings/Linker_Files/ProcessorExpert.ld" FileDate="2019-10-10, 16:30:35" FileAge="1570750235210" FileType="8" CompNumb="2" />
+      <File Name="Generated_Code/PE_Const.h" FileDate="2019-02-22, 13:15:11" FileAge="1550870111536" FileType="45637" />
+      <File Name="Documentation/doxygen/KEAZN64.txt" FileDate="2019-10-10, 15:53:13" FileAge="1570747993754" FileType="45637" CompNumb="2" />
+      <File Name="Documentation/doxygen/FTM0.txt" FileDate="2019-10-10, 15:53:13" FileAge="1570747993656" FileType="45637" CompNumb="34" />
+      <File Name="Documentation/KEAZN64_SIGNALS.txt" FileDate="2019-10-10, 19:43:40" FileAge="1570761820266" FileType="3072" />
+      <File Name="Generated_Code/PE_Types.h" FileDate="2019-10-02, 16:40:13" FileAge="1570059613402" FileType="45637" />
+      <File Name="Generated_Code/IO_Map.h" FileDate="2019-02-22, 13:15:11" FileAge="1550870111532" FileType="45637" />
+      <File Name="Static_Code/PDD/FTM_PDD.h" FileDate="2019-02-22, 12:31:10" FileAge="1550867470267" FileType="1048576" />
+      <File Name="Documentation/KEAZN64.txt" FileDate="2019-10-10, 16:49:39" FileAge="1570751379833" FileType="3072" />
+      <File Name="Generated_Code/PE_Error.h" FileDate="2019-02-22, 13:15:11" FileAge="1550870111539" FileType="45637" />
+      <File Name="Generated_Code/Cpu.h" FileDate="2019-10-10, 16:49:38" FileAge="1570751378895" FileType="45637" CompNumb="2" />
+      <File Name="Documentation/doxygen/GPIOA.txt" FileDate="2019-10-02, 16:40:13" FileAge="1570059613386" FileType="45637" CompNumb="33" />
+      <File Name="Documentation/doxygen/pex.doxyfile" FileDate="2019-02-22, 13:15:11" FileAge="1550870111510" FileType="45637" CompNumb="2" />
+      <File Name="Generated_Code/Cpu.c" FileDate="2019-10-10, 19:43:39" FileAge="1570761819902" FileType="45637" CompNumb="2" />
+      <File Name="Static_Code/PDD/I2C_PDD.h" FileDate="2019-02-22, 12:31:10" FileAge="1550867470287" FileType="1048576" />
+      <File Name="ProjectInfo.xml" FileDate="2019-10-10, 15:53:14" FileAge="1570747994004" FileType="45637" />
+      <File Name="Static_Code/PDD/IRQ_PDD.h" FileDate="2019-02-22, 12:31:10" FileAge="1550867470296" FileType="1048576" />
+      <File Name="Static_Code/PDD/CMP_PDD.h" FileDate="2019-02-22, 12:31:10" FileAge="1550867470236" FileType="1048576" />
+      <File Name="Static_Code/PDD/GPIO_PDD.h" FileDate="2019-02-22, 12:31:10" FileAge="1550867470280" FileType="1048576" />
+      <File Name="Static_Code/PDD/SPI_PDD.h" FileDate="2019-02-22, 12:31:10" FileAge="1550867470373" FileType="1048576" />
+      <File Name="Sources/main.c" FileDate="2019-10-10, 19:39:06" FileAge="1570761546025" FileType="128" />
+      <File Name="Sources/Events.h" FileDate="2019-10-10, 15:53:13" FileAge="1570747993785" FileType="131328" />
+      <File Name="Project_Settings/Debugger/SKEAZN64.mem" FileDate="2019-02-22, 12:31:10" FileAge="1550867470438" FileType="45637" CompNumb="2" />
+      <File Name="Sources/Events.c" FileDate="2019-10-03, 13:26:32" FileAge="1570134392426" FileType="131328" />
+    </GeneratedByPE>
+  </GeneratedFilesList>
+  <CodeGenReference>13</CodeGenReference>
+</CodeGenerationInfo>

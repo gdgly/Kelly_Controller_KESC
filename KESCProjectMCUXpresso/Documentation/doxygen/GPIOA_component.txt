@@ -1,0 +1,245 @@
+/*!
+  \page GPIOA GPIOA (Init_GPIO)
+**          This file implements the GPIO (GPIOA) module initialization
+**          according to the Peripheral Initialization settings, and
+**          defines interrupt service routines prototypes.
+**
+
+- \subpage GPIOA_settings
+- \subpage GPIOA_regs_overview  
+- \subpage GPIOA_regs_details
+- \ref GPIOA_module "Component documentation" 
+\page GPIOA_regs_overview Registers Initialization Overview
+This page contains the initialization values for the registers of the peripheral(s) configured
+by the component. 
+<table>
+<tr><td colspan="4" class="ttitle1">GPIOA Initialization</td></tr>
+<tr><td class="ttitle2">Address</td><td class="ttitle2">Register</td><td class="ttitle2">Register Value</td><td class="ttitle2">Register Description</td></tr>
+<tr><td>0x400FF014</td><td>GPIOA_PDDR</td>
+<td class="regNotResetVal">0xFC000000</td>
+ <td>GPIOA_PDDR register, peripheral GPIOA.</td></tr>
+<tr><td>0x400FF018</td><td>GPIOA_PIDR</td>
+<td class="regNotResetVal">0xFF1FFFFF</td>
+ <td>GPIOA_PIDR register, peripheral GPIOA.</td></tr>
+</table>
+Color Denotes Reset Value
+<br/>
+\page GPIOA_regs_details Register Initialization Details
+This page contains detailed description of initialization values for the 
+registers of the peripheral(s) configured by the component. 
+
+<div class="reghdr1">GPIOA_PDDR</div>
+<div class="regdiag">
+<table class="regtbl">
+<tr class="trd1r">
+<td class="trd1c">Bit</td><td>31</td><td>30</td><td>29</td><td>28</td><td>27</td><td>26</td><td>25</td><td>24</td><td>23</td>
+<td>22</td><td>21</td><td>20</td><td>19</td><td>18</td><td>17</td><td>16</td>
+</tr>
+<tr>
+<td class="trd1c">R</td><td colspan="16" rowspan="2">PDD</td>
+</tr>
+<tr>
+<td class="trd1c">W</td>
+</tr>
+<tr class="trd1r">
+<td class="trd1c">Reset</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+<td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+</tr>
+</table>
+<table class="regtbl">
+<tr class="trd1r">
+<td class="trd1c">Bit</td><td>15</td><td>14</td><td>13</td><td>12</td><td>11</td><td>10</td><td>9</td><td>8</td><td>7</td>
+<td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
+</tr>
+<tr>
+<td class="trd1c">R</td><td colspan="32" rowspan="2">PDD</td>
+</tr>
+<tr>
+<td class="trd1c">W</td>
+</tr>
+<tr class="trd1r">
+<td class="trd1c">Reset</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+<td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+</tr>
+</table>
+        
+</div>
+<table class="regtbl2"><tr><td class="trowtit" colspan="2">Address</td><td colspan="2">0x400FF014</td></tr>
+<tr class="trowtit"><td  class="trowtit" colspan="2">Initial value</td><td colspan="2">0xFC000000</td></tr>
+<tr class="trowtit"><td  class="trowtit" colspan="2">After-reset value</td><td colspan="2">0x00000000</td></tr>
+<tr><td class="ttitle2">Bit</td><td class="ttitle2">Field</td><td class="ttitle2">Value</td><td class="ttitle2">Description</td></tr>
+<tr><td>0 - 31</td><td>PDD</td><td>0x80000000</td><td>Port Data Direction</td>
+</tr></table>
+<div class="reghdr1">GPIOA_PIDR</div>
+<div class="regdiag">
+<table class="regtbl">
+<tr class="trd1r">
+<td class="trd1c">Bit</td><td>31</td><td>30</td><td>29</td><td>28</td><td>27</td><td>26</td><td>25</td><td>24</td><td>23</td>
+<td>22</td><td>21</td><td>20</td><td>19</td><td>18</td><td>17</td><td>16</td>
+</tr>
+<tr>
+<td class="trd1c">R</td><td colspan="16" rowspan="2">PID</td>
+</tr>
+<tr>
+<td class="trd1c">W</td>
+</tr>
+<tr class="trd1r">
+<td class="trd1c">Reset</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td>
+<td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td>
+</tr>
+</table>
+<table class="regtbl">
+<tr class="trd1r">
+<td class="trd1c">Bit</td><td>15</td><td>14</td><td>13</td><td>12</td><td>11</td><td>10</td><td>9</td><td>8</td><td>7</td>
+<td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
+</tr>
+<tr>
+<td class="trd1c">R</td><td colspan="32" rowspan="2">PID</td>
+</tr>
+<tr>
+<td class="trd1c">W</td>
+</tr>
+<tr class="trd1r">
+<td class="trd1c">Reset</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td>
+<td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td>
+</tr>
+</table>
+        
+</div>
+<table class="regtbl2"><tr><td class="trowtit" colspan="2">Address</td><td colspan="2">0x400FF018</td></tr>
+<tr class="trowtit"><td  class="trowtit" colspan="2">Initial value</td><td colspan="2">0xFF1FFFFF</td></tr>
+<tr class="trowtit"><td  class="trowtit" colspan="2">After-reset value</td><td colspan="2">0xFFFFFFFF</td></tr>
+<tr><td class="ttitle2">Bit</td><td class="ttitle2">Field</td><td class="ttitle2">Value</td><td class="ttitle2">Description</td></tr>
+<tr><td>0 - 31</td><td>PID</td><td>0x80000000</td><td>Port Input Disable</td>
+</tr></table>
+*/
+/*!
+\page GPIOA_settings Component Settings
+\code
+**          Component name                                 : GPIOA
+**          Device                                         : GPIOA
+**          Settings                                       : 
+**            Pin 0                                        : Do not initialize
+**            Pin 1                                        : Do not initialize
+**            Pin 2                                        : Do not initialize
+**            Pin 3                                        : Do not initialize
+**            Pin 4                                        : Do not initialize
+**            Pin 5                                        : Do not initialize
+**            Pin 6                                        : Do not initialize
+**            Pin 7                                        : Do not initialize
+**            Pin 8                                        : Do not initialize
+**            Pin 9                                        : Do not initialize
+**            Pin 10                                       : Do not initialize
+**            Pin 11                                       : Do not initialize
+**            Pin 12                                       : Do not initialize
+**            Pin 13                                       : Do not initialize
+**            Pin 14                                       : Do not initialize
+**            Pin 15                                       : Do not initialize
+**            Pin 16                                       : Do not initialize
+**            Pin 17                                       : Do not initialize
+**            Pin 18                                       : Do not initialize
+**            Pin 19                                       : Do not initialize
+**            Pin 20                                       : Do not initialize
+**            Pin 21                                       : Initialize
+**              Pin direction                              : Input
+**              Pin input                                  : Enabled
+**              Output value                               : No initialization
+**              Pull resistor                              : No initialization
+**            Pin 22                                       : Initialize
+**              Pin direction                              : Input
+**              Pin input                                  : Enabled
+**              Output value                               : No initialization
+**              Pull resistor                              : No initialization
+**            Pin 23                                       : Initialize
+**              Pin direction                              : Input
+**              Pin input                                  : Enabled
+**              Output value                               : No initialization
+**              Pull resistor                              : No initialization
+**            Pin 24                                       : Do not initialize
+**            Pin 25                                       : Do not initialize
+**            Pin 26                                       : Initialize
+**              Pin direction                              : Output
+**              Pin input                                  : Disabled
+**              Output value                               : No initialization
+**              Pull resistor                              : No initialization
+**            Pin 27                                       : Initialize
+**              Pin direction                              : Output
+**              Pin input                                  : Disabled
+**              Output value                               : No initialization
+**              Pull resistor                              : No initialization
+**            Pin 28                                       : Initialize
+**              Pin direction                              : Output
+**              Pin input                                  : Disabled
+**              Output value                               : No initialization
+**              Pull resistor                              : No initialization
+**            Pin 29                                       : Initialize
+**              Pin direction                              : Output
+**              Pin input                                  : Disabled
+**              Output value                               : No initialization
+**              Pull resistor                              : No initialization
+**            Pin 30                                       : Initialize
+**              Pin direction                              : Output
+**              Pin input                                  : Disabled
+**              Output value                               : No initialization
+**              Pull resistor                              : No initialization
+**            Pin 31                                       : Initialize
+**              Pin direction                              : Output
+**              Pin input                                  : Disabled
+**              Output value                               : No initialization
+**              Pull resistor                              : No initialization
+**          Pin selection/routing                          : 
+**            Pin 0                                        : Disabled
+**            Pin 1                                        : Disabled
+**            Pin 2                                        : Disabled
+**            Pin 3                                        : Disabled
+**            Pin 4                                        : Disabled
+**            Pin 5                                        : Disabled
+**            Pin 6                                        : Disabled
+**            Pin 7                                        : Disabled
+**            Pin 8                                        : Disabled
+**            Pin 9                                        : Disabled
+**            Pin 10                                       : Disabled
+**            Pin 11                                       : Disabled
+**            Pin 12                                       : Disabled
+**            Pin 13                                       : Disabled
+**            Pin 14                                       : Disabled
+**            Pin 15                                       : Disabled
+**            Pin 16                                       : Disabled
+**            Pin 17                                       : Disabled
+**            Pin 18                                       : Disabled
+**            Pin 19                                       : Disabled
+**            Pin 20                                       : Disabled
+**            Pin 21                                       : Enabled
+**              Pin                                        : PTC5/FTM1_CH1/RTCO
+**              Pin signal                                 : S1A
+**            Pin 22                                       : Enabled
+**              Pin                                        : PTC6/UART1_RX
+**              Pin signal                                 : S1B
+**            Pin 23                                       : Enabled
+**              Pin                                        : PTC7/UART1_TX
+**              Pin signal                                 : S1C
+**            Pin 24                                       : Disabled
+**            Pin 25                                       : Disabled
+**            Pin 26                                       : Enabled
+**              Pin                                        : PTD2/KBI1_P2/SPI1_MISO
+**              Pin signal                                 : EN_1A
+**            Pin 27                                       : Enabled
+**              Pin                                        : PTD3/KBI1_P3/SPI1_PCS0
+**              Pin signal                                 : EN_1B
+**            Pin 28                                       : Enabled
+**              Pin                                        : PTD4/KBI1_P4
+**              Pin signal                                 : EN_1C
+**            Pin 29                                       : Enabled
+**              Pin                                        : PTD5/KBI1_P5
+**              Pin signal                                 : SE_2A
+**            Pin 30                                       : Enabled
+**              Pin                                        : PTD6/KBI1_P6/UART2_RX
+**              Pin signal                                 : SE_2B
+**            Pin 31                                       : Enabled
+**              Pin                                        : PTD7/KBI1_P7/UART2_TX
+**              Pin signal                                 : SE_2C
+**          Initialization                                 : 
+**            Call Init method                             : yes
+<h1>
+\endcode
+*/
