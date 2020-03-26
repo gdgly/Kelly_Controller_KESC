@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <launchConfiguration type="com.pemicro.debug.gdbjtag.pne.launchConfigurationType">
-<stringAttribute key="com.crt.ctrlcenter.OFSemuDetails" value="PEMicroPE5657326"/>
+<stringAttribute key="com.crt.ctrlcenter.OFSemuDetails" value="PEMicroPE5657405"/>
 <booleanAttribute key="com.crt.ctrlcenter.saveState" value="true"/>
-<stringAttribute key="com.crt.ctrlcenter.serialNumber" value="USB1 - Multilink Universal Rev B (PE5657326)"/>
+<stringAttribute key="com.crt.ctrlcenter.serialNumber" value="USB1 - Multilink Universal Rev B (PE5657405)"/>
 <mapAttribute key="com.crt.ctrlcenter.symbolsGroupSettings"/>
 <intAttribute key="com.nxp.mcuxpresso.core.datamodels.ui.launchers.PELaunchConfigHandler.version" value="1"/>
 <booleanAttribute key="com.nxp.mcuxpresso.flash.clear.console" value="true"/>
 <booleanAttribute key="com.nxp.mcuxpresso.flash.confirm" value="false"/>
 <stringAttribute key="com.nxp.mcuxpresso.ide.probe.manufacturer" value="P&amp;E Microcomputer Systems"/>
-<stringAttribute key="com.nxp.mcuxpresso.ide.probe.name" value="USB1 - Multilink Universal Rev B (PE5657326)"/>
+<stringAttribute key="com.nxp.mcuxpresso.ide.probe.name" value="USB1 - Multilink Universal Rev B (PE5657405)"/>
 <stringAttribute key="com.nxp.mcuxpresso.ide.probe.type" value="USB1"/>
 <booleanAttribute key="com.nxp.mcuxpresso.pemicro.flash.cyclone.image" value="false"/>
 <stringAttribute key="com.nxp.mcuxpresso.pemicro.flash.program.action" value="Erase, blank check, program and verify"/>
@@ -67,6 +67,8 @@
 <booleanAttribute key="com.pemicro.debug.gdbjtag.pne.cyc_ser.SPECIFY_IP" value="false"/>
 <booleanAttribute key="com.pemicro.debug.gdbjtag.pne.cyc_ser.SPECIFY_NETWORK_CARD" value="false"/>
 <booleanAttribute key="com.pemicro.debug.gdbjtag.pne.cyc_ser.STARTUP_USE_SWD" value="true"/>
+<stringAttribute key="com.pemicro.debug.gdbjtag.pne.cyc_ser.SWO_BAUDRATE_SWITCH_MULTILINK_VALUE" value="-1.000000"/>
+<stringAttribute key="com.pemicro.debug.gdbjtag.pne.cyc_ser.SWO_BAUDRATE_SWITCH_TARGET_VALUE" value="-1.000000"/>
 <booleanAttribute key="com.pemicro.debug.gdbjtag.pne.cyc_usb.ALWAYS_ERASE" value="false"/>
 <stringAttribute key="com.pemicro.debug.gdbjtag.pne.cyc_usb.CYCLONE_IP" value=""/>
 <booleanAttribute key="com.pemicro.debug.gdbjtag.pne.cyc_usb.DO_RESET_DELAY" value="false"/>
@@ -215,7 +217,7 @@
 <stringAttribute key="org.eclipse.cdt.launch.PROGRAM_NAME" value="Debug\KESCProjectMCUXpresso.axf"/>
 <stringAttribute key="org.eclipse.cdt.launch.PROJECT_ATTR" value="KESCProjectMCUXpresso"/>
 <booleanAttribute key="org.eclipse.cdt.launch.PROJECT_BUILD_CONFIG_AUTO_ATTR" value="false"/>
-<stringAttribute key="org.eclipse.cdt.launch.PROJECT_BUILD_CONFIG_ID_ATTR" value="com.crt.advproject.config.exe.debug.397168959.1373231051"/>
+<stringAttribute key="org.eclipse.cdt.launch.PROJECT_BUILD_CONFIG_ID_ATTR" value="com.crt.advproject.config.exe.debug.397168959"/>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
 <listEntry value="/KESCProjectMCUXpresso"/>
 </listAttribute>

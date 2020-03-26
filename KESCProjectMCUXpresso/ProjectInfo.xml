@@ -44,7 +44,7 @@
     <SourceCodePaths>
       <Path>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\Generated_Code\</Path>
       <Path>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Bootloader\</Path>
-      <Path>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Bootloader\Exlucde\</Path>
+      <Path>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Bootloader\Exclude\</Path>
       <Path>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Bootloader\Platform\</Path>
       <Path>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\KESC\Exclude\</Path>
       <Path>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\KESC\</Path>
@@ -92,8 +92,8 @@
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\Generated_Code\Term1.c</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\Generated_Code\Vectors.c</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Bootloader\Bootloader.c</PathName>
-      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Bootloader\Exlucde\FC_bk.c</PathName>
-      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Bootloader\Exlucde\ShellBoot.c</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Bootloader\Exclude\FC_bk.c</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Bootloader\Exclude\ShellBoot.c</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Bootloader\FC_Protocol.c</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Bootloader\KellyID.c</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Bootloader\Platform\KEA64.c</PathName>
@@ -187,8 +187,8 @@
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\Generated_Code\Term1.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Bootloader\Bootloader.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Bootloader\Configs\KESC.h</PathName>
-      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Bootloader\Exlucde\Import.h</PathName>
-      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Bootloader\Exlucde\ShellBoot.h</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Bootloader\Exclude\Import.h</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Bootloader\Exclude\ShellBoot.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Bootloader\FC_Protocol.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Bootloader\KellyID.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Bootloader\Platform\KEA64.h</PathName>

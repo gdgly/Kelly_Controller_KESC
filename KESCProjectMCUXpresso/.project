@@ -57,6 +57,11 @@
 			<type>2</type>
 			<locationURI>copy_PARENT/Kelly_Library</locationURI>
 		</link>
+		<link>
+			<name>SourceGroup/nRF5_SDK_12.3.0_d7731ad</name>
+			<type>2</type>
+			<location>S:/KellyControls/nRF5_SDK_12.3.0_d7731ad</location>
+		</link>
 	</linkedResources>
 	<variableList>
 		<variable>
