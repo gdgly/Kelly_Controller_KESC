@@ -1,12 +1,7 @@
-/*
- * config.h
- *
- *  Created on: Dec 14, 2019
- *      Author: FireSourcery
- */
+//Precompile Config
 
-#ifndef KESC_CONFIG_H_
-#define KESC_CONFIG_H_
+#ifndef _PRECOMPILE_CONFIG_H_
+#define _PRECOMPILE_CONFIG_H_
 
 #define SHELL_OPTION_USE_LIST
 #define CMDLINE_MAX_ARGS 	3

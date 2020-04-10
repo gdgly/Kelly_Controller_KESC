@@ -104,7 +104,8 @@ BLINKY_T 			LEDPowerButton;
 LITE_FX_OS_THREAD_T ThreadLED;
 LITE_FX_OS_THREAD_T ThreadSerial;
 LITE_FX_OS_THREAD_T ThreadTask1Second;
-
+LITE_FX_OS_THREAD_T ThreadComTx;	//20ms period task for communications
+//LITE_FX_OS_THREAD_T ThreadSample;	//20ms period task for communications
 
 //R1 = 47.5k, R2 = 5.62k, DIV = 5.62/(47.5 + 5.62) = 281/2656
 //VREF = 5V, VDIV_PER_ADC = VREF/255 = 5/255
@@ -352,6 +353,35 @@ void Task1Second(void)
 	Measure_StartMeasureChannel(ADC_LSTEMP_AD, 0); //any issues if adc interrupt from previous measurement??
 }
 
+void ComTx(void)
+{
+//	Test_TxPacketValue
+//		(
+//			Speed_GetRotarySpeedDegreesPerSecond(&Motor1.Speed),
+//			Motor1.BackEMF,
+//			Motor1.PID.OutMax,
+//			20000 - looptime
+//			);
+	Test_TxPacketValue
+		(
+			1,
+			2,
+			3,
+			4
+		);
+//
+//	for (i = 0; i < 18; i++)
+//		SendChar(TxPacketBuffer[i]);
+
+}
+
+
+
+
+
+
+
+
 
 void ConfigLoadDefault(void)
 {
@@ -374,6 +404,8 @@ void Boot(void)
 //		ConfigDefault();
 //	}
 }
+
+
 
 /******************************************************************************/
 /*!
@@ -475,6 +507,29 @@ int Cmd_vbat(int argc, char ** argv)
 /*! @} */
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+static uint8_t RxPacketBufferArray[20];
+static uint8_t TxPacketBufferArray[20];
+
+
+
+
 void KESC_Init(void)
 {
 	Cpu_DisableInt();
@@ -483,7 +538,9 @@ void KESC_Init(void)
 	//Inhr1_SetBaudRateMode(Inhr1_BM_38400BAUD);
 	//Inhr1_SetBaudRateMode(Inhr1_BM_115200BAUD);
 	ADC_Init();
-	//Millis_Init(40000000, 200);
+	//Millis_Init(40000000, 200); //set in generated systick file.
+
+
 
 	//Load eeprom
 
@@ -566,10 +623,12 @@ void KESC_Init(void)
 	LiteFXOS_InitThreadPeriodicArgPeriod(&ThreadLED, 		 	LEDBlink, 		1000);
 	LiteFXOS_InitThreadPeriodicArgPeriod(&ThreadSerial, 		Serial, 		SHELL_OUTTER_LOOP_FREQ);
 	LiteFXOS_InitThreadPeriodicArgPeriod(&ThreadTask1Second, 	Task1Second, 	1000);
+	LiteFXOS_InitThreadPeriodicArgPeriod(&ThreadComTx, 			ComTx, 			20);
+
 	LiteFXOS_SetThreadStart(&ThreadLED);
 	LiteFXOS_SetThreadStart(&ThreadSerial);
 	LiteFXOS_SetThreadStart(&ThreadTask1Second);
-
+	LiteFXOS_SetThreadStart(&ThreadComTx);
 	Cpu_EnableInt();
 
 	BLDC_Commutation_MapCommuntationTableRunCalibration
@@ -601,23 +660,58 @@ void KESC_Init(void)
 
 	BLDC_SetPWM(&Motor1, 12);
 	ADC_Poll();
+
+	Test_Init
+	(
+		TxPacketBufferArray,
+		RxPacketBufferArray,
+		Inhr1_GetCharsInRxBuf,
+		Inhr1_RecvChar,
+		Inhr1_SendChar
+	);
+
+	//SendStartMessage();
 }
 
 
 
 void KESC_Loop(void)
 {
+	static volatile uint32_t t1, t2, delta;
+
 	while(1)
 	{
+		t1 = Micros();
+
+	//20ms send thread
+
+
 		//__DI();
 		//WDOG_Feed();
 		//__EI();
 
 		LiteFXOS_ProcThread(&ThreadLED);
-		LiteFXOS_ProcThread(&ThreadSerial);
+		//LiteFXOS_ProcThread(&ThreadSerial);
 		LiteFXOS_ProcThread(&ThreadTask1Second);
-		
+
 		BLDC_Process(&Motor1);
+
+
+
+		Test_StartUp();
+		Test_RxPacket(); ///always receive
+
+		//LiteFXOS_ProcThread(&ThreadComTx); //tx every 20ms
+
+		//		if (Test_RxPacket())
+		//		{
+		//			Motor1.PID.Kp = Test_GetKp();
+		//		}
+
+		Motor1.PID.Kp = Test_GetKp();
+		Motor1.PID.Ki = Test_GetKi();
+		Motor1.PID.Kd = Test_GetKd();
+
 
 //		//BLDC Fault checking
 //
@@ -647,6 +741,19 @@ void KESC_Loop(void)
 //		else
 //		{
 //			//Global_En = 1;
+//		}
+
+		//Debugging
+
+		t2 = Micros();
+//		if (LiteFXOS_ProcThread(&ThreadTask1Second))
+//		{
+//	    	Term1_SendStr("\r\nLoop time t2 ");
+//	    	Term1_SendNum(t2);
+//	    	Term1_SendStr("\r\n");
+//	    	Term1_SendStr("\r\nLoop time t1 ");
+//	    	Term1_SendNum(t1);
+//	    	Term1_SendStr("\r\n");
 //		}
 
 	}

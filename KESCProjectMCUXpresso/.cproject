@@ -78,7 +78,7 @@
 								<option id="com.crt.advproject.gcc.fpu.1203698339" name="Floating point" superClass="com.crt.advproject.gcc.fpu" useByScannerDiscovery="false" value="com.crt.advproject.gcc.fpu.none" valueType="enumerated"/>
 								<option id="com.crt.advproject.gcc.thumb.526256593" name="Thumb mode" superClass="com.crt.advproject.gcc.thumb" useByScannerDiscovery="false" value="true" valueType="boolean"/>
 								<option id="com.crt.advproject.gcc.arch.71048279" name="Architecture" superClass="com.crt.advproject.gcc.arch" useByScannerDiscovery="false" value="com.crt.advproject.gcc.target.cm0plus" valueType="enumerated"/>
-								<option id="com.crt.advproject.c.misc.dialect.247059733" name="Language standard" superClass="com.crt.advproject.c.misc.dialect" useByScannerDiscovery="true"/>
+								<option id="com.crt.advproject.c.misc.dialect.247059733" name="Language standard" superClass="com.crt.advproject.c.misc.dialect" useByScannerDiscovery="true" value="com.crt.advproject.misc.dialect.c11" valueType="enumerated"/>
 								<option id="gnu.c.compiler.option.dialect.flags.1103596146" name="Other dialect flags" superClass="gnu.c.compiler.option.dialect.flags" useByScannerDiscovery="true"/>
 								<option id="gnu.c.compiler.option.preprocessor.nostdinc.925878359" name="Do not search system directories (-nostdinc)" superClass="gnu.c.compiler.option.preprocessor.nostdinc" useByScannerDiscovery="false"/>
 								<option id="gnu.c.compiler.option.preprocessor.preprocess.1488120456" name="Preprocess only (-E)" superClass="gnu.c.compiler.option.preprocessor.preprocess" useByScannerDiscovery="false"/>
@@ -115,7 +115,7 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/source/ISRMap.h}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/KESC/SoftwareConfig.h}&quot;"/>
 								</option>
-								<option id="com.crt.advproject.gcc.exe.debug.option.optimization.level.1044516927" name="Optimization Level" superClass="com.crt.advproject.gcc.exe.debug.option.optimization.level" useByScannerDiscovery="false" value="gnu.c.optimization.level.most" valueType="enumerated"/>
+								<option id="com.crt.advproject.gcc.exe.debug.option.optimization.level.1044516927" name="Optimization Level" superClass="com.crt.advproject.gcc.exe.debug.option.optimization.level" useByScannerDiscovery="false" value="gnu.c.optimization.level.none" valueType="enumerated"/>
 								<option id="gnu.c.compiler.option.optimization.flags.1465661612" name="Other optimization flags" superClass="gnu.c.compiler.option.optimization.flags" useByScannerDiscovery="false" value="-fno-common" valueType="string"/>
 								<option id="com.crt.advproject.gcc.exe.debug.option.debugging.level.422761087" name="Debug Level" superClass="com.crt.advproject.gcc.exe.debug.option.debugging.level" useByScannerDiscovery="false"/>
 								<option id="gnu.c.compiler.option.debugging.other.2115221287" name="Other debugging flags" superClass="gnu.c.compiler.option.debugging.other" useByScannerDiscovery="false"/>
@@ -223,7 +223,7 @@
 								<option id="com.crt.advproject.link.cpp.inimplib.1209339803" name="Input Secure Gateway Import Library" superClass="com.crt.advproject.link.cpp.inimplib"/>
 							</tool>
 							<tool id="com.crt.advproject.link.exe.debug.1754253534" name="MCU Linker" superClass="com.crt.advproject.link.exe.debug">
-								<option id="com.crt.advproject.link.gcc.hdrlib.1257632058" name="Library" superClass="com.crt.advproject.link.gcc.hdrlib" value="com.crt.advproject.gcc.link.hdrlib.codered.nohost" valueType="enumerated"/>
+								<option id="com.crt.advproject.link.gcc.hdrlib.1257632058" name="Library" superClass="com.crt.advproject.link.gcc.hdrlib" value="com.crt.advproject.gcc.link.hdrlib.codered.semihost" valueType="enumerated"/>
 								<option id="com.crt.advproject.link.fpu.557894287" name="Floating point" superClass="com.crt.advproject.link.fpu" value="com.crt.advproject.link.fpu.none" valueType="enumerated"/>
 								<option id="com.crt.advproject.link.thumb.1358287385" name="Thumb mode" superClass="com.crt.advproject.link.thumb" value="true" valueType="boolean"/>
 								<option id="com.crt.advproject.link.memory.load.image.1450493032" name="Plain load image" superClass="com.crt.advproject.link.memory.load.image" useByScannerDiscovery="false" value="false;" valueType="string"/>
@@ -296,7 +296,7 @@
 					<sourceEntries>
 						<entry flags="LOCAL|VALUE_WORKSPACE_PATH" kind="sourcePath" name="CMSIS"/>
 						<entry excluding="Cpu.c.c|Vectors.c" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="Generated_Code"/>
-						<entry excluding="Kelly_Library/KEA64/Serial.c|Kelly_Library/KEA64/CRC.c|Kelly_Library/KEA64/CPU.c|Kelly_Library/Com|Kelly_Library/Com/Protocol|Bootloader|KESC/Shell.c|Kelly_Library/KEA64/Console.c|KESC/Exclude|Kelly_Library/Exclude" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="SourceGroup"/>
+						<entry excluding="Kelly_Library/Protocol/KellyProtocol1.c|Kelly_Library/Protocol/Com.c|Kelly_Library/Protocol/Protocol.c|KESC/Com.c|Kelly_Library/State|Kelly_Library/KEA64/Serial.c|Kelly_Library/KEA64/CRC.c|Kelly_Library/KEA64/CPU.c|Bootloader|KESC/Shell.c|Kelly_Library/KEA64/Console.c|KESC/Exclude|Kelly_Library/Exclude" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="SourceGroup"/>
 						<entry excluding="main.c" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="Sources"/>
 						<entry flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="Static_Code"/>
 						<entry flags="LOCAL|VALUE_WORKSPACE_PATH" kind="sourcePath" name="device"/>
@@ -305,7 +305,9 @@
 					</sourceEntries>
 				</configuration>
 			</storageModule>
-			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
+			<storageModule moduleId="org.eclipse.cdt.core.externalSettings">
+				<externalSettings containerId="KESCProjectMCUXpresso;com.crt.advproject.config.exe.release.1303864547" factoryId="org.eclipse.cdt.core.cfg.export.settings.sipplier"/>
+			</storageModule>
 		</cconfiguration>
 		<cconfiguration id="com.crt.advproject.config.exe.release.1303864547">
 			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="com.crt.advproject.config.exe.release.1303864547" moduleId="org.eclipse.cdt.core.settings" name="Release">
@@ -568,7 +570,7 @@
 								<option id="com.crt.advproject.link.crpenable.1999144865" name="Enable automatic placement of Code Read Protection field in image" superClass="com.crt.advproject.link.crpenable"/>
 								<option id="com.crt.advproject.link.flashconfigenable.769905735" name="Enable automatic placement of Flash Configuration field in image" superClass="com.crt.advproject.link.flashconfigenable" value="true" valueType="boolean"/>
 								<option id="com.crt.advproject.link.ecrp.764925576" name="Enhanced CRP" superClass="com.crt.advproject.link.ecrp"/>
-								<option id="com.crt.advproject.link.gcc.hdrlib.1374940914" name="Library" superClass="com.crt.advproject.link.gcc.hdrlib" value="com.crt.advproject.gcc.link.hdrlib.codered.nohost" valueType="enumerated"/>
+								<option id="com.crt.advproject.link.gcc.hdrlib.1374940914" name="Library" superClass="com.crt.advproject.link.gcc.hdrlib" value="com.crt.advproject.gcc.link.hdrlib.codered.semihost" valueType="enumerated"/>
 								<option id="com.crt.advproject.link.gcc.nanofloat.1527734496" name="Enable printf float " superClass="com.crt.advproject.link.gcc.nanofloat"/>
 								<option id="com.crt.advproject.link.gcc.nanofloat.scanf.1713375034" name="Enable scanf float " superClass="com.crt.advproject.link.gcc.nanofloat.scanf"/>
 								<option id="com.crt.advproject.link.toram.1598046194" name="Link application to RAM" superClass="com.crt.advproject.link.toram"/>
@@ -601,7 +603,7 @@
 					<sourceEntries>
 						<entry flags="LOCAL|VALUE_WORKSPACE_PATH" kind="sourcePath" name="CMSIS"/>
 						<entry excluding="Cpu.c.c|Vectors.c" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="Generated_Code"/>
-						<entry excluding="Kelly_Library/KEA64/Serial.c|Kelly_Library/KEA64/CRC.c|Kelly_Library/KEA64/CPU.c|Kelly_Library/Com|Kelly_Library/Com/Protocol|Bootloader|KESC/Shell.c|KESC/Reference.c|Kelly_Library/KEA64/Console.c|Utility/State|KESC/Exclude|Kelly_BLDC/Exclude|Utility/Measure|Utility/UstdLib|Utility/Exclude|Utility/Shell|Kelly_Library/Exclude|Kelly_KEA64/Exclude" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="SourceGroup"/>
+						<entry excluding="Kelly_Library/Protocol/KellyProtocol1.c|Kelly_Library/Protocol/Com.c|Kelly_Library/Protocol/Protocol.c|KESC/Com.c|Kelly_Library/State|nRF5_SDK_12.3.0_d7731ad|Kelly_Library/KEA64/Serial.c|Kelly_Library/KEA64/CRC.c|Kelly_Library/KEA64/CPU.c|Bootloader|KESC/Shell.c|KESC/Reference.c|Kelly_Library/KEA64/Console.c|Utility/State|KESC/Exclude|Kelly_BLDC/Exclude|Utility/Measure|Utility/UstdLib|Utility/Exclude|Utility/Shell|Kelly_Library/Exclude|Kelly_KEA64/Exclude" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="SourceGroup"/>
 						<entry excluding="main.c" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="Sources"/>
 						<entry flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="Static_Code"/>
 						<entry flags="LOCAL|VALUE_WORKSPACE_PATH" kind="sourcePath" name="device"/>
@@ -834,7 +836,7 @@
 								<option id="com.crt.advproject.link.cpp.inimplib.1487949909" name="Input Secure Gateway Import Library" superClass="com.crt.advproject.link.cpp.inimplib"/>
 							</tool>
 							<tool id="com.crt.advproject.link.exe.debug.817604173" name="MCU Linker" superClass="com.crt.advproject.link.exe.debug">
-								<option id="com.crt.advproject.link.gcc.hdrlib.442884734" name="Library" superClass="com.crt.advproject.link.gcc.hdrlib" useByScannerDiscovery="false" value="com.crt.advproject.gcc.link.hdrlib.codered.nohost" valueType="enumerated"/>
+								<option id="com.crt.advproject.link.gcc.hdrlib.442884734" name="Library" superClass="com.crt.advproject.link.gcc.hdrlib" useByScannerDiscovery="false" value="com.crt.advproject.gcc.link.hdrlib.codered.semihost" valueType="enumerated"/>
 								<option id="com.crt.advproject.link.fpu.529884125" name="Floating point" superClass="com.crt.advproject.link.fpu" useByScannerDiscovery="false" value="com.crt.advproject.link.fpu.none" valueType="enumerated"/>
 								<option id="com.crt.advproject.link.thumb.1265932120" name="Thumb mode" superClass="com.crt.advproject.link.thumb" useByScannerDiscovery="false" value="true" valueType="boolean"/>
 								<option id="com.crt.advproject.link.memory.load.image.448992870" name="Plain load image" superClass="com.crt.advproject.link.memory.load.image" useByScannerDiscovery="false" value="false;" valueType="string"/>
@@ -907,7 +909,7 @@
 					<sourceEntries>
 						<entry flags="LOCAL|VALUE_WORKSPACE_PATH" kind="sourcePath" name="CMSIS"/>
 						<entry excluding="Cpu.c.c|Vectors.c" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="Generated_Code"/>
-						<entry excluding="Kelly_Library/KEA64/Serial.c|Kelly_Library/KEA64/CRC.c|Kelly_Library/KEA64/CPU.c|Kelly_Library/Com|Kelly_Library/Com/Protocol|Bootloader|KESC/Shell.c|Kelly_Library/KEA64/Console.c|KESC/Exclude|Kelly_Library/Exclude" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="SourceGroup"/>
+						<entry excluding="Kelly_Library/Protocol/KellyProtocol1.c|Kelly_Library/Protocol/Com.c|Kelly_Library/Protocol/Protocol.c|KESC/Com.c|Kelly_Library/State|nRF5_SDK_12.3.0_d7731ad|Kelly_Library/KEA64/Serial.c|Kelly_Library/KEA64/CRC.c|Kelly_Library/KEA64/CPU.c|Bootloader|KESC/Shell.c|Kelly_Library/KEA64/Console.c|KESC/Exclude|Kelly_Library/Exclude" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="SourceGroup"/>
 						<entry excluding="main.c" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="Sources"/>
 						<entry flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="Static_Code"/>
 						<entry flags="LOCAL|VALUE_WORKSPACE_PATH" kind="sourcePath" name="device"/>

@@ -3,6 +3,7 @@
 	<name>KESCProjectMCUXpresso</name>
 	<comment></comment>
 	<projects>
+		<project>KESCProjectMCUXpresso</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
@@ -43,11 +44,6 @@
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
-			<name>SourceGroup/Bootloader</name>
-			<type>2</type>
-			<locationURI>copy_PARENT/Private_Bootloader/Bootloader</locationURI>
-		</link>
-		<link>
 			<name>SourceGroup/KESC</name>
 			<type>2</type>
 			<locationURI>copy_PARENT/Kelly_Controller_KESC/KESC</locationURI>
@@ -56,11 +52,6 @@
 			<name>SourceGroup/Kelly_Library</name>
 			<type>2</type>
 			<locationURI>copy_PARENT/Kelly_Library</locationURI>
-		</link>
-		<link>
-			<name>SourceGroup/nRF5_SDK_12.3.0_d7731ad</name>
-			<type>2</type>
-			<location>S:/KellyControls/nRF5_SDK_12.3.0_d7731ad</location>
 		</link>
 	</linkedResources>
 	<variableList>

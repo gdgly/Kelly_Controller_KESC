@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <launchConfiguration type="com.pemicro.debug.gdbjtag.pne.launchConfigurationType">
 <stringAttribute key="com.crt.ctrlcenter.OFSemuDetails" value="PEMicroPE5657405"/>
-<booleanAttribute key="com.crt.ctrlcenter.saveState" value="true"/>
 <stringAttribute key="com.crt.ctrlcenter.serialNumber" value="USB1 - Multilink Universal Rev B (PE5657405)"/>
 <mapAttribute key="com.crt.ctrlcenter.symbolsGroupSettings"/>
 <intAttribute key="com.nxp.mcuxpresso.core.datamodels.ui.launchers.PELaunchConfigHandler.version" value="1"/>
@@ -34,7 +33,7 @@
 <intAttribute key="com.pemicro.debug.gdbjtag.pne.algorithmIndex" value="0"/>
 <stringAttribute key="com.pemicro.debug.gdbjtag.pne.alternativeAlgorithmPath" value=""/>
 <booleanAttribute key="com.pemicro.debug.gdbjtag.pne.attachToRunning" value="false"/>
-<intAttribute key="com.pemicro.debug.gdbjtag.pne.customTrimFrequency" value="3906250"/>
+<stringAttribute key="com.pemicro.debug.gdbjtag.pne.customTrimFrequency" value="3906250"/>
 <booleanAttribute key="com.pemicro.debug.gdbjtag.pne.cyc_eth.ALWAYS_ERASE" value="false"/>
 <stringAttribute key="com.pemicro.debug.gdbjtag.pne.cyc_eth.CYCLONE_IP" value=""/>
 <booleanAttribute key="com.pemicro.debug.gdbjtag.pne.cyc_eth.DO_RESET_DELAY" value="false"/>
@@ -67,8 +66,6 @@
 <booleanAttribute key="com.pemicro.debug.gdbjtag.pne.cyc_ser.SPECIFY_IP" value="false"/>
 <booleanAttribute key="com.pemicro.debug.gdbjtag.pne.cyc_ser.SPECIFY_NETWORK_CARD" value="false"/>
 <booleanAttribute key="com.pemicro.debug.gdbjtag.pne.cyc_ser.STARTUP_USE_SWD" value="true"/>
-<stringAttribute key="com.pemicro.debug.gdbjtag.pne.cyc_ser.SWO_BAUDRATE_SWITCH_MULTILINK_VALUE" value="-1.000000"/>
-<stringAttribute key="com.pemicro.debug.gdbjtag.pne.cyc_ser.SWO_BAUDRATE_SWITCH_TARGET_VALUE" value="-1.000000"/>
 <booleanAttribute key="com.pemicro.debug.gdbjtag.pne.cyc_usb.ALWAYS_ERASE" value="false"/>
 <stringAttribute key="com.pemicro.debug.gdbjtag.pne.cyc_usb.CYCLONE_IP" value=""/>
 <booleanAttribute key="com.pemicro.debug.gdbjtag.pne.cyc_usb.DO_RESET_DELAY" value="false"/>
@@ -105,7 +102,7 @@
 <stringAttribute key="com.pemicro.debug.gdbjtag.pne.ml.CYCLONE_IP" value=""/>
 <booleanAttribute key="com.pemicro.debug.gdbjtag.pne.ml.DO_RESET_DELAY" value="false"/>
 <intAttribute key="com.pemicro.debug.gdbjtag.pne.ml.INTERFACE_PORT" value="0"/>
-<stringAttribute key="com.pemicro.debug.gdbjtag.pne.ml.INTERFACE_PORT_STRING" value="USB1"/>
+<stringAttribute key="com.pemicro.debug.gdbjtag.pne.ml.INTERFACE_PORT_STRING" value=""/>
 <stringAttribute key="com.pemicro.debug.gdbjtag.pne.ml.NETWORK_CARD_IP" value=""/>
 <stringAttribute key="com.pemicro.debug.gdbjtag.pne.ml.POWER_DOWN_DELAY" value="250"/>
 <booleanAttribute key="com.pemicro.debug.gdbjtag.pne.ml.POWER_OFF" value="false"/>

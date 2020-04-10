@@ -301,7 +301,7 @@
     </GenFiles>
     <SignalListFile>Documentation\KESCProjectMCUXpresso_SIGNALS.txt</SignalListFile>
     <DestinationCompiler>GNUC</DestinationCompiler>
-    <ProjectModificationStamp>138</ProjectModificationStamp>
+    <ProjectModificationStamp>143</ProjectModificationStamp>
   </Options>
   <CpuID_2>
     <Generated>true</Generated>
@@ -1905,6 +1905,250 @@
     <GenExtraFilesCount>1</GenExtraFilesCount>
     <ExtraFile0>Documentation\doxygen\ADC_component.txt</ExtraFile0>
   </ComponentID_60>
+  <ComponentID_151>
+    <Generated>false</Generated>
+    <GenCompName />
+    <GenComponentVersion>??.???</GenComponentVersion>
+    <GenDriverVersion>??.??</GenDriverVersion>
+    <GenEventModule />
+    <HeaderAge>-1</HeaderAge>
+    <CodeAge>-1</CodeAge>
+    <AsemblAge>-1</AsemblAge>
+    <GenNumMethods>0</GenNumMethods>
+    <GenNumEvents>0</GenNumEvents>
+    <GenSmartUserChangesDetected_Header>false</GenSmartUserChangesDetected_Header>
+    <GenSmartUserChangesDetected_Code>false</GenSmartUserChangesDetected_Code>
+    <GenSmartUserChangesDetected_Asembl>false</GenSmartUserChangesDetected_Asembl>
+    <GenMethodPos>0</GenMethodPos>
+    <GenExtraFilesCount>0</GenExtraFilesCount>
+    <InhrCompID_152>
+      <Generated>false</Generated>
+      <GenCompName />
+      <GenComponentVersion>??.???</GenComponentVersion>
+      <GenDriverVersion>??.??</GenDriverVersion>
+      <GenEventModule />
+      <HeaderAge>-1</HeaderAge>
+      <CodeAge>-1</CodeAge>
+      <AsemblAge>-1</AsemblAge>
+      <GenNumMethods>36</GenNumMethods>
+      <Init>false</Init>
+      <Deinit>false</Deinit>
+      <Enable>false</Enable>
+      <Disable>false</Disable>
+      <SendBlock>false</SendBlock>
+      <ReceiveBlock>false</ReceiveBlock>
+      <CancelBlockTransmission>false</CancelBlockTransmission>
+      <CancelBlockReception>false</CancelBlockReception>
+      <GetError>false</GetError>
+      <GetSentDataNum>false</GetSentDataNum>
+      <GetReceivedDataNum>false</GetReceivedDataNum>
+      <GetTxCompleteStatus>false</GetTxCompleteStatus>
+      <SetEventMask>false</SetEventMask>
+      <GetEventMask>false</GetEventMask>
+      <SelectBaudRate>false</SelectBaudRate>
+      <GetSelectedBaudRate>false</GetSelectedBaudRate>
+      <SetParity>false</SetParity>
+      <GetParity>false</GetParity>
+      <SetDataWidth>false</SetDataWidth>
+      <GetDataWidth>false</GetDataWidth>
+      <SetStopBitLength>false</SetStopBitLength>
+      <GetStopBitLength>false</GetStopBitLength>
+      <SetLoopMode>false</SetLoopMode>
+      <GetLoopMode>false</GetLoopMode>
+      <GetStats>false</GetStats>
+      <ClearStats>false</ClearStats>
+      <SendBreak>false</SendBreak>
+      <GetBreak>false</GetBreak>
+      <TurnTxOn>false</TurnTxOn>
+      <TurnTxOff>false</TurnTxOff>
+      <TurnRxOn>false</TurnRxOn>
+      <TurnRxOff>false</TurnRxOff>
+      <ConnectPin>false</ConnectPin>
+      <Main>false</Main>
+      <SetOperationMode>false</SetOperationMode>
+      <GetDriverState>false</GetDriverState>
+      <GenNumEvents>7</GenNumEvents>
+      <OnBlockReceived_Selected>1</OnBlockReceived_Selected>
+      <OnBlockReceived_Name>AS1_OnBlockReceived</OnBlockReceived_Name>
+      <OnBlockReceived_Priority>interrupts disabled</OnBlockReceived_Priority>
+      <OnBlockSent_Selected>1</OnBlockSent_Selected>
+      <OnBlockSent_Name>AS1_OnBlockSent</OnBlockSent_Name>
+      <OnBlockSent_Priority>interrupts disabled</OnBlockSent_Priority>
+      <OnBreak_Selected>1</OnBreak_Selected>
+      <OnBreak_Name>AS1_OnBreak</OnBreak_Name>
+      <OnBreak_Priority>interrupts disabled</OnBreak_Priority>
+      <OnError_Selected>1</OnError_Selected>
+      <OnError_Name>AS1_OnError</OnError_Name>
+      <OnError_Priority>interrupts disabled</OnError_Priority>
+      <OnTxComplete_Selected>1</OnTxComplete_Selected>
+      <OnTxComplete_Name>AS1_OnTxComplete</OnTxComplete_Name>
+      <OnTxComplete_Priority>interrupts disabled</OnTxComplete_Priority>
+      <OnIdle_Selected>1</OnIdle_Selected>
+      <OnIdle_Name />
+      <OnIdle_Priority>same as interrupt</OnIdle_Priority>
+      <OnRxActiveEdge_Selected>1</OnRxActiveEdge_Selected>
+      <OnRxActiveEdge_Name />
+      <OnRxActiveEdge_Priority>same as interrupt</OnRxActiveEdge_Priority>
+      <ISR_InpIntISRHandle />
+      <ISR_OutIntISRHandle />
+      <ISR_ErrIntISRHandle />
+      <ISR_IdleIntISRHandle />
+      <GenSmartUserChangesDetected_Header>false</GenSmartUserChangesDetected_Header>
+      <GenSmartUserChangesDetected_Code>false</GenSmartUserChangesDetected_Code>
+      <GenSmartUserChangesDetected_Asembl>false</GenSmartUserChangesDetected_Asembl>
+      <GenMethodPos>0</GenMethodPos>
+      <GenExtraFilesCount>0</GenExtraFilesCount>
+    </InhrCompID_152>
+  </ComponentID_151>
+  <ComponentID_153>
+    <Generated>false</Generated>
+    <GenCompName />
+    <GenComponentVersion>??.???</GenComponentVersion>
+    <GenDriverVersion>??.??</GenDriverVersion>
+    <GenEventModule />
+    <HeaderAge>-1</HeaderAge>
+    <CodeAge>-1</CodeAge>
+    <AsemblAge>-1</AsemblAge>
+    <GenNumMethods>24</GenNumMethods>
+    <Enable>false</Enable>
+    <Disable>false</Disable>
+    <EnableEvent>false</EnableEvent>
+    <DisableEvent>false</DisableEvent>
+    <RecvChar>false</RecvChar>
+    <SendChar>false</SendChar>
+    <RecvBlock>false</RecvBlock>
+    <SendBlock>false</SendBlock>
+    <ClearRxBuf>false</ClearRxBuf>
+    <ClearTxBuf>false</ClearTxBuf>
+    <CharsInRxBuf>false</CharsInRxBuf>
+    <GetCharsInRxBuf>false</GetCharsInRxBuf>
+    <CharsInTxBuf>false</CharsInTxBuf>
+    <GetCharsInTxBuf>false</GetCharsInTxBuf>
+    <SetBaudRateMode>false</SetBaudRateMode>
+    <GetError>false</GetError>
+    <GetBreak>false</GetBreak>
+    <SetBreak>false</SetBreak>
+    <TurnTxOn>false</TurnTxOn>
+    <TurnTxOff>false</TurnTxOff>
+    <TurnRxOn>false</TurnRxOn>
+    <TurnRxOff>false</TurnRxOff>
+    <LoopMode>false</LoopMode>
+    <ConnectPin>false</ConnectPin>
+    <GenNumEvents>10</GenNumEvents>
+    <BeforeNewSpeed_Selected>1</BeforeNewSpeed_Selected>
+    <BeforeNewSpeed_Name>AS1_BeforeNewSpeed</BeforeNewSpeed_Name>
+    <BeforeNewSpeed_Priority>interrupts disabled</BeforeNewSpeed_Priority>
+    <AfterNewSpeed_Selected>1</AfterNewSpeed_Selected>
+    <AfterNewSpeed_Name>AS1_AfterNewSpeed</AfterNewSpeed_Name>
+    <AfterNewSpeed_Priority>interrupts disabled</AfterNewSpeed_Priority>
+    <OnError_Selected>1</OnError_Selected>
+    <OnError_Name>AS1_OnError</OnError_Name>
+    <OnError_Priority>same as interrupt</OnError_Priority>
+    <OnRxChar_Selected>1</OnRxChar_Selected>
+    <OnRxChar_Name>AS1_OnRxChar</OnRxChar_Name>
+    <OnRxChar_Priority>same as interrupt</OnRxChar_Priority>
+    <OnRxCharExt_Selected>1</OnRxCharExt_Selected>
+    <OnRxCharExt_Name>AS1_OnRxCharExt</OnRxCharExt_Name>
+    <OnRxCharExt_Priority>same as interrupt</OnRxCharExt_Priority>
+    <OnTxChar_Selected>1</OnTxChar_Selected>
+    <OnTxChar_Name>AS1_OnTxChar</OnTxChar_Name>
+    <OnTxChar_Priority>same as interrupt</OnTxChar_Priority>
+    <OnFullRxBuf_Selected>1</OnFullRxBuf_Selected>
+    <OnFullRxBuf_Name>AS1_OnFullRxBuf</OnFullRxBuf_Name>
+    <OnFullRxBuf_Priority>same as interrupt</OnFullRxBuf_Priority>
+    <OnFreeTxBuf_Selected>1</OnFreeTxBuf_Selected>
+    <OnFreeTxBuf_Name>AS1_OnFreeTxBuf</OnFreeTxBuf_Name>
+    <OnFreeTxBuf_Priority>same as interrupt</OnFreeTxBuf_Priority>
+    <OnBreak_Selected>1</OnBreak_Selected>
+    <OnBreak_Name>AS1_OnBreak</OnBreak_Name>
+    <OnBreak_Priority>same as interrupt</OnBreak_Priority>
+    <OnTxComplete_Selected>1</OnTxComplete_Selected>
+    <OnTxComplete_Name>AS1_OnTxComplete</OnTxComplete_Name>
+    <OnTxComplete_Priority>same as interrupt</OnTxComplete_Priority>
+    <GenSmartUserChangesDetected_Header>false</GenSmartUserChangesDetected_Header>
+    <GenSmartUserChangesDetected_Code>false</GenSmartUserChangesDetected_Code>
+    <GenSmartUserChangesDetected_Asembl>false</GenSmartUserChangesDetected_Asembl>
+    <GenMethodPos>0</GenMethodPos>
+    <GenExtraFilesCount>0</GenExtraFilesCount>
+    <InhrCompID_154>
+      <Generated>false</Generated>
+      <GenCompName />
+      <GenComponentVersion>??.???</GenComponentVersion>
+      <GenDriverVersion>??.??</GenDriverVersion>
+      <GenEventModule />
+      <HeaderAge>-1</HeaderAge>
+      <CodeAge>-1</CodeAge>
+      <AsemblAge>-1</AsemblAge>
+      <GenNumMethods>36</GenNumMethods>
+      <Init>false</Init>
+      <Deinit>false</Deinit>
+      <Enable>false</Enable>
+      <Disable>false</Disable>
+      <SendBlock>false</SendBlock>
+      <ReceiveBlock>false</ReceiveBlock>
+      <CancelBlockTransmission>false</CancelBlockTransmission>
+      <CancelBlockReception>false</CancelBlockReception>
+      <GetError>false</GetError>
+      <GetSentDataNum>false</GetSentDataNum>
+      <GetReceivedDataNum>false</GetReceivedDataNum>
+      <GetTxCompleteStatus>false</GetTxCompleteStatus>
+      <SetEventMask>false</SetEventMask>
+      <GetEventMask>false</GetEventMask>
+      <SelectBaudRate>false</SelectBaudRate>
+      <GetSelectedBaudRate>false</GetSelectedBaudRate>
+      <SetParity>false</SetParity>
+      <GetParity>false</GetParity>
+      <SetDataWidth>false</SetDataWidth>
+      <GetDataWidth>false</GetDataWidth>
+      <SetStopBitLength>false</SetStopBitLength>
+      <GetStopBitLength>false</GetStopBitLength>
+      <SetLoopMode>false</SetLoopMode>
+      <GetLoopMode>false</GetLoopMode>
+      <GetStats>false</GetStats>
+      <ClearStats>false</ClearStats>
+      <SendBreak>false</SendBreak>
+      <GetBreak>false</GetBreak>
+      <TurnTxOn>false</TurnTxOn>
+      <TurnTxOff>false</TurnTxOff>
+      <TurnRxOn>false</TurnRxOn>
+      <TurnRxOff>false</TurnRxOff>
+      <ConnectPin>false</ConnectPin>
+      <Main>false</Main>
+      <SetOperationMode>false</SetOperationMode>
+      <GetDriverState>false</GetDriverState>
+      <GenNumEvents>7</GenNumEvents>
+      <OnBlockReceived_Selected>1</OnBlockReceived_Selected>
+      <OnBlockReceived_Name>AS2_OnBlockReceived</OnBlockReceived_Name>
+      <OnBlockReceived_Priority>interrupts disabled</OnBlockReceived_Priority>
+      <OnBlockSent_Selected>1</OnBlockSent_Selected>
+      <OnBlockSent_Name>AS2_OnBlockSent</OnBlockSent_Name>
+      <OnBlockSent_Priority>interrupts disabled</OnBlockSent_Priority>
+      <OnBreak_Selected>1</OnBreak_Selected>
+      <OnBreak_Name>AS2_OnBreak</OnBreak_Name>
+      <OnBreak_Priority>interrupts disabled</OnBreak_Priority>
+      <OnError_Selected>1</OnError_Selected>
+      <OnError_Name>AS2_OnError</OnError_Name>
+      <OnError_Priority>interrupts disabled</OnError_Priority>
+      <OnTxComplete_Selected>1</OnTxComplete_Selected>
+      <OnTxComplete_Name>AS2_OnTxComplete</OnTxComplete_Name>
+      <OnTxComplete_Priority>interrupts disabled</OnTxComplete_Priority>
+      <OnIdle_Selected>1</OnIdle_Selected>
+      <OnIdle_Name />
+      <OnIdle_Priority>same as interrupt</OnIdle_Priority>
+      <OnRxActiveEdge_Selected>1</OnRxActiveEdge_Selected>
+      <OnRxActiveEdge_Name />
+      <OnRxActiveEdge_Priority>same as interrupt</OnRxActiveEdge_Priority>
+      <ISR_InpIntISRHandle />
+      <ISR_OutIntISRHandle />
+      <ISR_ErrIntISRHandle />
+      <ISR_IdleIntISRHandle />
+      <GenSmartUserChangesDetected_Header>false</GenSmartUserChangesDetected_Header>
+      <GenSmartUserChangesDetected_Code>false</GenSmartUserChangesDetected_Code>
+      <GenSmartUserChangesDetected_Asembl>false</GenSmartUserChangesDetected_Asembl>
+      <GenMethodPos>0</GenMethodPos>
+      <GenExtraFilesCount>0</GenExtraFilesCount>
+    </InhrCompID_154>
+  </ComponentID_153>
   <UsedSrcFiles>
     <SrcFile0>Drivers\VAR\InitInterrupt.prg=1183486427</SrcFile0>
     <SrcFile1>Drivers\Kinetis\FLASH_LDD.drv=-1</SrcFile1>
