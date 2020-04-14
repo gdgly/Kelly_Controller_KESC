@@ -72,40 +72,23 @@ typedef enum
 	KESC_DIRECTION_REVERSE,
 } KESC_DIRECTION_T;
 
-volatile static KESC_DIRECTION_T Direction; //direction of travel
+volatile static KESC_DIRECTION_T Direction; // Direction of travel
 
-//volatile union
-//{
-//	uint16_t Reg;
-//	struct
-//	{
-//		uint16_t E0				:1;
-//		uint16_t OverVolt		:1;
-//		uint16_t LowVolt		:1;
-//		uint16_t TempWarn		:1;
-//		uint16_t Startup		:1;
-//		uint16_t E5				:1;
-//		uint16_t OverTemp		:1;
-//		uint16_t StartupTPS		:1;
-//		uint16_t Reverse		:1;
-//		uint16_t ILOP			:1;
-//		uint16_t Identify1		:1;
-//		uint16_t Identify2		:1;
-//		uint16_t RegenOverVolt	:1;
-//		uint16_t HallSensor1	:1;
-//		uint16_t HallSensor2	:1;
-//		uint16_t Com			:1;
-//	};
-//} ErrorFlags = {0};
-
+static uint32_t LoopTimer, LoopDelta;
 BLDC_CONTROLLER_T	Motor1;
+PID_T 				Motor1PID;
+BLDC_COMMUTATION_T  Motor1Commutation;
+SPEED_T 			Motor1Speed;
+PID_T 				Motor1PID;
+
 BLINKY_T 			LEDPowerButton;
 
 LITE_FX_OS_THREAD_T ThreadLED;
 LITE_FX_OS_THREAD_T ThreadSerial;
 LITE_FX_OS_THREAD_T ThreadTask1Second;
-LITE_FX_OS_THREAD_T ThreadComTx;	//20ms period task for communications
-//LITE_FX_OS_THREAD_T ThreadSample;	//20ms period task for communications
+LITE_FX_OS_THREAD_T ThreadComTx;			//20ms period task for communications
+
+
 
 //R1 = 47.5k, R2 = 5.62k, DIV = 5.62/(47.5 + 5.62) = 281/2656
 //VREF = 5V, VDIV_PER_ADC = VREF/255 = 5/255
@@ -124,8 +107,22 @@ LITE_FX_OS_THREAD_T ThreadComTx;	//20ms period task for communications
 #define VREF		5
 #define ADC_MAX		255
 
-VOLTAGE_DIVIDER_T 		DividerBattery;
+VOLTAGE_DIVIDER_T	DividerCommon; // Battery, BackEMF,
+VOLTAGE_DIVIDER_T	DividerTemp; // Battery, BackEMF,
 
+/******************************************************************************/
+/*!
+ * @name  	Hall Timer
+ * @brief	Freq = 312,500 Hz, Peroid = 3.2 uS, Overflow 209,712 us, 209 ms
+ *
+ * Hall triggered ISR
+ * Min rpm when delta = 0xFFFF:
+ * 312,500/10*60/0xFFFF = 28 rpm min for 10 pole pairs
+ *
+ * 10,000 rpm -> delta = 187
+ */
+/******************************************************************************/
+/*! @{ */
 
 // 1 POLE_PAIR = 6 STEPS = ELECTRIC_R
 // 60 Steps = 1 MECH_ROTATION:
@@ -147,7 +144,7 @@ void FTM1_ISR(void)
 
 //	BLDC_Commutation_ISR(&Motor1.Commutation, Motor1.PWM); //commutate 1/3 times here?
 
-	Speed_CaptureDeltaISR(&Motor1.Speed);
+	Speed_CaptureDeltaISR(&Motor1Speed);
 
 //	if (motorSel)	Speed_Capture(&Motor1.Speed);
 //	else			Speed_Capture(&Motor2.Speed);
@@ -162,7 +159,17 @@ void FTM1_ISR(void)
 //		reset timer
 //	}
 }
+/*! @} */
 
+
+/******************************************************************************/
+/*!
+ * @name  	PWM Timer
+ * @brief	51.2 us duty cycle
+ *
+ */
+/******************************************************************************/
+/*! @{ */
 #define FTM2_BUS_PEROID	 	(1)
 #define FTM2_FREQ 			(BUS_FREQ/FTM2_BUS_PEROID)
 #define FTM2_MODULO 		(512)
@@ -170,22 +177,31 @@ void FTM1_ISR(void)
 #define PWM_PEROID			(FTM2_MODULO*2) // FTM2 ticks, Modulo * 2 for center aligned PWM
 #define PWM_FREQ			(FTM2_FREQ/PWM_PEROID)
 
-//event period to pwm percentage
-//PWM_COUNTS per hall cycle =  FTM1_CV * 64 / 1024
+//PWM counts per hall cycle = delta_FTM1_CV * 64 / 1024
 
-//FTM2 PWM Cycle
+//FTM2 PWM Cycle trigger
 void FTM2_ISR(void)
 {
 	FTM2_SC &= ~FTM_SC_TOF_MASK;	//FTM_PDD_ClearOverflowInterruptFlag(FTM2_DEVICE);
 
-	if (Motor1.State == MOTOR_STATE_RUN) BLDC_Commutation_Poll(&Motor1.Commutation, Motor1.PWM);
+	if (Motor1.State == MOTOR_STATE_RUN) BLDC_Commutation_Poll(&Motor1Commutation, Motor1.PWM);
 
 
 	//Optionally measure Back EMF at beginning of PWM cycle. (Output is low)
-	//Triggered measure will occur again at center of pulse
+	//Triggered measure will occur again at center of pulse, use for motor current.
 	//StartADCPhaseA();
 	//StartADCPhaseB();
 	//StartADCPhaseC();
+
+
+	// calculate using pid,
+
+
+	// if set pid this loop, direct change pwm, dont need to check if hall state changed.
+//	BLDC_Commutation_ISR(&Motor1.Commutation, Motor1.PWM);
+//	BLDC_Commutation_SetPhasePWM(&Motor1.Commutation, Motor1.PWM);
+
+
 
 	//PID Process
 	//speed 0-256
@@ -203,18 +219,18 @@ void FTM2_ISR(void)
 
 //	if(PID_ProcessTimerISR(&PIDMotor2)) BLDC_SetPWM(&Motor2, 12);
 }
-
+/*! @} */
 
 /******************************************************************************/
 /*!
  * @name  	MeasureADCSection
  * @brief 	ADC Config
  *
- *
+ * PWM must be approximately 35 for 4us ADC sample
  */
 /******************************************************************************/
 /*! @{ */
-#define ADC_CHANNEL_COUNT			8u
+#define ADC_CHANNEL_COUNT			8U
 
 #define ADC_CHANNEL_PIN_BAT_AD		ADC_PDD_SINGLE_ENDED_DAD0
 #define ADC_CHANNEL_PIN_I1_AD		ADC_PDD_SINGLE_ENDED_AD4
@@ -256,38 +272,55 @@ uint8_t ADC_SampleGroupChannelPinBuffer[ADC_MAX_HW_SAMPLE_COUNT];
 //If sensorless, check commutate
 //Start measure another
 
-void MonitorGroup2(void)
-{
- //Monitor() if too high
-}
+//void MonitorGroup2(void)
+//{
+// //Monitor() if too high
+//}
+//
+//void MonitorBEMF(void)
+//{
+//
+//}
+//
+static const uint8_t SampleGroupChannels[] = {ADC_I1_AD, ADC_BAT_AD};
 
-void MonitorBEMF(void)
-{
-
-}
-
-static const uint8_t SampleGroupChannels[] = {ADC_BAT_AD, ADC_I1_AD};
-
-static void OnEndTriggerADCMotor1BEMF(void)
-{
-//	static const uint8_t MeasureNext[] = {ADC_BAT_AD, ADC_I1_AD, ADC_LSTEMP_AD};
-//	static uint8_t i = 0;
-//	Measure_StartMeasureChannel(MeasureNext[i], 0);
-//	if (i<sizeof(MeasureNext)/sizeof(uint8_t)) i++;
-	MonitorBEMF();
-	Measure_StartMeasureSampleGroup(&SampleGroupChannels, sizeof(SampleGroupChannels)/sizeof(uint8_t), MonitorGroup2);
-}
-
-static inline void TriggerADCMotor1PhaseA(void) { Measure_TriggerMeasureChannelOverwrite(ADC_V1A,		OnEndTriggerADCMotor1BEMF); }
-static inline void TriggerADCMotor1PhaseB(void) { Measure_TriggerMeasureChannelOverwrite(ADC_V1B,		OnEndTriggerADCMotor1BEMF); }
-static inline void TriggerADCMotor1PhaseC(void) { Measure_TriggerMeasureChannelOverwrite(ADC_I1_AD,		OnEndTriggerADCMotor1BEMF); }
-
-//static inline void TriggerADCMotor1PhaseC(void) {
-//	ADC0_CreateSampleGroup(ADC0_DeviceData, SampleGroupChannels, 2);
-//	ADC0_StartLoopTriggeredMeasurement(ADC0_DeviceData);
+//static void OnEndTriggerADCMotor1BEMF(void)
+//{
+////	static const uint8_t MeasureNext[] = {ADC_BAT_AD, ADC_I1_AD, ADC_LSTEMP_AD};
+////	static uint8_t i = 0;
+////	Measure_StartMeasureChannel(MeasureNext[i], 0);
+////	if (i<sizeof(MeasureNext)/sizeof(uint8_t)) i++;
+//	MonitorBEMF();
+//
+//	SetBEMF();
+//	Measure_StartMeasureSampleGroup(&SampleGroupChannels, sizeof(SampleGroupChannels)/sizeof(uint8_t), MonitorGroup2);
 //}
 
-//PWM must be approximately 35 for 4us ADC sample
+static void OnEndADCMotor1PhaseA(void)
+{
+	//BLDC_CaptureBEMF(&Motor1, Measure_GetAddr(ADC_V1A));
+	BLDC_CaptureBEMF(&Motor1, Motor1.BackEMFPhaseA_ADCU);
+	//Monitor_();
+	Measure_StartMeasureSampleGroup(&SampleGroupChannels, sizeof(SampleGroupChannels)/sizeof(uint8_t), 0);
+}
+
+static void OnEndADCMotor1PhaseB(void)
+{
+	BLDC_CaptureBEMF(&Motor1, Motor1.BackEMFPhaseB_ADCU);
+	//Monitor_();
+	Measure_StartMeasureSampleGroup(&SampleGroupChannels, sizeof(SampleGroupChannels)/sizeof(uint8_t), 0);
+}
+
+static void OnEndADCMotor1PhaseC(void)
+{
+
+}
+
+static inline void TriggerADCMotor1PhaseA(void) { Measure_TriggerMeasureChannelOverwrite(ADC_V1A,		OnEndADCMotor1PhaseA); }
+static inline void TriggerADCMotor1PhaseB(void) { Measure_TriggerMeasureChannelOverwrite(ADC_V1B,		OnEndADCMotor1PhaseB); }
+static inline void TriggerADCMotor1PhaseC(void) { Measure_TriggerMeasureChannelOverwrite(ADC_I1_AD,		OnEndADCMotor1PhaseC); }
+
+
 
 
 
@@ -306,11 +339,11 @@ static inline void TriggerADCMotor1PhaseC(void) { Measure_TriggerMeasureChannelO
  */
 /******************************************************************************/
 /*! @{ */
-uint8_t ReadHallSensorMotor1(void)		{return S1_ALL_PIN_READ();}
+uint8_t ReadHallSensorMotor1(void) {return S1_ALL_PIN_READ();}
 //force zero with FTM2_SWOCTRL? //void PwmTimerDisableAll(void) //FTM2_SWOCTRL
-void SetPWMMotor1PhaseA(uint8_t pwm)	{PWM_1A_PIN_SET_CV(pwm);}
-void SetPWMMotor1PhaseB(uint8_t pwm) 	{PWM_1B_PIN_SET_CV(pwm);}
-void SetPWMMotor1PhaseC(uint8_t pwm)	{PWM_1C_PIN_SET_CV(pwm);}
+void SetPWMMotor1PhaseA(uint16_t pwm) {PWM_1A_PIN_SET_CV(pwm);}
+void SetPWMMotor1PhaseB(uint16_t pwm) {PWM_1B_PIN_SET_CV(pwm);}
+void SetPWMMotor1PhaseC(uint16_t pwm) {PWM_1C_PIN_SET_CV(pwm);}
 
 #define SetPWMMotor1PhaseAB(pwm) SetPWMMotor1PhaseA(pwm)
 #define SetPWMMotor1PhaseAC(pwm) SetPWMMotor1PhaseA(pwm)
@@ -319,14 +352,15 @@ void SetPWMMotor1PhaseC(uint8_t pwm)	{PWM_1C_PIN_SET_CV(pwm);}
 #define SetPWMMotor1PhaseCA(pwm) SetPWMMotor1PhaseC(pwm)
 #define SetPWMMotor1PhaseCB(pwm) SetPWMMotor1PhaseC(pwm)
 
-void CommutateMotor1PhaseAB(uint8_t pwm) 	{PWM_1A_PIN_SET_CV(pwm); PWM_1B_PIN_SET_CV(0); EN_1_ALL_PIN_SET(0b011); SE_1_ALL_PIN_SET(0b010); TriggerADCMotor1PhaseC();}
-void CommutateMotor1PhaseAC(uint8_t pwm)	{PWM_1A_PIN_SET_CV(pwm); PWM_1C_PIN_SET_CV(0); EN_1_ALL_PIN_SET(0b101); SE_1_ALL_PIN_SET(0b100); TriggerADCMotor1PhaseB();}
-void CommutateMotor1PhaseBC(uint8_t pwm)	{PWM_1B_PIN_SET_CV(pwm); PWM_1C_PIN_SET_CV(0); EN_1_ALL_PIN_SET(0b110); SE_1_ALL_PIN_SET(0b100); TriggerADCMotor1PhaseA();}
-void CommutateMotor1PhaseBA(uint8_t pwm)	{PWM_1B_PIN_SET_CV(pwm); PWM_1A_PIN_SET_CV(0); EN_1_ALL_PIN_SET(0b011); SE_1_ALL_PIN_SET(0b001); TriggerADCMotor1PhaseC();}
-void CommutateMotor1PhaseCA(uint8_t pwm)	{PWM_1C_PIN_SET_CV(pwm); PWM_1A_PIN_SET_CV(0); EN_1_ALL_PIN_SET(0b101); SE_1_ALL_PIN_SET(0b001); TriggerADCMotor1PhaseB();}
-void CommutateMotor1PhaseCB(uint8_t pwm)	{PWM_1C_PIN_SET_CV(pwm); PWM_1B_PIN_SET_CV(0); EN_1_ALL_PIN_SET(0b110); SE_1_ALL_PIN_SET(0b010); TriggerADCMotor1PhaseA();}
-void EnablePWMMotor1All(void) 				{EN_1_ALL_PIN_SET(0b111); SE_1_ALL_PIN_SET(0b000);}
-void DisablePWMMotor1All(void) 				{EN_1_ALL_PIN_SET(0b000); SE_1_ALL_PIN_SET(0b000);}
+void CommutateMotor1PhaseAB(uint16_t pwm) {PWM_1A_PIN_SET_CV(pwm); PWM_1B_PIN_SET_CV(0); EN_1_ALL_PIN_SET(0b011); SE_1_ALL_PIN_SET(0b010); TriggerADCMotor1PhaseC();}
+void CommutateMotor1PhaseAC(uint16_t pwm) {PWM_1A_PIN_SET_CV(pwm); PWM_1C_PIN_SET_CV(0); EN_1_ALL_PIN_SET(0b101); SE_1_ALL_PIN_SET(0b100); TriggerADCMotor1PhaseB();}
+void CommutateMotor1PhaseBC(uint16_t pwm) {PWM_1B_PIN_SET_CV(pwm); PWM_1C_PIN_SET_CV(0); EN_1_ALL_PIN_SET(0b110); SE_1_ALL_PIN_SET(0b100); TriggerADCMotor1PhaseA();}
+void CommutateMotor1PhaseBA(uint16_t pwm) {PWM_1B_PIN_SET_CV(pwm); PWM_1A_PIN_SET_CV(0); EN_1_ALL_PIN_SET(0b011); SE_1_ALL_PIN_SET(0b001); TriggerADCMotor1PhaseC();}
+void CommutateMotor1PhaseCA(uint16_t pwm) {PWM_1C_PIN_SET_CV(pwm); PWM_1A_PIN_SET_CV(0); EN_1_ALL_PIN_SET(0b101); SE_1_ALL_PIN_SET(0b001); TriggerADCMotor1PhaseB();}
+void CommutateMotor1PhaseCB(uint16_t pwm) {PWM_1C_PIN_SET_CV(pwm); PWM_1B_PIN_SET_CV(0); EN_1_ALL_PIN_SET(0b110); SE_1_ALL_PIN_SET(0b010); TriggerADCMotor1PhaseA();}
+void EnablePWMMotor1All(void) 	{EN_1_ALL_PIN_SET(0b111); SE_1_ALL_PIN_SET(0b000);}
+void DisablePWMMotor1All(void) 	{EN_1_ALL_PIN_SET(0b000); SE_1_ALL_PIN_SET(0b000);} // all mosfet off motor coasts
+void ZeroPWMMotor1All(void) 	{PWM_1C_PIN_SET_CV(0); PWM_1C_PIN_SET_CV(0); PWM_1C_PIN_SET_CV(0); EN_1_ALL_PIN_SET(0b111); SE_1_ALL_PIN_SET(0b000);} // all mosfet top side off, low side on, dynamic brake
 
 void SaveParametersCommutationIndex(void)
 {
@@ -348,10 +382,7 @@ void Serial(void)
 	Shell_ProcessNonBlocking();
 }
 
-void Task1Second(void)
-{
-	Measure_StartMeasureChannel(ADC_LSTEMP_AD, 0); //any issues if adc interrupt from previous measurement??
-}
+
 
 void ComTx(void)
 {
@@ -374,6 +405,255 @@ void ComTx(void)
 //		SendChar(TxPacketBuffer[i]);
 
 }
+
+void PrintDebug(void)
+{
+	//printf("Loop Time is %d \n", LoopDelta);
+	//printf("PWM %d \n", Motor1.PWM);
+	printf("BackEMF A ADCU %d \n", *Motor1.BackEMFPhaseA_ADCU);
+	printf("BackEMF B ADCU %d \n", *Motor1.BackEMFPhaseB_ADCU);
+	//printf("Battery Voltage %d \n", VoltageDivider_GetVoltage(&DividerCommon, *Motor1.VBat_ADCU));
+	printf("BackEMF A %d \n", VoltageDivider_GetVoltage(&DividerCommon, *Motor1.BackEMFPhaseA_ADCU));
+	printf("BackEMF B %d \n", VoltageDivider_GetVoltage(&DividerCommon, *Motor1.BackEMFPhaseB_ADCU));
+	printf("BackEMF Select %d \n", VoltageDivider_GetVoltage(&DividerCommon, *Motor1.BackEMFSelect_ADCU));
+	printf("Hall Delta %d \n", Speed_GetDeltaTicks(&Motor1Speed));
+	//printf("RPM %d \n", Speed_GetRPM(&Motor1Speed));
+	printf("I ADCU %d \n", *Motor1.I_ADCU);
+
+//	printf("Motor Desired %d \n", *Motor1PID.SetPoint);
+//	printf("Motor Input %d \n", *Motor1PID.Input);
+//	printf("Motor Error (Measured - Input) %d \n", *Motor1PID.SetPoint - *Motor1PID.Input);
+
+	printf("\n");
+}
+
+void Task1Second(void)
+{
+	Measure_StartMeasureChannel(ADC_LSTEMP_AD, 0); // any issues if adc interrupt from previous measurement??
+
+	//PrintDebug();
+}
+
+
+
+
+
+
+
+
+
+/******************************************************************************/
+/*!
+ *  @name	ShellSection
+ *  Shell functions
+ */
+/******************************************************************************/
+/*! @{ */
+
+#define SHELL_OUTTER_LOOP_FREQ 100
+
+typedef enum
+{
+	RETURN_CODE_OK = 0,
+	RETURN_CODE_ERROR_1 = 1,
+} RETURN_CODE_T;
+
+extern int Cmd_pwm 		(int argc, char ** argv);
+extern int Cmd_rpm 		(int argc, char ** argv);
+extern int Cmd_jog 		(int argc, char ** argv);
+extern int Cmd_run 		(int argc, char ** argv);
+extern int Cmd_stop		(int argc, char ** argv);
+extern int Cmd_release 	(int argc, char ** argv);
+extern int Cmd_vbat		(int argc, char ** argv);
+extern int Cmd_v		(int argc, char ** argv);
+extern int Cmd_phase	(int argc, char ** argv);
+extern int Cmd_hold		(int argc, char ** argv);
+extern int Cmd_print	(int argc, char ** argv);
+
+CMDLINE_ENTRY_T CmdEntry_pwm 		=	{ "pwm", 		"Sets pwm value", 			Cmd_pwm		};
+CMDLINE_ENTRY_T CmdEntry_v	 		=	{ "v", 			"Sets applied voltage", 	Cmd_v		};
+CMDLINE_ENTRY_T CmdEntry_rpm 		=	{ "rpm", 		"Display rpm", 				Cmd_rpm		};
+CMDLINE_ENTRY_T CmdEntry_jog		=	{ "jog", 		"Jog motor", 				Cmd_jog		};
+CMDLINE_ENTRY_T CmdEntry_run 		=	{ "run", 		"Set motor to run mode", 	Cmd_run		};
+CMDLINE_ENTRY_T CmdEntry_stop 		=	{ "stop", 		"Set motor to idle mode", 	Cmd_stop	};
+CMDLINE_ENTRY_T CmdEntry_release 	=	{ "release", 	"Release hold", 			Cmd_release	};
+CMDLINE_ENTRY_T CmdEntry_vbat 		=	{ "vbat", 		"Display battery voltage", 	Cmd_vbat	};
+CMDLINE_ENTRY_T CmdEntry_phase		=	{ "phase", 		"Set motor phase", 			Cmd_phase	};
+CMDLINE_ENTRY_T CmdEntry_hold		=	{ "hold", 		"hold position", 			Cmd_hold	};
+CMDLINE_ENTRY_T CmdEntry_print		=	{ "print", 		"print debug info",			Cmd_print	};
+
+int Cmd_pwm(int argc, char ** argv)
+{
+    if(argc == 2) BLDC_SetPWM(&Motor1, strtoul(argv[1], 0, 10));
+    return RESERVED_SHELL_RETURN_CODE_SUCCESS;
+}
+
+int Cmd_v(int argc, char ** argv)
+{
+    if(argc == 2) BLDC_ApplyVoltage(&Motor1, strtoul(argv[1], 0, 10));
+    return RESERVED_SHELL_RETURN_CODE_SUCCESS;
+}
+
+int Cmd_rpm(int argc, char ** argv)
+{
+	(void)argv;
+    if(argc == 1)
+    {
+    	Term1_SendStr("\r\nRPM = ");
+    	Term1_SendNum(Speed_GetRPM(&Motor1.Speed));
+    	Term1_SendStr("\r\n");
+    }
+    return RESERVED_SHELL_RETURN_CODE_SUCCESS;
+}
+
+int Cmd_jog(int argc, char ** argv)
+{
+	if(argc == 1)
+	{
+		BLDC_SetJogSteps(&Motor1, 1);
+
+	}
+	else if(argc == 2) BLDC_SetJogSteps(&Motor1, strtoul(argv[1], 0, 10));
+    return RESERVED_SHELL_RETURN_CODE_SUCCESS;
+}
+
+int Cmd_run(int argc, char ** argv)
+{
+	(void)argv;
+    if(argc == 1) BLDC_Start(&Motor1);
+    return RESERVED_SHELL_RETURN_CODE_SUCCESS;
+}
+
+int Cmd_stop(int argc, char ** argv)
+{
+	(void)argv;
+    if(argc == 1) BLDC_Stop(&Motor1);
+    return RESERVED_SHELL_RETURN_CODE_SUCCESS;
+}
+
+int Cmd_hold(int argc, char ** argv)
+{
+	(void)argv;
+    if(argc == 1) BLDC_Hold(&Motor1);
+    return RESERVED_SHELL_RETURN_CODE_SUCCESS;
+}
+
+int Cmd_release(int argc, char ** argv)
+{
+	(void)argv;
+    if(argc == 1) BLDC_Release(&Motor1);
+    return RESERVED_SHELL_RETURN_CODE_SUCCESS;
+}
+
+int Cmd_vbat(int argc, char ** argv)
+{
+	(void)argv;
+    if(argc == 1)
+    {
+    	Term1_SendStr("\r\nVBat = ");
+    	Term1_SendNum(VoltageDivider_GetVoltage(&DividerCommon, *Motor1.VBat_ADCU));
+    	Term1_SendStr("\r\n");
+    }
+    return RESERVED_SHELL_RETURN_CODE_SUCCESS;
+}
+
+
+int Cmd_phase(int argc, char ** argv)
+{
+    if(argc == 2)
+    {
+    	if 		(argv[1][0] == 'a' && argv[1][1] == 'b') CommutateMotor1PhaseAB(Motor1.PWM);
+    	else if (argv[1][0] == 'a' && argv[1][1] == 'c') CommutateMotor1PhaseAC(Motor1.PWM);
+    	else if (argv[1][0] == 'b' && argv[1][1] == 'a') CommutateMotor1PhaseBA(Motor1.PWM);
+    	else if (argv[1][0] == 'b' && argv[1][1] == 'c') CommutateMotor1PhaseBC(Motor1.PWM);
+    	else if (argv[1][0] == 'c' && argv[1][1] == 'a') CommutateMotor1PhaseCA(Motor1.PWM);
+    	else if (argv[1][0] == 'c' && argv[1][1] == 'b') CommutateMotor1PhaseCB(Motor1.PWM);
+
+//
+//    	switch(argv[1][0])
+//    	{
+//
+//    	case 'a':
+//    	case 'A':
+//    		switch(argv[1][1])
+//    		{
+//
+//        	case 'b':
+//        	case 'B':
+//
+//        		break;
+//
+//    		case 'c':
+//    		case 'C':
+//
+//    			break;
+//    		}
+//    		break;
+//
+//		case 'b':
+//		case 'B':
+//			switch(argv[1][1])
+//			{
+//
+//			}
+//			break;
+//
+//		case 'c':
+//		case 'C':
+//			switch(argv[1][1])
+//			{
+//
+//			}
+//			break;
+//
+//    	}
+
+
+    }
+
+    return RESERVED_SHELL_RETURN_CODE_SUCCESS;
+}
+
+
+
+
+
+int Cmd_print(int argc, char ** argv)
+{
+	(void)argv;
+    if(argc == 1)
+    {
+    	Term1_SendStr("\r\nBackEMF = ");
+    	Term1_SendNum(VoltageDivider_GetVoltage(&DividerCommon, *Motor1.BackEMFSelect_ADCU));
+    	Term1_SendStr("\r\n");
+
+    	Term1_SendStr("\r\nI ADCU = ");
+    	Term1_SendNum(*Motor1.I_ADCU);
+    	Term1_SendStr("\r\n");
+
+    }
+    return RESERVED_SHELL_RETURN_CODE_SUCCESS;
+}
+
+void RegisterShellCmds()
+{
+	Shell_RegisterCmdLineEntry(&CmdEntry_pwm);
+	Shell_RegisterCmdLineEntry(&CmdEntry_rpm);
+	Shell_RegisterCmdLineEntry(&CmdEntry_jog);
+	Shell_RegisterCmdLineEntry(&CmdEntry_run);
+	Shell_RegisterCmdLineEntry(&CmdEntry_stop);
+	Shell_RegisterCmdLineEntry(&CmdEntry_release);
+	Shell_RegisterCmdLineEntry(&CmdEntry_vbat);
+	Shell_RegisterCmdLineEntry(&CmdEntry_v);
+	Shell_RegisterCmdLineEntry(&CmdEntry_phase);
+	Shell_RegisterCmdLineEntry(&CmdEntry_hold);
+	Shell_RegisterCmdLineEntry(&CmdEntry_print);
+}
+/*! @} */
+
+
+
+
 
 
 
@@ -405,130 +685,8 @@ void Boot(void)
 //	}
 }
 
-
-
-/******************************************************************************/
-/*!
- *  @name	ShellSection
- *  Shell functions
- */
-/******************************************************************************/
-/*! @{ */
-
-#define SHELL_OUTTER_LOOP_FREQ 100
-
-typedef enum
-{
-	RETURN_CODE_OK = 0,
-	RETURN_CODE_ERROR_1 = 1,
-} RETURN_CODE_T;
-
-extern int Cmd_pwm 		(int argc, char ** argv);
-extern int Cmd_rpm 		(int argc, char ** argv);
-extern int Cmd_jog 		(int argc, char ** argv);
-extern int Cmd_run 		(int argc, char ** argv);
-extern int Cmd_stop		(int argc, char ** argv);
-extern int Cmd_release 	(int argc, char ** argv);
-extern int Cmd_vbat		(int argc, char ** argv);
-
-CMDLINE_ENTRY_T CmdEntry_pwm 		=	{ "pwm", 		"Sets pwm value", 			Cmd_pwm		};
-CMDLINE_ENTRY_T CmdEntry_rpm 		=	{ "rpm", 		"Display rpm", 				Cmd_rpm		};
-CMDLINE_ENTRY_T CmdEntry_jog		=	{ "jog", 		"Jog motor", 				Cmd_jog		};
-CMDLINE_ENTRY_T CmdEntry_run 		=	{ "run", 		"Set motor to run mode", 	Cmd_run		};
-CMDLINE_ENTRY_T CmdEntry_stop 		=	{ "stop", 		"Set motor to idle mode", 	Cmd_stop	};
-CMDLINE_ENTRY_T CmdEntry_release 	=	{ "release", 	"Release hold", 			Cmd_release	};
-CMDLINE_ENTRY_T CmdEntry_vbat 		=	{ "vbat", 		"Display battery voltage", 	Cmd_vbat	};
-
-int Cmd_pwm(int argc, char ** argv)
-{
-	(void)argv;
-    if(argc == 2) BLDC_SetPWM(&Motor1, strtoul(argv[1], 0, 10));
-    return RESERVED_SHELL_RETURN_CODE_SUCCESS;
-}
-
-int Cmd_rpm(int argc, char ** argv)
-{
-	(void)argv;
-    if(argc == 1)
-    {
-    	Term1_SendStr("\r\nRPM = ");
-    	Term1_SendNum(Speed_GetRPM(&Motor1.Speed));
-    	Term1_SendStr("\r\n");
-    }
-    return RESERVED_SHELL_RETURN_CODE_SUCCESS;
-}
-
-int Cmd_jog(int argc, char ** argv)
-{
-	(void)argv;
-    if(argc == 2) BLDC_SetJogSteps(&Motor1, strtoul(argv[1], 0, 10));
-    return RESERVED_SHELL_RETURN_CODE_SUCCESS;
-}
-
-int Cmd_run(int argc, char ** argv)
-{
-	(void)argv;
-    if(argc == 1) Motor1.State = MOTOR_STATE_RUN;
-    return RESERVED_SHELL_RETURN_CODE_SUCCESS;
-}
-
-int Cmd_stop(int argc, char ** argv)
-{
-	(void)argv;
-    if(argc == 1) Motor1.State = MOTOR_STATE_STANDBY;
-    return RESERVED_SHELL_RETURN_CODE_SUCCESS;
-}
-
-int Cmd_hold(int argc, char ** argv)
-{
-	(void)argv;
-    if(argc == 1) Motor1.State = MOTOR_STATE_STANDBY;
-    return RESERVED_SHELL_RETURN_CODE_SUCCESS;
-}
-
-int Cmd_release(int argc, char ** argv)
-{
-	(void)argv;
-    if(argc == 1) BLDC_Release(&Motor1);
-    return RESERVED_SHELL_RETURN_CODE_SUCCESS;
-}
-
-int Cmd_vbat(int argc, char ** argv)
-{
-	(void)argv;
-    if(argc == 1)
-    {
-    	Term1_SendStr("\r\nVBat = ");
-    	Term1_SendNum(VoltageDivider_GetVoltage(&DividerBattery, *Motor1.VBat_ADCU));
-    	Term1_SendStr("\r\n");
-    }
-    return RESERVED_SHELL_RETURN_CODE_SUCCESS;
-}
-/*! @} */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 static uint8_t RxPacketBufferArray[20];
 static uint8_t TxPacketBufferArray[20];
-
-
-
 
 void KESC_Init(void)
 {
@@ -540,19 +698,28 @@ void KESC_Init(void)
 	ADC_Init();
 	//Millis_Init(40000000, 200); //set in generated systick file.
 
-
-
 	//Load eeprom
 
-	//Init software modules
-	VoltageDivider_Init(&DividerBattery, R1_RATIO, R2_RATIO, VREF, ADC_MAX);
-	Blinky_Init(&LEDPowerButton, LEDBlinkOn, LEDBlinkOff);
+	Measure_Init
+	(
+		ADC_CHANNEL_COUNT,
+		ADC_MAX_HW_SAMPLE_COUNT,
+		CHANNEL_TO_PIN,
+		MeasureChannelResult,
+		ADC_SampleGroupChannelPinBuffer,
+		ADC_SetConversion,
+		(ADC_DATA_T (*)(uint8_t))ADC_GetResult,
+		ADC_AbortConversion,
+		ADC_DisableInterrupt
+	);
 
-	Motor1.State = MOTOR_STATE_STANDBY;
+	//Init software modules
+	VoltageDivider_Init(&DividerCommon, R1_RATIO, R2_RATIO, VREF, ADC_MAX);
+	Blinky_Init(&LEDPowerButton, LEDBlinkOn, LEDBlinkOff);
 
 	BLDC_Commutation_Init
 	(
-		&Motor1.Commutation,
+		&Motor1Commutation,
 		DIRECTION_CW,
 		ReadHallSensorMotor1,
 		SetPWMMotor1PhaseA,
@@ -576,20 +743,7 @@ void KESC_Init(void)
 		DisablePWMMotor1All
 	);
 
-	Measure_Init
-	(
-		ADC_CHANNEL_COUNT,
-		ADC_MAX_HW_SAMPLE_COUNT,
-		CHANNEL_TO_PIN,
-		MeasureChannelResult,
-		ADC_SampleGroupChannelPinBuffer,
-		ADC_SetConversion,
-		(ADC_DATA_T (*)(uint8_t))ADC_GetResult,
-		ADC_AbortConversion,
-		ADC_DisableInterrupt
-	);
-
-	Speed_InitBLDC(&Motor1.Speed, &FTM1_C1V, FTM1_FREQ, FTM1_CV_MAX, MOTOR1_POLE_PAIRS, PWM_FREQ);
+	Speed_InitHallEncoder(&Motor1Speed, &FTM1_C1V, FTM1_CV_MAX, FTM1_FREQ, MOTOR1_POLE_PAIRS, PWM_FREQ);
 
 //	PID_Init
 //	(
@@ -598,6 +752,9 @@ void KESC_Init(void)
 //		PWM_PEROID, FTM2_FREQ, 10,
 //		10, FTM1_CV_MAX
 //	);
+
+
+
 
 	Measure_MapAddress(&Motor1.VBat_ADCU, 			ADC_BAT_AD);
 	Measure_MapAddress(&Motor1.BackEMFPhaseA_ADCU, 	ADC_V1A);
@@ -610,14 +767,25 @@ void KESC_Init(void)
 //	Measure_MapAddress(&Motor2.BackEMFPhaseC_ADCU, ADC_V2B);
 //	Measure_MapAddress(&Motor2.I_ADCU, 			ADC_I2_AD);
 
+
+	//Map Motor Structs
+	BLDC_Init
+	(
+		&Motor1,
+		&Motor1Commutation,
+		&Motor1Speed,
+		&Motor1PID,
+		&DividerCommon,
+		&DividerCommon,
+		&DividerCommon,
+		&DividerCommon,
+		DisablePWMMotor1All,
+		PWM_MAX
+	);
+
 	Shell_InitNonBlocking(10, SHELL_OUTTER_LOOP_FREQ);
-	Shell_RegisterCmdLineEntry(&CmdEntry_pwm);
-	Shell_RegisterCmdLineEntry(&CmdEntry_rpm);
-	Shell_RegisterCmdLineEntry(&CmdEntry_jog);
-	Shell_RegisterCmdLineEntry(&CmdEntry_run);
-	Shell_RegisterCmdLineEntry(&CmdEntry_stop);
-	Shell_RegisterCmdLineEntry(&CmdEntry_release);
-	Shell_RegisterCmdLineEntry(&CmdEntry_vbat);
+	RegisterShellCmds();
+
 
 	LiteFXOS_InitMillis(Millis_GetTickCounter());
 	LiteFXOS_InitThreadPeriodicArgPeriod(&ThreadLED, 		 	LEDBlink, 		1000);
@@ -631,9 +799,10 @@ void KESC_Init(void)
 	LiteFXOS_SetThreadStart(&ThreadComTx);
 	Cpu_EnableInt();
 
+	//temp run
 	BLDC_Commutation_MapCommuntationTableRunCalibration
 	(	
-		&Motor1.Commutation,
+		&Motor1Commutation,
 		0,
 		0,
 		0,
@@ -673,88 +842,40 @@ void KESC_Init(void)
 	//SendStartMessage();
 }
 
-
-
 void KESC_Loop(void)
 {
-	static volatile uint32_t t1, t2, delta;
-
 	while(1)
 	{
-		t1 = Micros();
-
-	//20ms send thread
-
+		LoopDelta = Micros() - LoopTimer;
+		LoopTimer = Micros();
 
 		//__DI();
 		//WDOG_Feed();
 		//__EI();
 
 		LiteFXOS_ProcThread(&ThreadLED);
-		//LiteFXOS_ProcThread(&ThreadSerial);
+		LiteFXOS_ProcThread(&ThreadSerial);
 		LiteFXOS_ProcThread(&ThreadTask1Second);
 
 		BLDC_Process(&Motor1);
 
 
 
-		Test_StartUp();
-		Test_RxPacket(); ///always receive
-
+		//Test_StartUp();
+		//Test_RxPacket(); ///always receive
 		//LiteFXOS_ProcThread(&ThreadComTx); //tx every 20ms
-
 		//		if (Test_RxPacket())
 		//		{
 		//			Motor1.PID.Kp = Test_GetKp();
 		//		}
 
-		Motor1.PID.Kp = Test_GetKp();
-		Motor1.PID.Ki = Test_GetKi();
-		Motor1.PID.Kd = Test_GetKd();
+//		Motor1.PID->Kp = Test_GetKp();
+//		Motor1.PID->Ki = Test_GetKi();
+//		Motor1.PID->Kd = Test_GetKd();
 
 
-//		//BLDC Fault checking
-//
-//		if
-//		(
-//			ErrorFlags.HallSensor1 ||
-//			ErrorFlags.Identify1 ||
-//			ErrorFlags.HallSensor2 ||
-//			ErrorFlags.Identify2 ||
-//			ErrorFlags.OverVolt /*|| Motor_Temp_Err*/ ||
-//			ErrorFlags.LowVolt ||
-//			ErrorFlags.StartupTPS||
-//			ErrorFlags.Reverse ||
-//			ErrorFlags.RegenOverVolt ||
-//			ErrorFlags.Com /*||Hall_Sensor_Err||Identify_Err*/  ||
-//			ErrorFlags.OverTemp
-//		)
-//		{
-//			SE_1_ALL_PIN_OFF();
-//			EN_1_ALL_PIN_OFF();
-//			SE_2_ALL_PIN_OFF();
-//			EN_2_ALL_PIN_OFF();
-//			//M_En=0;
-//			//Global_En=0;
-//			//Target_TPSx64 = 0;
-//		}
-//		else
-//		{
-//			//Global_En = 1;
-//		}
 
 		//Debugging
-
-		t2 = Micros();
-//		if (LiteFXOS_ProcThread(&ThreadTask1Second))
-//		{
-//	    	Term1_SendStr("\r\nLoop time t2 ");
-//	    	Term1_SendNum(t2);
-//	    	Term1_SendStr("\r\n");
-//	    	Term1_SendStr("\r\nLoop time t1 ");
-//	    	Term1_SendNum(t1);
-//	    	Term1_SendStr("\r\n");
-//		}
 
 	}
 }

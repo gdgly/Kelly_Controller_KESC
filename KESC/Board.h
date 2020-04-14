@@ -120,7 +120,7 @@
 #define SE_1C_PIN_OFF()			GPIO_PDD_ClearPortDataOutputMask(GPIOB_DEVICE, GPIO_PDD_PIN_18) //PTG2
 #define SE_1_ALL_PIN_ON() 		GPIO_PDD_SetPortDataOutput(GPIOB_DEVICE, GPIO_PDD_GetPortDataOutput(GPIOB_DEVICE) | (MASK_LSB_3<<16))
 #define SE_1_ALL_PIN_OFF() 		GPIO_PDD_SetPortDataOutput(GPIOB_DEVICE, GPIO_PDD_GetPortDataOutput(GPIOB_DEVICE) & ~(MASK_LSB_3<<16))
-#define SE_1_ALL_PIN_SET(val) 	GPIO_PDD_SetPortDataOutput(GPIOB_DEVICE, (GPIO_PDD_GetPortDataOutput(GPIOB_DEVICE) & ~((val&MASK_LSB_3)<<16)) | ((val&MASK_LSB_3)<<16))
+#define SE_1_ALL_PIN_SET(val) 	GPIO_PDD_SetPortDataOutput(GPIOB_DEVICE, (GPIO_PDD_GetPortDataOutput(GPIOB_DEVICE) & ~(MASK_LSB_3<<16)) | ((val&MASK_LSB_3)<<16))
 
 #define SE_2A_PIN_ON()			GPIO_PDD_SetPortDataOutputMask(GPIOA_DEVICE, GPIO_PDD_PIN_29) //PTD5
 #define SE_2B_PIN_ON()			GPIO_PDD_SetPortDataOutputMask(GPIOA_DEVICE, GPIO_PDD_PIN_30) //PTD6
@@ -131,9 +131,9 @@
 #define SE_2_ALL_PIN_ON() 		GPIO_PDD_SetPortDataOutput(GPIOA_DEVICE, GPIO_PDD_GetPortDataOutput(GPIOA_DEVICE) | (MASK_LSB_3<<29))
 #define SE_2_ALL_PIN_OFF() 		GPIO_PDD_SetPortDataOutput(GPIOA_DEVICE, GPIO_PDD_GetPortDataOutput(GPIOA_DEVICE) & ~(MASK_LSB_3<<29))
 
-#define EN_1A_PIN_ON()		GPIO_PDD_SetPortDataOutputMask(GPIOA_DEVICE, GPIO_PDD_PIN_26) 	//PTD2
-#define EN_1B_PIN_ON() 		GPIO_PDD_SetPortDataOutputMask(GPIOA_DEVICE, GPIO_PDD_PIN_27) 	//PTD3
-#define EN_1C_PIN_ON()		GPIO_PDD_SetPortDataOutputMask(GPIOA_DEVICE, GPIO_PDD_PIN_28) 	//PTD4
+#define EN_1A_PIN_ON()		GPIO_PDD_SetPortDataOutputMask(GPIOA_DEVICE, GPIO_PDD_PIN_26) 	//PTD2 //schematic A
+#define EN_1B_PIN_ON() 		GPIO_PDD_SetPortDataOutputMask(GPIOA_DEVICE, GPIO_PDD_PIN_27) 	//PTD3 //schematic B
+#define EN_1C_PIN_ON()		GPIO_PDD_SetPortDataOutputMask(GPIOA_DEVICE, GPIO_PDD_PIN_28) 	//PTD4 //schematic C
 #define EN_1A_PIN_OFF()		GPIO_PDD_ClearPortDataOutputMask(GPIOA_DEVICE, GPIO_PDD_PIN_26) //PTD2
 #define EN_1B_PIN_OFF() 	GPIO_PDD_ClearPortDataOutputMask(GPIOA_DEVICE, GPIO_PDD_PIN_27) //PTD3
 #define EN_1C_PIN_OFF()		GPIO_PDD_ClearPortDataOutputMask(GPIOA_DEVICE, GPIO_PDD_PIN_28) //PTD4
@@ -142,7 +142,7 @@
 #define EN_1C_PIN_SET(en)	((en) ? EN_1C_PIN_ON() : EN_1C_PIN_OFF())
 #define EN_1_ALL_PIN_ON() 		GPIO_PDD_SetPortDataOutput(GPIOA_DEVICE, GPIO_PDD_GetPortDataOutput(GPIOA_DEVICE) | (MASK_LSB_3<<26))
 #define EN_1_ALL_PIN_OFF() 		GPIO_PDD_SetPortDataOutput(GPIOA_DEVICE, GPIO_PDD_GetPortDataOutput(GPIOA_DEVICE) & ~(MASK_LSB_3<<26))
-#define EN_1_ALL_PIN_SET(val)	GPIO_PDD_SetPortDataOutput(GPIOA_DEVICE, (GPIO_PDD_GetPortDataOutput(GPIOA_DEVICE) & ~((val&MASK_LSB_3)<<26)) | ((val&MASK_LSB_3)<<26))
+#define EN_1_ALL_PIN_SET(val)	GPIO_PDD_SetPortDataOutput(GPIOA_DEVICE, (GPIO_PDD_GetPortDataOutput(GPIOA_DEVICE) & ~(MASK_LSB_3<<26)) | ((val&MASK_LSB_3)<<26))
 
 #define EN_2A_PIN_ON()		GPIO_PDD_SetPortDataOutputMask(GPIOB_DEVICE, GPIO_PDD_PIN_9)	//PTF1
 #define EN_2B_PIN_ON() 		GPIO_PDD_SetPortDataOutputMask(GPIOB_DEVICE, GPIO_PDD_PIN_10) 	//PTF2
