@@ -24,24 +24,6 @@ Module "FTM2"      (component Init_FTM_VAR0)
                 this method in user code to initialize the module. By default, the method is called by PE automatically; see 
                 "Call Init method" property of the component for more details.
 
-Module "SysTick"   (component Init_SysTick_VAR0)
-   - SysTick_Init -This method initializes registers of the SysTick module according to the Peripheral Initialization settings. 
-                Call this method in user code to initialize the module. By default, the method is called by PE automatically; 
-                see "Call Init method" property of the component for more details.
-
-Module "Term1"     (component Term)
-   - Term1_CRLF -Send CRLF to terminal.
-   - Term1_SendStr -Send string to terminal.
-   - Term1_SendNum -Send number to terminal.
-   - Term1_SendChar -Send char to terminal.
-   - Term1_Cls -Clear the terminal window.
-   - Term1_MoveTo -Move cursor to position x, y. Range of coordinates can be from 1 to the size, which depends on the used 
-                terminal. Position [1,1] represents the upper left corner.
-   - Term1_ReadChar -Read char from terminal.
-   - Term1_KeyPressed -Test if char was received from the terminal.
-   - Term1_ReadLine -Read string from the terminal. Waits until whole string is read. Method expects carriage return and line 
-                feed (CRLF) escape sequence as a string termination.
-
 Module "IFsh1"     (component IntFLASH)
    - IFsh1_DisableEvent -This method disables all the events except <OnSaveBuffer>, <OnRestoreBuffer> and <OnEraseError>. The 
                 method is available only if any event is enabled.

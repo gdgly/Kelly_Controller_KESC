@@ -6,7 +6,7 @@
 **     Version     : Component 01.044, Driver 01.04, CPU db: 3.00.000
 **     Repository  : Kinetis
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2020-01-03, 23:56, # CodeGen: 85
+**     Date/Time   : 2020-04-17, 22:47, # CodeGen: 136
 **     Abstract    :
 **
 **     Comment     :
@@ -67,10 +67,6 @@
 #include "GPIOB.h"
 #include "FTM1.h"
 #include "FTM2.h"
-#include "SysTick.h"
-#include "Term1.h"
-#include "Inhr1.h"
-#include "ASerialLdd1.h"
 #include "IFsh1.h"
 #include "IntFlashLdd1.h"
 #include "CRC1.h"

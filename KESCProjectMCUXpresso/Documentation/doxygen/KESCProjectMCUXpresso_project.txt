@@ -27,8 +27,6 @@
 - \subpage GPIOB
 - \subpage FTM1
 - \subpage FTM2
-- \subpage SysTick
-- \subpage ASerialLdd1
 - \subpage IntFlashLdd1
 - \subpage CRC1
 

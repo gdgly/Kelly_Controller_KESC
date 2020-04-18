@@ -6,7 +6,7 @@
 **     Version     : Component 01.044, Driver 01.04, CPU db: 3.00.000
 **     Repository  : Kinetis
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2020-01-03, 23:56, # CodeGen: 85
+**     Date/Time   : 2020-04-17, 22:47, # CodeGen: 136
 **     Abstract    :
 **
 **     Comment     :
@@ -61,10 +61,6 @@
   #include "GPIOB.h"
   #include "FTM1.h"
   #include "FTM2.h"
-  #include "SysTick.h"
-  #include "Term1.h"
-  #include "Inhr1.h"
-  #include "ASerialLdd1.h"
   #include "IFsh1.h"
   #include "IntFlashLdd1.h"
   #include "CRC1.h"
@@ -102,7 +98,7 @@
     (tIsrFunc)&Cpu_Interrupt,          /* 0x0C  0x00000030   -   ivINT_Reserved12              unused by PE */
     (tIsrFunc)&Cpu_Interrupt,          /* 0x0D  0x00000034   -   ivINT_Reserved13              unused by PE */
     (tIsrFunc)&Cpu_Interrupt,          /* 0x0E  0x00000038   -   ivINT_PendableSrvReq          unused by PE */
-    (tIsrFunc)&SysTick_ISR,            /* 0x0F  0x0000003C   2   ivINT_SysTick                 used by PE */
+    (tIsrFunc)&Cpu_Interrupt,          /* 0x0F  0x0000003C   -   ivINT_SysTick                 unused by PE */
     (tIsrFunc)&Cpu_Interrupt,          /* 0x10  0x00000040   -   ivINT_Reserved16              unused by PE */
     (tIsrFunc)&Cpu_Interrupt,          /* 0x11  0x00000044   -   ivINT_Reserved17              unused by PE */
     (tIsrFunc)&Cpu_Interrupt,          /* 0x12  0x00000048   -   ivINT_Reserved18              unused by PE */
@@ -115,7 +111,7 @@
     (tIsrFunc)&Cpu_Interrupt,          /* 0x19  0x00000064   -   ivINT_Reserved25              unused by PE */
     (tIsrFunc)&Cpu_Interrupt,          /* 0x1A  0x00000068   -   ivINT_SPI0                    unused by PE */
     (tIsrFunc)&Cpu_Interrupt,          /* 0x1B  0x0000006C   -   ivINT_SPI1                    unused by PE */
-    (tIsrFunc)&ASerialLdd1_Interrupt,  /* 0x1C  0x00000070   2   ivINT_UART0                   used by PE */
+    (tIsrFunc)&Cpu_Interrupt,          /* 0x1C  0x00000070   -   ivINT_UART0                   unused by PE */
     (tIsrFunc)&Cpu_Interrupt,          /* 0x1D  0x00000074   -   ivINT_UART1                   unused by PE */
     (tIsrFunc)&Cpu_Interrupt,          /* 0x1E  0x00000078   -   ivINT_UART2                   unused by PE */
     (tIsrFunc)&Cpu_Interrupt,          /* 0x1F  0x0000007C   -   ivINT_ADC0                    unused by PE */

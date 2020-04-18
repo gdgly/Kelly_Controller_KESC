@@ -9,7 +9,7 @@
 **     Version     : Component 01.014, Driver 01.07, CPU db: 3.00.000
 **     Repository  : Kinetis
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2019-12-26, 16:45, # CodeGen: 54
+**     Date/Time   : 2020-04-16, 21:47, # CodeGen: 128
 **     Abstract    :
 **         This component implements the Cyclic Redundancy Check (CRC) code calculation.
 **     Settings    :

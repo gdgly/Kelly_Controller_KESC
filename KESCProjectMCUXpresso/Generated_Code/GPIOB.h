@@ -7,7 +7,7 @@
 **     Version     : Component 01.006, Driver 01.06, CPU db: 3.00.000
 **     Repository  : Kinetis
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2019-12-12, 18:30, # CodeGen: 0
+**     Date/Time   : 2020-04-16, 21:47, # CodeGen: 128
 **     Abstract    :
 **          This file implements the GPIO (GPIOB) module initialization
 **          according to the Peripheral Initialization settings, and

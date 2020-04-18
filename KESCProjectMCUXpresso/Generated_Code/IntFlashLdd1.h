@@ -7,7 +7,7 @@
 **     Version     : Component 01.106, Driver 01.01, CPU db: 3.00.000
 **     Repository  : Kinetis
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2019-12-26, 16:23, # CodeGen: 53
+**     Date/Time   : 2020-04-16, 21:47, # CodeGen: 128
 **     Abstract    :
 **          This embedded component implements an access to an on-chip flash memory.
 **          Using this component the flash memory could be written to, erased,

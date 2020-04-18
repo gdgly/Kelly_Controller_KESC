@@ -52,14 +52,28 @@
       <Path>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\Exclude\Com\Transceiver\</Path>
       <Path>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\Exclude\KellyADC\</Path>
       <Path>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\Exclude\NXPShell\</Path>
+      <Path>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\Exclude\Protocol\</Path>
       <Path>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\Exclude\Queue\</Path>
+      <Path>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\External\FreeMASTER\src_common\</Path>
+      <Path>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\External\FreeMASTER\src_platforms\56F8xxx\</Path>
+      <Path>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\External\FreeMASTER\src_platforms\HC08\</Path>
+      <Path>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\External\FreeMASTER\src_platforms\HC12\</Path>
+      <Path>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\External\FreeMASTER\src_platforms\KEAxx\</Path>
+      <Path>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\External\FreeMASTER\src_platforms\Kxx\</Path>
+      <Path>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\External\FreeMASTER\src_platforms\MCF51xx\</Path>
+      <Path>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\External\FreeMASTER\src_platforms\MCF52xx\</Path>
+      <Path>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\External\FreeMASTER\src_platforms\MPC55xx\</Path>
+      <Path>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\External\FreeMASTER\src_platforms\MPC56xx\</Path>
+      <Path>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\External\FreeMASTER\src_platforms\MPC57xx\</Path>
+      <Path>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\External\FreeMASTER\src_platforms\MQX\</Path>
+      <Path>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\External\FreeMASTER\src_platforms\S32xx\</Path>
       <Path>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\KEA64\</Path>
+      <Path>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\KellyMotorShell\</Path>
       <Path>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\List\</Path>
       <Path>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\Measure\</Path>
       <Path>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\Millis\</Path>
       <Path>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\OS\</Path>
       <Path>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\PID\</Path>
-      <Path>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\Protocol\</Path>
       <Path>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\Shell\</Path>
       <Path>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\Speed\</Path>
       <Path>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\State\</Path>
@@ -74,7 +88,6 @@
   </PATHS>
   <FILES>
     <GeneratedCs>
-      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\Generated_Code\ASerialLdd1.c</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\Generated_Code\CRC1.c</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\Generated_Code\Cpu.c</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\Generated_Code\FTM1.c</PathName>
@@ -82,15 +95,13 @@
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\Generated_Code\GPIOA.c</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\Generated_Code\GPIOB.c</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\Generated_Code\IFsh1.c</PathName>
-      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\Generated_Code\Inhr1.c</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\Generated_Code\IntFlashLdd1.c</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\Generated_Code\PE_LDD.c</PathName>
-      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\Generated_Code\SysTick.c</PathName>
-      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\Generated_Code\Term1.c</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\Generated_Code\Vectors.c</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\KESC\Exclude\Calibration.c</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\KESC\Exclude\Reference.c</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\KESC\KESC.c</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\KESC\freemaster_tsa_table.c</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\BLDC\BLDC.c</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\BLDC\Commutation.c</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\BLDC\Monitor.c</PathName>
@@ -100,35 +111,62 @@
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\Exclude\CmdLineWithErroCodes\cmdline.c</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\Exclude\Com\Transceiver\AdafruitBLE.c</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\Exclude\Hall.c</PathName>
-      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\Exclude\KellyADC\ADCWrapper.c</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\Exclude\KellyADC\KellyADC.c</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\Exclude\KellyADC\Measure_bk.c</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\Exclude\KellyADC\Measurebk.c</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\Exclude\KellyADC\PEADC.c</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\Exclude\NXPShell\fsl_shell.c</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\Exclude\NXPShell\uif.c</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\Exclude\Protocol\Bluefruit.c</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\Exclude\Protocol\Com.c</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\Exclude\Protocol\ETS.c</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\Exclude\Protocol\KellyProtocol1.c</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\Exclude\Protocol\Protocol.c</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\Exclude\Protocol\TestProtocol.c</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\Exclude\Protocol\WiiChuck.c</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\Exclude\Queue\Queue.c</PathName>
-      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\Exclude\SKEAZN64.c</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\Exclude\arduino_test.c</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\Exclude\motor_speed_teensy.c</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\Exclude\teensy_test.c</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\External\FreeMASTER\src_common\freemaster_appcmd.c</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\External\FreeMASTER\src_common\freemaster_bdm.c</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\External\FreeMASTER\src_common\freemaster_can.c</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\External\FreeMASTER\src_common\freemaster_lin.c</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\External\FreeMASTER\src_common\freemaster_pipes.c</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\External\FreeMASTER\src_common\freemaster_protocol.c</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\External\FreeMASTER\src_common\freemaster_rec.c</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\External\FreeMASTER\src_common\freemaster_scope.c</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\External\FreeMASTER\src_common\freemaster_serial.c</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\External\FreeMASTER\src_common\freemaster_sfio.c</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\External\FreeMASTER\src_common\freemaster_tsa.c</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\External\FreeMASTER\src_platforms\56F8xxx\freemaster_56F8xxx.c</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\External\FreeMASTER\src_platforms\56F8xxx\freemaster_fastrec.c</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\External\FreeMASTER\src_platforms\HC08\freemaster_HC08.c</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\External\FreeMASTER\src_platforms\HC12\freemaster_HC12.c</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\External\FreeMASTER\src_platforms\KEAxx\freemaster_KEAxx.c</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\External\FreeMASTER\src_platforms\Kxx\freemaster_Kxx.c</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\External\FreeMASTER\src_platforms\MCF51xx\freemaster_MCF51xx.c</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\External\FreeMASTER\src_platforms\MCF52xx\freemaster_MCF52xx.c</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\External\FreeMASTER\src_platforms\MPC55xx\freemaster_MPC55xx.c</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\External\FreeMASTER\src_platforms\MPC56xx\freemaster_MPC56xx.c</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\External\FreeMASTER\src_platforms\MPC57xx\freemaster_MPC57xx.c</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\External\FreeMASTER\src_platforms\MQX\freemaster_mqx.c</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\External\FreeMASTER\src_platforms\S32xx\freemaster_S32xx.c</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\KEA64\ADC.c</PathName>
-      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\KEA64\CPU.c</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\KEA64\CRC.c</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\KEA64\Console.c</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\KEA64\Flash.c</PathName>
-      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\KEA64\Serial.c</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\KEA64\KEA64_CPU.c</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\KEA64\Measure0.c</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\KEA64\Serial0.c</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\KEA64\SysTick.c</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\KEA64\UART0.c</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\KellyMotorShell\KellyMotorShell.c</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\List\List.c</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\Measure\Measure.c</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\Millis\Millis.c</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\OS\OS.c</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\PID\PID.c</PathName>
-      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\Protocol\Bluefruit.c</PathName>
-      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\Protocol\Com.c</PathName>
-      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\Protocol\ETS.c</PathName>
-      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\Protocol\KellyProtocol1.c</PathName>
-      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\Protocol\Protocol.c</PathName>
-      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\Protocol\TestProtocol.c</PathName>
-      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\Protocol\WiiChuck.c</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\Shell\Shell.c</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\Shell\Terminal.c</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\Speed\Speed.c</PathName>
@@ -162,7 +200,6 @@
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\CMSIS\core_cm0plus.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\CMSIS\mpu_armv7.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\CMSIS\mpu_armv8.h</PathName>
-      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\Generated_Code\ASerialLdd1.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\Generated_Code\CRC1.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\Generated_Code\Cpu.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\Generated_Code\FTM1.h</PathName>
@@ -171,19 +208,19 @@
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\Generated_Code\GPIOB.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\Generated_Code\IFsh1.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\Generated_Code\IO_Map.h</PathName>
-      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\Generated_Code\Inhr1.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\Generated_Code\IntFlashLdd1.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\Generated_Code\PE_Const.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\Generated_Code\PE_Error.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\Generated_Code\PE_LDD.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\Generated_Code\PE_Types.h</PathName>
-      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\Generated_Code\SysTick.h</PathName>
-      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\Generated_Code\Term1.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\KESC\Board.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\KESC\Exclude\Calibration.h</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\KESC\ISRMap.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\KESC\KESC.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\KESC\Parameters.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\KESC\SoftwareConfig.h</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\KESC\freemaster_cfg.h</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\KESC\freemaster_cfggen.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\BLDC\BLDC.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\BLDC\Commutation.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\BLDC\Monitor.h</PathName>
@@ -226,35 +263,66 @@
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\Exclude\Adafruit_BluefruitLE_nRF51-master\utility\common_header.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\Exclude\Adafruit_BluefruitLE_nRF51-master\utility\errors.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\Exclude\Adafruit_BluefruitLE_nRF51-master\utility\sdep.h</PathName>
-      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\Exclude\Adafruit_FIFO\Adafruit_FIFO.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\Exclude\ArduinoPID\PID_v1.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\Exclude\BEMF.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\Exclude\Battery.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\Exclude\Bitwise.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\Exclude\CmdLineWithErroCodes\cmdline.h</PathName>
-      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\Exclude\Error.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\Exclude\Hall.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\Exclude\KellyADC\KellyADC.h</PathName>
-      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\Exclude\MeasureConfig.h</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\Exclude\KellyADC\Measurebk.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\Exclude\NXPShell\fsl_shell.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\Exclude\NXPShell\uif.h</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\Exclude\Protocol\Bluefruit.h</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\Exclude\Protocol\ETS.h</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\Exclude\Queue\Adafruit_FIFO\Adafruit_FIFO.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\Exclude\Queue\Queue.h</PathName>
-      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\Exclude\SKEAZN64.h</PathName>
-      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\Exclude\Types.h</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\External\FreeMASTER\src_common\freemaster_defcfg.h</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\External\FreeMASTER\src_common\freemaster_private.h</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\External\FreeMASTER\src_common\freemaster_protocol.h</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\External\FreeMASTER\src_common\freemaster_rec.h</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\External\FreeMASTER\src_common\freemaster_tsa.h</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\External\FreeMASTER\src_platforms\56F8xxx\freemaster.h</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\External\FreeMASTER\src_platforms\56F8xxx\freemaster_56F8xxx.h</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\External\FreeMASTER\src_platforms\56F8xxx\freemaster_fastrec.h</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\External\FreeMASTER\src_platforms\HC08\freemaster.h</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\External\FreeMASTER\src_platforms\HC08\freemaster_HC08.h</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\External\FreeMASTER\src_platforms\HC12\freemaster.h</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\External\FreeMASTER\src_platforms\HC12\freemaster_HC12.h</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\External\FreeMASTER\src_platforms\KEAxx\freemaster.h</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\External\FreeMASTER\src_platforms\KEAxx\freemaster_KEAxx.h</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\External\FreeMASTER\src_platforms\Kxx\freemaster.h</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\External\FreeMASTER\src_platforms\Kxx\freemaster_Kxx.h</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\External\FreeMASTER\src_platforms\MCF51xx\freemaster.h</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\External\FreeMASTER\src_platforms\MCF51xx\freemaster_MCF51xx.h</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\External\FreeMASTER\src_platforms\MCF52xx\freemaster.h</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\External\FreeMASTER\src_platforms\MCF52xx\freemaster_MCF52xx.h</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\External\FreeMASTER\src_platforms\MPC55xx\freemaster.h</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\External\FreeMASTER\src_platforms\MPC55xx\freemaster_MPC55xx.h</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\External\FreeMASTER\src_platforms\MPC56xx\freemaster.h</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\External\FreeMASTER\src_platforms\MPC56xx\freemaster_MPC56xx.h</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\External\FreeMASTER\src_platforms\MPC57xx\freemaster.h</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\External\FreeMASTER\src_platforms\MPC57xx\freemaster_MPC57xx.h</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\External\FreeMASTER\src_platforms\MQX\freemaster.h</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\External\FreeMASTER\src_platforms\MQX\freemaster_mqx.h</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\External\FreeMASTER\src_platforms\S32xx\freemaster.h</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\External\FreeMASTER\src_platforms\S32xx\freemaster_S32xx.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\KEA64\ADC.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\KEA64\CRC.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\KEA64\Console.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\KEA64\Flash.h</PathName>
-      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\KEA64\Serial.h</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\KEA64\KEA64_CPU.h</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\KEA64\Serial0.h</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\KEA64\SysTick.h</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\KEA64\UART0.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\List\List.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\Measure\Measure.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\Millis\Millis.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\OS\OS.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\PID\PID.h</PathName>
-      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\Protocol\Bluefruit.h</PathName>
-      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\Protocol\ETS.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\Shell\ConfigExample.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\Shell\Shell.h</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\Shell\Terminal.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\Speed\Speed.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\State\Menu.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\VoltageDivider\VoltageDivider.h</PathName>
@@ -290,7 +358,6 @@
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\device\system_MKE02Z4.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\drivers\fsl_clock.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\drivers\fsl_common.h</PathName>
-      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\source\ISRMap.h</PathName>
     </GeneratedHs>
   </FILES>
   <OPTIONS>

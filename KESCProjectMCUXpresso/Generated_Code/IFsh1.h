@@ -7,7 +7,7 @@
 **     Version     : Component 02.409, Driver 01.02, CPU db: 3.00.000
 **     Repository  : Kinetis
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2019-12-26, 16:23, # CodeGen: 53
+**     Date/Time   : 2020-04-16, 21:47, # CodeGen: 128
 **     Abstract    :
 **         This component "IntFLASH" implements an access to internal FLASH.
 **         The component support reading/writing data into FLASH, erasing of

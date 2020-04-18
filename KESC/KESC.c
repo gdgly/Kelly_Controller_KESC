@@ -1,46 +1,36 @@
-/*
- * KESC_V0.c
- *
- *  Created on: Oct 11, 2019
- *      Author: SLi
- */
-
 #include "KESC.h"
-
 #include "Board.h"
 #include "Parameters.h"
-#include "Shell.h"
 
-#include "BLDC.h"
-#include "Commutation.h"
-#include "Measure.h"
+// From Kelly Library
+#include "BLDC/BLDC.h"
+#include "BLDC/Commutation.h"
 
-#include "VoltageDivider.h"
-#include "PID.h"
-#include "Millis.h"
-#include "OS.h"
-#include "Blinky.h"
+#include "Shell/Terminal.h"
+#include "Shell/Shell.h"
 
-#include "ADC.h"
-//#include "ADC0.h"
+#include "VoltageDivider/VoltageDivider.h"
+#include "PID/PID.h"
+#include "Millis/Millis.h"
+#include "OS/OS.h"
+#include "Blinky/Blinky.h"
+#include "Measure/Measure.h"
 
-#include "Cpu.h"
-#include "GPIOA.h"
-#include "GPIOB.h"
-#include "FTM1.h"
-//#include "FTM0.h"
-#include "FTM2.h"
-//#include "WDOG.h"
+#include "KEA64/SysTick.h"
+#include "KEA64/ADC.h"
+#include "KEA64/UART0.h"
+#include "KEA64/Serial0.h"
+
+#include "freemaster.h"
+
+// PE Drivers
 #include "Cpu.h"
 #include "Events.h"
 #include "GPIOA.h"
 #include "GPIOB.h"
+#include "FTM1.h"
 #include "FTM2.h"
-#include "SysTick.h"
-#include "ADC.h"
-#include "Term1.h"
-#include "Inhr1.h"
-#include "ASerialLdd1.h"
+//#include "WDOG.h"
 
 #include "FTM_PDD.h"
 
@@ -74,13 +64,11 @@ typedef enum
 
 volatile static KESC_DIRECTION_T Direction; // Direction of travel
 
-static uint32_t LoopTimer, LoopDelta;
 BLDC_CONTROLLER_T	Motor1;
 PID_T 				Motor1PID;
-BLDC_COMMUTATION_T  Motor1Commutation;
-SPEED_T 			Motor1Speed;
-PID_T 				Motor1PID;
+MONITOR_T			Motor1Monitor;
 
+static uint32_t LoopTimer, LoopDelta;
 BLINKY_T 			LEDPowerButton;
 
 LITE_FX_OS_THREAD_T ThreadLED;
@@ -89,6 +77,19 @@ LITE_FX_OS_THREAD_T ThreadTask1Second;
 LITE_FX_OS_THREAD_T ThreadComTx;			//20ms period task for communications
 
 
+void LEDBlinkOn(void)  	{ LED_PIN_ON();  }
+void LEDBlinkOff(void) 	{ LED_PIN_OFF(); }
+void LEDBlink(void) 	{ Blinky_Toggle(&LEDPowerButton); }
+
+/******************************************************************************/
+/*!
+ * @name  	VoltageDividers
+ * @brief 	ADCU to voltage conversion
+ */
+/******************************************************************************/
+/*! @{ */
+VOLTAGE_DIVIDER_T	DividerCommon; // Battery, BackEMF,
+VOLTAGE_DIVIDER_T	DividerTemp; // LSTemp
 
 //R1 = 47.5k, R2 = 5.62k, DIV = 5.62/(47.5 + 5.62) = 281/2656
 //VREF = 5V, VDIV_PER_ADC = VREF/255 = 5/255
@@ -106,9 +107,127 @@ LITE_FX_OS_THREAD_T ThreadComTx;			//20ms period task for communications
 #define R2_RATIO 	562
 #define VREF		5
 #define ADC_MAX		255
+/*! @} */
 
-VOLTAGE_DIVIDER_T	DividerCommon; // Battery, BackEMF,
-VOLTAGE_DIVIDER_T	DividerTemp; // Battery, BackEMF,
+/******************************************************************************/
+/*!
+ * @name  	MeasureADCSection
+ * @brief 	ADC Config
+ *
+ * PWM must be approximately 35 for 4us ADC sample
+ */
+/******************************************************************************/
+/*! @{ */
+MEASURE_T MeasureADC0;
+
+#define MEASURE_ADC_CHANNEL_COUNT			8U
+
+//	Virtual/Measure Channel, index into arrays
+#define ADC_BAT_AD		0U
+#define ADC_I1_AD		1U
+#define ADC_I2_AD		2U
+#define ADC_V1A			3U
+#define ADC_V1B			4U
+#define ADC_V2A			5U
+#define ADC_V2B			6U
+#define ADC_LSTEMP_AD	7U
+
+uint8_t Measure_ChannelResultBuffer[MEASURE_ADC_CHANNEL_COUNT];
+//uint8_t Measure_ChannelSumBuffer[MEASURE_ADC_CHANNEL_COUNT];
+uint8_t Measure_ChannelSumBuffer[0];
+
+// ADC Pins
+#define ADC_CHANNEL_PIN_BAT_AD		ADC_PDD_SINGLE_ENDED_DAD0
+#define ADC_CHANNEL_PIN_I1_AD		ADC_PDD_SINGLE_ENDED_AD4
+#define ADC_CHANNEL_PIN_I2_AD		ADC_PDD_SINGLE_ENDED_AD5
+#define ADC_CHANNEL_PIN_V1A_AD 		ADC_PDD_SINGLE_ENDED_DAD1
+#define ADC_CHANNEL_PIN_V1B_AD 		ADC_PDD_SINGLE_ENDED_DAD2
+#define ADC_CHANNEL_PIN_V2A_AD 		ADC_PDD_SINGLE_ENDED_AD13
+#define ADC_CHANNEL_PIN_V2B_AD 		ADC_PDD_SINGLE_ENDED_AD14
+#define ADC_CHANNEL_PIN_LSTEMP_AD 	ADC_PDD_SINGLE_ENDED_AD15
+
+const uint8_t MEASURE_CHANNEL_TO_ADC_PIN[MEASURE_ADC_CHANNEL_COUNT] =
+{ 	/* Channel to pin conversion table */	/* ADC_SC1: ??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,COCO=0,AIEN=1,ADCO=0,ADCH=0 */
+	ADC_CHANNEL_PIN_BAT_AD, /* Status and control register value */	/* ADC_SC1: ??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,COCO=0,AIEN=1,ADCO=0,ADCH=4 */
+	ADC_CHANNEL_PIN_I1_AD, /* Status and control register value */	/* ADC_SC1: ??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,COCO=0,AIEN=1,ADCO=0,ADCH=5 */
+	ADC_CHANNEL_PIN_I2_AD, /* Status and control register value */	/* ADC_SC1: ??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,COCO=0,AIEN=1,ADCO=0,ADCH=1 */
+	ADC_CHANNEL_PIN_V1A_AD, /* Status and control register value */	/* ADC_SC1: ??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,COCO=0,AIEN=1,ADCO=0,ADCH=2 */
+	ADC_CHANNEL_PIN_V1B_AD, /* Status and control register value */	/* ADC_SC1: ??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,COCO=0,AIEN=1,ADCO=0,ADCH=0x0D */
+	ADC_CHANNEL_PIN_V2A_AD, /* Status and control register value */	/* ADC_SC1: ??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,COCO=0,AIEN=1,ADCO=0,ADCH=0x0E */
+	ADC_CHANNEL_PIN_V2B_AD, /* Status and control register value */	/* ADC_SC1: ??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,COCO=0,AIEN=1,ADCO=0,ADCH=0x0F */
+	ADC_CHANNEL_PIN_LSTEMP_AD /* Status and control register value */
+};
+
+uint8_t ADC_SampleChannelsBuffer[ADC_MAX_HW_SAMPLE_COUNT]; // array of pin channels pushed to adc fifo
+
+void ADC_ISR(void)
+{
+	LEDBlink();
+	LEDBlink();
+	LEDBlink();
+	Measure_ISR(&MeasureADC0);
+}
+
+static const uint8_t ChannelsMotor1A[] = {ADC_V1A, ADC_I1_AD, ADC_BAT_AD, ADC_LSTEMP_AD};
+static const uint8_t ChannelsMotor1B[] = {ADC_V1B, ADC_I1_AD, ADC_BAT_AD, ADC_LSTEMP_AD};
+static const uint8_t ChannelsMotor1C[] = {ADC_I1_AD, ADC_BAT_AD, ADC_LSTEMP_AD};
+
+static void OnEndADCMotor1PhaseA(void)
+{
+	//BLDC_CaptureBEMF(&Motor1, Measure_GetAddr(ADC_V1A));
+	//BLDC_CaptureBEMF(&Motor1, Motor1.BackEMFPhaseA_ADCU);
+	BLDC_SetBEMF(&Motor1, Measure_ChannelResultBuffer[ADC_V1A]);
+	//Monitor_Process(); // here or main?
+}
+
+static void OnEndADCMotor1PhaseB(void)
+{
+	//BLDC_CaptureBEMF(&Motor1, Motor1.BackEMFPhaseB_ADCU);
+	BLDC_SetBEMF(&Motor1, Measure_ChannelResultBuffer[ADC_V1B]);
+}
+
+static void OnEndADCMotor1PhaseC(void)
+{
+
+}
+
+MEASURE_SAMPLE_T MeasureSampleMotor1A =
+{
+	.Channels.ChannelGroup = ChannelsMotor1A,
+	.ChannelCount = sizeof(ChannelsMotor1A),
+	.HWTrigger = true,
+	.OnEndISR = OnEndADCMotor1PhaseA,
+	.Overwrite = true,
+	.RepeatCount = 1,
+	.RepeatCounter = 0,
+};
+
+MEASURE_SAMPLE_T MeasureSampleMotor1B =
+{
+		.Channels.ChannelGroup = ChannelsMotor1B,
+		.ChannelCount = sizeof(ChannelsMotor1B),
+		.HWTrigger = true,
+		.OnEndISR = OnEndADCMotor1PhaseB,
+		.Overwrite = true,
+		.RepeatCount = 1,
+		.RepeatCounter = 0,
+};
+
+MEASURE_SAMPLE_T MeasureSampleMotor1C =
+{
+		.Channels.ChannelGroup = ChannelsMotor1C,
+		.ChannelCount = sizeof(ChannelsMotor1C),
+		.HWTrigger = true,
+		.OnEndISR = OnEndADCMotor1PhaseC,
+		.Overwrite = true,
+		.RepeatCount = 1,
+		.RepeatCounter = 0,
+};
+
+static inline void TriggerADCMotor1PhaseA(void) { Measure_Start(&MeasureADC0, &MeasureSampleMotor1A); }
+static inline void TriggerADCMotor1PhaseB(void) { Measure_Start(&MeasureADC0, &MeasureSampleMotor1B); }
+static inline void TriggerADCMotor1PhaseC(void) { Measure_Start(&MeasureADC0, &MeasureSampleMotor1C); }
+/*! @} */
 
 /******************************************************************************/
 /*!
@@ -120,13 +239,14 @@ VOLTAGE_DIVIDER_T	DividerTemp; // Battery, BackEMF,
  * 312,500/10*60/0xFFFF = 28 rpm min for 10 pole pairs
  *
  * 10,000 rpm -> delta = 187
+ *
+ * // 1 POLE_PAIR = 6 STEPS = ELECTRIC_R
+// 60 Steps = 1 MECH_ROTATION:
+// 60 Steps / 6 Steps = 10 PolePairs
  */
 /******************************************************************************/
 /*! @{ */
-
-// 1 POLE_PAIR = 6 STEPS = ELECTRIC_R
-// 60 Steps = 1 MECH_ROTATION:
-// 60 Steps / 6 Steps = 10 PolePairs
+SPEED_T 			Motor1Speed;
 
 #define CPU_FREQ 			40000000
 #define BUS_FREQ 			20000000
@@ -135,7 +255,7 @@ VOLTAGE_DIVIDER_T	DividerTemp; // Battery, BackEMF,
 #define FTM1_FREQ 			(BUS_FREQ/FTM1_BUS_PEROID)
 #define FTM1_CV_MAX			(0xFFFF)
 
-static bool MotorSelect;
+//static bool MotorSelect;
 
 //Motor1 Hall A rising edge trigger
 void FTM1_ISR(void)
@@ -161,7 +281,6 @@ void FTM1_ISR(void)
 }
 /*! @} */
 
-
 /******************************************************************************/
 /*!
  * @name  	PWM Timer
@@ -170,6 +289,8 @@ void FTM1_ISR(void)
  */
 /******************************************************************************/
 /*! @{ */
+COMMUTATION_T  Motor1Commutation;
+
 #define FTM2_BUS_PEROID	 	(1)
 #define FTM2_FREQ 			(BUS_FREQ/FTM2_BUS_PEROID)
 #define FTM2_MODULO 		(512)
@@ -184,7 +305,7 @@ void FTM2_ISR(void)
 {
 	FTM2_SC &= ~FTM_SC_TOF_MASK;	//FTM_PDD_ClearOverflowInterruptFlag(FTM2_DEVICE);
 
-	if (Motor1.State == MOTOR_STATE_RUN) BLDC_Commutation_Poll(&Motor1Commutation, Motor1.PWM);
+	if (Motor1.State == MOTOR_STATE_RUN) Commutation_Poll(&Motor1Commutation, Motor1.PWM);
 
 
 	//Optionally measure Back EMF at beginning of PWM cycle. (Output is low)
@@ -223,117 +344,6 @@ void FTM2_ISR(void)
 
 /******************************************************************************/
 /*!
- * @name  	MeasureADCSection
- * @brief 	ADC Config
- *
- * PWM must be approximately 35 for 4us ADC sample
- */
-/******************************************************************************/
-/*! @{ */
-#define ADC_CHANNEL_COUNT			8U
-
-#define ADC_CHANNEL_PIN_BAT_AD		ADC_PDD_SINGLE_ENDED_DAD0
-#define ADC_CHANNEL_PIN_I1_AD		ADC_PDD_SINGLE_ENDED_AD4
-#define ADC_CHANNEL_PIN_I2_AD		ADC_PDD_SINGLE_ENDED_AD5
-#define ADC_CHANNEL_PIN_V1A_AD 		ADC_PDD_SINGLE_ENDED_DAD1
-#define ADC_CHANNEL_PIN_V1B_AD 		ADC_PDD_SINGLE_ENDED_DAD2
-#define ADC_CHANNEL_PIN_V2A_AD 		ADC_PDD_SINGLE_ENDED_AD13
-#define ADC_CHANNEL_PIN_V2B_AD 		ADC_PDD_SINGLE_ENDED_AD14
-#define ADC_CHANNEL_PIN_LSTEMP_AD 	ADC_PDD_SINGLE_ENDED_AD15
-
-//	Virtual/Measure Channel, index into arrays
-#define ADC_BAT_AD		0U
-#define ADC_I1_AD		1U
-#define ADC_I2_AD		2U
-#define ADC_V1A			3U
-#define ADC_V1B			4U
-#define ADC_V2A			5U
-#define ADC_V2B			6U
-#define ADC_LSTEMP_AD	7U
-
-const uint8_t CHANNEL_TO_PIN[ADC_CHANNEL_COUNT] =
-{ 	/* Channel to pin conversion table */	/* ADC_SC1: ??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,COCO=0,AIEN=1,ADCO=0,ADCH=0 */
-	ADC_CHANNEL_PIN_BAT_AD, /* Status and control register value */	/* ADC_SC1: ??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,COCO=0,AIEN=1,ADCO=0,ADCH=4 */
-	ADC_CHANNEL_PIN_I1_AD, /* Status and control register value */	/* ADC_SC1: ??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,COCO=0,AIEN=1,ADCO=0,ADCH=5 */
-	ADC_CHANNEL_PIN_I2_AD, /* Status and control register value */	/* ADC_SC1: ??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,COCO=0,AIEN=1,ADCO=0,ADCH=1 */
-	ADC_CHANNEL_PIN_V1A_AD, /* Status and control register value */	/* ADC_SC1: ??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,COCO=0,AIEN=1,ADCO=0,ADCH=2 */
-	ADC_CHANNEL_PIN_V1B_AD, /* Status and control register value */	/* ADC_SC1: ??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,COCO=0,AIEN=1,ADCO=0,ADCH=0x0D */
-	ADC_CHANNEL_PIN_V2A_AD, /* Status and control register value */	/* ADC_SC1: ??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,COCO=0,AIEN=1,ADCO=0,ADCH=0x0E */
-	ADC_CHANNEL_PIN_V2B_AD, /* Status and control register value */	/* ADC_SC1: ??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,??=0,COCO=0,AIEN=1,ADCO=0,ADCH=0x0F */
-	ADC_CHANNEL_PIN_LSTEMP_AD /* Status and control register value */
-};
-
-uint8_t MeasureChannelResult[ADC_CHANNEL_COUNT];
-
-uint8_t ADC_SampleGroupChannelPinBuffer[ADC_MAX_HW_SAMPLE_COUNT];
-
-//Sensored Routine
-//Store value
-//If sensorless, check commutate
-//Start measure another
-
-//void MonitorGroup2(void)
-//{
-// //Monitor() if too high
-//}
-//
-//void MonitorBEMF(void)
-//{
-//
-//}
-//
-static const uint8_t SampleGroupChannels[] = {ADC_I1_AD, ADC_BAT_AD};
-
-//static void OnEndTriggerADCMotor1BEMF(void)
-//{
-////	static const uint8_t MeasureNext[] = {ADC_BAT_AD, ADC_I1_AD, ADC_LSTEMP_AD};
-////	static uint8_t i = 0;
-////	Measure_StartMeasureChannel(MeasureNext[i], 0);
-////	if (i<sizeof(MeasureNext)/sizeof(uint8_t)) i++;
-//	MonitorBEMF();
-//
-//	SetBEMF();
-//	Measure_StartMeasureSampleGroup(&SampleGroupChannels, sizeof(SampleGroupChannels)/sizeof(uint8_t), MonitorGroup2);
-//}
-
-static void OnEndADCMotor1PhaseA(void)
-{
-	//BLDC_CaptureBEMF(&Motor1, Measure_GetAddr(ADC_V1A));
-	BLDC_CaptureBEMF(&Motor1, Motor1.BackEMFPhaseA_ADCU);
-	//Monitor_();
-	Measure_StartMeasureSampleGroup(&SampleGroupChannels, sizeof(SampleGroupChannels)/sizeof(uint8_t), 0);
-}
-
-static void OnEndADCMotor1PhaseB(void)
-{
-	BLDC_CaptureBEMF(&Motor1, Motor1.BackEMFPhaseB_ADCU);
-	//Monitor_();
-	Measure_StartMeasureSampleGroup(&SampleGroupChannels, sizeof(SampleGroupChannels)/sizeof(uint8_t), 0);
-}
-
-static void OnEndADCMotor1PhaseC(void)
-{
-
-}
-
-static inline void TriggerADCMotor1PhaseA(void) { Measure_TriggerMeasureChannelOverwrite(ADC_V1A,		OnEndADCMotor1PhaseA); }
-static inline void TriggerADCMotor1PhaseB(void) { Measure_TriggerMeasureChannelOverwrite(ADC_V1B,		OnEndADCMotor1PhaseB); }
-static inline void TriggerADCMotor1PhaseC(void) { Measure_TriggerMeasureChannelOverwrite(ADC_I1_AD,		OnEndADCMotor1PhaseC); }
-
-
-
-
-
-//I_Max = 50;
-//
-//if(Stall_Flag1)
-//	I_Max=(uint16_t)(I_Max*7)/10;
-
-/*! @} */
-
-
-/******************************************************************************/
-/*!
  *  @name CommutationSection
  *  Commutation functions
  */
@@ -358,9 +368,10 @@ void CommutateMotor1PhaseBC(uint16_t pwm) {PWM_1B_PIN_SET_CV(pwm); PWM_1C_PIN_SE
 void CommutateMotor1PhaseBA(uint16_t pwm) {PWM_1B_PIN_SET_CV(pwm); PWM_1A_PIN_SET_CV(0); EN_1_ALL_PIN_SET(0b011); SE_1_ALL_PIN_SET(0b001); TriggerADCMotor1PhaseC();}
 void CommutateMotor1PhaseCA(uint16_t pwm) {PWM_1C_PIN_SET_CV(pwm); PWM_1A_PIN_SET_CV(0); EN_1_ALL_PIN_SET(0b101); SE_1_ALL_PIN_SET(0b001); TriggerADCMotor1PhaseB();}
 void CommutateMotor1PhaseCB(uint16_t pwm) {PWM_1C_PIN_SET_CV(pwm); PWM_1B_PIN_SET_CV(0); EN_1_ALL_PIN_SET(0b110); SE_1_ALL_PIN_SET(0b010); TriggerADCMotor1PhaseA();}
-void EnablePWMMotor1All(void) 	{EN_1_ALL_PIN_SET(0b111); SE_1_ALL_PIN_SET(0b000);}
-void DisablePWMMotor1All(void) 	{EN_1_ALL_PIN_SET(0b000); SE_1_ALL_PIN_SET(0b000);} // all mosfet off motor coasts
-void ZeroPWMMotor1All(void) 	{PWM_1C_PIN_SET_CV(0); PWM_1C_PIN_SET_CV(0); PWM_1C_PIN_SET_CV(0); EN_1_ALL_PIN_SET(0b111); SE_1_ALL_PIN_SET(0b000);} // all mosfet top side off, low side on, dynamic brake
+void EnableMotor1PhaseABC(void) 			{EN_1_ALL_PIN_SET(0b111); SE_1_ALL_PIN_SET(0b000);}
+
+void FloatMotor1(void) 	{EN_1_ALL_PIN_SET(0b000); SE_1_ALL_PIN_SET(0b000);} // all mosfet off, motor coasts
+void ShortMotor1(void) 	{PWM_1C_PIN_SET_CV(0); PWM_1C_PIN_SET_CV(0); PWM_1C_PIN_SET_CV(0); EN_1_ALL_PIN_SET(0b111); SE_1_ALL_PIN_SET(0b000);} // all mosfet top side off, low side on, short motor terminals for dynamic brake
 
 void SaveParametersCommutationIndex(void)
 {
@@ -373,13 +384,12 @@ void SaveParametersCommutationIndex(void)
 }
 /*! @} */
 
-void LEDBlinkOn(void)  	{ LED_PIN_ON();  }
-void LEDBlinkOff(void) 	{ LED_PIN_OFF(); }
-void LEDBlink(void) 	{ Blinky_Toggle(&LEDPowerButton); }
+
+
 
 void Serial(void)
 {
-	Shell_ProcessNonBlocking();
+	//Shell_ProcessNonBlocking();
 }
 
 
@@ -393,13 +403,13 @@ void ComTx(void)
 //			Motor1.PID.OutMax,
 //			20000 - looptime
 //			);
-	Test_TxPacketValue
-		(
-			1,
-			2,
-			3,
-			4
-		);
+//	Test_TxPacketValue
+//		(
+//			1,
+//			2,
+//			3,
+//			4
+//		);
 //
 //	for (i = 0; i < 18; i++)
 //		SendChar(TxPacketBuffer[i]);
@@ -429,238 +439,8 @@ void PrintDebug(void)
 
 void Task1Second(void)
 {
-	Measure_StartMeasureChannel(ADC_LSTEMP_AD, 0); // any issues if adc interrupt from previous measurement??
-
 	//PrintDebug();
 }
-
-
-
-
-
-
-
-
-
-/******************************************************************************/
-/*!
- *  @name	ShellSection
- *  Shell functions
- */
-/******************************************************************************/
-/*! @{ */
-
-#define SHELL_OUTTER_LOOP_FREQ 100
-
-typedef enum
-{
-	RETURN_CODE_OK = 0,
-	RETURN_CODE_ERROR_1 = 1,
-} RETURN_CODE_T;
-
-extern int Cmd_pwm 		(int argc, char ** argv);
-extern int Cmd_rpm 		(int argc, char ** argv);
-extern int Cmd_jog 		(int argc, char ** argv);
-extern int Cmd_run 		(int argc, char ** argv);
-extern int Cmd_stop		(int argc, char ** argv);
-extern int Cmd_release 	(int argc, char ** argv);
-extern int Cmd_vbat		(int argc, char ** argv);
-extern int Cmd_v		(int argc, char ** argv);
-extern int Cmd_phase	(int argc, char ** argv);
-extern int Cmd_hold		(int argc, char ** argv);
-extern int Cmd_print	(int argc, char ** argv);
-
-CMDLINE_ENTRY_T CmdEntry_pwm 		=	{ "pwm", 		"Sets pwm value", 			Cmd_pwm		};
-CMDLINE_ENTRY_T CmdEntry_v	 		=	{ "v", 			"Sets applied voltage", 	Cmd_v		};
-CMDLINE_ENTRY_T CmdEntry_rpm 		=	{ "rpm", 		"Display rpm", 				Cmd_rpm		};
-CMDLINE_ENTRY_T CmdEntry_jog		=	{ "jog", 		"Jog motor", 				Cmd_jog		};
-CMDLINE_ENTRY_T CmdEntry_run 		=	{ "run", 		"Set motor to run mode", 	Cmd_run		};
-CMDLINE_ENTRY_T CmdEntry_stop 		=	{ "stop", 		"Set motor to idle mode", 	Cmd_stop	};
-CMDLINE_ENTRY_T CmdEntry_release 	=	{ "release", 	"Release hold", 			Cmd_release	};
-CMDLINE_ENTRY_T CmdEntry_vbat 		=	{ "vbat", 		"Display battery voltage", 	Cmd_vbat	};
-CMDLINE_ENTRY_T CmdEntry_phase		=	{ "phase", 		"Set motor phase", 			Cmd_phase	};
-CMDLINE_ENTRY_T CmdEntry_hold		=	{ "hold", 		"hold position", 			Cmd_hold	};
-CMDLINE_ENTRY_T CmdEntry_print		=	{ "print", 		"print debug info",			Cmd_print	};
-
-int Cmd_pwm(int argc, char ** argv)
-{
-    if(argc == 2) BLDC_SetPWM(&Motor1, strtoul(argv[1], 0, 10));
-    return RESERVED_SHELL_RETURN_CODE_SUCCESS;
-}
-
-int Cmd_v(int argc, char ** argv)
-{
-    if(argc == 2) BLDC_ApplyVoltage(&Motor1, strtoul(argv[1], 0, 10));
-    return RESERVED_SHELL_RETURN_CODE_SUCCESS;
-}
-
-int Cmd_rpm(int argc, char ** argv)
-{
-	(void)argv;
-    if(argc == 1)
-    {
-    	Term1_SendStr("\r\nRPM = ");
-    	Term1_SendNum(Speed_GetRPM(&Motor1.Speed));
-    	Term1_SendStr("\r\n");
-    }
-    return RESERVED_SHELL_RETURN_CODE_SUCCESS;
-}
-
-int Cmd_jog(int argc, char ** argv)
-{
-	if(argc == 1)
-	{
-		BLDC_SetJogSteps(&Motor1, 1);
-
-	}
-	else if(argc == 2) BLDC_SetJogSteps(&Motor1, strtoul(argv[1], 0, 10));
-    return RESERVED_SHELL_RETURN_CODE_SUCCESS;
-}
-
-int Cmd_run(int argc, char ** argv)
-{
-	(void)argv;
-    if(argc == 1) BLDC_Start(&Motor1);
-    return RESERVED_SHELL_RETURN_CODE_SUCCESS;
-}
-
-int Cmd_stop(int argc, char ** argv)
-{
-	(void)argv;
-    if(argc == 1) BLDC_Stop(&Motor1);
-    return RESERVED_SHELL_RETURN_CODE_SUCCESS;
-}
-
-int Cmd_hold(int argc, char ** argv)
-{
-	(void)argv;
-    if(argc == 1) BLDC_Hold(&Motor1);
-    return RESERVED_SHELL_RETURN_CODE_SUCCESS;
-}
-
-int Cmd_release(int argc, char ** argv)
-{
-	(void)argv;
-    if(argc == 1) BLDC_Release(&Motor1);
-    return RESERVED_SHELL_RETURN_CODE_SUCCESS;
-}
-
-int Cmd_vbat(int argc, char ** argv)
-{
-	(void)argv;
-    if(argc == 1)
-    {
-    	Term1_SendStr("\r\nVBat = ");
-    	Term1_SendNum(VoltageDivider_GetVoltage(&DividerCommon, *Motor1.VBat_ADCU));
-    	Term1_SendStr("\r\n");
-    }
-    return RESERVED_SHELL_RETURN_CODE_SUCCESS;
-}
-
-
-int Cmd_phase(int argc, char ** argv)
-{
-    if(argc == 2)
-    {
-    	if 		(argv[1][0] == 'a' && argv[1][1] == 'b') CommutateMotor1PhaseAB(Motor1.PWM);
-    	else if (argv[1][0] == 'a' && argv[1][1] == 'c') CommutateMotor1PhaseAC(Motor1.PWM);
-    	else if (argv[1][0] == 'b' && argv[1][1] == 'a') CommutateMotor1PhaseBA(Motor1.PWM);
-    	else if (argv[1][0] == 'b' && argv[1][1] == 'c') CommutateMotor1PhaseBC(Motor1.PWM);
-    	else if (argv[1][0] == 'c' && argv[1][1] == 'a') CommutateMotor1PhaseCA(Motor1.PWM);
-    	else if (argv[1][0] == 'c' && argv[1][1] == 'b') CommutateMotor1PhaseCB(Motor1.PWM);
-
-//
-//    	switch(argv[1][0])
-//    	{
-//
-//    	case 'a':
-//    	case 'A':
-//    		switch(argv[1][1])
-//    		{
-//
-//        	case 'b':
-//        	case 'B':
-//
-//        		break;
-//
-//    		case 'c':
-//    		case 'C':
-//
-//    			break;
-//    		}
-//    		break;
-//
-//		case 'b':
-//		case 'B':
-//			switch(argv[1][1])
-//			{
-//
-//			}
-//			break;
-//
-//		case 'c':
-//		case 'C':
-//			switch(argv[1][1])
-//			{
-//
-//			}
-//			break;
-//
-//    	}
-
-
-    }
-
-    return RESERVED_SHELL_RETURN_CODE_SUCCESS;
-}
-
-
-
-
-
-int Cmd_print(int argc, char ** argv)
-{
-	(void)argv;
-    if(argc == 1)
-    {
-    	Term1_SendStr("\r\nBackEMF = ");
-    	Term1_SendNum(VoltageDivider_GetVoltage(&DividerCommon, *Motor1.BackEMFSelect_ADCU));
-    	Term1_SendStr("\r\n");
-
-    	Term1_SendStr("\r\nI ADCU = ");
-    	Term1_SendNum(*Motor1.I_ADCU);
-    	Term1_SendStr("\r\n");
-
-    }
-    return RESERVED_SHELL_RETURN_CODE_SUCCESS;
-}
-
-void RegisterShellCmds()
-{
-	Shell_RegisterCmdLineEntry(&CmdEntry_pwm);
-	Shell_RegisterCmdLineEntry(&CmdEntry_rpm);
-	Shell_RegisterCmdLineEntry(&CmdEntry_jog);
-	Shell_RegisterCmdLineEntry(&CmdEntry_run);
-	Shell_RegisterCmdLineEntry(&CmdEntry_stop);
-	Shell_RegisterCmdLineEntry(&CmdEntry_release);
-	Shell_RegisterCmdLineEntry(&CmdEntry_vbat);
-	Shell_RegisterCmdLineEntry(&CmdEntry_v);
-	Shell_RegisterCmdLineEntry(&CmdEntry_phase);
-	Shell_RegisterCmdLineEntry(&CmdEntry_hold);
-	Shell_RegisterCmdLineEntry(&CmdEntry_print);
-}
-/*! @} */
-
-
-
-
-
-
-
-
-
-
-
 
 
 void ConfigLoadDefault(void)
@@ -685,39 +465,50 @@ void Boot(void)
 //	}
 }
 
-static uint8_t RxPacketBufferArray[20];
-static uint8_t TxPacketBufferArray[20];
+//static uint8_t RxPacketBufferArray[20];
+//static uint8_t TxPacketBufferArray[20];
 
 void KESC_Init(void)
 {
 	Cpu_DisableInt();
 	//Hardware init
-	Inhr1_SetBaudRateMode(Inhr1_BM_9600BAUD);
+	//Serial0_Init();
+	//Serial0_SetBaudRateMode(Serial0_BM_9600BAUD);
 	//Inhr1_SetBaudRateMode(Inhr1_BM_38400BAUD);
 	//Inhr1_SetBaudRateMode(Inhr1_BM_115200BAUD);
 	ADC_Init();
-	//Millis_Init(40000000, 200); //set in generated systick file.
-
-	//Load eeprom
+	SysTick_Init();
+	//Millis_Init(40000000, 200); // set in generated systick file.
 
 	Measure_Init
 	(
-		ADC_CHANNEL_COUNT,
-		ADC_MAX_HW_SAMPLE_COUNT,
-		CHANNEL_TO_PIN,
-		MeasureChannelResult,
-		ADC_SampleGroupChannelPinBuffer,
+		&MeasureADC0,
 		ADC_SetConversion,
+		ADC_SampleChannelsBuffer,
+		ADC_MAX_HW_SAMPLE_COUNT,
 		(ADC_DATA_T (*)(uint8_t))ADC_GetResult,
-		ADC_AbortConversion,
-		ADC_DisableInterrupt
+		ADC_DisableInterrupt,
+		ADC_GetConversionActiveFlag,
+		ADC_GetConversionCompleteFlag,
+		ADC_AbortConversion
+	);
+
+	Measure_InitModule
+	(
+		Measure_ChannelResultBuffer,
+		Measure_ChannelSumBuffer,
+		MEASURE_CHANNEL_TO_ADC_PIN,
+		MEASURE_ADC_CHANNEL_COUNT,
+		Cpu_DisableInt,
+		Cpu_EnableInt
 	);
 
 	//Init software modules
 	VoltageDivider_Init(&DividerCommon, R1_RATIO, R2_RATIO, VREF, ADC_MAX);
 	Blinky_Init(&LEDPowerButton, LEDBlinkOn, LEDBlinkOff);
 
-	BLDC_Commutation_Init
+	//Load eeprom
+	Commutation_Init
 	(
 		&Motor1Commutation,
 		DIRECTION_CW,
@@ -740,10 +531,11 @@ void KESC_Init(void)
 		0,
 		0,
 		0,
-		DisablePWMMotor1All
+		FloatMotor1,
+		FloatMotor1
 	);
 
-	Speed_InitHallEncoder(&Motor1Speed, &FTM1_C1V, FTM1_CV_MAX, FTM1_FREQ, MOTOR1_POLE_PAIRS, PWM_FREQ);
+	Speed_InitHallEncoder(&Motor1Speed, &FTM1_C1V, FTM1_CV_MAX, FTM1_FREQ, MOTOR1_POLE_PAIRS, 0, PWM_FREQ);
 
 //	PID_Init
 //	(
@@ -754,19 +546,17 @@ void KESC_Init(void)
 //	);
 
 
-
-
-	Measure_MapAddress(&Motor1.VBat_ADCU, 			ADC_BAT_AD);
-	Measure_MapAddress(&Motor1.BackEMFPhaseA_ADCU, 	ADC_V1A);
-	Measure_MapAddress(&Motor1.BackEMFPhaseB_ADCU, 	ADC_V1B);
-	//Measure_MapAddress(&Motor1.BackEMFPhaseC_ADCU, ADC_V1B);
-	Measure_MapAddress(&Motor1.I_ADCU, 				ADC_I1_AD);
-	Measure_MapAddress(&Motor1.LSTemp_ADCU, 		ADC_LSTEMP_AD);
+	//Monitor_Init();
+//	Measure_MapAddress(&Motor1.VBat_ADCU, 			ADC_BAT_AD);
+//	Measure_MapAddress(&Motor1.BackEMFPhaseA_ADCU, 	ADC_V1A);
+//	Measure_MapAddress(&Motor1.BackEMFPhaseB_ADCU, 	ADC_V1B);
+//	Measure_MapAddress(&Motor1.BackEMFPhaseC_ADCU, ADC_V1B);
+//	Measure_MapAddress(&Motor1.I_ADCU, 				ADC_I1_AD);
+//	Measure_MapAddress(&Motor1.LSTemp_ADCU, 		ADC_LSTEMP_AD);
 //	Measure_MapAddress(&Motor2.BackEMFPhaseA_ADCU, ADC_V2A);
 //	Measure_MapAddress(&Motor2.BackEMFPhaseB_ADCU, ADC_V2B);
 //	Measure_MapAddress(&Motor2.BackEMFPhaseC_ADCU, ADC_V2B);
 //	Measure_MapAddress(&Motor2.I_ADCU, 			ADC_I2_AD);
-
 
 	//Map Motor Structs
 	BLDC_Init
@@ -779,17 +569,19 @@ void KESC_Init(void)
 		&DividerCommon,
 		&DividerCommon,
 		&DividerCommon,
-		DisablePWMMotor1All,
+		FloatMotor1,
+		ShortMotor1,
 		PWM_MAX
 	);
 
-	Shell_InitNonBlocking(10, SHELL_OUTTER_LOOP_FREQ);
-	RegisterShellCmds();
+	//Shell_InitNonBlocking(10, SHELL_OUTTER_LOOP_FREQ);
+	//RegisterShellCmds();
 
+	FMSTR_Init();
 
 	LiteFXOS_InitMillis(Millis_GetTickCounter());
 	LiteFXOS_InitThreadPeriodicArgPeriod(&ThreadLED, 		 	LEDBlink, 		1000);
-	LiteFXOS_InitThreadPeriodicArgPeriod(&ThreadSerial, 		Serial, 		SHELL_OUTTER_LOOP_FREQ);
+	//LiteFXOS_InitThreadPeriodicArgPeriod(&ThreadSerial, 		Serial, 		SHELL_OUTTER_LOOP_FREQ);
 	LiteFXOS_InitThreadPeriodicArgPeriod(&ThreadTask1Second, 	Task1Second, 	1000);
 	LiteFXOS_InitThreadPeriodicArgPeriod(&ThreadComTx, 			ComTx, 			20);
 
@@ -799,8 +591,8 @@ void KESC_Init(void)
 	LiteFXOS_SetThreadStart(&ThreadComTx);
 	Cpu_EnableInt();
 
-	//temp run
-	BLDC_Commutation_MapCommuntationTableRunCalibration
+	// Temp run
+	Commutation_MapCommuntationTableRunCalibration
 	(	
 		&Motor1Commutation,
 		0,
@@ -815,31 +607,28 @@ void KESC_Init(void)
 		SetPWMMotor1PhaseB,
 		SetPWMMotor1PhaseC,
 		SetPWMMotor1PhaseC,
-		12,
 		CommutateMotor1PhaseAB, 
 		CommutateMotor1PhaseAC,
 		CommutateMotor1PhaseBC,
 		CommutateMotor1PhaseBA,
 		CommutateMotor1PhaseCA,
 		CommutateMotor1PhaseCB,
-		EnablePWMMotor1All,
+		12,
+		EnableMotor1PhaseABC,
 		Delay,
 		1000
 	);
 
-	BLDC_SetPWM(&Motor1, 12);
-	ADC_Poll();
+//	Test_Init
+//	(
+//		TxPacketBufferArray,
+//		RxPacketBufferArray,
+//		Inhr1_GetCharsInRxBuf,
+//		Inhr1_RecvChar,
+//		Inhr1_SendChar
+//	);
 
-	Test_Init
-	(
-		TxPacketBufferArray,
-		RxPacketBufferArray,
-		Inhr1_GetCharsInRxBuf,
-		Inhr1_RecvChar,
-		Inhr1_SendChar
-	);
-
-	//SendStartMessage();
+	// SendStartMessage();
 }
 
 void KESC_Loop(void)
@@ -854,12 +643,14 @@ void KESC_Loop(void)
 		//__EI();
 
 		LiteFXOS_ProcThread(&ThreadLED);
-		LiteFXOS_ProcThread(&ThreadSerial);
+		//LiteFXOS_ProcThread(&ThreadSerial);
 		LiteFXOS_ProcThread(&ThreadTask1Second);
 
 		BLDC_Process(&Motor1);
 
 
+		FMSTR_Poll();
+		FMSTR_Recorder();
 
 		//Test_StartUp();
 		//Test_RxPacket(); ///always receive
@@ -872,8 +663,6 @@ void KESC_Loop(void)
 //		Motor1.PID->Kp = Test_GetKp();
 //		Motor1.PID->Ki = Test_GetKi();
 //		Motor1.PID->Kd = Test_GetKd();
-
-
 
 		//Debugging
 

@@ -5,8 +5,8 @@
  *      Author: FireSourcery
  */
 
-#ifndef BOARD_H_
-#define BOARD_H_
+#ifndef _BOARD_H_
+#define _BOARD_H_
 
 /* Including needed modules to compile this module/procedure */
 #include "Cpu.h"
@@ -18,9 +18,9 @@
 //#include "WDOG.h"
 
 /* Including shared modules, which are used for whole project */
-#include "PE_Types.h"
-#include "PE_Error.h"
-#include "PE_Const.h"
+//#include "PE_Types.h"
+//#include "PE_Error.h"
+//#include "PE_Const.h"
 #include "IO_Map.h"
 
 #include "GPIO_PDD.h"
@@ -50,7 +50,7 @@
 //  GPIOA PTB3 - 
 //  GPIOA PTB4 - FTM2_CH4 - PWM_1B
 //  GPIOA PTB5 - FTM2_CH5 - PWM_1A
-//  GPIOA PTB6 -			- Button/LED
+//  GPIOA PTB6 - GPIO		- Button/LED
 //  GPIOA PTB7 - 
 //  
 //  GPIOA PTC0 - FTM2_CH0 	- PWM_2C
@@ -163,9 +163,9 @@
 #define S2_ALL_PIN_READ() ((GPIO_PDD_GetPortDataInput(GPIOB_BASE_PTR) >> 5)	& MASK_LSB_3) //bit order 00000CBA
 
 
-//#define PWM_CV_PHASE_A 	FTM2_C5V
-//#define PWM_CV_PHASE_B 	FTM2_C4V
-//#define PWM_CV_PHASE_C 	FTM2_C3V
+//#define PWM_CV_PHASE_A 			FTM2_C5V
+//#define PWM_CV_PHASE_B 			FTM2_C4V
+//#define PWM_CV_PHASE_C 			FTM2_C3V
 //#define PWM_CV_PHASE_A_SET(val) (*FTM2_C5V = val)
 //#define PWM_CV_PHASE_B_SET(val) (*FTM2_C4V = val)
 //#define PWM_CV_PHASE_C_SET(val) (*FTM2_C3V = val)

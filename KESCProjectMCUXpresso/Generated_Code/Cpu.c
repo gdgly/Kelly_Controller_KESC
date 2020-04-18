@@ -8,7 +8,7 @@
 **     Repository  : Kinetis
 **     Datasheet   : MKE02Z64M20SF0RM, Rev.2.1, Apr-23 2013; KEAZ64RM, Rev.1, Sep 2013
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2020-01-03, 23:56, # CodeGen: 85
+**     Date/Time   : 2020-04-17, 22:47, # CodeGen: 136
 **     Abstract    :
 **
 **     Comment     :
@@ -210,10 +210,6 @@
 #include "GPIOB.h"
 #include "FTM1.h"
 #include "FTM2.h"
-#include "SysTick.h"
-#include "Term1.h"
-#include "Inhr1.h"
-#include "ASerialLdd1.h"
 #include "IFsh1.h"
 #include "IntFlashLdd1.h"
 #include "CRC1.h"
@@ -524,12 +520,6 @@ void PE_low_level_init(void)
                  SIM_PINSEL_FTM2PS1_MASK |
                  SIM_PINSEL_FTM2PS0_MASK
                 );
-  /* SCB_SHPR3: PRI_15=0x80 */
-  SCB_SHPR3 = (uint32_t)((SCB_SHPR3 & (uint32_t)~(uint32_t)(
-               SCB_SHPR3_PRI_15(0x7F)
-              )) | (uint32_t)(
-               SCB_SHPR3_PRI_15(0x80)
-              ));
   /* SIM_SOPT: CLKOE=1,RSTPE=1,NMIE=0 */
   SIM_SOPT = (uint32_t)((SIM_SOPT & (uint32_t)~(uint32_t)(
               SIM_SOPT_NMIE_MASK
@@ -557,13 +547,6 @@ void PE_low_level_init(void)
   FTM2_Init();
 
 
-  /* ### Init_SysTick "SysTick" init code ... */
-  SysTick_Init();
-
-
-  /* ### Asynchro serial "Inhr1" init code ... */
-  Inhr1_Init();
-  /* ###  "Term1" init code ... */
   /* ### IntFLASH "IFsh1" init code ... */
   IFsh1_Init();
   /* ### CRC_LDD "CRC1" init code ... */

@@ -14,7 +14,7 @@ by the component.
 <tr><td colspan="4" class="ttitle1">CRC1 Initialization</td></tr>
 <tr><td class="ttitle2">Address</td><td class="ttitle2">Register</td><td class="ttitle2">Register Value</td><td class="ttitle2">Register Description</td></tr>
 <tr><td>0x4004800C</td><td>SIM_SCGC</td>
-<td class="regNotResetVal">0x001034C0</td>
+<td class="regNotResetVal">0x000034C0</td>
  <td>SIM_SCGC register, peripheral CRC1.</td></tr>
 <tr><td>0x40032008</td><td>CRC_CTRL</td>
 <td class="regNotResetVal">0x62000000</td>
@@ -79,7 +79,7 @@ registers of the peripheral(s) configured by the component.
         
 </div>
 <table class="regtbl2"><tr><td class="trowtit" colspan="2">Address</td><td colspan="2">0x4004800C</td></tr>
-<tr class="trowtit"><td  class="trowtit" colspan="2">Initial value</td><td colspan="2">0x001034C0</td></tr>
+<tr class="trowtit"><td  class="trowtit" colspan="2">Initial value</td><td colspan="2">0x000034C0</td></tr>
 <tr class="trowtit"><td  class="trowtit" colspan="2">After-reset value</td><td colspan="2">0x00003000</td></tr>
 <tr><td class="ttitle2">Bit</td><td class="ttitle2">Field</td><td class="ttitle2">Value</td><td class="ttitle2">Description</td></tr>
 <tr><td>31</td><td>ACMP1</td><td>0x00</td><td>ACMP1 Clock Gate Control</td>
@@ -90,7 +90,7 @@ registers of the peripheral(s) configured by the component.
 <tr><td>24</td><td>KBI0</td><td>0x00</td><td>KBI0 Clock Gate Control</td>
 <tr><td>22</td><td>UART2</td><td>0x00</td><td>UART2 Clock Gate Control</td>
 <tr><td>21</td><td>UART1</td><td>0x00</td><td>UART1 Clock Gate Control</td>
-<tr><td>20</td><td>UART0</td><td>0x01</td><td>UART0 Clock Gate Control</td>
+<tr><td>20</td><td>UART0</td><td>0x00</td><td>UART0 Clock Gate Control</td>
 <tr><td>19</td><td>SPI1</td><td>0x00</td><td>SPI1 Clock Gate Control</td>
 <tr><td>18</td><td>SPI0</td><td>0x00</td><td>SPI0 Clock Gate Control</td>
 <tr><td>17</td><td>I2C</td><td>0x00</td><td>I2C Clock Gate Control</td>

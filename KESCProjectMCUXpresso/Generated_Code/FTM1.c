@@ -7,7 +7,7 @@
 **     Version     : Component 01.010, Driver 01.10, CPU db: 3.00.000
 **     Repository  : Kinetis
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2020-01-03, 22:34, # CodeGen: 82
+**     Date/Time   : 2020-04-16, 21:47, # CodeGen: 128
 **     Abstract    :
 **          This file implements the FTM (FTM1) module initialization
 **          according to the Peripheral Initialization settings, and

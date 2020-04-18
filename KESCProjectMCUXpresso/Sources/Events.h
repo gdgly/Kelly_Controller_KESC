@@ -27,6 +27,7 @@
 */         
 
 #ifndef __Events_H
+
 #define __Events_H
 /* MODULE Events */
 
@@ -38,10 +39,6 @@
 #include "GPIOB.h"
 #include "FTM1.h"
 #include "FTM2.h"
-#include "SysTick.h"
-#include "Term1.h"
-#include "Inhr1.h"
-#include "ASerialLdd1.h"
 #include "IFsh1.h"
 #include "IntFlashLdd1.h"
 #include "CRC1.h"
