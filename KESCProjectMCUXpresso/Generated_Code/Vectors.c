@@ -6,7 +6,7 @@
 **     Version     : Component 01.044, Driver 01.04, CPU db: 3.00.000
 **     Repository  : Kinetis
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2020-04-17, 22:47, # CodeGen: 136
+**     Date/Time   : 2020-04-20, 15:06, # CodeGen: 158
 **     Abstract    :
 **
 **     Comment     :
@@ -59,7 +59,6 @@
   #include "Cpu.h"
   #include "GPIOA.h"
   #include "GPIOB.h"
-  #include "FTM1.h"
   #include "FTM2.h"
   #include "IFsh1.h"
   #include "IntFlashLdd1.h"
@@ -117,8 +116,8 @@
     (tIsrFunc)&Cpu_Interrupt,          /* 0x1F  0x0000007C   -   ivINT_ADC0                    unused by PE */
     (tIsrFunc)&Cpu_Interrupt,          /* 0x20  0x00000080   -   ivINT_ACMP0                   unused by PE */
     (tIsrFunc)&Cpu_Interrupt,          /* 0x21  0x00000084   -   ivINT_FTM0                    unused by PE */
-    (tIsrFunc)&FTM1_ISR,               /* 0x22  0x00000088   2   ivINT_FTM1                    used by PE */
-    (tIsrFunc)&FTM2_ISR,               /* 0x23  0x0000008C   2   ivINT_FTM2                    used by PE */
+    (tIsrFunc)&Cpu_Interrupt,          /* 0x22  0x00000088   -   ivINT_FTM1                    unused by PE */
+    (tIsrFunc)&FTM2_ISR,               /* 0x23  0x0000008C   1   ivINT_FTM2                    used by PE */
     (tIsrFunc)&Cpu_Interrupt,          /* 0x24  0x00000090   -   ivINT_RTC                     unused by PE */
     (tIsrFunc)&Cpu_Interrupt,          /* 0x25  0x00000094   -   ivINT_ACMP1                   unused by PE */
     (tIsrFunc)&Cpu_Interrupt,          /* 0x26  0x00000098   -   ivINT_PIT_CH0                 unused by PE */

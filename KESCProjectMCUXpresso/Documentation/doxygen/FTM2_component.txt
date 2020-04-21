@@ -16,7 +16,7 @@ by the component.
 <tr><td colspan="4" class="ttitle1">FTM2 Initialization</td></tr>
 <tr><td class="ttitle2">Address</td><td class="ttitle2">Register</td><td class="ttitle2">Register Value</td><td class="ttitle2">Register Description</td></tr>
 <tr><td>0x4004800C</td><td>SIM_SCGC</td>
-<td class="regNotResetVal">0x000030C0</td>
+<td class="regNotResetVal">0x00003080</td>
  <td>SIM_SCGC register, peripheral FTM2.</td></tr>
 <tr><td>0x4003A000</td><td>FTM2_SC</td>
 <td class="regNotResetVal">0x00000068</td>
@@ -165,7 +165,7 @@ registers of the peripheral(s) configured by the component.
         
 </div>
 <table class="regtbl2"><tr><td class="trowtit" colspan="2">Address</td><td colspan="2">0x4004800C</td></tr>
-<tr class="trowtit"><td  class="trowtit" colspan="2">Initial value</td><td colspan="2">0x000030C0</td></tr>
+<tr class="trowtit"><td  class="trowtit" colspan="2">Initial value</td><td colspan="2">0x00003080</td></tr>
 <tr class="trowtit"><td  class="trowtit" colspan="2">After-reset value</td><td colspan="2">0x00003000</td></tr>
 <tr><td class="ttitle2">Bit</td><td class="ttitle2">Field</td><td class="ttitle2">Value</td><td class="ttitle2">Description</td></tr>
 <tr><td>31</td><td>ACMP1</td><td>0x00</td><td>ACMP1 Clock Gate Control</td>
@@ -184,7 +184,7 @@ registers of the peripheral(s) configured by the component.
 <tr><td>12</td><td>FLASH</td><td>0x01</td><td>Flash Clock Gate Control</td>
 <tr><td>10</td><td>CRC</td><td>0x00</td><td>CRC Clock Gate Control</td>
 <tr><td>7</td><td>FTM2</td><td>0x01</td><td>FTM2 Clock Gate Control</td>
-<tr><td>6</td><td>FTM1</td><td>0x01</td><td>FTM1 Clock Gate Control</td>
+<tr><td>6</td><td>FTM1</td><td>0x00</td><td>FTM1 Clock Gate Control</td>
 <tr><td>5</td><td>FTM0</td><td>0x00</td><td>FTM0 Clock Gate Control</td>
 <tr><td>1</td><td>PIT</td><td>0x00</td><td>PIT Clock Gate Control</td>
 <tr><td>0</td><td>RTC</td><td>0x00</td><td>RTC Clock Gate Control</td>
@@ -2056,7 +2056,7 @@ registers of the peripheral(s) configured by the component.
 **            Channels / Timer overflow / Fault            : 
 **              Interrupt                                  : INT_FTM2
 **              Interrupt request                          : Enabled
-**              Interrupt priority                         : 2
+**              Interrupt priority                         : 1
 **              ISR Name                                   : FTM2_ISR
 **              Channels interrupt/DMA                     : See the respective Channel settings
 **              Timer overflow interrupt                   : Enabled

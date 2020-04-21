@@ -25,7 +25,7 @@ int main(void) {
 //    BOARD_InitBootPeripherals();
 //
     //printf("Hello World\n");
-	SystemCoreClockUpdate();
+	//SystemCoreClockUpdate();
 
 	PE_low_level_init();
 	KESC_Init();

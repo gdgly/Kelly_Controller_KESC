@@ -8,31 +8,12 @@
 #ifndef _BOARD_H_
 #define _BOARD_H_
 
-/* Including needed modules to compile this module/procedure */
-#include "Cpu.h"
-#include "GPIOA.h"
-#include "GPIOB.h"
-//#include "FTM1.h"
-//#include "FTM0.h"
-#include "FTM2.h"
-//#include "WDOG.h"
-
-/* Including shared modules, which are used for whole project */
-//#include "PE_Types.h"
-//#include "PE_Error.h"
-//#include "PE_Const.h"
 #include "IO_Map.h"
 
 #include "GPIO_PDD.h"
 #include "WDOG_PDD.h"
 #include "ADC_PDD.h"
 #include "FTM_PDD.h"
-
-#define MASK_LSB_1 0x01
-#define MASK_LSB_2 0x03
-#define MASK_LSB_3 0x07
-#define MASK_LSB_4 0x0F
-#define MASK_LSB_16 0xFFFF
 
 //	I/O Init
 //  GPIOA PTA0 - ADC_SE0 	- B+_AD
@@ -107,51 +88,57 @@
 //  GPIOB PTH6 - NC
 //  GPIOB PTH7 - NC
 
-#define LED_PIN_OFF()		GPIO_PDD_ClearPortDataOutputMask(GPIOB_DEVICE,	GPIO_PDD_PIN_25) //PTH1
-#define LED_PIN_ON()		GPIO_PDD_SetPortDataOutputMask(GPIOB_DEVICE,	GPIO_PDD_PIN_25) //PTH1
-#define ALARM_PIN_OFF()		GPIO_PDD_ClearPortDataOutputMask(GPIOB_DEVICE,	GPIO_PDD_PIN_24) //PTH0
-#define ALARM_PIN_ON()		GPIO_PDD_SetPortDataOutputMask(GPIOB_DEVICE,	GPIO_PDD_PIN_24) //PTH0
+#define MASK_LSB_1 0x01
+#define MASK_LSB_2 0x03
+#define MASK_LSB_3 0x07
+#define MASK_LSB_4 0x0F
+#define MASK_LSB_16 0xFFFF
 
-#define SE_1A_PIN_ON()			GPIO_PDD_SetPortDataOutputMask(GPIOB_DEVICE, GPIO_PDD_PIN_16) //PTG0
-#define SE_1B_PIN_ON()			GPIO_PDD_SetPortDataOutputMask(GPIOB_DEVICE, GPIO_PDD_PIN_17) //PTG1
-#define SE_1C_PIN_ON()			GPIO_PDD_SetPortDataOutputMask(GPIOB_DEVICE, GPIO_PDD_PIN_18) //PTG2
-#define SE_1A_PIN_OFF()			GPIO_PDD_ClearPortDataOutputMask(GPIOB_DEVICE, GPIO_PDD_PIN_16) //PTG0
-#define SE_1B_PIN_OFF() 		GPIO_PDD_ClearPortDataOutputMask(GPIOB_DEVICE, GPIO_PDD_PIN_17) //PTG1
-#define SE_1C_PIN_OFF()			GPIO_PDD_ClearPortDataOutputMask(GPIOB_DEVICE, GPIO_PDD_PIN_18) //PTG2
-#define SE_1_ALL_PIN_ON() 		GPIO_PDD_SetPortDataOutput(GPIOB_DEVICE, GPIO_PDD_GetPortDataOutput(GPIOB_DEVICE) | (MASK_LSB_3<<16))
-#define SE_1_ALL_PIN_OFF() 		GPIO_PDD_SetPortDataOutput(GPIOB_DEVICE, GPIO_PDD_GetPortDataOutput(GPIOB_DEVICE) & ~(MASK_LSB_3<<16))
-#define SE_1_ALL_PIN_SET(val) 	GPIO_PDD_SetPortDataOutput(GPIOB_DEVICE, (GPIO_PDD_GetPortDataOutput(GPIOB_DEVICE) & ~(MASK_LSB_3<<16)) | ((val&MASK_LSB_3)<<16))
+#define LED_PIN_OFF()		GPIO_PDD_ClearPortDataOutputMask(GPIOB_BASE_PTR,	GPIO_PDD_PIN_25) //PTH1
+#define LED_PIN_ON()		GPIO_PDD_SetPortDataOutputMask(GPIOB_BASE_PTR,	GPIO_PDD_PIN_25) //PTH1
+#define ALARM_PIN_OFF()		GPIO_PDD_ClearPortDataOutputMask(GPIOB_BASE_PTR,	GPIO_PDD_PIN_24) //PTH0
+#define ALARM_PIN_ON()		GPIO_PDD_SetPortDataOutputMask(GPIOB_BASE_PTR,	GPIO_PDD_PIN_24) //PTH0
 
-#define SE_2A_PIN_ON()			GPIO_PDD_SetPortDataOutputMask(GPIOA_DEVICE, GPIO_PDD_PIN_29) //PTD5
-#define SE_2B_PIN_ON()			GPIO_PDD_SetPortDataOutputMask(GPIOA_DEVICE, GPIO_PDD_PIN_30) //PTD6
-#define SE_2C_PIN_ON()			GPIO_PDD_SetPortDataOutputMask(GPIOA_DEVICE, GPIO_PDD_PIN_31) //PTD7
-#define SE_2A_PIN_OFF()			GPIO_PDD_ClearPortDataOutputMask(GPIOA_DEVICE, GPIO_PDD_PIN_29) //PTD5
-#define SE_2B_PIN_OFF() 		GPIO_PDD_ClearPortDataOutputMask(GPIOA_DEVICE, GPIO_PDD_PIN_30) //PTD6
-#define SE_2C_PIN_OFF()			GPIO_PDD_ClearPortDataOutputMask(GPIOA_DEVICE, GPIO_PDD_PIN_31) //PTD7
-#define SE_2_ALL_PIN_ON() 		GPIO_PDD_SetPortDataOutput(GPIOA_DEVICE, GPIO_PDD_GetPortDataOutput(GPIOA_DEVICE) | (MASK_LSB_3<<29))
-#define SE_2_ALL_PIN_OFF() 		GPIO_PDD_SetPortDataOutput(GPIOA_DEVICE, GPIO_PDD_GetPortDataOutput(GPIOA_DEVICE) & ~(MASK_LSB_3<<29))
+#define SE_1A_PIN_ON()			GPIO_PDD_SetPortDataOutputMask(GPIOB_BASE_PTR, GPIO_PDD_PIN_16) //PTG0
+#define SE_1B_PIN_ON()			GPIO_PDD_SetPortDataOutputMask(GPIOB_BASE_PTR, GPIO_PDD_PIN_17) //PTG1
+#define SE_1C_PIN_ON()			GPIO_PDD_SetPortDataOutputMask(GPIOB_BASE_PTR, GPIO_PDD_PIN_18) //PTG2
+#define SE_1A_PIN_OFF()			GPIO_PDD_ClearPortDataOutputMask(GPIOB_BASE_PTR, GPIO_PDD_PIN_16) //PTG0
+#define SE_1B_PIN_OFF() 		GPIO_PDD_ClearPortDataOutputMask(GPIOB_BASE_PTR, GPIO_PDD_PIN_17) //PTG1
+#define SE_1C_PIN_OFF()			GPIO_PDD_ClearPortDataOutputMask(GPIOB_BASE_PTR, GPIO_PDD_PIN_18) //PTG2
+#define SE_1_ALL_PIN_ON() 		GPIO_PDD_SetPortDataOutput(GPIOB_BASE_PTR, GPIO_PDD_GetPortDataOutput(GPIOB_BASE_PTR) | (MASK_LSB_3<<16))
+#define SE_1_ALL_PIN_OFF() 		GPIO_PDD_SetPortDataOutput(GPIOB_BASE_PTR, GPIO_PDD_GetPortDataOutput(GPIOB_BASE_PTR) & ~(MASK_LSB_3<<16))
+#define SE_1_ALL_PIN_SET(val) 	GPIO_PDD_SetPortDataOutput(GPIOB_BASE_PTR, (GPIO_PDD_GetPortDataOutput(GPIOB_BASE_PTR) & ~(MASK_LSB_3<<16)) | ((val&MASK_LSB_3)<<16))
 
-#define EN_1A_PIN_ON()		GPIO_PDD_SetPortDataOutputMask(GPIOA_DEVICE, GPIO_PDD_PIN_26) 	//PTD2 //schematic A
-#define EN_1B_PIN_ON() 		GPIO_PDD_SetPortDataOutputMask(GPIOA_DEVICE, GPIO_PDD_PIN_27) 	//PTD3 //schematic B
-#define EN_1C_PIN_ON()		GPIO_PDD_SetPortDataOutputMask(GPIOA_DEVICE, GPIO_PDD_PIN_28) 	//PTD4 //schematic C
-#define EN_1A_PIN_OFF()		GPIO_PDD_ClearPortDataOutputMask(GPIOA_DEVICE, GPIO_PDD_PIN_26) //PTD2
-#define EN_1B_PIN_OFF() 	GPIO_PDD_ClearPortDataOutputMask(GPIOA_DEVICE, GPIO_PDD_PIN_27) //PTD3
-#define EN_1C_PIN_OFF()		GPIO_PDD_ClearPortDataOutputMask(GPIOA_DEVICE, GPIO_PDD_PIN_28) //PTD4
+#define SE_2A_PIN_ON()			GPIO_PDD_SetPortDataOutputMask(GPIOA_BASE_PTR, GPIO_PDD_PIN_29) //PTD5
+#define SE_2B_PIN_ON()			GPIO_PDD_SetPortDataOutputMask(GPIOA_BASE_PTR, GPIO_PDD_PIN_30) //PTD6
+#define SE_2C_PIN_ON()			GPIO_PDD_SetPortDataOutputMask(GPIOA_BASE_PTR, GPIO_PDD_PIN_31) //PTD7
+#define SE_2A_PIN_OFF()			GPIO_PDD_ClearPortDataOutputMask(GPIOA_BASE_PTR, GPIO_PDD_PIN_29) //PTD5
+#define SE_2B_PIN_OFF() 		GPIO_PDD_ClearPortDataOutputMask(GPIOA_BASE_PTR, GPIO_PDD_PIN_30) //PTD6
+#define SE_2C_PIN_OFF()			GPIO_PDD_ClearPortDataOutputMask(GPIOA_BASE_PTR, GPIO_PDD_PIN_31) //PTD7
+#define SE_2_ALL_PIN_ON() 		GPIO_PDD_SetPortDataOutput(GPIOA_BASE_PTR, GPIO_PDD_GetPortDataOutput(GPIOA_BASE_PTR) | (MASK_LSB_3<<29))
+#define SE_2_ALL_PIN_OFF() 		GPIO_PDD_SetPortDataOutput(GPIOA_BASE_PTR, GPIO_PDD_GetPortDataOutput(GPIOA_BASE_PTR) & ~(MASK_LSB_3<<29))
+
+#define EN_1A_PIN_ON()		GPIO_PDD_SetPortDataOutputMask(GPIOA_BASE_PTR, GPIO_PDD_PIN_26) 	//PTD2 //schematic A
+#define EN_1B_PIN_ON() 		GPIO_PDD_SetPortDataOutputMask(GPIOA_BASE_PTR, GPIO_PDD_PIN_27) 	//PTD3 //schematic B
+#define EN_1C_PIN_ON()		GPIO_PDD_SetPortDataOutputMask(GPIOA_BASE_PTR, GPIO_PDD_PIN_28) 	//PTD4 //schematic C
+#define EN_1A_PIN_OFF()		GPIO_PDD_ClearPortDataOutputMask(GPIOA_BASE_PTR, GPIO_PDD_PIN_26) //PTD2
+#define EN_1B_PIN_OFF() 	GPIO_PDD_ClearPortDataOutputMask(GPIOA_BASE_PTR, GPIO_PDD_PIN_27) //PTD3
+#define EN_1C_PIN_OFF()		GPIO_PDD_ClearPortDataOutputMask(GPIOA_BASE_PTR, GPIO_PDD_PIN_28) //PTD4
 #define EN_1A_PIN_SET(en)	((en) ? EN_1A_PIN_ON() : EN_1A_PIN_OFF())
 #define EN_1B_PIN_SET(en)	((en) ? EN_1B_PIN_ON() : EN_1B_PIN_OFF())
 #define EN_1C_PIN_SET(en)	((en) ? EN_1C_PIN_ON() : EN_1C_PIN_OFF())
-#define EN_1_ALL_PIN_ON() 		GPIO_PDD_SetPortDataOutput(GPIOA_DEVICE, GPIO_PDD_GetPortDataOutput(GPIOA_DEVICE) | (MASK_LSB_3<<26))
-#define EN_1_ALL_PIN_OFF() 		GPIO_PDD_SetPortDataOutput(GPIOA_DEVICE, GPIO_PDD_GetPortDataOutput(GPIOA_DEVICE) & ~(MASK_LSB_3<<26))
-#define EN_1_ALL_PIN_SET(val)	GPIO_PDD_SetPortDataOutput(GPIOA_DEVICE, (GPIO_PDD_GetPortDataOutput(GPIOA_DEVICE) & ~(MASK_LSB_3<<26)) | ((val&MASK_LSB_3)<<26))
+#define EN_1_ALL_PIN_ON() 		GPIO_PDD_SetPortDataOutput(GPIOA_BASE_PTR, GPIO_PDD_GetPortDataOutput(GPIOA_BASE_PTR) | (MASK_LSB_3<<26))
+#define EN_1_ALL_PIN_OFF() 		GPIO_PDD_SetPortDataOutput(GPIOA_BASE_PTR, GPIO_PDD_GetPortDataOutput(GPIOA_BASE_PTR) & ~(MASK_LSB_3<<26))
+#define EN_1_ALL_PIN_SET(val)	GPIO_PDD_SetPortDataOutput(GPIOA_BASE_PTR, (GPIO_PDD_GetPortDataOutput(GPIOA_BASE_PTR) & ~(MASK_LSB_3<<26)) | ((val&MASK_LSB_3)<<26))
 
-#define EN_2A_PIN_ON()		GPIO_PDD_SetPortDataOutputMask(GPIOB_DEVICE, GPIO_PDD_PIN_9)	//PTF1
-#define EN_2B_PIN_ON() 		GPIO_PDD_SetPortDataOutputMask(GPIOB_DEVICE, GPIO_PDD_PIN_10) 	//PTF2
-#define EN_2C_PIN_ON()		GPIO_PDD_SetPortDataOutputMask(GPIOB_DEVICE, GPIO_PDD_PIN_11) 	//PTF3
-#define EN_2A_PIN_OFF()		GPIO_PDD_ClearPortDataOutputMask(GPIOB_DEVICE, GPIO_PDD_PIN_9) 	//PTF1
-#define EN_2B_PIN_OFF() 	GPIO_PDD_ClearPortDataOutputMask(GPIOB_DEVICE, GPIO_PDD_PIN_10) //PTF2
-#define EN_2C_PIN_OFF()		GPIO_PDD_ClearPortDataOutputMask(GPIOB_DEVICE, GPIO_PDD_PIN_11) //PTF3
-#define EN_2_ALL_PIN_ON() 	GPIO_PDD_SetPortDataOutput(GPIOB_DEVICE, GPIO_PDD_GetPortDataOutput(GPIOB_DEVICE) | (MASK_LSB_3<<9))
-#define EN_2_ALL_PIN_OFF() 	GPIO_PDD_SetPortDataOutput(GPIOB_DEVICE, GPIO_PDD_GetPortDataOutput(GPIOB_DEVICE) & ~(MASK_LSB_3<<9))
+#define EN_2A_PIN_ON()		GPIO_PDD_SetPortDataOutputMask(GPIOB_BASE_PTR, GPIO_PDD_PIN_9)	//PTF1
+#define EN_2B_PIN_ON() 		GPIO_PDD_SetPortDataOutputMask(GPIOB_BASE_PTR, GPIO_PDD_PIN_10) 	//PTF2
+#define EN_2C_PIN_ON()		GPIO_PDD_SetPortDataOutputMask(GPIOB_BASE_PTR, GPIO_PDD_PIN_11) 	//PTF3
+#define EN_2A_PIN_OFF()		GPIO_PDD_ClearPortDataOutputMask(GPIOB_BASE_PTR, GPIO_PDD_PIN_9) 	//PTF1
+#define EN_2B_PIN_OFF() 	GPIO_PDD_ClearPortDataOutputMask(GPIOB_BASE_PTR, GPIO_PDD_PIN_10) //PTF2
+#define EN_2C_PIN_OFF()		GPIO_PDD_ClearPortDataOutputMask(GPIOB_BASE_PTR, GPIO_PDD_PIN_11) //PTF3
+#define EN_2_ALL_PIN_ON() 	GPIO_PDD_SetPortDataOutput(GPIOB_BASE_PTR, GPIO_PDD_GetPortDataOutput(GPIOB_BASE_PTR) | (MASK_LSB_3<<9))
+#define EN_2_ALL_PIN_OFF() 	GPIO_PDD_SetPortDataOutput(GPIOB_BASE_PTR, GPIO_PDD_GetPortDataOutput(GPIOB_BASE_PTR) & ~(MASK_LSB_3<<9))
 
 
 //  GPIOA PTC5 - S1A
@@ -170,13 +157,13 @@
 //#define PWM_CV_PHASE_B_SET(val) (*FTM2_C4V = val)
 //#define PWM_CV_PHASE_C_SET(val) (*FTM2_C3V = val)
 
-#define PWM_1A_PIN_SET_CV(reg)	FTM_PDD_WriteChannelValueReg(FTM2_DEVICE, FTM_PDD_CHANNEL_5, reg) //PTB5 FTM2_C5V
-#define PWM_1B_PIN_SET_CV(reg)	FTM_PDD_WriteChannelValueReg(FTM2_DEVICE, FTM_PDD_CHANNEL_4, reg) //PTB4 FTM2_C4V
-#define PWM_1C_PIN_SET_CV(reg)	FTM_PDD_WriteChannelValueReg(FTM2_DEVICE, FTM_PDD_CHANNEL_3, reg) //PTC3 FTM2_C3V
+#define PWM_1A_PIN_SET_CV(reg)	FTM_PDD_WriteChannelValueReg(FTM2_BASE_PTR, FTM_PDD_CHANNEL_5, reg) //PTB5 FTM2_C5V
+#define PWM_1B_PIN_SET_CV(reg)	FTM_PDD_WriteChannelValueReg(FTM2_BASE_PTR, FTM_PDD_CHANNEL_4, reg) //PTB4 FTM2_C4V
+#define PWM_1C_PIN_SET_CV(reg)	FTM_PDD_WriteChannelValueReg(FTM2_BASE_PTR, FTM_PDD_CHANNEL_3, reg) //PTC3 FTM2_C3V
 
-#define PWM_2A_PIN_SET_CV(reg)	FTM_PDD_WriteChannelValueReg(FTM2_DEVICE, FTM_PDD_CHANNEL_2, reg) //PTC2 FTM2_C2V
-#define PWM_2B_PIN_SET_CV(reg)	FTM_PDD_WriteChannelValueReg(FTM2_DEVICE, FTM_PDD_CHANNEL_1, reg) //PTC1 FTM2_C1V
-#define PWM_2C_PIN_SET_CV(reg)	FTM_PDD_WriteChannelValueReg(FTM2_DEVICE, FTM_PDD_CHANNEL_0, reg) //PTC0 FTM2_C0V
+#define PWM_2A_PIN_SET_CV(reg)	FTM_PDD_WriteChannelValueReg(FTM2_BASE_PTR, FTM_PDD_CHANNEL_2, reg) //PTC2 FTM2_C2V
+#define PWM_2B_PIN_SET_CV(reg)	FTM_PDD_WriteChannelValueReg(FTM2_BASE_PTR, FTM_PDD_CHANNEL_1, reg) //PTC1 FTM2_C1V
+#define PWM_2C_PIN_SET_CV(reg)	FTM_PDD_WriteChannelValueReg(FTM2_BASE_PTR, FTM_PDD_CHANNEL_0, reg) //PTC0 FTM2_C0V
 
 //CLEARS PREVIOUS SETTING
 //1 sets top MOSFET on, bottom off, ignores PWM

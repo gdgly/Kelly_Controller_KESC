@@ -19,7 +19,7 @@
         <Line>PE_Const</Line>
         <Line>IO_Map</Line>
       </GenSharedModules>
-      <ShrdHeaderAge0>1351726583</ShrdHeaderAge0>
+      <ShrdHeaderAge0>1351877161</ShrdHeaderAge0>
       <ShrdCodeAge0>-1</ShrdCodeAge0>
       <ShrdAsemblAge0>-1</ShrdAsemblAge0>
       <ShrdHeaderAge1>1348035177</ShrdHeaderAge1>
@@ -31,10 +31,9 @@
       <ShrdHeaderAge3>1348035177</ShrdHeaderAge3>
       <ShrdCodeAge3>-1</ShrdCodeAge3>
       <ShrdAsemblAge3>-1</ShrdAsemblAge3>
-      <GenExtraFiles lines_count="13">
+      <GenExtraFiles lines_count="12">
         <Line>Documentation\doxygen\GPIOA_component.txt</Line>
         <Line>Documentation\doxygen\GPIOB_component.txt</Line>
-        <Line>Documentation\doxygen\FTM1_component.txt</Line>
         <Line>Documentation\doxygen\FTM2_component.txt</Line>
         <Line>Documentation\doxygen\IntFlashLdd1_component.txt</Line>
         <Line>Documentation\doxygen\CRC1_component.txt</Line>
@@ -46,15 +45,14 @@
         <Line>Generated_Code\PE_LDD.h</Line>
         <Line>Generated_Code\Vectors.c</Line>
       </GenExtraFiles>
-      <GenExtraFileSrcDir9>Repositories\lib\doxygen\</GenExtraFileSrcDir9>
-      <XtraAge10>1351726583</XtraAge10>
-      <XtraAge11>1351726583</XtraAge11>
-      <XtraAge12>1351726583</XtraAge12>
-      <GenExtraFileType12>4</GenExtraFileType12>
+      <GenExtraFileSrcDir8>Repositories\lib\doxygen\</GenExtraFileSrcDir8>
+      <XtraAge9>1351877161</XtraAge9>
+      <XtraAge10>1351907529</XtraAge10>
+      <XtraAge11>1351907529</XtraAge11>
       <GenExtraFileType11>4</GenExtraFileType11>
       <GenExtraFileType10>4</GenExtraFileType10>
-      <GenExtraFileType9>5</GenExtraFileType9>
-      <GenExtraFileType8>4</GenExtraFileType8>
+      <GenExtraFileType9>4</GenExtraFileType9>
+      <GenExtraFileType8>5</GenExtraFileType8>
       <GenExtraFileType7>4</GenExtraFileType7>
       <GenExtraFileType6>4</GenExtraFileType6>
       <GenExtraFileType5>4</GenExtraFileType5>
@@ -261,11 +259,10 @@
         <Line>Cpu_OnReset</Line>
         <Line>Cpu_OnNMIINT</Line>
       </GenMethodsInEvents>
-      <GenAllModules lines_count="13">
+      <GenAllModules lines_count="12">
         <Line>Cpu</Line>
         <Line>CRC1</Line>
         <Line>Events</Line>
-        <Line>FTM1</Line>
         <Line>FTM2</Line>
         <Line>GPIOA</Line>
         <Line>GPIOB</Line>
@@ -277,10 +274,9 @@
         <Line>PE_Types</Line>
       </GenAllModules>
       <GenExternModules lines_count="0" />
-      <GenBeanModules lines_count="7">
+      <GenBeanModules lines_count="6">
         <Line>GPIOA</Line>
         <Line>GPIOB</Line>
-        <Line>FTM1</Line>
         <Line>FTM2</Line>
         <Line>IFsh1</Line>
         <Line>IntFlashLdd1</Line>
@@ -289,7 +285,7 @@
     </GenFiles>
     <SignalListFile>Documentation\KESCProjectMCUXpresso_SIGNALS.txt</SignalListFile>
     <DestinationCompiler>GNUC</DestinationCompiler>
-    <ProjectModificationStamp>166</ProjectModificationStamp>
+    <ProjectModificationStamp>184</ProjectModificationStamp>
   </Options>
   <CpuID_2>
     <Generated>true</Generated>
@@ -298,7 +294,7 @@
     <GenDriverVersion>01.04</GenDriverVersion>
     <GenEventModule>Events</GenEventModule>
     <HeaderAge>1351658987</HeaderAge>
-    <CodeAge>1351726583</CodeAge>
+    <CodeAge>1351907529</CodeAge>
     <AsemblAge>-1</AsemblAge>
     <GenNumMethods>6</GenNumMethods>
     <SetClockConfiguration>true</SetClockConfiguration>
@@ -435,13 +431,13 @@
     <ExtraFile0>Documentation\doxygen\GPIOB_component.txt</ExtraFile0>
   </ComponentID_50>
   <ComponentID_55>
-    <Generated>true</Generated>
+    <Generated>false</Generated>
     <GenCompName>FTM1</GenCompName>
     <GenComponentVersion>01.010</GenComponentVersion>
     <GenDriverVersion>01.10</GenDriverVersion>
     <GenEventModule />
-    <HeaderAge>1351658987</HeaderAge>
-    <CodeAge>1351658987</CodeAge>
+    <HeaderAge>1351906840</HeaderAge>
+    <CodeAge>1351906840</CodeAge>
     <AsemblAge>-1</AsemblAge>
     <GenNumMethods>1</GenNumMethods>
     <Init>true</Init>
@@ -474,8 +470,8 @@
     <GenComponentVersion>01.010</GenComponentVersion>
     <GenDriverVersion>01.10</GenDriverVersion>
     <GenEventModule />
-    <HeaderAge>1351658987</HeaderAge>
-    <CodeAge>1351658987</CodeAge>
+    <HeaderAge>1351752100</HeaderAge>
+    <CodeAge>1351752100</CodeAge>
     <AsemblAge>-1</AsemblAge>
     <GenNumMethods>1</GenNumMethods>
     <Init>true</Init>
@@ -1109,6 +1105,521 @@
     <GenExtraFilesCount>1</GenExtraFilesCount>
     <ExtraFile0>Documentation\doxygen\ADC0_component.txt</ExtraFile0>
   </ComponentID_133>
+  <ComponentID_169>
+    <Generated>false</Generated>
+    <GenCompName>AD1</GenCompName>
+    <GenComponentVersion>01.697</GenComponentVersion>
+    <GenDriverVersion>01.00</GenDriverVersion>
+    <GenEventModule>Events</GenEventModule>
+    <HeaderAge>-1</HeaderAge>
+    <CodeAge>-1</CodeAge>
+    <AsemblAge>-1</AsemblAge>
+    <GenNumMethods>21</GenNumMethods>
+    <Enable>true</Enable>
+    <Disable>true</Disable>
+    <EnableEvent>false</EnableEvent>
+    <DisableEvent>false</DisableEvent>
+    <Start>true</Start>
+    <Stop>true</Stop>
+    <Measure>true</Measure>
+    <MeasureChan>true</MeasureChan>
+    <EnableExtChanTrigger>false</EnableExtChanTrigger>
+    <EnableIntChanTrigger>true</EnableIntChanTrigger>
+    <GetValue>true</GetValue>
+    <GetChanValue>true</GetChanValue>
+    <GetValue8>true</GetValue8>
+    <GetChanValue8>true</GetChanValue8>
+    <GetValue16>true</GetValue16>
+    <GetChanValue16>true</GetChanValue16>
+    <EnableAsynchroClock>false</EnableAsynchroClock>
+    <DisableAsynchroClock>false</DisableAsynchroClock>
+    <EnableAutoCompare>true</EnableAutoCompare>
+    <DisableAutoCompare>true</DisableAutoCompare>
+    <ConnectPin>false</ConnectPin>
+    <GenNumEvents>3</GenNumEvents>
+    <BeforeNewSpeed_Selected>0</BeforeNewSpeed_Selected>
+    <BeforeNewSpeed_Name>AD1_BeforeNewSpeed</BeforeNewSpeed_Name>
+    <BeforeNewSpeed_Priority>interrupts disabled</BeforeNewSpeed_Priority>
+    <AfterNewSpeed_Selected>0</AfterNewSpeed_Selected>
+    <AfterNewSpeed_Name>AD1_AfterNewSpeed</AfterNewSpeed_Name>
+    <AfterNewSpeed_Priority>interrupts disabled</AfterNewSpeed_Priority>
+    <OnEnd_Selected>3</OnEnd_Selected>
+    <OnEnd_Name>AD1_OnEnd</OnEnd_Name>
+    <OnEnd_Priority>same as interrupt</OnEnd_Priority>
+    <GenSmartUserChangesDetected_Header>false</GenSmartUserChangesDetected_Header>
+    <GenSmartUserChangesDetected_Code>false</GenSmartUserChangesDetected_Code>
+    <GenSmartUserChangesDetected_Asembl>false</GenSmartUserChangesDetected_Asembl>
+    <GenMethodPos>37</GenMethodPos>
+    <MethodPos>
+      <MethodPos0>HWEnDi</MethodPos0>
+      <MethodType>internal_method</MethodType>
+      <ModuleType>Header</ModuleType>
+      <LineBeg>133</LineBeg>
+      <LineEnd>145</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos1>Enable</MethodPos1>
+      <MethodType>method</MethodType>
+      <ModuleType>Header</ModuleType>
+      <LineBeg>146</LineBeg>
+      <LineEnd>163</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos2>Disable</MethodPos2>
+      <MethodType>method</MethodType>
+      <ModuleType>Header</ModuleType>
+      <LineBeg>164</LineBeg>
+      <LineEnd>181</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos3>Start</MethodPos3>
+      <MethodType>method</MethodType>
+      <ModuleType>Header</ModuleType>
+      <LineBeg>182</LineBeg>
+      <LineEnd>207</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos4>Stop</MethodPos4>
+      <MethodType>method</MethodType>
+      <ModuleType>Header</ModuleType>
+      <LineBeg>208</LineBeg>
+      <LineEnd>236</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos5>Measure</MethodPos5>
+      <MethodType>method</MethodType>
+      <ModuleType>Header</ModuleType>
+      <LineBeg>237</LineBeg>
+      <LineEnd>271</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos6>MeasureChan</MethodPos6>
+      <MethodType>method</MethodType>
+      <ModuleType>Header</ModuleType>
+      <LineBeg>272</LineBeg>
+      <LineEnd>304</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos7>GetValue</MethodPos7>
+      <MethodType>method</MethodType>
+      <ModuleType>Header</ModuleType>
+      <LineBeg>305</LineBeg>
+      <LineEnd>336</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos8>GetChanValue</MethodPos8>
+      <MethodType>method</MethodType>
+      <ModuleType>Header</ModuleType>
+      <LineBeg>337</LineBeg>
+      <LineEnd>374</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos9>GetValue8</MethodPos9>
+      <MethodType>method</MethodType>
+      <ModuleType>Header</ModuleType>
+      <LineBeg>375</LineBeg>
+      <LineEnd>404</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos10>GetChanValue8</MethodPos10>
+      <MethodType>method</MethodType>
+      <ModuleType>Header</ModuleType>
+      <LineBeg>405</LineBeg>
+      <LineEnd>440</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos11>GetValue16</MethodPos11>
+      <MethodType>method</MethodType>
+      <ModuleType>Header</ModuleType>
+      <LineBeg>441</LineBeg>
+      <LineEnd>470</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos12>GetChanValue16</MethodPos12>
+      <MethodType>method</MethodType>
+      <ModuleType>Header</ModuleType>
+      <LineBeg>471</LineBeg>
+      <LineEnd>506</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos13>EnableAutoCompare</MethodPos13>
+      <MethodType>method</MethodType>
+      <ModuleType>Header</ModuleType>
+      <LineBeg>507</LineBeg>
+      <LineEnd>534</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos14>DisableAutoCompare</MethodPos14>
+      <MethodType>method</MethodType>
+      <ModuleType>Header</ModuleType>
+      <LineBeg>535</LineBeg>
+      <LineEnd>548</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos15>EnableIntChanTrigger</MethodPos15>
+      <MethodType>method</MethodType>
+      <ModuleType>Header</ModuleType>
+      <LineBeg>549</LineBeg>
+      <LineEnd>577</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos16>ADC_LDD OnMeasurementComplete</MethodPos16>
+      <MethodType>inherited_event</MethodType>
+      <ModuleType>Header</ModuleType>
+      <LineBeg>578</LineBeg>
+      <LineEnd>579</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos17>Init</MethodPos17>
+      <MethodType>internal_method</MethodType>
+      <ModuleType>Header</ModuleType>
+      <LineBeg>580</LineBeg>
+      <LineEnd>592</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos18>ClrSumV</MethodPos18>
+      <MethodType>internal_method</MethodType>
+      <ModuleType>Code</ModuleType>
+      <LineBeg>135</LineBeg>
+      <LineEnd>152</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos19>HWEnDi</MethodPos19>
+      <MethodType>internal_method</MethodType>
+      <ModuleType>Code</ModuleType>
+      <LineBeg>153</LineBeg>
+      <LineEnd>196</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos20>Enable</MethodPos20>
+      <MethodType>method</MethodType>
+      <ModuleType>Code</ModuleType>
+      <LineBeg>197</LineBeg>
+      <LineEnd>222</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos21>Disable</MethodPos21>
+      <MethodType>method</MethodType>
+      <ModuleType>Code</ModuleType>
+      <LineBeg>223</LineBeg>
+      <LineEnd>248</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos22>Start</MethodPos22>
+      <MethodType>method</MethodType>
+      <ModuleType>Code</ModuleType>
+      <LineBeg>249</LineBeg>
+      <LineEnd>286</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos23>Stop</MethodPos23>
+      <MethodType>method</MethodType>
+      <ModuleType>Code</ModuleType>
+      <LineBeg>287</LineBeg>
+      <LineEnd>329</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos24>Measure</MethodPos24>
+      <MethodType>method</MethodType>
+      <ModuleType>Code</ModuleType>
+      <LineBeg>330</LineBeg>
+      <LineEnd>379</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos25>MeasureChan</MethodPos25>
+      <MethodType>method</MethodType>
+      <ModuleType>Code</ModuleType>
+      <LineBeg>380</LineBeg>
+      <LineEnd>437</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos26>GetValue</MethodPos26>
+      <MethodType>method</MethodType>
+      <ModuleType>Code</ModuleType>
+      <LineBeg>438</LineBeg>
+      <LineEnd>480</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos27>GetChanValue</MethodPos27>
+      <MethodType>method</MethodType>
+      <ModuleType>Code</ModuleType>
+      <LineBeg>481</LineBeg>
+      <LineEnd>535</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos28>GetValue8</MethodPos28>
+      <MethodType>method</MethodType>
+      <ModuleType>Code</ModuleType>
+      <LineBeg>536</LineBeg>
+      <LineEnd>575</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos29>GetChanValue8</MethodPos29>
+      <MethodType>method</MethodType>
+      <ModuleType>Code</ModuleType>
+      <LineBeg>576</LineBeg>
+      <LineEnd>621</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos30>GetValue16</MethodPos30>
+      <MethodType>method</MethodType>
+      <ModuleType>Code</ModuleType>
+      <LineBeg>622</LineBeg>
+      <LineEnd>661</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos31>GetChanValue16</MethodPos31>
+      <MethodType>method</MethodType>
+      <ModuleType>Code</ModuleType>
+      <LineBeg>662</LineBeg>
+      <LineEnd>707</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos32>EnableAutoCompare</MethodPos32>
+      <MethodType>method</MethodType>
+      <ModuleType>Code</ModuleType>
+      <LineBeg>708</LineBeg>
+      <LineEnd>743</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos33>DisableAutoCompare</MethodPos33>
+      <MethodType>method</MethodType>
+      <ModuleType>Code</ModuleType>
+      <LineBeg>744</LineBeg>
+      <LineEnd>764</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos34>EnableIntChanTrigger</MethodPos34>
+      <MethodType>method</MethodType>
+      <ModuleType>Code</ModuleType>
+      <LineBeg>765</LineBeg>
+      <LineEnd>806</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos35>ADC_LDD OnMeasurementComplete</MethodPos35>
+      <MethodType>inherited_event</MethodType>
+      <ModuleType>Code</ModuleType>
+      <LineBeg>807</LineBeg>
+      <LineEnd>879</LineEnd>
+    </MethodPos>
+    <MethodPos>
+      <MethodPos36>Init</MethodPos36>
+      <MethodType>internal_method</MethodType>
+      <ModuleType>Code</ModuleType>
+      <LineBeg>880</LineBeg>
+      <LineEnd>900</LineEnd>
+    </MethodPos>
+    <GenExtraFilesCount>0</GenExtraFilesCount>
+    <InhrCompID_170>
+      <Generated>false</Generated>
+      <GenCompName>AdcLdd1</GenCompName>
+      <GenComponentVersion>01.183</GenComponentVersion>
+      <GenDriverVersion>01.00</GenDriverVersion>
+      <GenEventModule>Events</GenEventModule>
+      <HeaderAge>-1</HeaderAge>
+      <CodeAge>-1</CodeAge>
+      <AsemblAge>-1</AsemblAge>
+      <GenNumMethods>18</GenNumMethods>
+      <Init>true</Init>
+      <Deinit>false</Deinit>
+      <Enable>true</Enable>
+      <Disable>true</Disable>
+      <GetEventMask>false</GetEventMask>
+      <SetEventMask>false</SetEventMask>
+      <StartSingleMeasurement>true</StartSingleMeasurement>
+      <StartLoopMeasurement>false</StartLoopMeasurement>
+      <StartSingleTriggeredMeasurement>false</StartSingleTriggeredMeasurement>
+      <StartLoopTriggeredMeasurement>true</StartLoopTriggeredMeasurement>
+      <CancelMeasurement>true</CancelMeasurement>
+      <GetMeasuredValues>true</GetMeasuredValues>
+      <SelectSampleGroup>false</SelectSampleGroup>
+      <CreateSampleGroup>true</CreateSampleGroup>
+      <GetMeasurementCompleteStatus>true</GetMeasurementCompleteStatus>
+      <SetOperationMode>false</SetOperationMode>
+      <GetDriverState>false</GetDriverState>
+      <ConnectPin>false</ConnectPin>
+      <GenNumEvents>1</GenNumEvents>
+      <OnMeasurementComplete_Selected>2</OnMeasurementComplete_Selected>
+      <OnMeasurementComplete_Name>AdcLdd1_OnMeasurementComplete</OnMeasurementComplete_Name>
+      <OnMeasurementComplete_Priority>interrupts disabled</OnMeasurementComplete_Priority>
+      <ISR_MeasurementCompleteInterruptISRHandle />
+      <ISR_ErrorInterruptISRHandle />
+      <GenSmartUserChangesDetected_Header>false</GenSmartUserChangesDetected_Header>
+      <GenSmartUserChangesDetected_Code>false</GenSmartUserChangesDetected_Code>
+      <GenSmartUserChangesDetected_Asembl>false</GenSmartUserChangesDetected_Asembl>
+      <GenMethodPos>24</GenMethodPos>
+      <MethodPos>
+        <MethodPos0>Init</MethodPos0>
+        <MethodType>method</MethodType>
+        <ModuleType>Header</ModuleType>
+        <LineBeg>225</LineBeg>
+        <LineEnd>249</LineEnd>
+      </MethodPos>
+      <MethodPos>
+        <MethodPos1>Enable</MethodPos1>
+        <MethodType>method</MethodType>
+        <ModuleType>Header</ModuleType>
+        <LineBeg>250</LineBeg>
+        <LineEnd>273</LineEnd>
+      </MethodPos>
+      <MethodPos>
+        <MethodPos2>Disable</MethodPos2>
+        <MethodType>method</MethodType>
+        <ModuleType>Header</ModuleType>
+        <LineBeg>274</LineBeg>
+        <LineEnd>301</LineEnd>
+      </MethodPos>
+      <MethodPos>
+        <MethodPos3>StartSingleMeasurement</MethodPos3>
+        <MethodType>method</MethodType>
+        <ModuleType>Header</ModuleType>
+        <LineBeg>302</LineBeg>
+        <LineEnd>341</LineEnd>
+      </MethodPos>
+      <MethodPos>
+        <MethodPos4>StartLoopTriggeredMeasurement</MethodPos4>
+        <MethodType>method</MethodType>
+        <ModuleType>Header</ModuleType>
+        <LineBeg>342</LineBeg>
+        <LineEnd>389</LineEnd>
+      </MethodPos>
+      <MethodPos>
+        <MethodPos5>CancelMeasurement</MethodPos5>
+        <MethodType>method</MethodType>
+        <ModuleType>Header</ModuleType>
+        <LineBeg>390</LineBeg>
+        <LineEnd>412</LineEnd>
+      </MethodPos>
+      <MethodPos>
+        <MethodPos6>CreateSampleGroup</MethodPos6>
+        <MethodType>method</MethodType>
+        <ModuleType>Header</ModuleType>
+        <LineBeg>413</LineBeg>
+        <LineEnd>455</LineEnd>
+      </MethodPos>
+      <MethodPos>
+        <MethodPos7>GetMeasuredValues</MethodPos7>
+        <MethodType>method</MethodType>
+        <ModuleType>Header</ModuleType>
+        <LineBeg>456</LineBeg>
+        <LineEnd>489</LineEnd>
+      </MethodPos>
+      <MethodPos>
+        <MethodPos8>GetMeasurementCompleteStatus</MethodPos8>
+        <MethodType>method</MethodType>
+        <ModuleType>Header</ModuleType>
+        <LineBeg>490</LineBeg>
+        <LineEnd>511</LineEnd>
+      </MethodPos>
+      <MethodPos>
+        <MethodPos9>EnableAutoCompare</MethodPos9>
+        <MethodType>method</MethodType>
+        <ModuleType>Header</ModuleType>
+        <LineBeg>512</LineBeg>
+        <LineEnd>578</LineEnd>
+      </MethodPos>
+      <MethodPos>
+        <MethodPos10>DisableAutoCompare</MethodPos10>
+        <MethodType>method</MethodType>
+        <ModuleType>Header</ModuleType>
+        <LineBeg>579</LineBeg>
+        <LineEnd>599</LineEnd>
+      </MethodPos>
+      <MethodPos>
+        <MethodPos11>MeasurementCompleteInterrupt</MethodPos11>
+        <MethodType>method</MethodType>
+        <ModuleType>Header</ModuleType>
+        <LineBeg>600</LineBeg>
+        <LineEnd>611</LineEnd>
+      </MethodPos>
+      <MethodPos>
+        <MethodPos12>Init</MethodPos12>
+        <MethodType>method</MethodType>
+        <ModuleType>Code</ModuleType>
+        <LineBeg>179</LineBeg>
+        <LineEnd>248</LineEnd>
+      </MethodPos>
+      <MethodPos>
+        <MethodPos13>Enable</MethodPos13>
+        <MethodType>method</MethodType>
+        <ModuleType>Code</ModuleType>
+        <LineBeg>249</LineBeg>
+        <LineEnd>276</LineEnd>
+      </MethodPos>
+      <MethodPos>
+        <MethodPos14>Disable</MethodPos14>
+        <MethodType>method</MethodType>
+        <ModuleType>Code</ModuleType>
+        <LineBeg>277</LineBeg>
+        <LineEnd>310</LineEnd>
+      </MethodPos>
+      <MethodPos>
+        <MethodPos15>StartSingleMeasurement</MethodPos15>
+        <MethodType>method</MethodType>
+        <ModuleType>Code</ModuleType>
+        <LineBeg>311</LineBeg>
+        <LineEnd>371</LineEnd>
+      </MethodPos>
+      <MethodPos>
+        <MethodPos16>StartLoopTriggeredMeasurement</MethodPos16>
+        <MethodType>method</MethodType>
+        <ModuleType>Code</ModuleType>
+        <LineBeg>372</LineBeg>
+        <LineEnd>440</LineEnd>
+      </MethodPos>
+      <MethodPos>
+        <MethodPos17>CancelMeasurement</MethodPos17>
+        <MethodType>method</MethodType>
+        <ModuleType>Code</ModuleType>
+        <LineBeg>441</LineBeg>
+        <LineEnd>474</LineEnd>
+      </MethodPos>
+      <MethodPos>
+        <MethodPos18>CreateSampleGroup</MethodPos18>
+        <MethodType>method</MethodType>
+        <ModuleType>Code</ModuleType>
+        <LineBeg>475</LineBeg>
+        <LineEnd>551</LineEnd>
+      </MethodPos>
+      <MethodPos>
+        <MethodPos19>GetMeasuredValues</MethodPos19>
+        <MethodType>method</MethodType>
+        <ModuleType>Code</ModuleType>
+        <LineBeg>552</LineBeg>
+        <LineEnd>602</LineEnd>
+      </MethodPos>
+      <MethodPos>
+        <MethodPos20>GetMeasurementCompleteStatus</MethodPos20>
+        <MethodType>method</MethodType>
+        <ModuleType>Code</ModuleType>
+        <LineBeg>603</LineBeg>
+        <LineEnd>635</LineEnd>
+      </MethodPos>
+      <MethodPos>
+        <MethodPos21>EnableAutoCompare</MethodPos21>
+        <MethodType>method</MethodType>
+        <ModuleType>Code</ModuleType>
+        <LineBeg>636</LineBeg>
+        <LineEnd>734</LineEnd>
+      </MethodPos>
+      <MethodPos>
+        <MethodPos22>DisableAutoCompare</MethodPos22>
+        <MethodType>method</MethodType>
+        <ModuleType>Code</ModuleType>
+        <LineBeg>735</LineBeg>
+        <LineEnd>770</LineEnd>
+      </MethodPos>
+      <MethodPos>
+        <MethodPos23>MeasurementCompleteInterrupt</MethodPos23>
+        <MethodType>internal_method</MethodType>
+        <ModuleType>Code</ModuleType>
+        <LineBeg>771</LineBeg>
+        <LineEnd>793</LineEnd>
+      </MethodPos>
+      <GenExtraFilesCount>1</GenExtraFilesCount>
+      <ExtraFile0>Documentation\doxygen\AdcLdd1_component.txt</ExtraFile0>
+    </InhrCompID_170>
+  </ComponentID_169>
   <ComponentID_60>
     <Generated>false</Generated>
     <GenCompName>ADC</GenCompName>
@@ -1121,7 +1632,7 @@
     <GenNumMethods>1</GenNumMethods>
     <Init>true</Init>
     <GenNumEvents>0</GenNumEvents>
-    <ISR_ISRHandleName />
+    <ISR_ISRHandleName>ADC_ISR</ISR_ISRHandleName>
     <GenSmartUserChangesDetected_Header>false</GenSmartUserChangesDetected_Header>
     <GenSmartUserChangesDetected_Code>false</GenSmartUserChangesDetected_Code>
     <GenSmartUserChangesDetected_Asembl>false</GenSmartUserChangesDetected_Asembl>
@@ -1130,15 +1641,15 @@
       <MethodPos0>Init</MethodPos0>
       <MethodType>method</MethodType>
       <ModuleType>Header</ModuleType>
-      <LineBeg>169</LineBeg>
-      <LineEnd>183</LineEnd>
+      <LineBeg>175</LineBeg>
+      <LineEnd>189</LineEnd>
     </MethodPos>
     <MethodPos>
       <MethodPos1>Init</MethodPos1>
       <MethodType>method</MethodType>
       <ModuleType>Code</ModuleType>
-      <LineBeg>165</LineBeg>
-      <LineEnd>200</LineEnd>
+      <LineBeg>171</LineBeg>
+      <LineEnd>208</LineEnd>
     </MethodPos>
     <GenExtraFilesCount>1</GenExtraFilesCount>
     <ExtraFile0>Documentation\doxygen\ADC_component.txt</ExtraFile0>
@@ -2711,524 +3222,6 @@
       <ExtraFile0>Documentation\doxygen\UART0_component.txt</ExtraFile0>
     </InhrCompID_168>
   </ComponentID_167>
-  <ComponentID_169>
-    <Generated>false</Generated>
-    <GenCompName>AD1</GenCompName>
-    <GenComponentVersion>01.697</GenComponentVersion>
-    <GenDriverVersion>01.00</GenDriverVersion>
-    <GenEventModule>Events</GenEventModule>
-    <HeaderAge>1351706195</HeaderAge>
-    <CodeAge>1351706195</CodeAge>
-    <AsemblAge>-1</AsemblAge>
-    <GenNumMethods>21</GenNumMethods>
-    <Enable>true</Enable>
-    <Disable>true</Disable>
-    <EnableEvent>false</EnableEvent>
-    <DisableEvent>false</DisableEvent>
-    <Start>true</Start>
-    <Stop>true</Stop>
-    <Measure>true</Measure>
-    <MeasureChan>true</MeasureChan>
-    <EnableExtChanTrigger>false</EnableExtChanTrigger>
-    <EnableIntChanTrigger>true</EnableIntChanTrigger>
-    <GetValue>true</GetValue>
-    <GetChanValue>true</GetChanValue>
-    <GetValue8>true</GetValue8>
-    <GetChanValue8>true</GetChanValue8>
-    <GetValue16>true</GetValue16>
-    <GetChanValue16>true</GetChanValue16>
-    <EnableAsynchroClock>false</EnableAsynchroClock>
-    <DisableAsynchroClock>false</DisableAsynchroClock>
-    <EnableAutoCompare>true</EnableAutoCompare>
-    <DisableAutoCompare>true</DisableAutoCompare>
-    <ConnectPin>false</ConnectPin>
-    <GenNumEvents>3</GenNumEvents>
-    <BeforeNewSpeed_Selected>0</BeforeNewSpeed_Selected>
-    <BeforeNewSpeed_Name>AD1_BeforeNewSpeed</BeforeNewSpeed_Name>
-    <BeforeNewSpeed_Priority>interrupts disabled</BeforeNewSpeed_Priority>
-    <AfterNewSpeed_Selected>0</AfterNewSpeed_Selected>
-    <AfterNewSpeed_Name>AD1_AfterNewSpeed</AfterNewSpeed_Name>
-    <AfterNewSpeed_Priority>interrupts disabled</AfterNewSpeed_Priority>
-    <OnEnd_Selected>3</OnEnd_Selected>
-    <OnEnd_Name>AD1_OnEnd</OnEnd_Name>
-    <OnEnd_Priority>same as interrupt</OnEnd_Priority>
-    <GenSmartUserChangesDetected_Header>false</GenSmartUserChangesDetected_Header>
-    <GenSmartUserChangesDetected_Code>false</GenSmartUserChangesDetected_Code>
-    <GenSmartUserChangesDetected_Asembl>false</GenSmartUserChangesDetected_Asembl>
-    <GenMethodPos>37</GenMethodPos>
-    <MethodPos>
-      <MethodPos0>HWEnDi</MethodPos0>
-      <MethodType>internal_method</MethodType>
-      <ModuleType>Header</ModuleType>
-      <LineBeg>133</LineBeg>
-      <LineEnd>145</LineEnd>
-    </MethodPos>
-    <MethodPos>
-      <MethodPos1>Enable</MethodPos1>
-      <MethodType>method</MethodType>
-      <ModuleType>Header</ModuleType>
-      <LineBeg>146</LineBeg>
-      <LineEnd>163</LineEnd>
-    </MethodPos>
-    <MethodPos>
-      <MethodPos2>Disable</MethodPos2>
-      <MethodType>method</MethodType>
-      <ModuleType>Header</ModuleType>
-      <LineBeg>164</LineBeg>
-      <LineEnd>181</LineEnd>
-    </MethodPos>
-    <MethodPos>
-      <MethodPos3>Start</MethodPos3>
-      <MethodType>method</MethodType>
-      <ModuleType>Header</ModuleType>
-      <LineBeg>182</LineBeg>
-      <LineEnd>207</LineEnd>
-    </MethodPos>
-    <MethodPos>
-      <MethodPos4>Stop</MethodPos4>
-      <MethodType>method</MethodType>
-      <ModuleType>Header</ModuleType>
-      <LineBeg>208</LineBeg>
-      <LineEnd>236</LineEnd>
-    </MethodPos>
-    <MethodPos>
-      <MethodPos5>Measure</MethodPos5>
-      <MethodType>method</MethodType>
-      <ModuleType>Header</ModuleType>
-      <LineBeg>237</LineBeg>
-      <LineEnd>271</LineEnd>
-    </MethodPos>
-    <MethodPos>
-      <MethodPos6>MeasureChan</MethodPos6>
-      <MethodType>method</MethodType>
-      <ModuleType>Header</ModuleType>
-      <LineBeg>272</LineBeg>
-      <LineEnd>304</LineEnd>
-    </MethodPos>
-    <MethodPos>
-      <MethodPos7>GetValue</MethodPos7>
-      <MethodType>method</MethodType>
-      <ModuleType>Header</ModuleType>
-      <LineBeg>305</LineBeg>
-      <LineEnd>336</LineEnd>
-    </MethodPos>
-    <MethodPos>
-      <MethodPos8>GetChanValue</MethodPos8>
-      <MethodType>method</MethodType>
-      <ModuleType>Header</ModuleType>
-      <LineBeg>337</LineBeg>
-      <LineEnd>374</LineEnd>
-    </MethodPos>
-    <MethodPos>
-      <MethodPos9>GetValue8</MethodPos9>
-      <MethodType>method</MethodType>
-      <ModuleType>Header</ModuleType>
-      <LineBeg>375</LineBeg>
-      <LineEnd>404</LineEnd>
-    </MethodPos>
-    <MethodPos>
-      <MethodPos10>GetChanValue8</MethodPos10>
-      <MethodType>method</MethodType>
-      <ModuleType>Header</ModuleType>
-      <LineBeg>405</LineBeg>
-      <LineEnd>440</LineEnd>
-    </MethodPos>
-    <MethodPos>
-      <MethodPos11>GetValue16</MethodPos11>
-      <MethodType>method</MethodType>
-      <ModuleType>Header</ModuleType>
-      <LineBeg>441</LineBeg>
-      <LineEnd>470</LineEnd>
-    </MethodPos>
-    <MethodPos>
-      <MethodPos12>GetChanValue16</MethodPos12>
-      <MethodType>method</MethodType>
-      <ModuleType>Header</ModuleType>
-      <LineBeg>471</LineBeg>
-      <LineEnd>506</LineEnd>
-    </MethodPos>
-    <MethodPos>
-      <MethodPos13>EnableAutoCompare</MethodPos13>
-      <MethodType>method</MethodType>
-      <ModuleType>Header</ModuleType>
-      <LineBeg>507</LineBeg>
-      <LineEnd>534</LineEnd>
-    </MethodPos>
-    <MethodPos>
-      <MethodPos14>DisableAutoCompare</MethodPos14>
-      <MethodType>method</MethodType>
-      <ModuleType>Header</ModuleType>
-      <LineBeg>535</LineBeg>
-      <LineEnd>548</LineEnd>
-    </MethodPos>
-    <MethodPos>
-      <MethodPos15>EnableIntChanTrigger</MethodPos15>
-      <MethodType>method</MethodType>
-      <ModuleType>Header</ModuleType>
-      <LineBeg>549</LineBeg>
-      <LineEnd>577</LineEnd>
-    </MethodPos>
-    <MethodPos>
-      <MethodPos16>ADC_LDD OnMeasurementComplete</MethodPos16>
-      <MethodType>inherited_event</MethodType>
-      <ModuleType>Header</ModuleType>
-      <LineBeg>578</LineBeg>
-      <LineEnd>579</LineEnd>
-    </MethodPos>
-    <MethodPos>
-      <MethodPos17>Init</MethodPos17>
-      <MethodType>internal_method</MethodType>
-      <ModuleType>Header</ModuleType>
-      <LineBeg>580</LineBeg>
-      <LineEnd>592</LineEnd>
-    </MethodPos>
-    <MethodPos>
-      <MethodPos18>ClrSumV</MethodPos18>
-      <MethodType>internal_method</MethodType>
-      <ModuleType>Code</ModuleType>
-      <LineBeg>135</LineBeg>
-      <LineEnd>152</LineEnd>
-    </MethodPos>
-    <MethodPos>
-      <MethodPos19>HWEnDi</MethodPos19>
-      <MethodType>internal_method</MethodType>
-      <ModuleType>Code</ModuleType>
-      <LineBeg>153</LineBeg>
-      <LineEnd>196</LineEnd>
-    </MethodPos>
-    <MethodPos>
-      <MethodPos20>Enable</MethodPos20>
-      <MethodType>method</MethodType>
-      <ModuleType>Code</ModuleType>
-      <LineBeg>197</LineBeg>
-      <LineEnd>222</LineEnd>
-    </MethodPos>
-    <MethodPos>
-      <MethodPos21>Disable</MethodPos21>
-      <MethodType>method</MethodType>
-      <ModuleType>Code</ModuleType>
-      <LineBeg>223</LineBeg>
-      <LineEnd>248</LineEnd>
-    </MethodPos>
-    <MethodPos>
-      <MethodPos22>Start</MethodPos22>
-      <MethodType>method</MethodType>
-      <ModuleType>Code</ModuleType>
-      <LineBeg>249</LineBeg>
-      <LineEnd>286</LineEnd>
-    </MethodPos>
-    <MethodPos>
-      <MethodPos23>Stop</MethodPos23>
-      <MethodType>method</MethodType>
-      <ModuleType>Code</ModuleType>
-      <LineBeg>287</LineBeg>
-      <LineEnd>329</LineEnd>
-    </MethodPos>
-    <MethodPos>
-      <MethodPos24>Measure</MethodPos24>
-      <MethodType>method</MethodType>
-      <ModuleType>Code</ModuleType>
-      <LineBeg>330</LineBeg>
-      <LineEnd>379</LineEnd>
-    </MethodPos>
-    <MethodPos>
-      <MethodPos25>MeasureChan</MethodPos25>
-      <MethodType>method</MethodType>
-      <ModuleType>Code</ModuleType>
-      <LineBeg>380</LineBeg>
-      <LineEnd>437</LineEnd>
-    </MethodPos>
-    <MethodPos>
-      <MethodPos26>GetValue</MethodPos26>
-      <MethodType>method</MethodType>
-      <ModuleType>Code</ModuleType>
-      <LineBeg>438</LineBeg>
-      <LineEnd>480</LineEnd>
-    </MethodPos>
-    <MethodPos>
-      <MethodPos27>GetChanValue</MethodPos27>
-      <MethodType>method</MethodType>
-      <ModuleType>Code</ModuleType>
-      <LineBeg>481</LineBeg>
-      <LineEnd>535</LineEnd>
-    </MethodPos>
-    <MethodPos>
-      <MethodPos28>GetValue8</MethodPos28>
-      <MethodType>method</MethodType>
-      <ModuleType>Code</ModuleType>
-      <LineBeg>536</LineBeg>
-      <LineEnd>575</LineEnd>
-    </MethodPos>
-    <MethodPos>
-      <MethodPos29>GetChanValue8</MethodPos29>
-      <MethodType>method</MethodType>
-      <ModuleType>Code</ModuleType>
-      <LineBeg>576</LineBeg>
-      <LineEnd>621</LineEnd>
-    </MethodPos>
-    <MethodPos>
-      <MethodPos30>GetValue16</MethodPos30>
-      <MethodType>method</MethodType>
-      <ModuleType>Code</ModuleType>
-      <LineBeg>622</LineBeg>
-      <LineEnd>661</LineEnd>
-    </MethodPos>
-    <MethodPos>
-      <MethodPos31>GetChanValue16</MethodPos31>
-      <MethodType>method</MethodType>
-      <ModuleType>Code</ModuleType>
-      <LineBeg>662</LineBeg>
-      <LineEnd>707</LineEnd>
-    </MethodPos>
-    <MethodPos>
-      <MethodPos32>EnableAutoCompare</MethodPos32>
-      <MethodType>method</MethodType>
-      <ModuleType>Code</ModuleType>
-      <LineBeg>708</LineBeg>
-      <LineEnd>743</LineEnd>
-    </MethodPos>
-    <MethodPos>
-      <MethodPos33>DisableAutoCompare</MethodPos33>
-      <MethodType>method</MethodType>
-      <ModuleType>Code</ModuleType>
-      <LineBeg>744</LineBeg>
-      <LineEnd>764</LineEnd>
-    </MethodPos>
-    <MethodPos>
-      <MethodPos34>EnableIntChanTrigger</MethodPos34>
-      <MethodType>method</MethodType>
-      <ModuleType>Code</ModuleType>
-      <LineBeg>765</LineBeg>
-      <LineEnd>806</LineEnd>
-    </MethodPos>
-    <MethodPos>
-      <MethodPos35>ADC_LDD OnMeasurementComplete</MethodPos35>
-      <MethodType>inherited_event</MethodType>
-      <ModuleType>Code</ModuleType>
-      <LineBeg>807</LineBeg>
-      <LineEnd>879</LineEnd>
-    </MethodPos>
-    <MethodPos>
-      <MethodPos36>Init</MethodPos36>
-      <MethodType>internal_method</MethodType>
-      <ModuleType>Code</ModuleType>
-      <LineBeg>880</LineBeg>
-      <LineEnd>900</LineEnd>
-    </MethodPos>
-    <GenExtraFilesCount>0</GenExtraFilesCount>
-    <InhrCompID_170>
-      <Generated>false</Generated>
-      <GenCompName>AdcLdd1</GenCompName>
-      <GenComponentVersion>01.183</GenComponentVersion>
-      <GenDriverVersion>01.00</GenDriverVersion>
-      <GenEventModule>Events</GenEventModule>
-      <HeaderAge>1351706195</HeaderAge>
-      <CodeAge>1351706195</CodeAge>
-      <AsemblAge>-1</AsemblAge>
-      <GenNumMethods>21</GenNumMethods>
-      <Init>true</Init>
-      <Deinit>false</Deinit>
-      <Enable>true</Enable>
-      <Disable>true</Disable>
-      <GetEventMask>false</GetEventMask>
-      <SetEventMask>false</SetEventMask>
-      <StartSingleMeasurement>true</StartSingleMeasurement>
-      <StartLoopMeasurement>false</StartLoopMeasurement>
-      <StartSingleTriggeredMeasurement>false</StartSingleTriggeredMeasurement>
-      <StartLoopTriggeredMeasurement>true</StartLoopTriggeredMeasurement>
-      <CancelMeasurement>true</CancelMeasurement>
-      <GetMeasuredValues>true</GetMeasuredValues>
-      <SelectSampleGroup>false</SelectSampleGroup>
-      <CreateSampleGroup>true</CreateSampleGroup>
-      <GetMeasurementCompleteStatus>true</GetMeasurementCompleteStatus>
-      <EnableAutoCompare>true</EnableAutoCompare>
-      <DisableAutoCompare>true</DisableAutoCompare>
-      <SetOperationMode>false</SetOperationMode>
-      <GetDriverState>false</GetDriverState>
-      <ConnectPin>false</ConnectPin>
-      <Main>false</Main>
-      <GenNumEvents>1</GenNumEvents>
-      <OnMeasurementComplete_Selected>2</OnMeasurementComplete_Selected>
-      <OnMeasurementComplete_Name>AdcLdd1_OnMeasurementComplete</OnMeasurementComplete_Name>
-      <OnMeasurementComplete_Priority>interrupts disabled</OnMeasurementComplete_Priority>
-      <ISR_MeasurementCompleteInterruptISRHandle />
-      <ISR_ErrorInterruptISRHandle />
-      <GenSmartUserChangesDetected_Header>false</GenSmartUserChangesDetected_Header>
-      <GenSmartUserChangesDetected_Code>false</GenSmartUserChangesDetected_Code>
-      <GenSmartUserChangesDetected_Asembl>false</GenSmartUserChangesDetected_Asembl>
-      <GenMethodPos>24</GenMethodPos>
-      <MethodPos>
-        <MethodPos0>Init</MethodPos0>
-        <MethodType>method</MethodType>
-        <ModuleType>Header</ModuleType>
-        <LineBeg>225</LineBeg>
-        <LineEnd>249</LineEnd>
-      </MethodPos>
-      <MethodPos>
-        <MethodPos1>Enable</MethodPos1>
-        <MethodType>method</MethodType>
-        <ModuleType>Header</ModuleType>
-        <LineBeg>250</LineBeg>
-        <LineEnd>273</LineEnd>
-      </MethodPos>
-      <MethodPos>
-        <MethodPos2>Disable</MethodPos2>
-        <MethodType>method</MethodType>
-        <ModuleType>Header</ModuleType>
-        <LineBeg>274</LineBeg>
-        <LineEnd>301</LineEnd>
-      </MethodPos>
-      <MethodPos>
-        <MethodPos3>StartSingleMeasurement</MethodPos3>
-        <MethodType>method</MethodType>
-        <ModuleType>Header</ModuleType>
-        <LineBeg>302</LineBeg>
-        <LineEnd>341</LineEnd>
-      </MethodPos>
-      <MethodPos>
-        <MethodPos4>StartLoopTriggeredMeasurement</MethodPos4>
-        <MethodType>method</MethodType>
-        <ModuleType>Header</ModuleType>
-        <LineBeg>342</LineBeg>
-        <LineEnd>389</LineEnd>
-      </MethodPos>
-      <MethodPos>
-        <MethodPos5>CancelMeasurement</MethodPos5>
-        <MethodType>method</MethodType>
-        <ModuleType>Header</ModuleType>
-        <LineBeg>390</LineBeg>
-        <LineEnd>412</LineEnd>
-      </MethodPos>
-      <MethodPos>
-        <MethodPos6>CreateSampleGroup</MethodPos6>
-        <MethodType>method</MethodType>
-        <ModuleType>Header</ModuleType>
-        <LineBeg>413</LineBeg>
-        <LineEnd>455</LineEnd>
-      </MethodPos>
-      <MethodPos>
-        <MethodPos7>GetMeasuredValues</MethodPos7>
-        <MethodType>method</MethodType>
-        <ModuleType>Header</ModuleType>
-        <LineBeg>456</LineBeg>
-        <LineEnd>489</LineEnd>
-      </MethodPos>
-      <MethodPos>
-        <MethodPos8>GetMeasurementCompleteStatus</MethodPos8>
-        <MethodType>method</MethodType>
-        <ModuleType>Header</ModuleType>
-        <LineBeg>490</LineBeg>
-        <LineEnd>511</LineEnd>
-      </MethodPos>
-      <MethodPos>
-        <MethodPos9>EnableAutoCompare</MethodPos9>
-        <MethodType>method</MethodType>
-        <ModuleType>Header</ModuleType>
-        <LineBeg>512</LineBeg>
-        <LineEnd>578</LineEnd>
-      </MethodPos>
-      <MethodPos>
-        <MethodPos10>DisableAutoCompare</MethodPos10>
-        <MethodType>method</MethodType>
-        <ModuleType>Header</ModuleType>
-        <LineBeg>579</LineBeg>
-        <LineEnd>599</LineEnd>
-      </MethodPos>
-      <MethodPos>
-        <MethodPos11>MeasurementCompleteInterrupt</MethodPos11>
-        <MethodType>method</MethodType>
-        <ModuleType>Header</ModuleType>
-        <LineBeg>600</LineBeg>
-        <LineEnd>611</LineEnd>
-      </MethodPos>
-      <MethodPos>
-        <MethodPos12>Init</MethodPos12>
-        <MethodType>method</MethodType>
-        <ModuleType>Code</ModuleType>
-        <LineBeg>179</LineBeg>
-        <LineEnd>248</LineEnd>
-      </MethodPos>
-      <MethodPos>
-        <MethodPos13>Enable</MethodPos13>
-        <MethodType>method</MethodType>
-        <ModuleType>Code</ModuleType>
-        <LineBeg>249</LineBeg>
-        <LineEnd>276</LineEnd>
-      </MethodPos>
-      <MethodPos>
-        <MethodPos14>Disable</MethodPos14>
-        <MethodType>method</MethodType>
-        <ModuleType>Code</ModuleType>
-        <LineBeg>277</LineBeg>
-        <LineEnd>310</LineEnd>
-      </MethodPos>
-      <MethodPos>
-        <MethodPos15>StartSingleMeasurement</MethodPos15>
-        <MethodType>method</MethodType>
-        <ModuleType>Code</ModuleType>
-        <LineBeg>311</LineBeg>
-        <LineEnd>371</LineEnd>
-      </MethodPos>
-      <MethodPos>
-        <MethodPos16>StartLoopTriggeredMeasurement</MethodPos16>
-        <MethodType>method</MethodType>
-        <ModuleType>Code</ModuleType>
-        <LineBeg>372</LineBeg>
-        <LineEnd>440</LineEnd>
-      </MethodPos>
-      <MethodPos>
-        <MethodPos17>CancelMeasurement</MethodPos17>
-        <MethodType>method</MethodType>
-        <ModuleType>Code</ModuleType>
-        <LineBeg>441</LineBeg>
-        <LineEnd>474</LineEnd>
-      </MethodPos>
-      <MethodPos>
-        <MethodPos18>CreateSampleGroup</MethodPos18>
-        <MethodType>method</MethodType>
-        <ModuleType>Code</ModuleType>
-        <LineBeg>475</LineBeg>
-        <LineEnd>551</LineEnd>
-      </MethodPos>
-      <MethodPos>
-        <MethodPos19>GetMeasuredValues</MethodPos19>
-        <MethodType>method</MethodType>
-        <ModuleType>Code</ModuleType>
-        <LineBeg>552</LineBeg>
-        <LineEnd>602</LineEnd>
-      </MethodPos>
-      <MethodPos>
-        <MethodPos20>GetMeasurementCompleteStatus</MethodPos20>
-        <MethodType>method</MethodType>
-        <ModuleType>Code</ModuleType>
-        <LineBeg>603</LineBeg>
-        <LineEnd>635</LineEnd>
-      </MethodPos>
-      <MethodPos>
-        <MethodPos21>EnableAutoCompare</MethodPos21>
-        <MethodType>method</MethodType>
-        <ModuleType>Code</ModuleType>
-        <LineBeg>636</LineBeg>
-        <LineEnd>734</LineEnd>
-      </MethodPos>
-      <MethodPos>
-        <MethodPos22>DisableAutoCompare</MethodPos22>
-        <MethodType>method</MethodType>
-        <ModuleType>Code</ModuleType>
-        <LineBeg>735</LineBeg>
-        <LineEnd>770</LineEnd>
-      </MethodPos>
-      <MethodPos>
-        <MethodPos23>MeasurementCompleteInterrupt</MethodPos23>
-        <MethodType>internal_method</MethodType>
-        <ModuleType>Code</ModuleType>
-        <LineBeg>771</LineBeg>
-        <LineEnd>793</LineEnd>
-      </MethodPos>
-      <GenExtraFilesCount>1</GenExtraFilesCount>
-      <ExtraFile0>Documentation\doxygen\AdcLdd1_component.txt</ExtraFile0>
-    </InhrCompID_170>
-  </ComponentID_169>
   <UsedSrcFiles>
     <SrcFile0>Drivers\Kinetis\FLASH_LDD.drv=-1</SrcFile0>
     <SrcFile1>Drivers\Common\SetReg16.prg=1183486427</SrcFile1>

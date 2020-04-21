@@ -25,7 +25,6 @@
 \page page_components Components 
 - \subpage GPIOA
 - \subpage GPIOB
-- \subpage FTM1
 - \subpage FTM2
 - \subpage IntFlashLdd1
 - \subpage CRC1

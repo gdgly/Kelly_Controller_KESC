@@ -14,11 +14,6 @@ Module "GPIOB"     (component Init_GPIO_VAR0)
                 this method in user code to initialize the module. By default, the method is called by PE automatically; see 
                 "Call Init method" property of the component for more details.
 
-Module "FTM1"      (component Init_FTM_VAR0)
-   - FTM1_Init -This method initializes registers of the FTM module according to the Peripheral Initialization settings. Call 
-                this method in user code to initialize the module. By default, the method is called by PE automatically; see 
-                "Call Init method" property of the component for more details.
-
 Module "FTM2"      (component Init_FTM_VAR0)
    - FTM2_Init -This method initializes registers of the FTM module according to the Peripheral Initialization settings. Call 
                 this method in user code to initialize the module. By default, the method is called by PE automatically; see 

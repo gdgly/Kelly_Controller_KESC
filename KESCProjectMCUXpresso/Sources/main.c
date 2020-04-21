@@ -32,7 +32,6 @@
 #include "Events.h"
 #include "GPIOA.h"
 #include "GPIOB.h"
-#include "FTM1.h"
 #include "FTM2.h"
 #include "IFsh1.h"
 #include "IntFlashLdd1.h"

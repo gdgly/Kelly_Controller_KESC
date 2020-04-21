@@ -7,7 +7,7 @@
 **     Version     : Component 01.010, Driver 01.10, CPU db: 3.00.000
 **     Repository  : Kinetis
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2020-04-16, 21:47, # CodeGen: 128
+**     Date/Time   : 2020-04-18, 03:12, # CodeGen: 147
 **     Abstract    :
 **          This file implements the FTM (FTM2) module initialization
 **          according to the Peripheral Initialization settings, and
@@ -159,7 +159,7 @@
 **            Channels / Timer overflow / Fault            : 
 **              Interrupt                                  : INT_FTM2
 **              Interrupt request                          : Enabled
-**              Interrupt priority                         : 2
+**              Interrupt priority                         : 1
 **              ISR Name                                   : FTM2_ISR
 **              Channels interrupt/DMA                     : See the respective Channel settings
 **              Timer overflow interrupt                   : Enabled

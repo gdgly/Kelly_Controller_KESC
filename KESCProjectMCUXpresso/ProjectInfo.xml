@@ -80,6 +80,7 @@
       <Path>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\VoltageDivider\</Path>
       <Path>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\Sources\</Path>
       <Path>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\board\</Path>
+      <Path>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\component\lists\</Path>
       <Path>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\device\</Path>
       <Path>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\drivers\</Path>
       <Path>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\source\</Path>
@@ -90,7 +91,6 @@
     <GeneratedCs>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\Generated_Code\CRC1.c</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\Generated_Code\Cpu.c</PathName>
-      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\Generated_Code\FTM1.c</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\Generated_Code\FTM2.c</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\Generated_Code\GPIOA.c</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\Generated_Code\GPIOB.c</PathName>
@@ -100,6 +100,8 @@
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\Generated_Code\Vectors.c</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\KESC\Exclude\Calibration.c</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\KESC\Exclude\Reference.c</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\KESC\Exclude\fsl_shell.c</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\KESC\KEA_Init.c</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\KESC\KESC.c</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\KESC\freemaster_tsa_table.c</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\BLDC\BLDC.c</PathName>
@@ -155,6 +157,7 @@
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\KEA64\ADC.c</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\KEA64\CRC.c</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\KEA64\Console.c</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\KEA64\FTM1.c</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\KEA64\Flash.c</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\KEA64\KEA64_CPU.c</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\KEA64\Measure0.c</PathName>
@@ -178,9 +181,14 @@
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\board\clock_config.c</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\board\peripherals.c</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\board\pin_mux.c</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\component\lists\generic_list.c</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\device\system_MKE02Z4.c</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\drivers\fsl_clock.c</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\drivers\fsl_common.c</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\drivers\fsl_ftm.c</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\drivers\fsl_gpio.c</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\drivers\fsl_irq.c</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\drivers\fsl_uart.c</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\source\KESCProjectMCUXpresso.c</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\source\semihost_hardfault.c</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\startup\startup_mke02z4.c</PathName>
@@ -202,7 +210,6 @@
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\CMSIS\mpu_armv8.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\Generated_Code\CRC1.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\Generated_Code\Cpu.h</PathName>
-      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\Generated_Code\FTM1.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\Generated_Code\FTM2.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\Generated_Code\GPIOA.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\Generated_Code\GPIOB.h</PathName>
@@ -215,10 +222,10 @@
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\Generated_Code\PE_Types.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\KESC\Board.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\KESC\Exclude\Calibration.h</PathName>
-      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\KESC\ISRMap.h</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\KESC\Exclude\fsl_shell.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\KESC\KESC.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\KESC\Parameters.h</PathName>
-      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\KESC\SoftwareConfig.h</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\KESC\PrecompileConfig.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\KESC\freemaster_cfg.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\KESC\freemaster_cfggen.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\BLDC\BLDC.h</PathName>
@@ -310,11 +317,13 @@
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\KEA64\ADC.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\KEA64\CRC.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\KEA64\Console.h</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\KEA64\FTM1.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\KEA64\Flash.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\KEA64\KEA64_CPU.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\KEA64\Serial0.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\KEA64\SysTick.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\KEA64\UART0.h</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\KellyMotorShell\KellyMotorShell.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\List\List.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\Measure\Measure.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\SourceGroup\Kelly_Library\Millis\Millis.h</PathName>
@@ -352,12 +361,17 @@
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\board\clock_config.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\board\peripherals.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\board\pin_mux.h</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\component\lists\generic_list.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\device\MKE02Z4.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\device\MKE02Z4_features.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\device\fsl_device_registers.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\device\system_MKE02Z4.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\drivers\fsl_clock.h</PathName>
       <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\drivers\fsl_common.h</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\drivers\fsl_ftm.h</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\drivers\fsl_gpio.h</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\drivers\fsl_irq.h</PathName>
+      <PathName>S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\drivers\fsl_uart.h</PathName>
     </GeneratedHs>
   </FILES>
   <OPTIONS>

@@ -8,7 +8,7 @@
 **     Repository  : Kinetis
 **     Datasheet   : MKE02Z64M20SF0RM, Rev.2.1, Apr-23 2013; KEAZ64RM, Rev.1, Sep 2013
 **     Compiler    : GNU C Compiler
-**     Date/Time   : 2020-04-17, 22:47, # CodeGen: 136
+**     Date/Time   : 2020-04-20, 15:06, # CodeGen: 158
 **     Abstract    :
 **
 **     Comment     :
@@ -208,7 +208,6 @@
 /* {Default RTOS Adapter} No RTOS includes */
 #include "GPIOA.h"
 #include "GPIOB.h"
-#include "FTM1.h"
 #include "FTM2.h"
 #include "IFsh1.h"
 #include "IntFlashLdd1.h"
@@ -503,16 +502,6 @@ void PE_low_level_init(void)
                 PMC_SPMSC1_LVDE_MASK
                ));
   /* Common initialization of the CPU registers */
-  /* NVIC_ISER: SETENA|=0x000C0000 */
-  NVIC_ISER |= NVIC_ISER_SETENA(0x000C0000);
-  /* NVIC_IPR4: PRI_19=0x80,PRI_18=0x80 */
-  NVIC_IPR4 = (uint32_t)((NVIC_IPR4 & (uint32_t)~(uint32_t)(
-               NVIC_IP_PRI_19(0x7F) |
-               NVIC_IP_PRI_18(0x7F)
-              )) | (uint32_t)(
-               NVIC_IP_PRI_19(0x80) |
-               NVIC_IP_PRI_18(0x80)
-              ));
   /* SIM_PINSEL: FTM2PS3=0,FTM2PS2=0,FTM2PS1=0,FTM2PS0=0 */
   SIM_PINSEL &= (uint32_t)~(uint32_t)(
                  SIM_PINSEL_FTM2PS3_MASK |
@@ -520,6 +509,14 @@ void PE_low_level_init(void)
                  SIM_PINSEL_FTM2PS1_MASK |
                  SIM_PINSEL_FTM2PS0_MASK
                 );
+  /* NVIC_ISER: SETENA|=0x00080000 */
+  NVIC_ISER |= NVIC_ISER_SETENA(0x00080000);
+  /* NVIC_IPR4: PRI_19=0x40 */
+  NVIC_IPR4 = (uint32_t)((NVIC_IPR4 & (uint32_t)~(uint32_t)(
+               NVIC_IP_PRI_19(0xBF)
+              )) | (uint32_t)(
+               NVIC_IP_PRI_19(0x40)
+              ));
   /* SIM_SOPT: CLKOE=1,RSTPE=1,NMIE=0 */
   SIM_SOPT = (uint32_t)((SIM_SOPT & (uint32_t)~(uint32_t)(
               SIM_SOPT_NMIE_MASK
@@ -537,10 +534,6 @@ void PE_low_level_init(void)
 
   /* ### Init_GPIO "GPIOB" init code ... */
   GPIOB_Init();
-
-
-  /* ### Init_FTM "FTM1" init code ... */
-  FTM1_Init();
 
 
   /* ### Init_FTM "FTM2" init code ... */

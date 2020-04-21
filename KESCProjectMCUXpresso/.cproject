@@ -84,6 +84,10 @@
 								<option id="gnu.c.compiler.option.preprocessor.preprocess.1488120456" name="Preprocess only (-E)" superClass="gnu.c.compiler.option.preprocessor.preprocess" useByScannerDiscovery="false"/>
 								<option id="gnu.c.compiler.option.preprocessor.undef.symbol.2129871456" name="Undefined symbols (-U)" superClass="gnu.c.compiler.option.preprocessor.undef.symbol" useByScannerDiscovery="false"/>
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.c.compiler.option.include.paths.932146090" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/drivers}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/CMSIS}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/device}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/lists}&quot;"/>
 									<listOptionValue builtIn="false" value="../CMSIS"/>
 									<listOptionValue builtIn="false" value="../drivers"/>
 									<listOptionValue builtIn="false" value="../device"/>
@@ -113,8 +117,7 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/KESC}&quot;"/>
 								</option>
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.c.compiler.option.include.files.1710961385" name="Include files (-include)" superClass="gnu.c.compiler.option.include.files" useByScannerDiscovery="false" valueType="includeFiles">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/source/ISRMap.h}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/KESC/SoftwareConfig.h}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/KESC/PrecompileConfig.h}&quot;"/>
 								</option>
 								<option id="com.crt.advproject.gcc.exe.debug.option.optimization.level.1044516927" name="Optimization Level" superClass="com.crt.advproject.gcc.exe.debug.option.optimization.level" useByScannerDiscovery="false" value="gnu.c.optimization.level.none" valueType="enumerated"/>
 								<option id="gnu.c.compiler.option.optimization.flags.1465661612" name="Other optimization flags" superClass="gnu.c.compiler.option.optimization.flags" useByScannerDiscovery="false" value="-fno-common" valueType="string"/>
@@ -152,6 +155,10 @@
 								<option id="com.crt.advproject.gas.arch.225359077" name="Architecture" superClass="com.crt.advproject.gas.arch" value="com.crt.advproject.gas.target.cm0plus" valueType="enumerated"/>
 								<option id="gnu.both.asm.option.flags.crt.1497517847" name="Assembler flags" superClass="gnu.both.asm.option.flags.crt" value="-c -x assembler-with-cpp -D__REDLIB__" valueType="string"/>
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.both.asm.option.include.paths.558399724" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/drivers}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/CMSIS}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/device}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/lists}&quot;"/>
 									<listOptionValue builtIn="false" value="../CMSIS"/>
 									<listOptionValue builtIn="false" value="../drivers"/>
 									<listOptionValue builtIn="false" value="../device"/>
@@ -162,6 +169,23 @@
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/Static_Code/PDD&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/Static_Code/IO_Map&quot;"/>
 									<listOptionValue builtIn="false" value="../"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Bootloader}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/External/FreeMASTER/src_common}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/External/FreeMASTER/src_platforms/Kxx}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/BLDC}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/Blinky}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/KEA64}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/Measure}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/Speed}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/Millis}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/OS}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/PID}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/State}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/VoltageDivider}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/List}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/Shell}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/KESC}&quot;"/>
 								</option>
 								<option id="gnu.both.asm.option.warnings.nowarn.81561096" name="Suppress warnings (-W)" superClass="gnu.both.asm.option.warnings.nowarn"/>
 								<option id="gnu.both.asm.option.version.317101603" name="Announce version (-v)" superClass="gnu.both.asm.option.version"/>
@@ -295,6 +319,10 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
+						<entry flags="LOCAL|VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="component"/>
+						<entry flags="LOCAL|VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="CMSIS"/>
+						<entry flags="LOCAL|VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="drivers"/>
+						<entry flags="LOCAL|VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="device"/>
 						<entry flags="LOCAL|VALUE_WORKSPACE_PATH" kind="sourcePath" name="CMSIS"/>
 						<entry excluding="Cpu.c.c|Vectors.c" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="Generated_Code"/>
 						<entry excluding="Kelly_Library/External/FreeMASTER/src_platforms/KEAxx|Kelly_Library/External/FreeMASTER/src_platforms/S32xx|Kelly_Library/External/FreeMASTER/src_platforms/MQX|Kelly_Library/External/FreeMASTER/src_platforms/MPC57xx|Kelly_Library/External/FreeMASTER/src_platforms/MPC56xx|Kelly_Library/External/FreeMASTER/src_platforms/MPC55xx|Kelly_Library/External/FreeMASTER/src_platforms/MCF52xx|Kelly_Library/External/FreeMASTER/src_platforms/MCF51xx|Kelly_Library/External/FreeMASTER/src_platforms/HC12|Kelly_Library/External/FreeMASTER/src_platforms/HC08|Kelly_Library/External/FreeMASTER/src_platforms/56F8xxx|Kelly_Library/KellyMotorShell/KellyMotorShell.c|Kelly_Library/Protocol/KellyProtocol1.c|Kelly_Library/Protocol/Com.c|Kelly_Library/Protocol/Protocol.c|KESC/Com.c|Kelly_Library/State|Kelly_Library/KEA64/Serial.c|Kelly_Library/KEA64/CRC.c|Bootloader|KESC/Shell.c|Kelly_Library/KEA64/Console.c|KESC/Exclude|Kelly_Library/Exclude" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="SourceGroup"/>
@@ -390,21 +418,40 @@
 								</option>
 								<option id="gnu.c.compiler.option.preprocessor.undef.symbol.629630775" name="Undefined symbols (-U)" superClass="gnu.c.compiler.option.preprocessor.undef.symbol" useByScannerDiscovery="false"/>
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.c.compiler.option.include.paths.379833857" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/drivers}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/CMSIS}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/device}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/lists}&quot;"/>
 									<listOptionValue builtIn="false" value="../CMSIS"/>
 									<listOptionValue builtIn="false" value="../drivers"/>
 									<listOptionValue builtIn="false" value="../device"/>
-									<listOptionValue builtIn="false" value="../component/serial_manager"/>
-									<listOptionValue builtIn="false" value="../utilities"/>
-									<listOptionValue builtIn="false" value="../component/lists"/>
 									<listOptionValue builtIn="false" value="../board"/>
 									<listOptionValue builtIn="false" value="../source"/>
-									<listOptionValue builtIn="false" value="../"/>
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/Generated_Code&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/Sources&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/Static_Code/PDD&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/Static_Code/IO_Map&quot;"/>
+									<listOptionValue builtIn="false" value="../"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Bootloader}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/External/FreeMASTER/src_common}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/External/FreeMASTER/src_platforms/Kxx}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/BLDC}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/Blinky}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/KEA64}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/Measure}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/Speed}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/Millis}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/OS}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/PID}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/State}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/VoltageDivider}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/List}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/Shell}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/KESC}&quot;"/>
+									<listOptionValue builtIn="false" value="../component/serial_manager"/>
+									<listOptionValue builtIn="false" value="../utilities"/>
+									<listOptionValue builtIn="false" value="../component/lists"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_BLDC}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_SKEAZN64}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Utility}&quot;"/>
@@ -448,21 +495,40 @@
 								<option id="com.crt.advproject.gas.arch.1286630509" name="Architecture" superClass="com.crt.advproject.gas.arch" value="com.crt.advproject.gas.target.cm0plus" valueType="enumerated"/>
 								<option id="gnu.both.asm.option.flags.crt.28676811" name="Assembler flags" superClass="gnu.both.asm.option.flags.crt" value="-c -x assembler-with-cpp -D__REDLIB__" valueType="string"/>
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.both.asm.option.include.paths.1555036168" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/drivers}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/CMSIS}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/device}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/lists}&quot;"/>
 									<listOptionValue builtIn="false" value="../CMSIS"/>
 									<listOptionValue builtIn="false" value="../drivers"/>
 									<listOptionValue builtIn="false" value="../device"/>
-									<listOptionValue builtIn="false" value="../component/serial_manager"/>
-									<listOptionValue builtIn="false" value="../utilities"/>
-									<listOptionValue builtIn="false" value="../component/lists"/>
 									<listOptionValue builtIn="false" value="../board"/>
 									<listOptionValue builtIn="false" value="../source"/>
-									<listOptionValue builtIn="false" value="../"/>
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/Generated_Code&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/Sources&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/Static_Code/PDD&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/Static_Code/IO_Map&quot;"/>
+									<listOptionValue builtIn="false" value="../"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Bootloader}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/External/FreeMASTER/src_common}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/External/FreeMASTER/src_platforms/Kxx}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/BLDC}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/Blinky}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/KEA64}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/Measure}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/Speed}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/Millis}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/OS}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/PID}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/State}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/VoltageDivider}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/List}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/Shell}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/KESC}&quot;"/>
+									<listOptionValue builtIn="false" value="../component/serial_manager"/>
+									<listOptionValue builtIn="false" value="../utilities"/>
+									<listOptionValue builtIn="false" value="../component/lists"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_BLDC}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_SKEAZN64}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Utility}&quot;"/>
@@ -603,15 +669,20 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
+						<entry flags="LOCAL|VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="component"/>
+						<entry flags="LOCAL|VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="CMSIS"/>
+						<entry flags="LOCAL|VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="drivers"/>
+						<entry flags="LOCAL|VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="device"/>
 						<entry flags="LOCAL|VALUE_WORKSPACE_PATH" kind="sourcePath" name="CMSIS"/>
 						<entry excluding="Cpu.c.c|Vectors.c" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="Generated_Code"/>
-						<entry excluding="Kelly_Library/External/FreeMASTER/src_platforms/KEAxx|Kelly_Library/External/FreeMASTER/src_platforms/S32xx|Kelly_Library/External/FreeMASTER/src_platforms/MQX|Kelly_Library/External/FreeMASTER/src_platforms/MPC57xx|Kelly_Library/External/FreeMASTER/src_platforms/MPC56xx|Kelly_Library/External/FreeMASTER/src_platforms/MPC55xx|Kelly_Library/External/FreeMASTER/src_platforms/MCF52xx|Kelly_Library/External/FreeMASTER/src_platforms/MCF51xx|Kelly_Library/External/FreeMASTER/src_platforms/HC12|Kelly_Library/External/FreeMASTER/src_platforms/HC08|Kelly_Library/External/FreeMASTER/src_platforms/56F8xxx|Kelly_Library/KellyMotorShell/KellyMotorShell.c|Kelly_Library/Protocol/KellyProtocol1.c|Kelly_Library/Protocol/Com.c|Kelly_Library/Protocol/Protocol.c|KESC/Com.c|Kelly_Library/State|nRF5_SDK_12.3.0_d7731ad|Kelly_Library/KEA64/Serial.c|Kelly_Library/KEA64/CRC.c|Bootloader|KESC/Shell.c|KESC/Reference.c|Kelly_Library/KEA64/Console.c|Utility/State|KESC/Exclude|Kelly_BLDC/Exclude|Utility/Measure|Utility/UstdLib|Utility/Exclude|Utility/Shell|Kelly_Library/Exclude|Kelly_KEA64/Exclude" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="SourceGroup"/>
+						<entry excluding="Kelly_Library/External/FreeMASTER/src_platforms/KEAxx|Kelly_Library/External/FreeMASTER/src_platforms/S32xx|Kelly_Library/External/FreeMASTER/src_platforms/MQX|Kelly_Library/External/FreeMASTER/src_platforms/MPC57xx|Kelly_Library/External/FreeMASTER/src_platforms/MPC56xx|Kelly_Library/External/FreeMASTER/src_platforms/MPC55xx|Kelly_Library/External/FreeMASTER/src_platforms/MCF52xx|Kelly_Library/External/FreeMASTER/src_platforms/MCF51xx|Kelly_Library/External/FreeMASTER/src_platforms/HC12|Kelly_Library/External/FreeMASTER/src_platforms/HC08|Kelly_Library/External/FreeMASTER/src_platforms/56F8xxx|Kelly_Library/KellyMotorShell/KellyMotorShell.c|Kelly_Library/Protocol/KellyProtocol1.c|Kelly_Library/Protocol/Com.c|Kelly_Library/Protocol/Protocol.c|KESC/Com.c|Kelly_Library/State|Kelly_Library/KEA64/Serial.c|Kelly_Library/KEA64/CRC.c|Bootloader|KESC/Shell.c|Kelly_Library/KEA64/Console.c|KESC/Exclude|Kelly_Library/Exclude" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="SourceGroup"/>
 						<entry excluding="main.c" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="Sources"/>
 						<entry flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="Static_Code"/>
 						<entry flags="LOCAL|VALUE_WORKSPACE_PATH" kind="sourcePath" name="device"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="drivers"/>
 						<entry flags="LOCAL|VALUE_WORKSPACE_PATH" kind="sourcePath" name="source"/>
 						<entry flags="LOCAL|VALUE_WORKSPACE_PATH" kind="sourcePath" name="startup"/>
+						<entry excluding="Kelly_Library/External/FreeMASTER/src_platforms/KEAxx|Kelly_Library/External/FreeMASTER/src_platforms/S32xx|Kelly_Library/External/FreeMASTER/src_platforms/MQX|Kelly_Library/External/FreeMASTER/src_platforms/MPC57xx|Kelly_Library/External/FreeMASTER/src_platforms/MPC56xx|Kelly_Library/External/FreeMASTER/src_platforms/MPC55xx|Kelly_Library/External/FreeMASTER/src_platforms/MCF52xx|Kelly_Library/External/FreeMASTER/src_platforms/MCF51xx|Kelly_Library/External/FreeMASTER/src_platforms/HC12|Kelly_Library/External/FreeMASTER/src_platforms/HC08|Kelly_Library/External/FreeMASTER/src_platforms/56F8xxx|Kelly_Library/KellyMotorShell/KellyMotorShell.c|Kelly_Library/Protocol/KellyProtocol1.c|Kelly_Library/Protocol/Com.c|Kelly_Library/Protocol/Protocol.c|KESC/Com.c|Kelly_Library/State|nRF5_SDK_12.3.0_d7731ad|Kelly_Library/KEA64/Serial.c|Kelly_Library/KEA64/CRC.c|Bootloader|KESC/Shell.c|KESC/Reference.c|Kelly_Library/KEA64/Console.c|Utility/State|KESC/Exclude|Kelly_BLDC/Exclude|Utility/Measure|Utility/UstdLib|Utility/Exclude|Utility/Shell|Kelly_Library/Exclude|Kelly_KEA64/Exclude" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="SourceGroup"/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -700,6 +771,10 @@
 								<option id="gnu.c.compiler.option.preprocessor.preprocess.458110025" name="Preprocess only (-E)" superClass="gnu.c.compiler.option.preprocessor.preprocess" useByScannerDiscovery="false"/>
 								<option id="gnu.c.compiler.option.preprocessor.undef.symbol.1001284124" name="Undefined symbols (-U)" superClass="gnu.c.compiler.option.preprocessor.undef.symbol" useByScannerDiscovery="false"/>
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.c.compiler.option.include.paths.52210320" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/drivers}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/CMSIS}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/device}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/lists}&quot;"/>
 									<listOptionValue builtIn="false" value="../CMSIS"/>
 									<listOptionValue builtIn="false" value="../drivers"/>
 									<listOptionValue builtIn="false" value="../device"/>
@@ -709,11 +784,13 @@
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/Sources&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/Static_Code/PDD&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/Static_Code/IO_Map&quot;"/>
+									<listOptionValue builtIn="false" value="../"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Bootloader}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/External/FreeMASTER/src_common}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/External/FreeMASTER/src_platforms/Kxx}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/BLDC}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/Blinky}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/Com}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/KEA64}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/Measure}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/Speed}&quot;"/>
@@ -725,7 +802,17 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/List}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/Shell}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/KESC}&quot;"/>
-									<listOptionValue builtIn="false" value="../"/>
+									<listOptionValue builtIn="false" value="../component/serial_manager"/>
+									<listOptionValue builtIn="false" value="../utilities"/>
+									<listOptionValue builtIn="false" value="../component/lists"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_BLDC}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_SKEAZN64}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Utility}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Utility/OS}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Utility/PID}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Utility/VoltageDivider}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Utility/Millis}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/Com}&quot;"/>
 								</option>
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.c.compiler.option.include.files.1498362656" name="Include files (-include)" superClass="gnu.c.compiler.option.include.files" useByScannerDiscovery="false" valueType="includeFiles">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/source/ISRMap.h}&quot;"/>
@@ -767,6 +854,10 @@
 								<option id="com.crt.advproject.gas.arch.364739589" name="Architecture" superClass="com.crt.advproject.gas.arch" useByScannerDiscovery="false" value="com.crt.advproject.gas.target.cm0plus" valueType="enumerated"/>
 								<option id="gnu.both.asm.option.flags.crt.890708407" name="Assembler flags" superClass="gnu.both.asm.option.flags.crt" useByScannerDiscovery="false" value="-c -x assembler-with-cpp -D__REDLIB__" valueType="string"/>
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.both.asm.option.include.paths.287570644" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/drivers}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/CMSIS}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/device}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/lists}&quot;"/>
 									<listOptionValue builtIn="false" value="../CMSIS"/>
 									<listOptionValue builtIn="false" value="../drivers"/>
 									<listOptionValue builtIn="false" value="../device"/>
@@ -777,6 +868,34 @@
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/Static_Code/PDD&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/Static_Code/IO_Map&quot;"/>
 									<listOptionValue builtIn="false" value="../"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Bootloader}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/External/FreeMASTER/src_common}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/External/FreeMASTER/src_platforms/Kxx}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/BLDC}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/Blinky}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/KEA64}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/Measure}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/Speed}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/Millis}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/OS}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/PID}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/State}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/VoltageDivider}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/List}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/Shell}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/KESC}&quot;"/>
+									<listOptionValue builtIn="false" value="../component/serial_manager"/>
+									<listOptionValue builtIn="false" value="../utilities"/>
+									<listOptionValue builtIn="false" value="../component/lists"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_BLDC}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_SKEAZN64}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Utility}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Utility/OS}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Utility/PID}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Utility/VoltageDivider}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Utility/Millis}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/Com}&quot;"/>
 								</option>
 								<option id="gnu.both.asm.option.warnings.nowarn.360901176" name="Suppress warnings (-W)" superClass="gnu.both.asm.option.warnings.nowarn" useByScannerDiscovery="false"/>
 								<option id="gnu.both.asm.option.version.799864159" name="Announce version (-v)" superClass="gnu.both.asm.option.version" useByScannerDiscovery="false"/>
@@ -910,15 +1029,21 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
+						<entry flags="LOCAL|VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="component"/>
+						<entry flags="LOCAL|VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="CMSIS"/>
+						<entry flags="LOCAL|VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="drivers"/>
+						<entry flags="LOCAL|VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="device"/>
 						<entry flags="LOCAL|VALUE_WORKSPACE_PATH" kind="sourcePath" name="CMSIS"/>
 						<entry excluding="Cpu.c.c|Vectors.c" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="Generated_Code"/>
-						<entry excluding="Kelly_Library/External/FreeMASTER/src_platforms/KEAxx|Kelly_Library/External/FreeMASTER/src_platforms/S32xx|Kelly_Library/External/FreeMASTER/src_platforms/MQX|Kelly_Library/External/FreeMASTER/src_platforms/MPC57xx|Kelly_Library/External/FreeMASTER/src_platforms/MPC56xx|Kelly_Library/External/FreeMASTER/src_platforms/MPC55xx|Kelly_Library/External/FreeMASTER/src_platforms/MCF52xx|Kelly_Library/External/FreeMASTER/src_platforms/MCF51xx|Kelly_Library/External/FreeMASTER/src_platforms/HC12|Kelly_Library/External/FreeMASTER/src_platforms/HC08|Kelly_Library/External/FreeMASTER/src_platforms/56F8xxx|Kelly_Library/KellyMotorShell/KellyMotorShell.c|Kelly_Library/Protocol/KellyProtocol1.c|Kelly_Library/Protocol/Com.c|Kelly_Library/Protocol/Protocol.c|KESC/Com.c|Kelly_Library/State|nRF5_SDK_12.3.0_d7731ad|Kelly_Library/KEA64/Serial.c|Kelly_Library/KEA64/CRC.c|Bootloader|KESC/Shell.c|Kelly_Library/KEA64/Console.c|KESC/Exclude|Kelly_Library/Exclude" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="SourceGroup"/>
+						<entry excluding="Kelly_Library/External/FreeMASTER/src_platforms/KEAxx|Kelly_Library/External/FreeMASTER/src_platforms/S32xx|Kelly_Library/External/FreeMASTER/src_platforms/MQX|Kelly_Library/External/FreeMASTER/src_platforms/MPC57xx|Kelly_Library/External/FreeMASTER/src_platforms/MPC56xx|Kelly_Library/External/FreeMASTER/src_platforms/MPC55xx|Kelly_Library/External/FreeMASTER/src_platforms/MCF52xx|Kelly_Library/External/FreeMASTER/src_platforms/MCF51xx|Kelly_Library/External/FreeMASTER/src_platforms/HC12|Kelly_Library/External/FreeMASTER/src_platforms/HC08|Kelly_Library/External/FreeMASTER/src_platforms/56F8xxx|Kelly_Library/KellyMotorShell/KellyMotorShell.c|Kelly_Library/Protocol/KellyProtocol1.c|Kelly_Library/Protocol/Com.c|Kelly_Library/Protocol/Protocol.c|KESC/Com.c|Kelly_Library/State|Kelly_Library/KEA64/Serial.c|Kelly_Library/KEA64/CRC.c|Bootloader|KESC/Shell.c|Kelly_Library/KEA64/Console.c|KESC/Exclude|Kelly_Library/Exclude" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="SourceGroup"/>
 						<entry excluding="main.c" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="Sources"/>
 						<entry flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="Static_Code"/>
 						<entry flags="LOCAL|VALUE_WORKSPACE_PATH" kind="sourcePath" name="device"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="drivers"/>
 						<entry flags="LOCAL|VALUE_WORKSPACE_PATH" kind="sourcePath" name="source"/>
 						<entry flags="LOCAL|VALUE_WORKSPACE_PATH" kind="sourcePath" name="startup"/>
+						<entry excluding="Kelly_Library/External/FreeMASTER/src_platforms/KEAxx|Kelly_Library/External/FreeMASTER/src_platforms/S32xx|Kelly_Library/External/FreeMASTER/src_platforms/MQX|Kelly_Library/External/FreeMASTER/src_platforms/MPC57xx|Kelly_Library/External/FreeMASTER/src_platforms/MPC56xx|Kelly_Library/External/FreeMASTER/src_platforms/MPC55xx|Kelly_Library/External/FreeMASTER/src_platforms/MCF52xx|Kelly_Library/External/FreeMASTER/src_platforms/MCF51xx|Kelly_Library/External/FreeMASTER/src_platforms/HC12|Kelly_Library/External/FreeMASTER/src_platforms/HC08|Kelly_Library/External/FreeMASTER/src_platforms/56F8xxx|Kelly_Library/KellyMotorShell/KellyMotorShell.c|Kelly_Library/Protocol/KellyProtocol1.c|Kelly_Library/Protocol/Com.c|Kelly_Library/Protocol/Protocol.c|KESC/Com.c|Kelly_Library/State|nRF5_SDK_12.3.0_d7731ad|Kelly_Library/KEA64/Serial.c|Kelly_Library/KEA64/CRC.c|Bootloader|KESC/Shell.c|KESC/Reference.c|Kelly_Library/KEA64/Console.c|Utility/State|KESC/Exclude|Kelly_BLDC/Exclude|Utility/Measure|Utility/UstdLib|Utility/Exclude|Utility/Shell|Kelly_Library/Exclude|Kelly_KEA64/Exclude" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="SourceGroup"/>
+						<entry excluding="Kelly_Library/External/FreeMASTER/src_platforms/KEAxx|Kelly_Library/External/FreeMASTER/src_platforms/S32xx|Kelly_Library/External/FreeMASTER/src_platforms/MQX|Kelly_Library/External/FreeMASTER/src_platforms/MPC57xx|Kelly_Library/External/FreeMASTER/src_platforms/MPC56xx|Kelly_Library/External/FreeMASTER/src_platforms/MPC55xx|Kelly_Library/External/FreeMASTER/src_platforms/MCF52xx|Kelly_Library/External/FreeMASTER/src_platforms/MCF51xx|Kelly_Library/External/FreeMASTER/src_platforms/HC12|Kelly_Library/External/FreeMASTER/src_platforms/HC08|Kelly_Library/External/FreeMASTER/src_platforms/56F8xxx|Kelly_Library/KellyMotorShell/KellyMotorShell.c|Kelly_Library/Protocol/KellyProtocol1.c|Kelly_Library/Protocol/Com.c|Kelly_Library/Protocol/Protocol.c|KESC/Com.c|Kelly_Library/State|nRF5_SDK_12.3.0_d7731ad|Kelly_Library/KEA64/Serial.c|Kelly_Library/KEA64/CRC.c|Bootloader|KESC/Shell.c|Kelly_Library/KEA64/Console.c|KESC/Exclude|Kelly_Library/Exclude" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="SourceGroup"/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -928,26 +1053,11 @@
 	<storageModule moduleId="cdtBuildSystem" version="4.0.0">
 		<project id="KESCProjectMCUXpresso.null.650382924" name="KESCProjectMCUXpresso" projectType="com.crt.advproject.projecttype.exe"/>
 	</storageModule>
-	<storageModule moduleId="scannerConfiguration">
-		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
-		<scannerConfigBuildInfo instanceId="com.crt.advproject.config.exe.debug.397168959;com.crt.advproject.config.exe.debug.397168959.;com.crt.advproject.gcc.exe.debug.1729120727;com.crt.advproject.compiler.input.1709476936">
-			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
-		</scannerConfigBuildInfo>
-		<scannerConfigBuildInfo instanceId="com.crt.advproject.config.exe.release.1303864547;com.crt.advproject.config.exe.release.1303864547.;com.crt.advproject.gas.exe.release.1086809614;com.crt.advproject.assembler.input.711484601">
-			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
-		</scannerConfigBuildInfo>
-		<scannerConfigBuildInfo instanceId="com.crt.advproject.config.exe.debug.397168959;com.crt.advproject.config.exe.debug.397168959.;com.crt.advproject.gas.exe.debug.1463689226;com.crt.advproject.assembler.input.2014852666">
-			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
-		</scannerConfigBuildInfo>
-		<scannerConfigBuildInfo instanceId="com.crt.advproject.config.exe.release.1303864547;com.crt.advproject.config.exe.release.1303864547.;com.crt.advproject.gcc.exe.release.1464931007;com.crt.advproject.compiler.input.928668842">
-			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
-		</scannerConfigBuildInfo>
-	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
 	<storageModule moduleId="com.nxp.mcuxpresso.core.datamodels">
 		<sdkName>SDK_2.x_MKE02Z64xxx4</sdkName>
 		<sdkVersion>2.6.0</sdkVersion>
-		<sdkComponents>middleware.baremetal.MKE02Z4;device.MKE02Z4_startup.MKE02Z4;platform.Include_common.MKE02Z4;platform.Include_core_cm0plus.MKE02Z4;device.MKE02Z4_CMSIS.MKE02Z4;platform.drivers.common.MKE02Z4;platform.drivers.clock.MKE02Z4;</sdkComponents>
+		<sdkComponents>middleware.baremetal.MKE02Z4;device.MKE02Z4_startup.MKE02Z4;platform.Include_common.MKE02Z4;platform.Include_core_cm0plus.MKE02Z4;device.MKE02Z4_CMSIS.MKE02Z4;platform.drivers.common.MKE02Z4;platform.drivers.clock.MKE02Z4;platform.drivers.ftm.MKE02Z4;platform.drivers.gpio_1.MKE02Z4;platform.drivers.irq.MKE02Z4;platform.drivers.uart.MKE02Z4;component.lists.MKE02Z4;</sdkComponents>
 		<package>MKE02Z64VLH4</package>
 		<core>cm0plus</core>
 		<coreId>core0_MKE02Z64xxx4</coreId>
@@ -978,4 +1088,25 @@
 	<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets"/>
 	<storageModule moduleId="refreshScope"/>
 	<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
+	<storageModule moduleId="scannerConfiguration">
+		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		<scannerConfigBuildInfo instanceId="com.crt.advproject.config.exe.debug.397168959.1373231051;com.crt.advproject.config.exe.debug.397168959.1373231051.;com.crt.advproject.gcc.exe.debug.891234223;com.crt.advproject.compiler.input.890837472">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="com.crt.advproject.GCCManagedMakePerProjectProfile"/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="com.crt.advproject.config.exe.debug.397168959.1373231051;com.crt.advproject.config.exe.debug.397168959.1373231051.;com.crt.advproject.gas.exe.debug.1838203160;com.crt.advproject.assembler.input.396220548">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="com.crt.advproject.GCCManagedMakePerProjectProfile"/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="com.crt.advproject.config.exe.debug.397168959;com.crt.advproject.config.exe.debug.397168959.;com.crt.advproject.gcc.exe.debug.1729120727;com.crt.advproject.compiler.input.1709476936">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="com.crt.advproject.config.exe.release.1303864547;com.crt.advproject.config.exe.release.1303864547.;com.crt.advproject.gas.exe.release.1086809614;com.crt.advproject.assembler.input.711484601">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="com.crt.advproject.config.exe.debug.397168959;com.crt.advproject.config.exe.debug.397168959.;com.crt.advproject.gas.exe.debug.1463689226;com.crt.advproject.assembler.input.2014852666">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="com.crt.advproject.config.exe.release.1303864547;com.crt.advproject.config.exe.release.1303864547.;com.crt.advproject.gcc.exe.release.1464931007;com.crt.advproject.compiler.input.928668842">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		</scannerConfigBuildInfo>
+	</storageModule>
 </cproject>

@@ -300,7 +300,7 @@ ICS_C2 = (uint8_t)(ICS_C2 & (uint8_t)~(uint8_t)(ICS_C2_BDIV_MASK));
     </Events>
   </Bean>
   <Bean name="FTM1" type="Init_FTM">
-    <Enabled v="Y" />
+    <Enabled v="N" />
     <Properties>
       <Component_name v="FTM1" />
       <Device v="FTM1" />
@@ -553,7 +553,7 @@ ICS_C2 = (uint8_t)(ICS_C2 & (uint8_t)~(uint8_t)(ICS_C2_BDIV_MASK));
         <group name="Channels / Timer overflow / Fault">
           <Interrupt v="INT_FTM2" />
           <Interrupt_request v="Enabled" />
-          <Interrupt_priority v="2" />
+          <Interrupt_priority v="1" />
           <ISR_Name v="FTM2_ISR" />
           <Channels_interrupt_DMA v="See the respective Channel settings" />
           <Timer_overflow_interrupt v="Enabled" />
@@ -997,6 +997,176 @@ ICS_C2 = (uint8_t)(ICS_C2 & (uint8_t)~(uint8_t)(ICS_C2_BDIV_MASK));
       </event>
     </Events>
   </Bean>
+  <Bean name="AD1" type="ADC">
+    <Enabled v="N" />
+    <Properties>
+      <Component_name v="AD1" />
+      <A_D_converter v="ADC" />
+      <Sharing v="Disabled" />
+      <inhrbean type="ADC_LDD">
+        <Enabled v="N" />
+        <Template v="ADC_LDD" />
+        <Properties>
+          <Component_name v="AdcLdd1" />
+          <A_D_converter v="ADC" />
+          <Discontinuous_mode v="no" />
+          <boolgroup name="Interrupt service/event" v="Disabled" />
+          <list name="A/D channel list" v="4">
+            <group name="Channel 0">
+              <enumgroup name="Channel mode" v="Single Ended">
+                <group name="Input">
+                  <A_D_channel__pin_ v="PTF7/ADC0_SE15" />
+                </group>
+              </enumgroup>
+            </group>
+            <group name="Channel 1">
+              <enumgroup name="Channel mode" v="Single Ended">
+                <group name="Input">
+                  <A_D_channel__pin_ v="PTF6/ADC0_SE14" />
+                </group>
+              </enumgroup>
+            </group>
+            <group name="Channel 2">
+              <enumgroup name="Channel mode" v="Single Ended">
+                <group name="Input">
+                  <A_D_channel__pin_ v="PTF5/ADC0_SE13" />
+                </group>
+              </enumgroup>
+            </group>
+            <group name="Channel 3">
+              <enumgroup name="Channel mode" v="Single Ended">
+                <group name="Input">
+                  <A_D_channel__pin_ v="PTF4/ADC0_SE12" />
+                </group>
+              </enumgroup>
+            </group>
+          </list>
+          <boolgroup name="Static sample groups" v="Disabled" />
+          <A_D_resolution sel_value="12 bits">
+            
+Autoselect
+
+            <EmptySection_DummyValue />
+          </A_D_resolution>
+          <Conversion_time v="" />
+          <ADC_clock v="4.999 MHz (200.003 ns)" />
+          <Single_conversion_time___Single_ended v="4.25 us" />
+          <Single_conversion_time___Differential v="Differential mode not supported" />
+          <Additional_conversion_time___Single_ended v="3.4 us" />
+          <Additional_conversion_time___Differential v="Differential mode not supported" />
+          <Result_type v="unsigned 16 bits, right justified" />
+          <boolgroup name="Trigger" v="Disabled" />
+          <group name="Voltage reference">
+            <group name="High voltage reference">
+              <Volt__ref__pin v="VDDA/VREFH" />
+            </group>
+            <group name="Low voltage reference">
+              <Volt__ref__pin v="VSSA/VREFL" />
+            </group>
+          </group>
+          <group name="Initialization">
+            <Enabled_in_init__code v="yes" />
+            <group name="Event mask">
+              <OnMeasurementComplete v="Enabled" />
+            </group>
+          </group>
+        </Properties>
+        <Methods>
+          <Init v="generate code" />
+          <Deinit v="don&amp;apos;t generate code" />
+          <Enable v="generate code" />
+          <Disable v="generate code" />
+          <GetEventMask v="don&amp;apos;t generate code" />
+          <SetEventMask v="don&amp;apos;t generate code" />
+          <StartSingleMeasurement v="generate code" />
+          <StartLoopMeasurement v="don&amp;apos;t generate code" />
+          <StartSingleTriggeredMeasurement v="don&amp;apos;t generate code" />
+          <StartLoopTriggeredMeasurement v="generate code" />
+          <CancelMeasurement v="generate code" />
+          <GetMeasuredValues v="generate code" />
+          <SelectSampleGroup v="don&amp;apos;t generate code" />
+          <CreateSampleGroup v="generate code" />
+          <GetMeasurementCompleteStatus v="generate code" />
+          <SetOperationMode v="don&amp;apos;t generate code" />
+          <GetDriverState v="don&amp;apos;t generate code" />
+          <ConnectPin v="don&amp;apos;t generate code" />
+        </Methods>
+        <Events>
+          <Event_module_name v="Events" />
+          <event name="OnMeasurementComplete" v="generate code">
+            <Event_procedure_name v="AdcLdd1_OnMeasurementComplete" />
+          </event>
+        </Events>
+      </inhrbean>
+      <boolgroup name="Interrupt service/event" v="Enabled">
+        <A_D_interrupt v="INT_ADC0" />
+        <A_D_interrupt_priority v="high priority" />
+      </boolgroup>
+      <list name="A/D channels" v="4">
+        <group name="Channel0">
+          <A_D_channel__pin_ v="PTF7/ADC0_SE15" />
+        </group>
+        <group name="Channel1">
+          <A_D_channel__pin_ v="PTF6/ADC0_SE14" />
+        </group>
+        <group name="Channel2">
+          <A_D_channel__pin_ v="PTF5/ADC0_SE13" />
+        </group>
+        <group name="Channel3">
+          <A_D_channel__pin_ v="PTF4/ADC0_SE12" />
+        </group>
+      </list>
+      <A_D_resolution v="8 bits" />
+      <Conversion_time v="3.400044 &amp;#181;s" />
+      <Low_power_mode v="Disabled" />
+      <Sample_time v="short" />
+      <boolgroup name="Internal trigger" v="Enabled">
+        <EmptySection_DummyValue />
+      </boolgroup>
+      <Number_of_conversions v="2" />
+      <group name="Initialization">
+        <Enabled_in_init__code v="yes" />
+        <Events_enabled_in_init_ v="yes" />
+      </group>
+      <group name="CPU clock/speed selection">
+        <High_speed_mode v="This component enabled" />
+        <Low_speed_mode v="This component disabled" />
+        <Slow_speed_mode v="This component disabled" />
+      </group>
+    </Properties>
+    <Methods>
+      <Enable v="generate code" />
+      <Disable v="generate code" />
+      <EnableEvent v="don&amp;apos;t generate code" />
+      <DisableEvent v="don&amp;apos;t generate code" />
+      <Start v="generate code" />
+      <Stop v="generate code" />
+      <Measure v="generate code" />
+      <MeasureChan v="generate code" />
+      <EnableExtChanTrigger v="don&amp;apos;t generate code" />
+      <EnableIntChanTrigger v="don&amp;apos;t generate code" />
+      <GetValue v="generate code" />
+      <GetChanValue v="generate code" />
+      <GetValue8 v="generate code" />
+      <GetChanValue8 v="generate code" />
+      <GetValue16 v="generate code" />
+      <GetChanValue16 v="generate code" />
+      <EnableAsynchroClock v="don&amp;apos;t generate code" />
+      <DisableAsynchroClock v="don&amp;apos;t generate code" />
+      <EnableAutoCompare v="generate code" />
+      <DisableAutoCompare v="generate code" />
+      <ConnectPin v="don&amp;apos;t generate code" />
+    </Methods>
+    <Events>
+      <Event_module_name v="Events" />
+      <event name="BeforeNewSpeed" v="don&amp;apos;t generate code" />
+      <event name="AfterNewSpeed" v="don&amp;apos;t generate code" />
+      <event name="OnEnd" v="generate code">
+        <Event_procedure_name v="AD1_OnEnd" />
+        <Priority v="same as interrupt" />
+      </event>
+    </Events>
+  </Bean>
   <Bean name="ADC" type="Init_ADC">
     <Enabled v="N" />
     <Properties>
@@ -1005,15 +1175,15 @@ ICS_C2 = (uint8_t)(ICS_C2 & (uint8_t)~(uint8_t)(ICS_C2_BDIV_MASK));
       <group name="Settings">
         <Clock_gate v="Enabled" />
         <group name="Clock settings">
-          <Input_clock_select v="Bus clock/2" />
-          <Prescaler v="2" />
+          <Input_clock_select v="Bus clock" />
+          <Prescaler v="4" />
           <Frequency v="5000 kHz" />
           <Long_sample_time v="Disabled" />
         </group>
         <Conversion_mode v="Continuous" />
         <Result_data_format v="8-bit right" />
         <Low_power_mode v="Disabled" />
-        <Conversion_trigger v="SW" />
+        <Conversion_trigger v="HW" />
         <Single_conversion_time___Single_ended v="4.25 us" />
         <Single_conversion_time___Differential v="Differential mode not supported" />
         <Additional_conversion_time___Single_ended v="3.40 us" />
@@ -1023,7 +1193,7 @@ ICS_C2 = (uint8_t)(ICS_C2 & (uint8_t)~(uint8_t)(ICS_C2_BDIV_MASK));
           <Compare_value_1 v="0" />
           <Compare_function v="Result &amp;lt; CV1" />
         </group>
-        <Voltage_reference v="Default reference pin pair" />
+        <Voltage_reference v="Analog supply pin pair" />
       </group>
       <group name="FIFO settings">
         <FIFO_depth v="8-level FIFO" />
@@ -1094,14 +1264,22 @@ ICS_C2 = (uint8_t)(ICS_C2 & (uint8_t)~(uint8_t)(ICS_C2_BDIV_MASK));
         <boolgroup name="Channel 28" v="Disabled" />
         <boolgroup name="Channel 29" v="Disabled" />
         <boolgroup name="Channel 30" v="Disabled" />
-        <boolgroup name="Trigger" v="Disabled" />
+        <boolgroup name="Trigger" v="Enabled">
+          <Trigger_source v="FTM2_init_delay" />
+          <boolgroup name="Delayed trigger" v="Selected">
+            <Clock_source v="BusClk" />
+            <Clock_output_divider v="1" />
+            <Delay_value v="0" />
+            <Delay_time v="0 us" />
+          </boolgroup>
+        </boolgroup>
       </group>
       <group name="Interrupts/DMA">
         <Interrupt v="INT_ADC0" />
         <Interrupt_request v="Disabled" />
-        <Interrupt_priority v="0 (Highest)" />
-        <ISR_name v="" />
-        <Conversion_complete_interrupt v="Disabled" />
+        <Interrupt_priority v="1" />
+        <ISR_name v="ADC_ISR" />
+        <Conversion_complete_interrupt v="Enabled" />
       </group>
       <group name="Initialization">
         <boolgroup name="Measurement preparation" v="Disabled" />
@@ -1799,186 +1977,6 @@ ICS_C2 = (uint8_t)(ICS_C2 & (uint8_t)~(uint8_t)(ICS_C2_BDIV_MASK));
     </Methods>
     <Events>
       <EmptySection_DummyValue />
-    </Events>
-  </Bean>
-  <Bean name="AD1" type="ADC">
-    <Enabled v="N" />
-    <Properties>
-      <Component_name v="AD1" />
-      <A_D_converter v="ADC" />
-      <Sharing v="Disabled" />
-      <inhrbean type="ADC_LDD">
-        <Enabled v="N" />
-        <Template v="ADC_LDD" />
-        <Properties>
-          <Component_name v="AdcLdd1" />
-          <A_D_converter v="ADC" />
-          <Discontinuous_mode v="no" />
-          <boolgroup name="Interrupt service/event" v="Enabled">
-            <A_D_interrupt v="INT_ADC0" />
-            <A_D_interrupt_priority v="high priority" />
-          </boolgroup>
-          <list name="A/D channel list" v="4">
-            <group name="Channel 0">
-              <enumgroup name="Channel mode" v="Single Ended">
-                <group name="Input">
-                  <A_D_channel__pin_ v="PTF7/ADC0_SE15" />
-                </group>
-              </enumgroup>
-            </group>
-            <group name="Channel 1">
-              <enumgroup name="Channel mode" v="Single Ended">
-                <group name="Input">
-                  <A_D_channel__pin_ v="PTF6/ADC0_SE14" />
-                </group>
-              </enumgroup>
-            </group>
-            <group name="Channel 2">
-              <enumgroup name="Channel mode" v="Single Ended">
-                <group name="Input">
-                  <A_D_channel__pin_ v="PTF5/ADC0_SE13" />
-                </group>
-              </enumgroup>
-            </group>
-            <group name="Channel 3">
-              <enumgroup name="Channel mode" v="Single Ended">
-                <group name="Input">
-                  <A_D_channel__pin_ v="PTF4/ADC0_SE12" />
-                </group>
-              </enumgroup>
-            </group>
-          </list>
-          <boolgroup name="Static sample groups" v="Disabled" />
-          <A_D_resolution v="8 bits" />
-          <Low_power_mode v="Disabled" />
-          <Sample_time v="3.5 clock periods" />
-          <Conversion_time v="" />
-          <ADC_clock v="4.999 MHz (200.003 ns)" />
-          <Single_conversion_time___Single_ended v="4.25 us" />
-          <Single_conversion_time___Differential v="Differential mode not supported" />
-          <Additional_conversion_time___Single_ended v="3.4 us" />
-          <Additional_conversion_time___Differential v="Differential mode not supported" />
-          <Result_type v="unsigned 8 bits, right justified" />
-          <boolgroup name="Trigger" v="Enabled">
-            <Trigger_input v="FTM2_match_delay" />
-            <Trigger_active_state v="Rising edge" />
-            <Samples_per_trigger v="One sample" />
-            <enumgroup name="Trigger type" v="Internal">
-              <Source_component v="FTM2" />
-            </enumgroup>
-          </boolgroup>
-          <group name="Voltage reference">
-            <group name="High voltage reference">
-              <Volt__ref__pin v="VDDA/VREFH" />
-            </group>
-            <group name="Low voltage reference">
-              <Volt__ref__pin v="VSSA/VREFL" />
-            </group>
-          </group>
-          <group name="Initialization">
-            <Enabled_in_init__code v="yes" />
-            <group name="Event mask">
-              <OnMeasurementComplete v="Enabled" />
-            </group>
-          </group>
-        </Properties>
-        <Methods>
-          <Init v="generate code" />
-          <Deinit v="don&amp;apos;t generate code" />
-          <Enable v="generate code" />
-          <Disable v="generate code" />
-          <GetEventMask v="don&amp;apos;t generate code" />
-          <SetEventMask v="don&amp;apos;t generate code" />
-          <StartSingleMeasurement v="generate code" />
-          <StartLoopMeasurement v="don&amp;apos;t generate code" />
-          <StartSingleTriggeredMeasurement v="don&amp;apos;t generate code" />
-          <StartLoopTriggeredMeasurement v="generate code" />
-          <CancelMeasurement v="generate code" />
-          <GetMeasuredValues v="generate code" />
-          <SelectSampleGroup v="don&amp;apos;t generate code" />
-          <CreateSampleGroup v="generate code" />
-          <GetMeasurementCompleteStatus v="generate code" />
-          <EnableAutoCompare v="generate code" />
-          <DisableAutoCompare v="generate code" />
-          <SetOperationMode v="don&amp;apos;t generate code" />
-          <GetDriverState v="don&amp;apos;t generate code" />
-          <ConnectPin v="don&amp;apos;t generate code" />
-          <Main v="don&amp;apos;t generate code" />
-        </Methods>
-        <Events>
-          <Event_module_name v="Events" />
-          <event name="OnMeasurementComplete" v="generate code">
-            <Event_procedure_name v="AdcLdd1_OnMeasurementComplete" />
-          </event>
-        </Events>
-      </inhrbean>
-      <boolgroup name="Interrupt service/event" v="Enabled">
-        <A_D_interrupt v="INT_ADC0" />
-        <A_D_interrupt_priority v="high priority" />
-      </boolgroup>
-      <list name="A/D channels" v="4">
-        <group name="Channel0">
-          <A_D_channel__pin_ v="PTF7/ADC0_SE15" />
-        </group>
-        <group name="Channel1">
-          <A_D_channel__pin_ v="PTF6/ADC0_SE14" />
-        </group>
-        <group name="Channel2">
-          <A_D_channel__pin_ v="PTF5/ADC0_SE13" />
-        </group>
-        <group name="Channel3">
-          <A_D_channel__pin_ v="PTF4/ADC0_SE12" />
-        </group>
-      </list>
-      <A_D_resolution v="8 bits" />
-      <Conversion_time v="3.400044 &amp;#181;s" />
-      <Low_power_mode v="Disabled" />
-      <Sample_time v="short" />
-      <boolgroup name="Internal trigger" v="Enabled">
-        <EmptySection_DummyValue />
-      </boolgroup>
-      <Number_of_conversions v="2" />
-      <group name="Initialization">
-        <Enabled_in_init__code v="yes" />
-        <Events_enabled_in_init_ v="yes" />
-      </group>
-      <group name="CPU clock/speed selection">
-        <High_speed_mode v="This component enabled" />
-        <Low_speed_mode v="This component disabled" />
-        <Slow_speed_mode v="This component disabled" />
-      </group>
-    </Properties>
-    <Methods>
-      <Enable v="generate code" />
-      <Disable v="generate code" />
-      <EnableEvent v="don&amp;apos;t generate code" />
-      <DisableEvent v="don&amp;apos;t generate code" />
-      <Start v="generate code" />
-      <Stop v="generate code" />
-      <Measure v="generate code" />
-      <MeasureChan v="generate code" />
-      <EnableExtChanTrigger v="don&amp;apos;t generate code" />
-      <EnableIntChanTrigger v="generate code" />
-      <GetValue v="generate code" />
-      <GetChanValue v="generate code" />
-      <GetValue8 v="generate code" />
-      <GetChanValue8 v="generate code" />
-      <GetValue16 v="generate code" />
-      <GetChanValue16 v="generate code" />
-      <EnableAsynchroClock v="don&amp;apos;t generate code" />
-      <DisableAsynchroClock v="don&amp;apos;t generate code" />
-      <EnableAutoCompare v="generate code" />
-      <DisableAutoCompare v="generate code" />
-      <ConnectPin v="don&amp;apos;t generate code" />
-    </Methods>
-    <Events>
-      <Event_module_name v="Events" />
-      <event name="BeforeNewSpeed" v="don&amp;apos;t generate code" />
-      <event name="AfterNewSpeed" v="don&amp;apos;t generate code" />
-      <event name="OnEnd" v="generate code">
-        <Event_procedure_name v="AD1_OnEnd" />
-        <Priority v="same as interrupt" />
-      </event>
     </Events>
   </Bean>
 </PE_PROJECT_SETTINGS_DOCUMENTATION>

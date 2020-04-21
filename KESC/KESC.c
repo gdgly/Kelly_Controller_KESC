@@ -6,9 +6,6 @@
 #include "BLDC/BLDC.h"
 #include "BLDC/Commutation.h"
 
-#include "Shell/Terminal.h"
-#include "Shell/Shell.h"
-
 #include "VoltageDivider/VoltageDivider.h"
 #include "PID/PID.h"
 #include "Millis/Millis.h"
@@ -16,10 +13,14 @@
 #include "Blinky/Blinky.h"
 #include "Measure/Measure.h"
 
+#include "Shell/Terminal.h"
+#include "Shell/Shell.h"
+
 #include "KEA64/SysTick.h"
 #include "KEA64/ADC.h"
 #include "KEA64/UART0.h"
-#include "KEA64/Serial0.h"
+	#include "KEA64/Serial0.h"
+#include "KEA64/FTM1.h"
 
 #include "freemaster.h"
 
@@ -31,8 +32,6 @@
 #include "FTM1.h"
 #include "FTM2.h"
 //#include "WDOG.h"
-
-#include "FTM_PDD.h"
 
 /* Including shared modules, which are used for whole project */
 #include "PE_Types.h"
@@ -77,9 +76,7 @@ LITE_FX_OS_THREAD_T ThreadTask1Second;
 LITE_FX_OS_THREAD_T ThreadComTx;			//20ms period task for communications
 
 
-void LEDBlinkOn(void)  	{ LED_PIN_ON();  }
-void LEDBlinkOff(void) 	{ LED_PIN_OFF(); }
-void LEDBlink(void) 	{ Blinky_Toggle(&LEDPowerButton); }
+
 
 /******************************************************************************/
 /*!
@@ -123,18 +120,19 @@ MEASURE_T MeasureADC0;
 #define MEASURE_ADC_CHANNEL_COUNT			8U
 
 //	Virtual/Measure Channel, index into arrays
-#define ADC_BAT_AD		0U
-#define ADC_I1_AD		1U
-#define ADC_I2_AD		2U
-#define ADC_V1A			3U
-#define ADC_V1B			4U
-#define ADC_V2A			5U
-#define ADC_V2B			6U
-#define ADC_LSTEMP_AD	7U
+#define MEASURE_CHANNEL_BAT_AD		0U
+#define MEASURE_CHANNEL_I1_AD		1U
+#define MEASURE_CHANNEL_I2_AD		2U
+#define MEASURE_CHANNEL_V1A			3U
+#define MEASURE_CHANNEL_V1B			4U
+#define MEASURE_CHANNEL_V2A			5U
+#define MEASURE_CHANNEL_V2B			6U
+#define MEASURE_CHANNEL_LSTEMP_AD	7U
 
 uint8_t Measure_ChannelResultBuffer[MEASURE_ADC_CHANNEL_COUNT];
-//uint8_t Measure_ChannelSumBuffer[MEASURE_ADC_CHANNEL_COUNT];
-uint8_t Measure_ChannelSumBuffer[0];
+uint8_t Measure_ChannelSumBuffer[0]; //[MEASURE_ADC_CHANNEL_COUNT];
+
+const uint8_t DummyPhaseCBuffer = 0;
 
 // ADC Pins
 #define ADC_CHANNEL_PIN_BAT_AD		ADC_PDD_SINGLE_ENDED_DAD0
@@ -160,35 +158,33 @@ const uint8_t MEASURE_CHANNEL_TO_ADC_PIN[MEASURE_ADC_CHANNEL_COUNT] =
 
 uint8_t ADC_SampleChannelsBuffer[ADC_MAX_HW_SAMPLE_COUNT]; // array of pin channels pushed to adc fifo
 
-void ADC_ISR(void)
+void ADC_ISR(void) // runs after all items in fifo are processed // only 1 channel in group is processed every hw trigger
 {
-	LEDBlink();
-	LEDBlink();
-	LEDBlink();
-	Measure_ISR(&MeasureADC0);
+	Measure_CompleteISR(&MeasureADC0);
 }
 
-static const uint8_t ChannelsMotor1A[] = {ADC_V1A, ADC_I1_AD, ADC_BAT_AD, ADC_LSTEMP_AD};
-static const uint8_t ChannelsMotor1B[] = {ADC_V1B, ADC_I1_AD, ADC_BAT_AD, ADC_LSTEMP_AD};
-static const uint8_t ChannelsMotor1C[] = {ADC_I1_AD, ADC_BAT_AD, ADC_LSTEMP_AD};
+
+static const uint8_t ChannelsMotor1A[] = {MEASURE_CHANNEL_V1A, MEASURE_CHANNEL_I1_AD, MEASURE_CHANNEL_BAT_AD, MEASURE_CHANNEL_LSTEMP_AD};
+static const uint8_t ChannelsMotor1B[] = {MEASURE_CHANNEL_V1B, MEASURE_CHANNEL_I1_AD, MEASURE_CHANNEL_BAT_AD, MEASURE_CHANNEL_LSTEMP_AD};
+static const uint8_t ChannelsMotor1C[] = {MEASURE_CHANNEL_I1_AD, MEASURE_CHANNEL_BAT_AD, MEASURE_CHANNEL_LSTEMP_AD};
 
 static void OnEndADCMotor1PhaseA(void)
 {
-	//BLDC_CaptureBEMF(&Motor1, Measure_GetAddr(ADC_V1A));
-	//BLDC_CaptureBEMF(&Motor1, Motor1.BackEMFPhaseA_ADCU);
-	BLDC_SetBEMF(&Motor1, Measure_ChannelResultBuffer[ADC_V1A]);
 	//Monitor_Process(); // here or main?
+	//Monitor_SetBEMFPhaseA(&Motor1Monitor);
+
+	Monitor_CaptureBEMF(&Motor1Monitor);
 }
 
 static void OnEndADCMotor1PhaseB(void)
 {
-	//BLDC_CaptureBEMF(&Motor1, Motor1.BackEMFPhaseB_ADCU);
-	BLDC_SetBEMF(&Motor1, Measure_ChannelResultBuffer[ADC_V1B]);
+	//Monitor_SetBEMFPhaseB(&Motor1Monitor);
+	Monitor_CaptureBEMF(&Motor1Monitor);
 }
 
 static void OnEndADCMotor1PhaseC(void)
 {
-
+	Monitor_CaptureBEMF(&Motor1Monitor);
 }
 
 MEASURE_SAMPLE_T MeasureSampleMotor1A =
@@ -204,37 +200,43 @@ MEASURE_SAMPLE_T MeasureSampleMotor1A =
 
 MEASURE_SAMPLE_T MeasureSampleMotor1B =
 {
-		.Channels.ChannelGroup = ChannelsMotor1B,
-		.ChannelCount = sizeof(ChannelsMotor1B),
-		.HWTrigger = true,
-		.OnEndISR = OnEndADCMotor1PhaseB,
-		.Overwrite = true,
-		.RepeatCount = 1,
-		.RepeatCounter = 0,
+	.Channels.ChannelGroup = ChannelsMotor1B,
+	.ChannelCount = sizeof(ChannelsMotor1B),
+	.HWTrigger = true,
+	.OnEndISR = OnEndADCMotor1PhaseB,
+	.Overwrite = true,
+	.RepeatCount = 1,
+	.RepeatCounter = 0,
 };
 
 MEASURE_SAMPLE_T MeasureSampleMotor1C =
 {
-		.Channels.ChannelGroup = ChannelsMotor1C,
-		.ChannelCount = sizeof(ChannelsMotor1C),
-		.HWTrigger = true,
-		.OnEndISR = OnEndADCMotor1PhaseC,
-		.Overwrite = true,
-		.RepeatCount = 1,
-		.RepeatCounter = 0,
+	.Channels.ChannelGroup = ChannelsMotor1C,
+	.ChannelCount = sizeof(ChannelsMotor1C),
+	.HWTrigger = true,
+	.OnEndISR = OnEndADCMotor1PhaseC,
+	.Overwrite = true,
+	.RepeatCount = 1,
+	.RepeatCounter = 0,
 };
 
-static inline void TriggerADCMotor1PhaseA(void) { Measure_Start(&MeasureADC0, &MeasureSampleMotor1A); }
-static inline void TriggerADCMotor1PhaseB(void) { Measure_Start(&MeasureADC0, &MeasureSampleMotor1B); }
-static inline void TriggerADCMotor1PhaseC(void) { Measure_Start(&MeasureADC0, &MeasureSampleMotor1C); }
+
+//set backemf = largest of 3
+static inline void TriggerADCMotor1PhaseA(void) { Measure_Start(&MeasureADC0, &MeasureSampleMotor1A); Monitor_SelectBEMFPhaseA(&Motor1Monitor);}
+static inline void TriggerADCMotor1PhaseB(void) { Measure_Start(&MeasureADC0, &MeasureSampleMotor1B); Monitor_SelectBEMFPhaseB(&Motor1Monitor);}
+static inline void TriggerADCMotor1PhaseC(void) { Measure_Start(&MeasureADC0, &MeasureSampleMotor1C); }//Monitor_SelectBEMFBuffer(&Motor1Monitor);}
 /*! @} */
+
+
+#define CPU_FREQ 			40000000
+#define BUS_FREQ 			20000000
 
 /******************************************************************************/
 /*!
  * @name  	Hall Timer
  * @brief	Freq = 312,500 Hz, Peroid = 3.2 uS, Overflow 209,712 us, 209 ms
  *
- * Hall triggered ISR
+ * Set to capture Motor 1 Hall A
  * Min rpm when delta = 0xFFFF:
  * 312,500/10*60/0xFFFF = 28 rpm min for 10 pole pairs
  *
@@ -248,38 +250,41 @@ static inline void TriggerADCMotor1PhaseC(void) { Measure_Start(&MeasureADC0, &M
 /*! @{ */
 SPEED_T 			Motor1Speed;
 
-#define CPU_FREQ 			40000000
-#define BUS_FREQ 			20000000
-
 #define FTM1_BUS_PEROID		(64)
 #define FTM1_FREQ 			(BUS_FREQ/FTM1_BUS_PEROID)
 #define FTM1_CV_MAX			(0xFFFF)
 
-//static bool MotorSelect;
+inline static bool FTM1_Filter(void)
+{
+	volatile static uint32_t td, ts;
+
+	td = Micros() - ts;
+	ts = Micros();
+
+	if (td < 100) return true;
+
+	return false;
+}
 
 //Motor1 Hall A rising edge trigger
 void FTM1_ISR(void)
 {
+	//volatile uint32_t reg = FTM1_C1SC;
 	FTM1_C1SC &= ~FTM_CnSC_CHF_MASK;	//FTM_PDD_ClearChannelInterruptFlag(FTM1_DEVICE, FTM_PDD_CHANNEL_1);
 
-//	BLDC_Commutation_ISR(&Motor1.Commutation, Motor1.PWM); //commutate 1/3 times here?
+	//if (FTM1_Filter()) return;
 
-	Speed_CaptureDeltaISR(&Motor1Speed);
+//	BLDC_Commutation_ISR(&Motor1.Commutation, Motor1.PWM); //commutate 1/6 times here?
+	//Speed_CaptureDeltaISR(&Motor1Speed);
+	//Speed_DeltaOverflowDetectionISR(&Motor1Speed);
 
-//	if (motorSel)	Speed_Capture(&Motor1.Speed);
-//	else			Speed_Capture(&Motor2.Speed);
-//	if (count < 1)
-//	{
-//		count++;
-//	}
-//	else
-//	{
-//		count = 0;
-//		motorSel = !motorSel;
-//		reset timer
-//	}
+	//FTM1_C1SC = reg & ~FTM_CnSC_CHF_MASK;
+	// If another event occurs between the read and write operations, the write operation has no effect; therefore, CHF remains set indicating an event has occurred.
+	FTM1_C1SC &= ~FTM_CnSC_CHF_MASK;	//FTM_PDD_ClearChannelInterruptFlag(FTM1_DEVICE, FTM_PDD_CHANNEL_1);
 }
 /*! @} */
+
+
 
 /******************************************************************************/
 /*!
@@ -300,14 +305,16 @@ COMMUTATION_T  Motor1Commutation;
 
 //PWM counts per hall cycle = delta_FTM1_CV * 64 / 1024
 
+extern uint8_t ReadHallSensorMotor1(void);
+
 //FTM2 PWM Cycle trigger
 void FTM2_ISR(void)
 {
+	//(void)FTM2_SC;
 	FTM2_SC &= ~FTM_SC_TOF_MASK;	//FTM_PDD_ClearOverflowInterruptFlag(FTM2_DEVICE);
 
-	if (Motor1.State == MOTOR_STATE_RUN) Commutation_Poll(&Motor1Commutation, Motor1.PWM);
-
-
+	BLDC_ProcessRunPoll(&Motor1);
+	Speed_CaptureDeltaPoll(&Motor1Speed, ReadHallSensorMotor1()&0x01);
 	//Optionally measure Back EMF at beginning of PWM cycle. (Output is low)
 	//Triggered measure will occur again at center of pulse, use for motor current.
 	//StartADCPhaseA();
@@ -368,7 +375,7 @@ void CommutateMotor1PhaseBC(uint16_t pwm) {PWM_1B_PIN_SET_CV(pwm); PWM_1C_PIN_SE
 void CommutateMotor1PhaseBA(uint16_t pwm) {PWM_1B_PIN_SET_CV(pwm); PWM_1A_PIN_SET_CV(0); EN_1_ALL_PIN_SET(0b011); SE_1_ALL_PIN_SET(0b001); TriggerADCMotor1PhaseC();}
 void CommutateMotor1PhaseCA(uint16_t pwm) {PWM_1C_PIN_SET_CV(pwm); PWM_1A_PIN_SET_CV(0); EN_1_ALL_PIN_SET(0b101); SE_1_ALL_PIN_SET(0b001); TriggerADCMotor1PhaseB();}
 void CommutateMotor1PhaseCB(uint16_t pwm) {PWM_1C_PIN_SET_CV(pwm); PWM_1B_PIN_SET_CV(0); EN_1_ALL_PIN_SET(0b110); SE_1_ALL_PIN_SET(0b010); TriggerADCMotor1PhaseA();}
-void EnableMotor1PhaseABC(void) 			{EN_1_ALL_PIN_SET(0b111); SE_1_ALL_PIN_SET(0b000);}
+void EnableMotor1PhaseABC(void) {EN_1_ALL_PIN_SET(0b111); SE_1_ALL_PIN_SET(0b000);}
 
 void FloatMotor1(void) 	{EN_1_ALL_PIN_SET(0b000); SE_1_ALL_PIN_SET(0b000);} // all mosfet off, motor coasts
 void ShortMotor1(void) 	{PWM_1C_PIN_SET_CV(0); PWM_1C_PIN_SET_CV(0); PWM_1C_PIN_SET_CV(0); EN_1_ALL_PIN_SET(0b111); SE_1_ALL_PIN_SET(0b000);} // all mosfet top side off, low side on, short motor terminals for dynamic brake
@@ -385,7 +392,9 @@ void SaveParametersCommutationIndex(void)
 /*! @} */
 
 
-
+void LEDBlinkOn(void)  	{ LED_PIN_ON();  }
+void LEDBlinkOff(void) 	{ LED_PIN_OFF(); }
+void LEDBlink(void) 	{ Blinky_Toggle(&LEDPowerButton); }
 
 void Serial(void)
 {
@@ -396,46 +405,11 @@ void Serial(void)
 
 void ComTx(void)
 {
-//	Test_TxPacketValue
-//		(
-//			Speed_GetRotarySpeedDegreesPerSecond(&Motor1.Speed),
-//			Motor1.BackEMF,
-//			Motor1.PID.OutMax,
-//			20000 - looptime
-//			);
-//	Test_TxPacketValue
-//		(
-//			1,
-//			2,
-//			3,
-//			4
-//		);
-//
-//	for (i = 0; i < 18; i++)
-//		SendChar(TxPacketBuffer[i]);
+
 
 }
 
-void PrintDebug(void)
-{
-	//printf("Loop Time is %d \n", LoopDelta);
-	//printf("PWM %d \n", Motor1.PWM);
-	printf("BackEMF A ADCU %d \n", *Motor1.BackEMFPhaseA_ADCU);
-	printf("BackEMF B ADCU %d \n", *Motor1.BackEMFPhaseB_ADCU);
-	//printf("Battery Voltage %d \n", VoltageDivider_GetVoltage(&DividerCommon, *Motor1.VBat_ADCU));
-	printf("BackEMF A %d \n", VoltageDivider_GetVoltage(&DividerCommon, *Motor1.BackEMFPhaseA_ADCU));
-	printf("BackEMF B %d \n", VoltageDivider_GetVoltage(&DividerCommon, *Motor1.BackEMFPhaseB_ADCU));
-	printf("BackEMF Select %d \n", VoltageDivider_GetVoltage(&DividerCommon, *Motor1.BackEMFSelect_ADCU));
-	printf("Hall Delta %d \n", Speed_GetDeltaTicks(&Motor1Speed));
-	//printf("RPM %d \n", Speed_GetRPM(&Motor1Speed));
-	printf("I ADCU %d \n", *Motor1.I_ADCU);
 
-//	printf("Motor Desired %d \n", *Motor1PID.SetPoint);
-//	printf("Motor Input %d \n", *Motor1PID.Input);
-//	printf("Motor Error (Measured - Input) %d \n", *Motor1PID.SetPoint - *Motor1PID.Input);
-
-	printf("\n");
-}
 
 void Task1Second(void)
 {
@@ -465,19 +439,21 @@ void Boot(void)
 //	}
 }
 
-//static uint8_t RxPacketBufferArray[20];
-//static uint8_t TxPacketBufferArray[20];
 
 void KESC_Init(void)
 {
 	Cpu_DisableInt();
 	//Hardware init
-	//Serial0_Init();
-	//Serial0_SetBaudRateMode(Serial0_BM_9600BAUD);
+	Serial0_Init();
+	Serial0_SetBaudRateMode(Serial0_BM_9600BAUD);
 	//Inhr1_SetBaudRateMode(Inhr1_BM_38400BAUD);
 	//Inhr1_SetBaudRateMode(Inhr1_BM_115200BAUD);
-	ADC_Init();
+
+	/* ADC_APCTL1: ADPC=0xE037 */
+	ADC_Init(0xE037);
 	SysTick_Init();
+	FTM1_Init();
+
 	//Millis_Init(40000000, 200); // set in generated systick file.
 
 	Measure_Init
@@ -537,26 +513,31 @@ void KESC_Init(void)
 
 	Speed_InitHallEncoder(&Motor1Speed, &FTM1_C1V, FTM1_CV_MAX, FTM1_FREQ, MOTOR1_POLE_PAIRS, 0, PWM_FREQ);
 
+	Speed_InitDeltaOverflowDetection(&Motor1Speed, Millis_GetTickCounter());
+
 //	PID_Init
 //	(
-//		&PIDMotor1, Speed_GetPtrEventPeriod(), &Motor1.PIDOutputHallPeriod, &Motor1.PIDSetPointHallPeriod,
+//		&PIDMotor1,
+	//Speed_GetPtrEventPeriod(), &Motor1.PIDOutputHallPeriod, &Motor1.PIDSetPointHallPeriod,
 //		500, 1, 0,
 //		PWM_PEROID, FTM2_FREQ, 10,
 //		10, FTM1_CV_MAX
 //	);
 
 
-	//Monitor_Init();
-//	Measure_MapAddress(&Motor1.VBat_ADCU, 			ADC_BAT_AD);
-//	Measure_MapAddress(&Motor1.BackEMFPhaseA_ADCU, 	ADC_V1A);
-//	Measure_MapAddress(&Motor1.BackEMFPhaseB_ADCU, 	ADC_V1B);
-//	Measure_MapAddress(&Motor1.BackEMFPhaseC_ADCU, ADC_V1B);
-//	Measure_MapAddress(&Motor1.I_ADCU, 				ADC_I1_AD);
-//	Measure_MapAddress(&Motor1.LSTemp_ADCU, 		ADC_LSTEMP_AD);
-//	Measure_MapAddress(&Motor2.BackEMFPhaseA_ADCU, ADC_V2A);
-//	Measure_MapAddress(&Motor2.BackEMFPhaseB_ADCU, ADC_V2B);
-//	Measure_MapAddress(&Motor2.BackEMFPhaseC_ADCU, ADC_V2B);
-//	Measure_MapAddress(&Motor2.I_ADCU, 			ADC_I2_AD);
+	Monitor_Init
+	(
+		&Motor1Monitor,
+		&Measure_ChannelResultBuffer[MEASURE_CHANNEL_BAT_AD],
+		&Measure_ChannelResultBuffer[MEASURE_CHANNEL_V1A],
+		&Measure_ChannelResultBuffer[MEASURE_CHANNEL_V1B],
+		&DummyPhaseCBuffer, //no phase c
+		&Measure_ChannelResultBuffer[MEASURE_CHANNEL_I1_AD],
+		&Measure_ChannelResultBuffer[MEASURE_CHANNEL_LSTEMP_AD],
+		&DividerCommon,
+		&DividerCommon,
+		&DividerCommon
+	);
 
 	//Map Motor Structs
 	BLDC_Init
@@ -565,15 +546,13 @@ void KESC_Init(void)
 		&Motor1Commutation,
 		&Motor1Speed,
 		&Motor1PID,
-		&DividerCommon,
-		&DividerCommon,
-		&DividerCommon,
-		&DividerCommon,
+		&Motor1Monitor,
 		FloatMotor1,
 		ShortMotor1,
 		PWM_MAX
 	);
 
+	//KellyMotorShell_Init();
 	//Shell_InitNonBlocking(10, SHELL_OUTTER_LOOP_FREQ);
 	//RegisterShellCmds();
 
@@ -618,21 +597,17 @@ void KESC_Init(void)
 		Delay,
 		1000
 	);
+	BLDC_Stop(&Motor1); // release pwm after last commutation from calibration routine
 
-//	Test_Init
-//	(
-//		TxPacketBufferArray,
-//		RxPacketBufferArray,
-//		Inhr1_GetCharsInRxBuf,
-//		Inhr1_RecvChar,
-//		Inhr1_SendChar
-//	);
+	BLDC_SetPWM(&Motor1, 25);
 
-	// SendStartMessage();
+	//BLDC_Start(&Motor1);
 }
+
 
 void KESC_Loop(void)
 {
+
 	while(1)
 	{
 		LoopDelta = Micros() - LoopTimer;
@@ -641,24 +616,37 @@ void KESC_Loop(void)
 		//__DI();
 		//WDOG_Feed();
 		//__EI();
+		//Speed_CaptureDeltaPoll(&Motor1Speed, ReadHallSensorMotor1()&0x01);
+
 
 		LiteFXOS_ProcThread(&ThreadLED);
-		//LiteFXOS_ProcThread(&ThreadSerial);
 		LiteFXOS_ProcThread(&ThreadTask1Second);
 
 		BLDC_Process(&Motor1);
 
 
+
+
+		//		Monitor_Process(&Motor1Monitor);
+		if(LiteFXOS_ProcThread(&ThreadComTx))
+		{
+			Monitor_Convert(&Motor1Monitor);
+			Motor1Monitor.RPM 			= Speed_GetRPM(&Motor1Speed);
+			Motor1Monitor.PWMVoltage 	= BLDC_GetPWMVoltage(&Motor1);
+		}
+
 		FMSTR_Poll();
 		FMSTR_Recorder();
 
+		//LiteFXOS_ProcThread(&ThreadSerial);
+
 		//Test_StartUp();
 		//Test_RxPacket(); ///always receive
-		//LiteFXOS_ProcThread(&ThreadComTx); //tx every 20ms
-		//		if (Test_RxPacket())
-		//		{
-		//			Motor1.PID.Kp = Test_GetKp();
-		//		}
+
+//				if (Test_RxPacket())
+//				{
+//					Motor1.PID.Kp = Test_GetKp();
+//				}
 
 //		Motor1.PID->Kp = Test_GetKp();
 //		Motor1.PID->Ki = Test_GetKi();

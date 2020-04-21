@@ -8,7 +8,7 @@
 #ifndef PARAMETERS_H_
 #define PARAMETERS_H_
 
-
+#include <stdint.h>
 
 #define MOTOR1_POLE_PAIRS	10 // read from eeprom
 #define MAX_RPM 5000
