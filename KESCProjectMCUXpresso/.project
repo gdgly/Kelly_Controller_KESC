@@ -53,6 +53,11 @@
 			<type>2</type>
 			<locationURI>copy_PARENT/Kelly_Library</locationURI>
 		</link>
+		<link>
+			<name>SourceGroup/KESC/Exclude/Sources</name>
+			<type>2</type>
+			<locationURI>PARENT-2-PROJECT_LOC/%5BArchive%5D/Sources</locationURI>
+		</link>
 	</linkedResources>
 	<variableList>
 		<variable>
