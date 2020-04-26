@@ -267,47 +267,6 @@ MEASURE_SAMPLE_T MeasureSampleBEMFMotor1C =
 static inline void TriggerADCMotor1PhaseA(void) { Measure_Start(&MeasureADC0, &MeasureSampleBEMFMotor1A); }//Monitor_ZeroCaptureFilterBEMF(&Motor1Monitor);}
 static inline void TriggerADCMotor1PhaseB(void) { Measure_Start(&MeasureADC0, &MeasureSampleBEMFMotor1B); }//Monitor_ZeroCaptureFilterBEMF(&Motor1Monitor);}
 static inline void TriggerADCMotor1PhaseC(void) { Measure_Start(&MeasureADC0, &MeasureSampleBEMFMotor1C); }//Monitor_ZeroCaptureFilterBEMF(&Motor1Monitor);}
-
-//static const uint8_t ChannelsMotor1A[] = {MEASURE_CHANNEL_V1A, MEASURE_CHANNEL_I1_AD, MEASURE_CHANNEL_BAT_AD, MEASURE_CHANNEL_LSTEMP_AD};
-//static const uint8_t ChannelsMotor1B[] = {MEASURE_CHANNEL_V1B, MEASURE_CHANNEL_I1_AD, MEASURE_CHANNEL_BAT_AD, MEASURE_CHANNEL_LSTEMP_AD};
-//static const uint8_t ChannelsMotor1C[] = {MEASURE_CHANNEL_I1_AD, MEASURE_CHANNEL_BAT_AD, MEASURE_CHANNEL_LSTEMP_AD};
-//
-//MEASURE_SAMPLE_T MeasureSampleMotor1A =
-//{
-//	.Channels.ChannelGroup = ChannelsMotor1A,
-//	.ChannelCount = sizeof(ChannelsMotor1A),
-//	.HWTrigger = true,
-//	.OnEndISR = OnEndADCMotor1PhaseA,
-//	.Overwrite = true,
-//	.RepeatCount = 1,
-//	.RepeatCounter = 0,
-//};
-//
-//MEASURE_SAMPLE_T MeasureSampleMotor1B =
-//{
-//	.Channels.ChannelGroup = ChannelsMotor1B,
-//	.ChannelCount = sizeof(ChannelsMotor1B),
-//	.HWTrigger = true,
-//	.OnEndISR = OnEndADCMotor1PhaseB,
-//	.Overwrite = true,
-//	.RepeatCount = 1,
-//	.RepeatCounter = 0,
-//};
-//
-//MEASURE_SAMPLE_T MeasureSampleMotor1C =
-//{
-//	.Channels.ChannelGroup = ChannelsMotor1C,
-//	.ChannelCount = sizeof(ChannelsMotor1C),
-//	.HWTrigger = true,
-//	.OnEndISR = OnEndADCMotor1PhaseC,
-//	.Overwrite = true,
-//	.RepeatCount = 1,
-//	.RepeatCounter = 0,
-//};
-
-//static inline void TriggerADCMotor1PhaseA(void) { Measure_Start(&MeasureADC0, &MeasureSampleMotor1A); Monitor_SelectBEMFPhaseA(&Motor1Monitor);}
-//static inline void TriggerADCMotor1PhaseB(void) { Measure_Start(&MeasureADC0, &MeasureSampleMotor1B); Monitor_SelectBEMFPhaseB(&Motor1Monitor);}
-//static inline void TriggerADCMotor1PhaseC(void) { Measure_Start(&MeasureADC0, &MeasureSampleMotor1C); }//Monitor_SelectBEMFBuffer(&Motor1Monitor);}
 /*! @} */
 
 
@@ -385,33 +344,37 @@ COMMUTATION_T  Motor1Commutation;
 #define PWM_MAX 			(FTM2_MODULO)
 #define PWM_PEROID			(FTM2_MODULO*2) // FTM2 ticks, Modulo * 2 for center aligned PWM
 #define PWM_FREQ			(FTM2_FREQ/PWM_PEROID)
-
 #define FTM2_ISR_FREQ 		(FTM2_FREQ/PWM_PEROID)
 
 //PWM counts per hall cycle = delta_FTM1_CV * 64 / 1024
 
 extern uint8_t ReadHallSensorMotor1(void);
-extern void Exp50usOpen(void);
+extern void ModulateAngle(void);
+
 //FTM2 PWM Cycle trigger
 void FTM2_ISR(void)
 {
 	//(void)FTM2_SC;
 	FTM2_SC &= ~FTM_SC_TOF_MASK;	//FTM_PDD_ClearOverflowInterruptFlag(FTM2_DEVICE);
 
-	BLDC_ProcessRunPoll(&Motor1);
+	//BLDC_ProcessRunPoll(&Motor1);
 
-	//if (Motor1.MotorMode == MOTOR_MODE_RUN) PID_ComputeTimerISR(&Motor1PID);
+	//Speed_CaptureDeltaPoll(&Motor1Speed, ReadHallSensorMotor1()&0x01);
+	Speed_CaptureLongDeltaPoll(&Motor1Speed, ReadHallSensorMotor1()&0x01);
 
-	Speed_CaptureDeltaPoll(&Motor1Speed, ReadHallSensorMotor1()&0x01);
+	if (Motor1.MotorMode == MOTOR_MODE_RUN) ModulateAngle();
+
+	BLDC_ProcessRunPoll(&Motor1); //if stops at same sensor state?
+
+
+	Motor1.RPM 	= Speed_GetRPM(&Motor1Speed);
+//if (Motor1.MotorMode == MOTOR_MODE_RUN) PID_ComputeTimerISR(&Motor1PID);
 
 	//Optionally measure Back EMF at beginning of PWM cycle. (Output is low)
 	//Triggered measure will occur again at center of pulse, use for motor current.
 	//StartADCPhaseA();
 	//StartADCPhaseB();
 	//StartADCPhaseC();
-
-	//if (Motor1.MotorMode == MOTOR_MODE_RUN) Exp50usOpen();
-
 
 }
 /*! @} */
@@ -436,21 +399,25 @@ void SetPWMMotor1PhaseC(uint16_t pwm) {PWM_1C_PIN_SET_CV(pwm);}
 #define SetPWMMotor1PhaseCA(pwm) SetPWMMotor1PhaseC(pwm)
 #define SetPWMMotor1PhaseCB(pwm) SetPWMMotor1PhaseC(pwm)
 
+void SetPWMMotor1PhaseABC(uint16_t pwmA, uint16_t pwmB, uint16_t pwmC) {PWM_1A_PIN_SET_CV((pwmA+1)<<1); PWM_1B_PIN_SET_CV((pwmB+1)<<1); PWM_1C_PIN_SET_CV((pwmC+1)<<1);}
+//comutation module 1 master setfunction, each table entry is data only
+
+
 // Unipolar 4q form 1
-//void CommutateMotor1PhaseAB(uint16_t pwm) {PWM_1A_PIN_SET_CV(pwm); PWM_1B_PIN_SET_CV(0); EN_1CBA_PIN_SET_OUT(0b011); /*SE_1CBA_PIN_SET_OUT(0b010);*/ TriggerADCMotor1PhaseC();}
-//void CommutateMotor1PhaseAC(uint16_t pwm) {PWM_1A_PIN_SET_CV(pwm); PWM_1C_PIN_SET_CV(0); EN_1CBA_PIN_SET_OUT(0b101); /*SE_1CBA_PIN_SET_OUT(0b100);*/ TriggerADCMotor1PhaseB();}
-//void CommutateMotor1PhaseBC(uint16_t pwm) {PWM_1B_PIN_SET_CV(pwm); PWM_1C_PIN_SET_CV(0); EN_1CBA_PIN_SET_OUT(0b110); /*SE_1CBA_PIN_SET_OUT(0b100);*/ TriggerADCMotor1PhaseA();}
-//void CommutateMotor1PhaseBA(uint16_t pwm) {PWM_1B_PIN_SET_CV(pwm); PWM_1A_PIN_SET_CV(0); EN_1CBA_PIN_SET_OUT(0b011); /*SE_1CBA_PIN_SET_OUT(0b001);*/ TriggerADCMotor1PhaseC();}
-//void CommutateMotor1PhaseCA(uint16_t pwm) {PWM_1C_PIN_SET_CV(pwm); PWM_1A_PIN_SET_CV(0); EN_1CBA_PIN_SET_OUT(0b101); /*SE_1CBA_PIN_SET_OUT(0b001);*/ TriggerADCMotor1PhaseB();}
-//void CommutateMotor1PhaseCB(uint16_t pwm) {PWM_1C_PIN_SET_CV(pwm); PWM_1B_PIN_SET_CV(0); EN_1CBA_PIN_SET_OUT(0b110); /*SE_1CBA_PIN_SET_OUT(0b010);*/ TriggerADCMotor1PhaseA();}
+void CommutateMotor1PhaseAB(uint16_t pwm) {PWM_1A_PIN_SET_CV(pwm); PWM_1B_PIN_SET_CV(0); EN_1CBA_PIN_SET_OUT(0b011); /*SE_1CBA_PIN_SET_OUT(0b010);*/ TriggerADCMotor1PhaseC();}
+void CommutateMotor1PhaseAC(uint16_t pwm) {PWM_1A_PIN_SET_CV(pwm); PWM_1C_PIN_SET_CV(0); EN_1CBA_PIN_SET_OUT(0b101); /*SE_1CBA_PIN_SET_OUT(0b100);*/ TriggerADCMotor1PhaseB();}
+void CommutateMotor1PhaseBC(uint16_t pwm) {PWM_1B_PIN_SET_CV(pwm); PWM_1C_PIN_SET_CV(0); EN_1CBA_PIN_SET_OUT(0b110); /*SE_1CBA_PIN_SET_OUT(0b100);*/ TriggerADCMotor1PhaseA();}
+void CommutateMotor1PhaseBA(uint16_t pwm) {PWM_1B_PIN_SET_CV(pwm); PWM_1A_PIN_SET_CV(0); EN_1CBA_PIN_SET_OUT(0b011); /*SE_1CBA_PIN_SET_OUT(0b001);*/ TriggerADCMotor1PhaseC();}
+void CommutateMotor1PhaseCA(uint16_t pwm) {PWM_1C_PIN_SET_CV(pwm); PWM_1A_PIN_SET_CV(0); EN_1CBA_PIN_SET_OUT(0b101); /*SE_1CBA_PIN_SET_OUT(0b001);*/ TriggerADCMotor1PhaseB();}
+void CommutateMotor1PhaseCB(uint16_t pwm) {PWM_1C_PIN_SET_CV(pwm); PWM_1B_PIN_SET_CV(0); EN_1CBA_PIN_SET_OUT(0b110); /*SE_1CBA_PIN_SET_OUT(0b010);*/ TriggerADCMotor1PhaseA();}
 
 // Unipolar 4q form 2
-void CommutateMotor1PhaseAB(uint16_t pwm) {PWM_1A_PIN_SET_CV(PWM_MAX/2 + pwm/2); PWM_1B_PIN_SET_CV(PWM_MAX/2 - pwm/2); EN_1CBA_PIN_SET_OUT(0b011); /*SE_1CBA_PIN_SET_OUT(0b010);*/ TriggerADCMotor1PhaseC();}
-void CommutateMotor1PhaseAC(uint16_t pwm) {PWM_1A_PIN_SET_CV(PWM_MAX/2 + pwm/2); PWM_1C_PIN_SET_CV(PWM_MAX/2 - pwm/2); EN_1CBA_PIN_SET_OUT(0b101); /*SE_1CBA_PIN_SET_OUT(0b100);*/ TriggerADCMotor1PhaseB();}
-void CommutateMotor1PhaseBC(uint16_t pwm) {PWM_1B_PIN_SET_CV(PWM_MAX/2 + pwm/2); PWM_1C_PIN_SET_CV(PWM_MAX/2 - pwm/2); EN_1CBA_PIN_SET_OUT(0b110); /*SE_1CBA_PIN_SET_OUT(0b100);*/ TriggerADCMotor1PhaseA();}
-void CommutateMotor1PhaseBA(uint16_t pwm) {PWM_1B_PIN_SET_CV(PWM_MAX/2 + pwm/2); PWM_1A_PIN_SET_CV(PWM_MAX/2 - pwm/2); EN_1CBA_PIN_SET_OUT(0b011); /*SE_1CBA_PIN_SET_OUT(0b001);*/ TriggerADCMotor1PhaseC();}
-void CommutateMotor1PhaseCA(uint16_t pwm) {PWM_1C_PIN_SET_CV(PWM_MAX/2 + pwm/2); PWM_1A_PIN_SET_CV(PWM_MAX/2 - pwm/2); EN_1CBA_PIN_SET_OUT(0b101); /*SE_1CBA_PIN_SET_OUT(0b001);*/ TriggerADCMotor1PhaseB();}
-void CommutateMotor1PhaseCB(uint16_t pwm) {PWM_1C_PIN_SET_CV(PWM_MAX/2 + pwm/2); PWM_1B_PIN_SET_CV(PWM_MAX/2 - pwm/2); EN_1CBA_PIN_SET_OUT(0b110); /*SE_1CBA_PIN_SET_OUT(0b010);*/ TriggerADCMotor1PhaseA();}
+void CommutateUnipolar2Motor1PhaseAB(uint16_t pwm) {PWM_1A_PIN_SET_CV(PWM_MAX/2 + pwm/2); PWM_1B_PIN_SET_CV(PWM_MAX/2 - pwm/2); EN_1CBA_PIN_SET_OUT(0b011); SE_1CBA_PIN_SET_OUT(0b010); TriggerADCMotor1PhaseC();}
+void CommutateUnipolar2Motor1PhaseAC(uint16_t pwm) {PWM_1A_PIN_SET_CV(PWM_MAX/2 + pwm/2); PWM_1C_PIN_SET_CV(PWM_MAX/2 - pwm/2); EN_1CBA_PIN_SET_OUT(0b101); SE_1CBA_PIN_SET_OUT(0b100); TriggerADCMotor1PhaseB();}
+void CommutateUnipolar2Motor1PhaseBC(uint16_t pwm) {PWM_1B_PIN_SET_CV(PWM_MAX/2 + pwm/2); PWM_1C_PIN_SET_CV(PWM_MAX/2 - pwm/2); EN_1CBA_PIN_SET_OUT(0b110); SE_1CBA_PIN_SET_OUT(0b100); TriggerADCMotor1PhaseA();}
+void CommutateUnipolar2Motor1PhaseBA(uint16_t pwm) {PWM_1B_PIN_SET_CV(PWM_MAX/2 + pwm/2); PWM_1A_PIN_SET_CV(PWM_MAX/2 - pwm/2); EN_1CBA_PIN_SET_OUT(0b011); SE_1CBA_PIN_SET_OUT(0b001); TriggerADCMotor1PhaseC();}
+void CommutateUnipolar2Motor1PhaseCA(uint16_t pwm) {PWM_1C_PIN_SET_CV(PWM_MAX/2 + pwm/2); PWM_1A_PIN_SET_CV(PWM_MAX/2 - pwm/2); EN_1CBA_PIN_SET_OUT(0b101); SE_1CBA_PIN_SET_OUT(0b001); TriggerADCMotor1PhaseB();}
+void CommutateUnipolar2Motor1PhaseCB(uint16_t pwm) {PWM_1C_PIN_SET_CV(PWM_MAX/2 + pwm/2); PWM_1B_PIN_SET_CV(PWM_MAX/2 - pwm/2); EN_1CBA_PIN_SET_OUT(0b110); SE_1CBA_PIN_SET_OUT(0b010); TriggerADCMotor1PhaseA();}
 
 // Bipolar
 void CommutateBipolarMotor1PhaseAB(uint16_t pwm) {PWM_1ABC_PIN_SET_POL(0b010); PWM_1A_PIN_SET_CV(PWM_MAX/2 + pwm/2); PWM_1B_PIN_SET_CV(PWM_MAX/2 + pwm/2); EN_1CBA_PIN_SET_OUT(0b011); /*SE_1CBA_PIN_SET_OUT(0b010);*/ TriggerADCMotor1PhaseC();}
@@ -460,27 +427,78 @@ void CommutateBipolarMotor1PhaseBA(uint16_t pwm) {PWM_1ABC_PIN_SET_POL(0b100); P
 void CommutateBipolarMotor1PhaseCA(uint16_t pwm) {PWM_1ABC_PIN_SET_POL(0b100); PWM_1C_PIN_SET_CV(PWM_MAX/2 + pwm/2); PWM_1A_PIN_SET_CV(PWM_MAX/2 + pwm/2); EN_1CBA_PIN_SET_OUT(0b101); /*SE_1CBA_PIN_SET_OUT(0b001);*/ TriggerADCMotor1PhaseB();}
 void CommutateBipolarMotor1PhaseCB(uint16_t pwm) {PWM_1ABC_PIN_SET_POL(0b010); PWM_1C_PIN_SET_CV(PWM_MAX/2 + pwm/2); PWM_1B_PIN_SET_CV(PWM_MAX/2 + pwm/2); EN_1CBA_PIN_SET_OUT(0b110); /*SE_1CBA_PIN_SET_OUT(0b010);*/ TriggerADCMotor1PhaseA();}
 
+static unsigned char SinusoidalWaveTable[384]=
+{
+	127,131,135,138,142,145,149,152,155,159,162,165,168,171,174,177,180,183,186,189,192,194,197,200,
+	202,205,207,210,212,214,217,219,221,223,225,227,229,231,232,234,236,237,239,240,242,243,244,245,
+	247,248,249,250,250,251,252,253,253,254,254,255,255,255,255,255,255,255,255,255,255,255,254,254,
+	253,253,252,252,251,250,249,248,247,246,245,244,242,241,240,238,237,235,233,232,230,228,226,224,
+	222,222,225,226,228,230,232,234,235,237,238,240,241,243,244,245,246,247,248,249,250,251,252,252,
+	253,254,254,254,255,255,255,255,255,255,255,255,255,255,254,254,254,253,252,252,251,250,249,248,
+	247,246,245,244,243,241,240,238,237,235,234,232,230,228,227,225,223,220,218,216,214,212,209,207,
+	204,202,199,197,194,191,188,185,183,180,177,174,171,167,164,161,158,154,151,148,144,141,137,134,
+	130,127,123,119,116,112,108,104,101, 97, 93, 89, 85, 81, 77, 73, 69, 65, 61, 57, 53, 49, 45, 41,
+	36, 32, 28, 24, 20, 16, 12, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 6, 10, 15, 19, 23, 27, 31,
+	35, 39, 44, 48, 52, 56, 60, 64, 68, 72, 76, 80, 84, 88, 92, 96, 99,103,107,111,115,118,121,124
+};
 
-//void Exp50usOpen(void)
-//{
-//	if (Motor1Commutation.CommuntationTable[Motor1Commutation.GetHallState()].ActivatePhase == CommutateMotor1PhaseAB)
-//		EN_1CBA_PIN_SET_OUT(0b011);
-//	else if	(Motor1Commutation.CommuntationTable[Motor1Commutation.GetHallState()].ActivatePhase == CommutateMotor1PhaseAC)
-//		EN_1CBA_PIN_SET_OUT(0b101);
-//}
-//
-//void ExpADCClose(void)
-//{
-//	if (Motor1Commutation.CommuntationTable[Motor1Commutation.GetHallState()].ActivatePhase == CommutateMotor1PhaseAB)
-//		EN_1CBA_PIN_SET_OUT(0b001);
-//	else if	(Motor1Commutation.CommuntationTable[Motor1Commutation.GetHallState()].ActivatePhase == CommutateMotor1PhaseAC)
-//		EN_1CBA_PIN_SET_OUT(0b001);
-//}
+//Phase boundaries 32, 96, 160, 224, 288, 352
+//Phase midpoints  64, 128, 192, 256, 320, 0
+
+//PhaseAB Angle 	A:32-96 	B:288-352 	C:160-224
+//PhaseAC Angle 	A:96-160	B:352-32 	C:224-288
+//PhaseBC Angle 	A:160-224	B:32-96 	C:288-352
+//PhaseBA Angle 	A:224-288	B:160-224	C:352-32
+//PhaseCA Angle 	A:288-352	B:224-288 	C:32-96
+//PhaseCB Angle 	A:352-32	B:352-32 	C:96-160
+
+//sinusoidal approximation with midpoint
+void CommutateSinusoidalAvgMotor1PhaseAB(uint16_t pwm) {PWM_1A_PIN_SET_CV(SinusoidalWaveTable[64]*2*pwm/PWM_MAX); 	PWM_1B_PIN_SET_CV(SinusoidalWaveTable[320]*2*pwm/PWM_MAX); 	PWM_1C_PIN_SET_CV(SinusoidalWaveTable[192]*2*pwm/PWM_MAX); 	EN_1CBA_PIN_SET_OUT(0b111); /*SE_1CBA_PIN_SET_OUT(0b010);*/ TriggerADCMotor1PhaseC();}
+void CommutateSinusoidalAvgMotor1PhaseAC(uint16_t pwm) {PWM_1A_PIN_SET_CV(SinusoidalWaveTable[128]*2*pwm/PWM_MAX); PWM_1B_PIN_SET_CV(SinusoidalWaveTable[0]*2*pwm/PWM_MAX); 	PWM_1C_PIN_SET_CV(SinusoidalWaveTable[256]*2*pwm/PWM_MAX); 	EN_1CBA_PIN_SET_OUT(0b111); /*SE_1CBA_PIN_SET_OUT(0b010);*/ TriggerADCMotor1PhaseB();}
+void CommutateSinusoidalAvgMotor1PhaseBC(uint16_t pwm) {PWM_1A_PIN_SET_CV(SinusoidalWaveTable[192]*2*pwm/PWM_MAX); PWM_1B_PIN_SET_CV(SinusoidalWaveTable[64]*2*pwm/PWM_MAX); 	PWM_1C_PIN_SET_CV(SinusoidalWaveTable[320]*2*pwm/PWM_MAX); 	EN_1CBA_PIN_SET_OUT(0b111); /*SE_1CBA_PIN_SET_OUT(0b010);*/ TriggerADCMotor1PhaseA();}
+void CommutateSinusoidalAvgMotor1PhaseBA(uint16_t pwm) {PWM_1A_PIN_SET_CV(SinusoidalWaveTable[256]*2*pwm/PWM_MAX); PWM_1B_PIN_SET_CV(SinusoidalWaveTable[128]*2*pwm/PWM_MAX); 	PWM_1C_PIN_SET_CV(SinusoidalWaveTable[0]*2*pwm/PWM_MAX); 	EN_1CBA_PIN_SET_OUT(0b111); /*SE_1CBA_PIN_SET_OUT(0b010);*/ TriggerADCMotor1PhaseC();}
+void CommutateSinusoidalAvgMotor1PhaseCA(uint16_t pwm) {PWM_1A_PIN_SET_CV(SinusoidalWaveTable[320]*2*pwm/PWM_MAX); PWM_1B_PIN_SET_CV(SinusoidalWaveTable[192]*2*pwm/PWM_MAX); 	PWM_1C_PIN_SET_CV(SinusoidalWaveTable[64]*2*pwm/PWM_MAX); 	EN_1CBA_PIN_SET_OUT(0b111); /*SE_1CBA_PIN_SET_OUT(0b010);*/ TriggerADCMotor1PhaseB();}
+void CommutateSinusoidalAvgMotor1PhaseCB(uint16_t pwm) {PWM_1A_PIN_SET_CV(SinusoidalWaveTable[0]*2*pwm/PWM_MAX); 	PWM_1B_PIN_SET_CV(SinusoidalWaveTable[256]*2*pwm/PWM_MAX); 	PWM_1C_PIN_SET_CV(SinusoidalWaveTable[128]*2*pwm/PWM_MAX); 	EN_1CBA_PIN_SET_OUT(0b111); /*SE_1CBA_PIN_SET_OUT(0b010);*/ TriggerADCMotor1PhaseA();}
+
+volatile static uint16_t Angle;
+volatile static uint16_t AngleOffset;
+volatile static uint32_t ISRCount;
+volatile static uint32_t PWMRatio;
+
+//AngleOffset[degrees] = ISRCount * ISRTime [us] * AngularSpeed [degrees/us]
+//AngleOffset[degrees] = ISRCount * ISRTime [us] * CYCLE_DOMAIN [degrees] * CycleFreq [cycles/us]
+//AngleOffset[degrees] = ISRCount * ISRTime [us] * CYCLE_DOMAIN [degrees] / CycleTime [us]
+void ModulateAngle(void)
+{
+	//AngleOffset = (384*Count51us*1,000,000 / FTM2_ISR_FREQ) / (1,000,000*Speed_GetDelta(&Motor1Speed) / FTM1_FREQ);
+	AngleOffset = (384*FTM1_FREQ/FTM2_ISR_FREQ) * ISRCount / Speed_GetDelta(&Motor1Speed);
+
+	// angle offset range of 0-64
+	if (AngleOffset > 64) AngleOffset = 64;
+	ISRCount++;
+	//if (Angle > 383)  angle = angle mod 384
+	PWM_1A_PIN_SET_CV(SinusoidalWaveTable[(Angle + 32  + AngleOffset) % 384]*2 * PWMRatio/PWM_MAX);
+	PWM_1B_PIN_SET_CV(SinusoidalWaveTable[(Angle + 288 + AngleOffset) % 384]*2 * PWMRatio/PWM_MAX);
+	PWM_1C_PIN_SET_CV(SinusoidalWaveTable[(Angle + 160 + AngleOffset) % 384]*2 * PWMRatio/PWM_MAX);
+}
+
+void CommutateSinusoidalMotor1PhaseAB(uint16_t pwm) {ISRCount = 0; Angle = 0; 	PWMRatio = pwm;	EN_1CBA_PIN_SET_OUT(0b111); SE_1CBA_PIN_SET_OUT(0b010); TriggerADCMotor1PhaseC();}
+void CommutateSinusoidalMotor1PhaseAC(uint16_t pwm) {ISRCount = 0; Angle = 64; 	PWMRatio = pwm; EN_1CBA_PIN_SET_OUT(0b111); SE_1CBA_PIN_SET_OUT(0b100); TriggerADCMotor1PhaseB();}
+void CommutateSinusoidalMotor1PhaseBC(uint16_t pwm) {ISRCount = 0; Angle = 128; PWMRatio = pwm;	EN_1CBA_PIN_SET_OUT(0b111); SE_1CBA_PIN_SET_OUT(0b100); TriggerADCMotor1PhaseA();}
+void CommutateSinusoidalMotor1PhaseBA(uint16_t pwm) {ISRCount = 0; Angle = 192; PWMRatio = pwm;	EN_1CBA_PIN_SET_OUT(0b111); SE_1CBA_PIN_SET_OUT(0b001); TriggerADCMotor1PhaseC();}
+void CommutateSinusoidalMotor1PhaseCA(uint16_t pwm) {ISRCount = 0; Angle = 256; PWMRatio = pwm;	EN_1CBA_PIN_SET_OUT(0b111); SE_1CBA_PIN_SET_OUT(0b001); TriggerADCMotor1PhaseB();}
+void CommutateSinusoidalMotor1PhaseCB(uint16_t pwm) {ISRCount = 0; Angle = 320; PWMRatio = pwm;	EN_1CBA_PIN_SET_OUT(0b111); SE_1CBA_PIN_SET_OUT(0b010); TriggerADCMotor1PhaseA();}
 
 
-void EnableMotor1PhaseABC(void) 	{EN_1CBA_PIN_SET_OUT(0b111); SE_1CBA_PIN_SET_OUT(0b000);}
+
+void EnableMotor1PhaseABC(void) 	{EN_1CBA_PIN_SET_OUT(0b111); SE_1CBA_PIN_SET_OUT(0b111);}
 void DisableMotor1PhaseABC(void) 	{EN_1CBA_PIN_SET_OUT(0b000); SE_1CBA_PIN_SET_OUT(0b000);} // all mosfet off, motor coasts
-void Set0PWMMotor1PhaseABC(void) 	{PWM_1C_PIN_SET_CV(0); PWM_1C_PIN_SET_CV(0); PWM_1C_PIN_SET_CV(0); EN_1CBA_PIN_SET_OUT(0b111); SE_1CBA_PIN_SET_OUT(0b000);} // all mosfet top side off, low side on, short motor terminals for dynamic brake
+void Set0PWMMotor1PhaseABC(void) 	{PWM_1A_PIN_SET_CV(0); PWM_1B_PIN_SET_CV(0); PWM_1C_PIN_SET_CV(0); EN_1CBA_PIN_SET_OUT(0b111); SE_1CBA_PIN_SET_OUT(0b000);} // all mosfet top side off, low side on, short motor terminals for dynamic brake
 
 void RestPWMPolarityMotor1(void) 	{PWM_1ABC_PIN_SET_POL(0b000);}
 
@@ -552,9 +570,9 @@ void PIDTuning(void) //2s
 	toggle ^= 1;
 
 	if (toggle)
-		Motor1.SetPointRPM = 0;
+		Motor1.SetPointRPM = 100;
 	else
-		Motor1.SetPointRPM = 1000;
+		Motor1.SetPointRPM = 300;
 }
 
 
@@ -626,26 +644,25 @@ void KESC_Init(void)
 		CommutateMotor1PhaseBA,
 		CommutateMotor1PhaseCA,
 		CommutateMotor1PhaseCB,
-		IndexAB,
-		IndexAC,
-		IndexBC,
-		IndexBA,
-		IndexCA,
-		IndexCB,
+		0,
+		0,
+		0,
+		0,
+		0,
+		0,
 		DisableMotor1PhaseABC,
 		DisableMotor1PhaseABC
 	);
 
 	Speed_InitHallEncoder(&Motor1Speed, &FTM1_C1V, FTM1_CV_MAX, FTM1_FREQ, MOTOR1_POLE_PAIRS, 0, PWM_FREQ);
-
 	Speed_InitDeltaOverflowDetection(&Motor1Speed, Millis_GetTickCounter());
 
 	PID_Init
 	(
 		&Motor1PID,
 		&Motor1.RPM, &Motor1.PWM, &Motor1.SetPointRPM,
-		60, 100, 0, 1, 0, 1,
-		FTM2_FREQ, PWM_PEROID, 10,
+		20, 100, 0, 1, 0, 1,
+		FTM2_FREQ, PWM_PEROID, 20,
 		0, PWM_MAX/4
 	);
 
@@ -677,8 +694,8 @@ void KESC_Init(void)
 	);
 
 	//KellyMotorShell_Init();
-	//Shell_InitNonBlocking(10, SHELL_OUTTER_LOOP_FREQ);
-	//RegisterShellCmds();
+		//Shell_InitNonBlocking(10, SHELL_OUTTER_LOOP_FREQ);
+		//RegisterShellCmds();
 
 	FMSTR_Init();
 
@@ -725,6 +742,52 @@ void KESC_Init(void)
 	);
 	BLDC_Stop(&Motor1); // release pwm after last commutation from calibration routine
 
+//	Commutation_MapCommuntationTable
+//	(
+//		&Motor1Commutation,
+//		SetPWMMotor1PhaseA,
+//		SetPWMMotor1PhaseA,
+//		SetPWMMotor1PhaseB,
+//		SetPWMMotor1PhaseB,
+//		SetPWMMotor1PhaseC,
+//		SetPWMMotor1PhaseC,
+//		CommutateBipolarMotor1PhaseAB,
+//		CommutateBipolarMotor1PhaseAC,
+//		CommutateBipolarMotor1PhaseBC,
+//		CommutateBipolarMotor1PhaseBA,
+//		CommutateBipolarMotor1PhaseCA,
+//		CommutateBipolarMotor1PhaseCB,
+//		IndexAB,
+//		IndexAC,
+//		IndexBC,
+//		IndexBA,
+//		IndexCA,
+//		IndexCB
+//	);
+
+//	Commutation_MapCommuntationTable
+//	(
+//		&Motor1Commutation,
+//		SetPWMMotor1PhaseA,
+//		SetPWMMotor1PhaseA,
+//		SetPWMMotor1PhaseB,
+//		SetPWMMotor1PhaseB,
+//		SetPWMMotor1PhaseC,
+//		SetPWMMotor1PhaseC,
+//		CommutateUnipolar2Motor1PhaseAB,
+//		CommutateUnipolar2Motor1PhaseAC,
+//		CommutateUnipolar2Motor1PhaseBC,
+//		CommutateUnipolar2Motor1PhaseBA,
+//		CommutateUnipolar2Motor1PhaseCA,
+//		CommutateUnipolar2Motor1PhaseCB,
+//		IndexAB,
+//		IndexAC,
+//		IndexBC,
+//		IndexBA,
+//		IndexCA,
+//		IndexCB
+//	);
+
 	Commutation_MapCommuntationTable
 	(
 		&Motor1Commutation,
@@ -734,12 +797,12 @@ void KESC_Init(void)
 		SetPWMMotor1PhaseB,
 		SetPWMMotor1PhaseC,
 		SetPWMMotor1PhaseC,
-		CommutateBipolarMotor1PhaseAB,
-		CommutateBipolarMotor1PhaseAC,
-		CommutateBipolarMotor1PhaseBC,
-		CommutateBipolarMotor1PhaseBA,
-		CommutateBipolarMotor1PhaseCA,
-		CommutateBipolarMotor1PhaseCB,
+		CommutateSinusoidalMotor1PhaseAB,
+		CommutateSinusoidalMotor1PhaseAC,
+		CommutateSinusoidalMotor1PhaseBC,
+		CommutateSinusoidalMotor1PhaseBA,
+		CommutateSinusoidalMotor1PhaseCA,
+		CommutateSinusoidalMotor1PhaseCB,
 		IndexAB,
 		IndexAC,
 		IndexBC,
@@ -748,16 +811,12 @@ void KESC_Init(void)
 		IndexCB
 	);
 
-	BLDC_SetPWM(&Motor1, 25);
-
-	//BLDC_Start(&Motor1);
 }
 
 bool GlobalPIDTuning = 0;
 
 void KESC_Loop(void)
 {
-
 	while(1)
 	{
 		LoopDelta = Micros() - LoopTimer;
@@ -781,7 +840,7 @@ void KESC_Loop(void)
 		if(LiteFXOS_ProcThread(&ThreadComTx))
 		{
 			Monitor_Convert(&Motor1Monitor);
-			Motor1.RPM 			= Speed_GetRPM(&Motor1Speed);
+
 			Motor1.PWMVoltage 	= BLDC_GetPWMVoltage(&Motor1);
 		}
 
