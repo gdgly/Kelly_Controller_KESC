@@ -1,0 +1,7 @@
+ExitOnError 1
+r
+h
+loadfile "S:\KellyControls\Kelly_Controller_KESC\KESCProjectMCUXpresso\Debug\KESCProjectMCUXpresso.hex"
+qc
+
+qc
