@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <launchConfiguration type="com.pemicro.debug.gdbjtag.pne.launchConfigurationType">
-<stringAttribute key="com.crt.ctrlcenter.OFSemuDetails" value="PEMicroPE5657405"/>
-<stringAttribute key="com.crt.ctrlcenter.serialNumber" value="USB1 - Multilink Universal Rev B (PE5657405)"/>
+<stringAttribute key="com.crt.ctrlcenter.OFSemuDetails" value="PEMicroPEMFED690"/>
+<stringAttribute key="com.crt.ctrlcenter.serialNumber" value="USB1 - Multilink ACP Rev B (PEMFED690)"/>
 <mapAttribute key="com.crt.ctrlcenter.symbolsGroupSettings"/>
 <intAttribute key="com.nxp.mcuxpresso.core.datamodels.ui.launchers.PELaunchConfigHandler.version" value="1"/>
 <booleanAttribute key="com.nxp.mcuxpresso.flash.clear.console" value="true"/>
 <booleanAttribute key="com.nxp.mcuxpresso.flash.confirm" value="false"/>
 <stringAttribute key="com.nxp.mcuxpresso.ide.probe.manufacturer" value="P&amp;E Microcomputer Systems"/>
-<stringAttribute key="com.nxp.mcuxpresso.ide.probe.name" value="USB1 - Multilink Universal Rev B (PE5657405)"/>
+<stringAttribute key="com.nxp.mcuxpresso.ide.probe.name" value="USB1 - Multilink ACP Rev B (PEMFED690)"/>
 <stringAttribute key="com.nxp.mcuxpresso.ide.probe.type" value="USB1"/>
 <booleanAttribute key="com.nxp.mcuxpresso.pemicro.flash.cyclone.image" value="false"/>
 <stringAttribute key="com.nxp.mcuxpresso.pemicro.flash.program.action" value="Erase, blank check, program and verify"/>
@@ -92,8 +92,8 @@
 <booleanAttribute key="com.pemicro.debug.gdbjtag.pne.eraseOptionsenabled" value="false"/>
 <stringAttribute key="com.pemicro.debug.gdbjtag.pne.gdbClientOtherCommands" value="set mem inaccessible-by-default off&#13;&#10;set tcp auto-retry on&#13;&#10;set tcp connect-timeout 240&#13;&#10;set remotetimeout 60"/>
 <stringAttribute key="com.pemicro.debug.gdbjtag.pne.gdbClientOtherOptions" value=""/>
-<intAttribute key="com.pemicro.debug.gdbjtag.pne.gdbServerTelnetPortNumber" value="51794"/>
-<intAttribute key="com.pemicro.debug.gdbjtag.pne.gdbmiPortNumber" value="6224"/>
+<intAttribute key="com.pemicro.debug.gdbjtag.pne.gdbServerTelnetPortNumber" value="51796"/>
+<intAttribute key="com.pemicro.debug.gdbjtag.pne.gdbmiPortNumber" value="6236"/>
 <intAttribute key="com.pemicro.debug.gdbjtag.pne.jtagPreIrBits" value="0"/>
 <intAttribute key="com.pemicro.debug.gdbjtag.pne.jtagTapNumber" value="0"/>
 <stringAttribute key="com.pemicro.debug.gdbjtag.pne.macScript" value=""/>
@@ -146,7 +146,7 @@
 <booleanAttribute key="com.pemicro.debug.gdbjtag.pne.sda.SPECIFY_NETWORK_CARD" value="false"/>
 <booleanAttribute key="com.pemicro.debug.gdbjtag.pne.sda.STARTUP_USE_SWD" value="true"/>
 <intAttribute key="com.pemicro.debug.gdbjtag.pne.selectedCoreNumber" value="1"/>
-<intAttribute key="com.pemicro.debug.gdbjtag.pne.serverPortNumber" value="7224"/>
+<intAttribute key="com.pemicro.debug.gdbjtag.pne.serverPortNumber" value="7236"/>
 <booleanAttribute key="com.pemicro.debug.gdbjtag.pne.trc_eth.ALWAYS_ERASE" value="false"/>
 <stringAttribute key="com.pemicro.debug.gdbjtag.pne.trc_eth.CYCLONE_IP" value=""/>
 <booleanAttribute key="com.pemicro.debug.gdbjtag.pne.trc_eth.DO_RESET_DELAY" value="false"/>

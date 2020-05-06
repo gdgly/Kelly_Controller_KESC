@@ -161,7 +161,7 @@
 #define PWM_1B_PIN_SET_CV(reg)	FTM_PDD_WriteChannelValueReg(FTM2_BASE_PTR, FTM_PDD_CHANNEL_4, reg) //PTB4 FTM2_C4V
 #define PWM_1C_PIN_SET_CV(reg)	FTM_PDD_WriteChannelValueReg(FTM2_BASE_PTR, FTM_PDD_CHANNEL_3, reg) //PTC3 FTM2_C3V
 
-#define PWM_1ABC_PIN_SET_POL(reg)  FTM_PDD_WritePolarityReg(FTM2_BASE_PTR, (FTM_PDD_ReadPolarityReg(FTM2_BASE_PTR) & ~(MASK_LSB_3<<3)) | ((reg&MASK_LSB_3)<<3))
+#define PWM_1ABC_PIN_SET_POL(reg)  FTM_PDD_WritePolarityReg(FTM2_BASE_PTR, (FTM_PDD_ReadPolarityReg(FTM2_BASE_PTR) & ~(MASK_LSB_3<<3)) | (((reg)&MASK_LSB_3)<<3))
 
 
 

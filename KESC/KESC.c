@@ -385,7 +385,7 @@ void RestPWMPolarityMotor1PhaseABC(void) 	{PWM_1ABC_PIN_SET_POL(0b000);}
 
 //void SetPWMMotor1_8(uint8_t pwmA, uint8_t pwmB, uint8_t pwmC) 	{PWM_1A_PIN_SET_CV((uint16_t)pwmA<<1); PWM_1B_PIN_SET_CV((uint16_t)pwmB<<1); PWM_1C_PIN_SET_CV((uint16_t)pwmC<<1);}
 void SetPWMMotor1(uint16_t pwmA, uint16_t pwmB, uint16_t pwmC) 	{PWM_1A_PIN_SET_CV(pwmA); PWM_1B_PIN_SET_CV(pwmB); PWM_1C_PIN_SET_CV(pwmC);}
-void EnablePWMMotor1(bool enA, bool enB, bool enC) 				{EN_1CBA_PIN_SET_OUT(enC<<2|enB<<1|enA);}
+void EnablePWMMotor1(bool enA, bool enB, bool enC)				{EN_1CBA_PIN_SET_OUT(enC<<2|enB<<1|enA);}
 void InversePWMMotor1(bool invA, bool invB, bool invC)		 	{PWM_1ABC_PIN_SET_POL(invA<<2|invB<<1|invC);}
 
 void OnMotor1PhaseAB(void) {SE_1CBA_PIN_SET_OUT(0b010); TriggerADCMotor1PhaseC();};
@@ -468,8 +468,8 @@ void KESC_Init(void)
 	//Hardware init
 	Serial0_Init();
 	Serial0_SetBaudRateMode(Serial0_BM_9600BAUD);
-	//Inhr1_SetBaudRateMode(Inhr1_BM_38400BAUD);
-	//Inhr1_SetBaudRateMode(Inhr1_BM_115200BAUD);
+	//Serial0_SetBaudRateMode(Inhr1_BM_38400BAUD);
+	//Serial0_SetBaudRateMode(Inhr1_BM_115200BAUD);
 
 	/* ADC_APCTL1: ADPC=0xE037 */
 	ADC_Init(0xE037);
@@ -532,6 +532,7 @@ void KESC_Init(void)
 	Waveform_InitSinusoidalModulation
 	(
 		SetPWMMotor1,
+		PWM_MAX,
 		EnablePWMMotor1,
 		InversePWMMotor1,
 		OnMotor1PhaseAB,
@@ -599,17 +600,39 @@ void KESC_Init(void)
 	LiteFXOS_SetThreadStart(&ThreadTask1Second);
 	LiteFXOS_SetThreadStart(&ThreadComTx);
 	LiteFXOS_SetThreadStart(&ThreadPIDTuning);
+
 	Cpu_EnableInt();
-
-
 }
+
 
 bool GlobalPIDTuning = 0;
 
 void KESC_Loop(void)
 {
 	// Temp run
-	Commutation_MapCommuntationTableRunCalibration
+//	Commutation_MapCommuntationTableRunCalibration
+//	(
+//		&Motor1Commutation,
+//		&IndexAB,
+//		&IndexAC,
+//		&IndexBC,
+//		&IndexBA,
+//		&IndexCA,
+//		&IndexCB,
+//	Waveform_CommutatePhaseAB,
+//	Waveform_CommutatePhaseAC,
+//	Waveform_CommutatePhaseBC,
+//	Waveform_CommutatePhaseBA,
+//	Waveform_CommutatePhaseCA,
+//	Waveform_CommutatePhaseCB,
+//		SetPWMMotor1,
+//		20,
+//		EnablePWMMotor1,
+//		Delay,
+//		1000
+//	);
+
+	Commutation_RunCalibration
 	(
 		&Motor1Commutation,
 		&IndexAB,
@@ -618,20 +641,32 @@ void KESC_Loop(void)
 		&IndexBA,
 		&IndexCA,
 		&IndexCB,
+		SetPWMMotor1,
+		20,
+		EnablePWMMotor1,
+		Delay,
+		1000
+	);
+
+	Commutation_MapCommuntationTable
+	(
+		&Motor1Commutation,
 		Waveform_CommutatePhaseAB,
 		Waveform_CommutatePhaseAC,
 		Waveform_CommutatePhaseBC,
 		Waveform_CommutatePhaseBA,
 		Waveform_CommutatePhaseCA,
 		Waveform_CommutatePhaseCB,
-		12,
-		EnablePWMMotor1,
-		Delay,
-		1000
+		IndexAB,
+		IndexAC,
+		IndexBC,
+		IndexBA,
+		IndexCA,
+		IndexCB
 	);
 
 	Waveform_SetMode(0);
-	//Waveform_EnableSinusoidalModulation();
+	Waveform_EnableSinusoidalModulation();
 	//Waveform_DisableSinusoidalModulation();
 
 

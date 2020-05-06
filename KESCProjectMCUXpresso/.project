@@ -63,11 +63,6 @@
 			<type>2</type>
 			<locationURI>PARENT-2-PROJECT_LOC/%5BArchive%5D/Sources</locationURI>
 		</link>
-		<link>
-			<name>SourceGroup/KESC/Exclude/bldc</name>
-			<type>2</type>
-			<locationURI>PARENT-2-PROJECT_LOC/%5BReference%5D/KE04_LV_TWR_BLDC_HallSensor_Look-upTable/src/projects/KE04/bldc</locationURI>
-		</link>
 	</linkedResources>
 	<variableList>
 		<variable>
