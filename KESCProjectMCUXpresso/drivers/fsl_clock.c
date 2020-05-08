@@ -28,7 +28,7 @@
 #define SIM_BUSDIV_VAL ((SIM->BUSDIV & SIM_BUSDIV_BUSDIV_MASK) >> SIM_BUSDIV_BUSDIV_SHIFT)
 
 /* ICS_S_CLKST definition. */
-enum _ics_clkout_stat
+enum
 {
     kICS_ClkOutStatFll, /* FLL.            */
     kICS_ClkOutStatInt, /* Internal clock. */
@@ -112,7 +112,7 @@ static uint32_t CLOCK_GetFllExtRefClkFreq(void)
 
     uint32_t freq = CLOCK_GetICSExtClkFreq();
 
-    if (!freq)
+    if (freq == 0UL)
     {
         return freq;
     }
@@ -152,16 +152,20 @@ static uint32_t CLOCK_GetFllExtRefClkFreq(void)
 
 static uint32_t CLOCK_GetFllRefClkFreq(void)
 {
+    uint32_t freq;
+
     /* If use external reference clock. */
-    if (kICS_FllSrcExternal == ICS_S_IREFST_VAL)
+    if ((uint8_t)kICS_FllSrcExternal == ICS_S_IREFST_VAL)
     {
-        return CLOCK_GetFllExtRefClkFreq();
+        freq = CLOCK_GetFllExtRefClkFreq();
     }
     /* If use internal reference clock. */
     else
     {
-        return s_slowIrcFreq;
+        freq = s_slowIrcFreq;
     }
+
+    return freq;
 }
 
 static uint8_t CLOCK_GetOscRangeFromFreq(uint32_t freq)
@@ -190,16 +194,20 @@ static uint8_t CLOCK_GetOscRangeFromFreq(uint32_t freq)
  */
 uint32_t CLOCK_GetOsc0ErClkFreq(void)
 {
-    if (OSC0->CR & OSC_CR_OSCEN_MASK)
+    uint32_t freq;
+
+    if ((OSC0->CR & OSC_CR_OSCEN_MASK) != 0U)
     {
         /* Please call CLOCK_SetXtal0Freq base on board setting before using OSC0 clock. */
         assert(g_xtal0Freq);
-        return g_xtal0Freq;
+        freq = g_xtal0Freq;
     }
     else
     {
-        return 0U;
+        freq = 0U;
     }
+
+    return freq;
 }
 
 /*!
@@ -211,7 +219,7 @@ uint32_t CLOCK_GetFlashClkFreq(void)
 {
     uint32_t freq;
 
-    freq = CLOCK_GetICSOutClkFreq() / (SIM_BUSDIV_VAL + 1);
+    freq = CLOCK_GetICSOutClkFreq() / (SIM_BUSDIV_VAL + 1U);
 
     return freq;
 }
@@ -316,7 +324,7 @@ void CLOCK_SetSimConfig(sim_clock_config_t const *config)
 uint32_t CLOCK_GetICSOutClkFreq(void)
 {
     uint32_t icsoutclk;
-    uint32_t clkst = ICS_S_CLKST_VAL;
+    uint8_t clkst = ICS_S_CLKST_VAL;
 
     switch (clkst)
     {
@@ -334,7 +342,7 @@ uint32_t CLOCK_GetICSOutClkFreq(void)
             break;
     }
 
-    return (icsoutclk / (1 << ICS_C2_BDIV_VAL));
+    return (icsoutclk / (1UL << ICS_C2_BDIV_VAL));
 }
 
 /*!
@@ -348,14 +356,20 @@ uint32_t CLOCK_GetICSOutClkFreq(void)
  */
 uint32_t CLOCK_GetFllFreq(void)
 {
+    uint32_t freq;
+
     /* If FLL is not enabled currently, then return 0U. */
-    if ((ICS->C2 & ICS_C2_LP_MASK))
+    if ((ICS->C2 & ICS_C2_LP_MASK) != 0U)
     {
-        return 0U;
+        freq = 0U;
+    }
+    else
+    {
+        /* Get FLL reference clock frequency. */
+        freq = CLOCK_GetFllRefClkFreq() * ICS_FLL_CLOCK_FACTOR;
     }
 
-    /* Get FLL reference clock frequency. */
-    return CLOCK_GetFllRefClkFreq() * ICS_FLL_CLOCK_FACTOR;
+    return freq;
 }
 
 /*!
@@ -368,13 +382,19 @@ uint32_t CLOCK_GetFllFreq(void)
  */
 uint32_t CLOCK_GetInternalRefClkFreq(void)
 {
+    uint32_t freq;
+
     /* If ICSIRCLK is gated. */
-    if (!(ICS->C1 & ICS_C1_IRCLKEN_MASK))
+    if ((ICS->C1 & ICS_C1_IRCLKEN_MASK) == 0U)
     {
-        return 0U;
+        freq = 0U;
+    }
+    else
+    {
+        freq = s_slowIrcFreq;
     }
 
-    return s_slowIrcFreq;
+    return freq;
 }
 
 /*!
@@ -388,16 +408,21 @@ uint32_t CLOCK_GetInternalRefClkFreq(void)
 uint32_t CLOCK_GetICSFixedFreqClkFreq(void)
 {
     uint32_t freq = CLOCK_GetFllRefClkFreq();
+    uint32_t ret;
+    uint32_t ICSOUTCLK;
 
+    ICSOUTCLK = CLOCK_GetICSOutClkFreq();
     /* ICSFFCLK must be no more than ICSOUTCLK/4. */
-    if ((freq) && (freq <= (CLOCK_GetICSOutClkFreq() / 4U)))
+    if ((freq != 0UL) && (freq <= (ICSOUTCLK / 4U)))
     {
-        return freq;
+        ret = freq;
     }
     else
     {
-        return 0U;
+        ret = 0U;
     }
+
+    return ret;
 }
 
 /*!
@@ -411,13 +436,13 @@ void CLOCK_InitOsc0(osc_config_t const *config)
 {
     uint8_t range = CLOCK_GetOscRangeFromFreq(config->freq);
 
-    OSC0->CR = ((OSC0->CR & ~OSC_MODE_MASK) | OSC_CR_RANGE(range) | ((uint8_t)config->workMode) |
+    OSC0->CR = ((OSC0->CR & (uint8_t)(~OSC_MODE_MASK)) | (uint8_t)(OSC_CR_RANGE(range)) | ((uint8_t)config->workMode) |
                 ((uint8_t)config->enableMode));
 
-    if ((kOSC_ModeExt != config->workMode) && (OSC0->CR & OSC_CR_OSCEN_MASK))
+    if (((uint8_t)kOSC_ModeExt != config->workMode) && ((OSC0->CR & OSC_CR_OSCEN_MASK) != 0U))
     {
         /* Wait for stable. */
-        while (!(OSC0->CR & OSC_CR_OSCINIT_MASK))
+        while (0U == (OSC0->CR & OSC_CR_OSCINIT_MASK))
         {
         }
     }
@@ -443,9 +468,9 @@ void CLOCK_DeinitOsc0(void)
 ics_mode_t CLOCK_GetMode(void)
 {
     ics_mode_t mode = kICS_ModeError;
-    uint32_t clkst  = ICS_S_CLKST_VAL;
-    uint32_t irefst = ICS_S_IREFST_VAL;
-    uint32_t lp     = ICS_C2_LP_VAL;
+    uint8_t clkst   = ICS_S_CLKST_VAL;
+    uint8_t irefst  = ICS_S_IREFST_VAL;
+    uint8_t lp      = ICS_C2_LP_VAL;
 
     /*------------------------------------------------------------------
                            Mode and Registers
@@ -477,7 +502,7 @@ ics_mode_t CLOCK_GetMode(void)
     switch (clkst)
     {
         case kICS_ClkOutStatFll:
-            if (kICS_FllSrcExternal == irefst)
+            if ((uint8_t)kICS_FllSrcExternal == irefst)
             {
                 mode = kICS_ModeFEE;
             }
@@ -487,7 +512,7 @@ ics_mode_t CLOCK_GetMode(void)
             }
             break;
         case kICS_ClkOutStatInt:
-            if (lp)
+            if (lp != 0U)
             {
                 mode = kICS_ModeBILP;
             }
@@ -497,7 +522,7 @@ ics_mode_t CLOCK_GetMode(void)
             }
             break;
         case kICS_ClkOutStatExt:
-            if (lp)
+            if (lp != 0U)
             {
                 mode = kICS_ModeBELP;
             }
@@ -507,6 +532,7 @@ ics_mode_t CLOCK_GetMode(void)
             }
             break;
         default:
+            mode = kICS_ModeError;
             break;
     }
 
@@ -534,24 +560,24 @@ status_t CLOCK_SetFeiMode(uint8_t bDiv)
 #endif
 
     /* Set IREFS. */
-    ICS->C1 = (ICS->C1 & ~(ICS_C1_IREFS_MASK)) | ICS_C1_IREFS(kICS_FllSrcInternal); /* IREFS = 1 */
+    ICS->C1 = (uint8_t)((ICS->C1 & ~(ICS_C1_IREFS_MASK)) | ICS_C1_IREFS(kICS_FllSrcInternal)); /* IREFS = 1 */
 
     /* Set CLKS */
-    ICS->C1 = (ICS->C1 & (~ICS_C1_CLKS_MASK)) | ICS_C1_CLKS(kICS_ClkOutSrcFll); /* CLKS = 0 */
+    ICS->C1 = (uint8_t)((ICS->C1 & (~ICS_C1_CLKS_MASK)) | ICS_C1_CLKS(kICS_ClkOutSrcFll)); /* CLKS = 0 */
     /* set bus clock divider */
-    ICS->C2 = (ICS->C2 & (~ICS_C2_BDIV_MASK)) | ICS_C2_BDIV(bDiv);
+    ICS->C2 = (uint8_t)((ICS->C2 & (~ICS_C2_BDIV_MASK)) | ICS_C2_BDIV(bDiv));
 
     /* Wait and check status. */
-    while (kICS_FllSrcInternal != ICS_S_IREFST_VAL)
+    while ((uint8_t)kICS_FllSrcInternal != ICS_S_IREFST_VAL)
     {
     }
     /* Check ICS_S[CLKST] */
-    while (kICS_ClkOutStatFll != ICS_S_CLKST_VAL)
+    while ((uint8_t)kICS_ClkOutStatFll != ICS_S_CLKST_VAL)
     {
     }
 
     /* wait for FLL to lock */
-    while (!(ICS->S & ICS_S_LOCK_MASK))
+    while (0U == (ICS->S & ICS_S_LOCK_MASK))
     {
     }
 
@@ -584,35 +610,35 @@ status_t CLOCK_SetFeeMode(uint8_t bDiv, uint8_t rDiv)
 #endif
 
     /* Set CLKS, rDiv and IREFS. */
-    ICS->C1 = ((ICS->C1 & ~(ICS_C1_CLKS_MASK | ICS_C1_RDIV_MASK | ICS_C1_IREFS_MASK)) |
-               (ICS_C1_CLKS(kICS_ClkOutSrcFll)         /* CLKS = 0 */
-                | ICS_C1_RDIV(rDiv)                    /* FRDIV */
-                | ICS_C1_IREFS(kICS_FllSrcExternal))); /* IREFS = 0 */
+    ICS->C1 = (uint8_t)((ICS->C1 & ~(ICS_C1_CLKS_MASK | ICS_C1_RDIV_MASK | ICS_C1_IREFS_MASK)) |
+                        (ICS_C1_CLKS(kICS_ClkOutSrcFll)         /* CLKS = 0 */
+                         | ICS_C1_RDIV(rDiv)                    /* FRDIV */
+                         | ICS_C1_IREFS(kICS_FllSrcExternal))); /* IREFS = 0 */
     /* set bus clock divider */
-    ICS->C2 = (ICS->C2 & (~ICS_C2_BDIV_MASK)) | ICS_C2_BDIV(bDiv);
+    ICS->C2 = (uint8_t)((ICS->C2 & (~ICS_C2_BDIV_MASK)) | ICS_C2_BDIV(bDiv));
 
     /* If use external crystal as clock source, wait for it stable. */
     {
-        if (OSC0->CR & OSC_CR_OSCOS_MASK)
+        if ((OSC0->CR & OSC_CR_OSCOS_MASK) != 0U)
         {
-            while (!(OSC0->CR & OSC_CR_OSCINIT_MASK))
+            while (0U == (OSC0->CR & OSC_CR_OSCINIT_MASK))
             {
             }
         }
     }
 
     /* Wait and check status. */
-    while (kICS_FllSrcExternal != ICS_S_IREFST_VAL)
+    while ((uint8_t)kICS_FllSrcExternal != ICS_S_IREFST_VAL)
     {
     }
 
     /* Check ICS_S[CLKST] */
-    while (kICS_ClkOutStatFll != ICS_S_CLKST_VAL)
+    while ((uint8_t)kICS_ClkOutStatFll != ICS_S_CLKST_VAL)
     {
     }
 
     /* wait for FLL to lock */
-    while (!(ICS->S & ICS_S_LOCK_MASK))
+    while (0U == (ICS->S & ICS_S_LOCK_MASK))
     {
     }
 
@@ -646,18 +672,18 @@ status_t CLOCK_SetFbiMode(uint8_t bDiv)
 #endif
 
     /* set bus clock divider and disable low power */
-    ICS->C2 = (ICS->C2 & (~(ICS_C2_BDIV_MASK | ICS_C2_LP_MASK))) | ICS_C2_BDIV(bDiv);
+    ICS->C2 = (uint8_t)((ICS->C2 & (~(ICS_C2_BDIV_MASK | ICS_C2_LP_MASK))) | ICS_C2_BDIV(bDiv));
     /* Set CLKS and IREFS. */
-    ICS->C1 =
-        ((ICS->C1 & ~(ICS_C1_CLKS_MASK | ICS_C1_IREFS_MASK)) | (ICS_C1_CLKS(kICS_ClkOutSrcInternal)    /* CLKS = 1 */
-                                                                | ICS_C1_IREFS(kICS_FllSrcInternal))); /* IREFS = 1 */
+    ICS->C1 = (uint8_t)((ICS->C1 & ~(ICS_C1_CLKS_MASK | ICS_C1_IREFS_MASK)) |
+                        (ICS_C1_CLKS(kICS_ClkOutSrcInternal)    /* CLKS = 1 */
+                         | ICS_C1_IREFS(kICS_FllSrcInternal))); /* IREFS = 1 */
 
     /* Wait and check status. */
-    while (kICS_FllSrcInternal != ICS_S_IREFST_VAL)
+    while ((uint8_t)kICS_FllSrcInternal != ICS_S_IREFST_VAL)
     {
     }
 
-    while (kICS_ClkOutStatInt != ICS_S_CLKST_VAL)
+    while ((uint8_t)kICS_ClkOutStatInt != ICS_S_CLKST_VAL)
     {
     }
 
@@ -691,31 +717,31 @@ status_t CLOCK_SetFbeMode(uint8_t bDiv, uint8_t rDiv)
 #endif
 
     /* set bus clock divider and disable low power */
-    ICS->C2 = (ICS->C2 & (~(ICS_C2_BDIV_MASK | ICS_C2_LP_MASK))) | ICS_C2_BDIV(bDiv);
+    ICS->C2 = (uint8_t)((ICS->C2 & (~(ICS_C2_BDIV_MASK | ICS_C2_LP_MASK))) | ICS_C2_BDIV(bDiv));
 
     /* Set CLKS and IREFS. */
-    ICS->C1 = ((ICS->C1 & ~(ICS_C1_CLKS_MASK | ICS_C1_RDIV_MASK | ICS_C1_IREFS_MASK)) |
-               (ICS_C1_CLKS(kICS_ClkOutSrcExternal)    /* CLKS = 2 */
-                | ICS_C1_RDIV(rDiv)                    /* FRDIV = frDiv */
-                | ICS_C1_IREFS(kICS_FllSrcExternal))); /* IREFS = 0 */
+    ICS->C1 = (uint8_t)((ICS->C1 & ~(ICS_C1_CLKS_MASK | ICS_C1_RDIV_MASK | ICS_C1_IREFS_MASK)) |
+                        (ICS_C1_CLKS(kICS_ClkOutSrcExternal)    /* CLKS = 2 */
+                         | ICS_C1_RDIV(rDiv)                    /* FRDIV = frDiv */
+                         | ICS_C1_IREFS(kICS_FllSrcExternal))); /* IREFS = 0 */
 
     /* If use external crystal as clock source, wait for it stable. */
     {
-        if (OSC0->CR & OSC_CR_OSCOS_MASK)
+        if ((OSC0->CR & OSC_CR_OSCOS_MASK) != 0U)
         {
-            while (!(OSC0->CR & OSC_CR_OSCINIT_MASK))
+            while (0U == (OSC0->CR & OSC_CR_OSCINIT_MASK))
             {
             }
         }
     }
 
     /* Wait for Reference clock Status bit to clear */
-    while (kICS_FllSrcExternal != ICS_S_IREFST_VAL)
+    while ((uint8_t)kICS_FllSrcExternal != ICS_S_IREFST_VAL)
     {
     }
 
     /* Wait for clock status bits to show clock source is ext ref clk */
-    while (kICS_ClkOutStatExt != ICS_S_CLKST_VAL)
+    while ((uint8_t)kICS_ClkOutStatExt != ICS_S_CLKST_VAL)
     {
     }
 
@@ -745,7 +771,7 @@ status_t CLOCK_SetBilpMode(uint8_t bDiv)
 #endif /* ICS_CONFIG_CHECK_PARAM */
 
     /* set bus clock divider and enable low power */
-    ICS->C2 = (ICS->C2 & (~ICS_C2_BDIV_MASK)) | ICS_C2_BDIV(bDiv) | ICS_C2_LP_MASK;
+    ICS->C2 = (uint8_t)((ICS->C2 & (~ICS_C2_BDIV_MASK)) | ICS_C2_BDIV(bDiv) | ICS_C2_LP_MASK);
 
     return kStatus_Success;
 }
@@ -770,7 +796,7 @@ status_t CLOCK_SetBelpMode(uint8_t bDiv)
 #endif
 
     /* set bus clock divider and enable low power */
-    ICS->C2 = (ICS->C2 & (~ICS_C2_BDIV_MASK)) | ICS_C2_BDIV(bDiv) | ICS_C2_LP_MASK;
+    ICS->C2 = (uint8_t)((ICS->C2 & (~ICS_C2_BDIV_MASK)) | ICS_C2_BDIV(bDiv) | ICS_C2_LP_MASK);
 
     return kStatus_Success;
 }
@@ -821,13 +847,13 @@ status_t CLOCK_BootToFeeMode(uint8_t bDiv, uint8_t rDiv)
 status_t CLOCK_BootToBilpMode(uint8_t bDiv)
 {
     /* If reset mode is not BILP, first enter FBI mode. */
-    ICS->C1 = (ICS->C1 & ~ICS_C1_CLKS_MASK) | ICS_C1_CLKS(kICS_ClkOutSrcInternal);
-    while (ICS_S_CLKST_VAL != kICS_ClkOutStatInt)
+    ICS->C1 = (uint8_t)((ICS->C1 & ~ICS_C1_CLKS_MASK) | ICS_C1_CLKS(kICS_ClkOutSrcInternal));
+    while (ICS_S_CLKST_VAL != (uint8_t)kICS_ClkOutStatInt)
     {
     }
 
     /* set bus clock divider and enable low power */
-    ICS->C2 = (ICS->C2 & (~ICS_C2_BDIV_MASK)) | ICS_C2_BDIV(bDiv) | ICS_C2_LP_MASK;
+    ICS->C2 = (uint8_t)((ICS->C2 & (~ICS_C2_BDIV_MASK)) | ICS_C2_BDIV(bDiv) | ICS_C2_LP_MASK);
 
     return kStatus_Success;
 }
@@ -845,15 +871,15 @@ status_t CLOCK_BootToBilpMode(uint8_t bDiv)
 status_t CLOCK_BootToBelpMode(uint8_t bDiv)
 {
     /* Set to FBE mode. */
-    ICS->C1 =
-        ((ICS->C1 & ~(ICS_C1_CLKS_MASK | ICS_C1_IREFS_MASK)) | (ICS_C1_CLKS(kICS_ClkOutSrcExternal)    /* CLKS = 2 */
-                                                                | ICS_C1_IREFS(kICS_FllSrcExternal))); /* IREFS = 0 */
+    ICS->C1 = (uint8_t)((ICS->C1 & ~(ICS_C1_CLKS_MASK | ICS_C1_IREFS_MASK)) |
+                        (ICS_C1_CLKS(kICS_ClkOutSrcExternal)    /* CLKS = 2 */
+                         | ICS_C1_IREFS(kICS_FllSrcExternal))); /* IREFS = 0 */
 
     /* If use external crystal as clock source, wait for it stable. */
     {
-        if (OSC0->CR & OSC_CR_OSCOS_MASK)
+        if ((OSC0->CR & OSC_CR_OSCOS_MASK) != 0U)
         {
-            while (!(OSC0->CR & OSC_CR_OSCINIT_MASK))
+            while (0U == (OSC0->CR & OSC_CR_OSCINIT_MASK))
             {
             }
         }
@@ -866,7 +892,7 @@ status_t CLOCK_BootToBelpMode(uint8_t bDiv)
     }
 
     /* set bus clock divider and enable low power */
-    ICS->C2 = (ICS->C2 & (~ICS_C2_BDIV_MASK)) | ICS_C2_BDIV(bDiv) | ICS_C2_LP_MASK;
+    ICS->C2 = (uint8_t)((ICS->C2 & (~ICS_C2_BDIV_MASK)) | ICS_C2_BDIV(bDiv) | ICS_C2_LP_MASK);
 
     return kStatus_Success;
 }
@@ -938,6 +964,7 @@ status_t CLOCK_SetIcsConfig(const ics_config_t *config)
                 status = CLOCK_SetBelpMode(config->bDiv);
                 break;
             default:
+                status = kStatus_Success;
                 break;
         }
         if (kStatus_Success != status)
@@ -947,30 +974,4 @@ status_t CLOCK_SetIcsConfig(const ics_config_t *config)
     } while (next_mode != config->icsMode);
 
     return kStatus_Success;
-}
-
-/*!
- * brief Delay at least for several microseconds.
- * Please note that, this API will calculate the microsecond period with the maximum devices
- * supported CPU frequency, so this API will only delay for at least the given microseconds, if precise
- * delay count was needed, please implement a new timer count to achieve this function.
- *
- * param delay_us  Delay time in unit of microsecond.
- */
-__attribute__((weak)) void SDK_DelayAtLeastUs(uint32_t delay_us)
-{
-    assert(0U != delay_us);
-
-    uint32_t count = (uint32_t)USEC_TO_COUNT(delay_us, SDK_DEVICE_MAXIMUM_CPU_CLOCK_FREQUENCY);
-
-    /*
-     * Calculate the real delay count depend on the excute instructions cycles,
-     * users can change the divider value to adapt to the real IDE optimise level.
-     */
-    count = (count / 4U);
-
-    for (; count > 0UL; count--)
-    {
-        __NOP();
-    }
 }

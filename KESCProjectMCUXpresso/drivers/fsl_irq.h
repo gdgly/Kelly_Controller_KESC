@@ -1,5 +1,5 @@
 /*
- * Copyright 2017 NXP
+ * Copyright 2016-2019 NXP
  * All rights reserved.
  *
  * SPDX-License-Identifier: BSD-3-Clause
@@ -23,7 +23,7 @@
 
 /*! @name Driver version */
 /*@{*/
-#define FSL_IRQ_DRIVER_VERSION (MAKE_VERSION(2, 0, 1)) /*!< Version 2.0.1. */
+#define FSL_IRQ_DRIVER_VERSION (MAKE_VERSION(2, 0, 2)) /*!< Version 2.0.2. */
 /*@}*/
 
 /*! @brief Interrupt Request (IRQ) Edge Select */
@@ -70,6 +70,15 @@ extern "C" {
 /*@{*/
 
 /*!
+ * @brief Get irq instance.
+ *
+ * @param base   IRQ peripheral base pointer
+ *
+ * @retval Irq instance number.
+ */
+uint32_t IRQ_GetInstance(IRQ_Type *base);
+
+/*!
  * @brief Initializes the IRQ pin used by the board.
  *
  * To initialize the IRQ pin, define a irq configuration, specify whhether enable pull-up, the edge and detect mode.
@@ -77,7 +86,6 @@ extern "C" {
  *
  * This is an example to initialize irq configuration.
  * @code
- * // define IRQ pin input with internal pull-up, falling edge detect
  * irq_config_t config =
  * {
  *   true,
@@ -117,7 +125,7 @@ static inline void IRQ_Enable(IRQ_Type *base, bool enable)
     }
     else
     {
-        base->SC &= ~IRQ_SC_IRQPE_MASK;
+        base->SC &= (uint8_t)~IRQ_SC_IRQPE_MASK;
     }
 }
 
@@ -142,7 +150,7 @@ static inline void IRQ_EnableInterrupt(IRQ_Type *base, bool enable)
         }
         else
         {
-            base->SC &= ~IRQ_SC_IRQIE_MASK;
+            base->SC &= (uint8_t)~IRQ_SC_IRQIE_MASK;
         }
     }
 }
@@ -172,7 +180,7 @@ static inline void IRQ_ClearIRQFlag(IRQ_Type *base)
  */
 static inline uint32_t IRQ_GetIRQFlag(IRQ_Type *base)
 {
-    return (base->SC & IRQ_SC_IRQF_MASK);
+    return ((uint32_t)base->SC & IRQ_SC_IRQF_MASK);
 }
 
 /*@}*/

@@ -1,5 +1,5 @@
 /*
- * Copyright 2017 NXP
+ * Copyright 2016-2019 NXP
  * All rights reserved.
  *
  * SPDX-License-Identifier: BSD-3-Clause
@@ -32,6 +32,13 @@ static const clock_ip_name_t s_irqClocks[] = IRQ_CLOCKS;
  * Code
  ******************************************************************************/
 
+/*!
+ * @brief Get irq instance.
+ *
+ * @param base   IRQ peripheral base pointer
+ *
+ * @retval Irq instance number.
+ */
 uint32_t IRQ_GetInstance(IRQ_Type *base)
 {
     uint32_t instance;
@@ -58,7 +65,6 @@ uint32_t IRQ_GetInstance(IRQ_Type *base)
  *
  * This is an example to initialize irq configuration.
  * code
- * // define IRQ pin input with internal pull-up, falling edge detect
  * irq_config_t config =
  * {
  *   true,
@@ -80,7 +86,7 @@ void IRQ_Init(IRQ_Type *base, const irq_config_t *config)
 #endif /* FSL_SDK_DISABLE_DRIVER_CLOCK_CONTROL */
 
     uint8_t scValue = base->SC;
-    scValue &= ~(IRQ_SC_IRQMOD_MASK | IRQ_SC_IRQEDG_MASK | IRQ_SC_IRQPDD_MASK);
+    scValue &= (uint8_t) ~(IRQ_SC_IRQMOD_MASK | IRQ_SC_IRQEDG_MASK | IRQ_SC_IRQPDD_MASK);
     if (!config->enablePullDevice)
     {
         scValue |= IRQ_SC_IRQPDD_MASK;

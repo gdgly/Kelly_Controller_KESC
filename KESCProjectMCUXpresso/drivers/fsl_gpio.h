@@ -1,5 +1,5 @@
 /*
- * Copyright 2017, NXP
+ * Copyright 2017-2019, NXP
  * All rights reserved.
  *
  * SPDX-License-Identifier: BSD-3-Clause
@@ -21,8 +21,8 @@
 
 /*! @name Driver version */
 /*@{*/
-/*! @brief GPIO driver version 2.0.0. */
-#define FSL_GPIO_DRIVER_VERSION (MAKE_VERSION(2, 0, 0))
+/*! @brief GPIO driver version 2.0.1. */
+#define FSL_GPIO_DRIVER_VERSION (MAKE_VERSION(2, 0, 1))
 /*@}*/
 
 /*! @brief PORT definition */
@@ -89,13 +89,13 @@ extern "C" {
  *
  * This is an example to define an input pin or an output pin configuration.
  * @code
- * // Define a digital input pin configuration,
+ * Define a digital input pin configuration,
  * gpio_pin_config_t config =
  * {
  *   kGPIO_DigitalInput,
  *   0,
  * }
- * //Define a digital output pin configuration,
+ * Define a digital output pin configuration,
  * gpio_pin_config_t config =
  * {
  *   kGPIO_DigitalOutput,
@@ -229,13 +229,13 @@ void FGPIO_PortInit(gpio_port_num_t port);
  *
  * This is an example to define an input pin or an output pin configuration:
  * @code
- * // Define a digital input pin configuration,
+ * Define a digital input pin configuration,
  * gpio_pin_config_t config =
  * {
  *   kGPIO_DigitalInput,
  *   0,
  * }
- * //Define a digital output pin configuration,
+ * Define a digital output pin configuration,
  * gpio_pin_config_t config =
  * {
  *   kGPIO_DigitalOutput,

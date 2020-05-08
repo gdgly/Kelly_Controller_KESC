@@ -1,5 +1,5 @@
 /*
- * Copyright 2017, NXP
+ * Copyright 2017-2019, NXP
  * All rights reserved.
  *
  * SPDX-License-Identifier: BSD-3-Clause
@@ -17,7 +17,7 @@
 #endif
 
 #define PORT_NUMBERS_EACH_GPIO (4U)
-#define PIN_NUMBERS_EACH_PORT (8U)
+#define PIN_NUMBERS_EACH_PORT (8UL)
 /*******************************************************************************
  * Variables
  ******************************************************************************/
@@ -54,13 +54,13 @@ static const clock_ip_name_t s_fgpioClockName[] = FGPIO_CLOCKS;
  *
  * This is an example to define an input pin or an output pin configuration.
  * code
- * // Define a digital input pin configuration,
+ * Define a digital input pin configuration,
  * gpio_pin_config_t config =
  * {
  *   kGPIO_DigitalInput,
  *   0,
  * }
- * //Define a digital output pin configuration,
+ * Define a digital output pin configuration,
  * gpio_pin_config_t config =
  * {
  *   kGPIO_DigitalOutput,
@@ -86,14 +86,14 @@ void GPIO_PinInit(gpio_port_num_t port, uint8_t pin, const gpio_pin_config_t *co
 
     if (config->pinDirection == kGPIO_DigitalInput)
     {
-        base->PDDR &= ~(1U << ((uint32_t)pin + (shift * PIN_NUMBERS_EACH_PORT)));
-        base->PIDR &= ~(1U << ((uint32_t)pin + (shift * PIN_NUMBERS_EACH_PORT)));
+        base->PDDR &= ~(1UL << ((uint32_t)pin + (shift * PIN_NUMBERS_EACH_PORT)));
+        base->PIDR &= ~(1UL << ((uint32_t)pin + (shift * PIN_NUMBERS_EACH_PORT)));
     }
     else
     {
         GPIO_PinWrite(port, pin, config->outputLogic);
-        base->PDDR |= (1U << ((uint32_t)pin + (shift * PIN_NUMBERS_EACH_PORT)));
-        base->PIDR |= (1U << ((uint32_t)pin + (shift * PIN_NUMBERS_EACH_PORT)));
+        base->PDDR |= (1UL << ((uint32_t)pin + (shift * PIN_NUMBERS_EACH_PORT)));
+        base->PIDR |= (1UL << ((uint32_t)pin + (shift * PIN_NUMBERS_EACH_PORT)));
     }
 }
 
@@ -118,11 +118,11 @@ void GPIO_PinWrite(gpio_port_num_t port, uint8_t pin, uint8_t output)
 
     if (output == 0U)
     {
-        base->PCOR = 1U << ((uint32_t)pin + (shift * PIN_NUMBERS_EACH_PORT));
+        base->PCOR = 1UL << ((uint32_t)pin + (shift * PIN_NUMBERS_EACH_PORT));
     }
     else
     {
-        base->PSOR = 1U << ((uint32_t)pin + (shift * PIN_NUMBERS_EACH_PORT));
+        base->PSOR = 1UL << ((uint32_t)pin + (shift * PIN_NUMBERS_EACH_PORT));
     }
 }
 
@@ -202,7 +202,7 @@ uint32_t GPIO_PinRead(gpio_port_num_t port, uint8_t pin)
     uint8_t shift    = (uint8_t)port % PORT_NUMBERS_EACH_GPIO;
     GPIO_Type *base  = s_gpioBases[instance];
 
-    return (((base->PDIR) >> ((uint32_t)pin + (shift * PIN_NUMBERS_EACH_PORT))) & 0x01U);
+    return (((base->PDIR) >> ((uint32_t)pin + (shift * PIN_NUMBERS_EACH_PORT))) & 0x01UL);
 }
 
 #if defined(FSL_FEATURE_SOC_FGPIO_COUNT) && FSL_FEATURE_SOC_FGPIO_COUNT
@@ -237,13 +237,13 @@ void FGPIO_PortInit(FGPIO_Type *base)
  *
  * This is an example to define an input pin or an output pin configuration:
  * code
- * // Define a digital input pin configuration,
+ * Define a digital input pin configuration,
  * gpio_pin_config_t config =
  * {
  *   kGPIO_DigitalInput,
  *   0,
  * }
- * //Define a digital output pin configuration,
+ * Define a digital output pin configuration,
  * gpio_pin_config_t config =
  * {
  *   kGPIO_DigitalOutput,
@@ -269,12 +269,12 @@ void FGPIO_PinInit(gpio_port_num_t port, uint8_t pin, const gpio_pin_config_t *c
 
     if (config->pinDirection == kGPIO_DigitalInput)
     {
-        base->PDDR &= ~(1U << ((uint32_t)pin + (shift * PIN_NUMBERS_EACH_PORT)));
+        base->PDDR &= ~(1UL << ((uint32_t)pin + (shift * PIN_NUMBERS_EACH_PORT)));
     }
     else
     {
         FGPIO_PinWrite(port, pin, config->outputLogic);
-        base->PDDR |= (1U << ((uint32_t)pin + (shift * PIN_NUMBERS_EACH_PORT)));
+        base->PDDR |= (1UL << ((uint32_t)pin + (shift * PIN_NUMBERS_EACH_PORT)));
     }
 }
 
@@ -299,11 +299,11 @@ void FGPIO_PinWrite(gpio_port_num_t port, uint8_t pin, uint8_t output)
 
     if (output == 0U)
     {
-        base->PCOR = 1 << ((uint32_t)pin + (shift * PIN_NUMBERS_EACH_PORT));
+        base->PCOR = 1UL << ((uint32_t)pin + (shift * PIN_NUMBERS_EACH_PORT));
     }
     else
     {
-        base->PSOR = 1 << ((uint32_t)pin + (shift * PIN_NUMBERS_EACH_PORT));
+        base->PSOR = 1UL << ((uint32_t)pin + (shift * PIN_NUMBERS_EACH_PORT));
     }
 }
 
@@ -383,7 +383,7 @@ uint32_t FGPIO_PinRead(gpio_port_num_t port, uint8_t pin)
     uint8_t shift    = (uint8_t)port % PORT_NUMBERS_EACH_GPIO;
     FGPIO_Type *base = s_fgpioBases[instance];
 
-    return (((base->PDIR) >> ((uint32_t)pin + (shift * PIN_NUMBERS_EACH_PORT))) & 0x01U);
+    return (((base->PDIR) >> ((uint32_t)pin + (shift * PIN_NUMBERS_EACH_PORT))) & 0x01UL);
 }
 
 #endif /* FSL_FEATURE_SOC_FGPIO_COUNT */

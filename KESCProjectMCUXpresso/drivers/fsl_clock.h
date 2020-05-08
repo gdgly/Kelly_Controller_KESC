@@ -59,8 +59,8 @@
 
 /*! @name Driver version */
 /*@{*/
-/*! @brief CLOCK driver version 2.1.0. */
-#define FSL_CLOCK_DRIVER_VERSION (MAKE_VERSION(2, 1, 0))
+/*! @brief CLOCK driver version 2.2.1. */
+#define FSL_CLOCK_DRIVER_VERSION (MAKE_VERSION(2, 2, 1))
 /*@}*/
 
 /* Definition for delay API in clock driver, users can redefine it to the real application. */
@@ -74,8 +74,8 @@
  * function CLOCK_SetXtal0Freq to set the value in the clock driver. For example,
  * if XTAL0 is 8 MHz:
  * @code
- * CLOCK_InitOsc0(...); // Set up the OSC0
- * CLOCK_SetXtal0Freq(80000000); // Set the XTAL0 value to the clock driver.
+ * CLOCK_InitOsc0(...);
+ * CLOCK_SetXtal0Freq(80000000)
  * @endcode
  *
  * This is important for the multicore platforms where only one core needs to set up the
@@ -362,7 +362,7 @@ extern "C" {
 static inline void CLOCK_EnableClock(clock_ip_name_t name)
 {
     uint32_t regAddr = SIM_BASE + CLK_GATE_ABSTRACT_REG_OFFSET((uint32_t)name);
-    (*(volatile uint32_t *)regAddr) |= (1U << CLK_GATE_ABSTRACT_BITS_SHIFT((uint32_t)name));
+    (*(volatile uint32_t *)regAddr) |= (1UL << CLK_GATE_ABSTRACT_BITS_SHIFT((uint32_t)name));
 }
 
 /*!
@@ -373,7 +373,7 @@ static inline void CLOCK_EnableClock(clock_ip_name_t name)
 static inline void CLOCK_DisableClock(clock_ip_name_t name)
 {
     uint32_t regAddr = SIM_BASE + CLK_GATE_ABSTRACT_REG_OFFSET((uint32_t)name);
-    (*(volatile uint32_t *)regAddr) &= ~(1U << CLK_GATE_ABSTRACT_BITS_SHIFT((uint32_t)name));
+    (*(volatile uint32_t *)regAddr) &= ~(1UL << CLK_GATE_ABSTRACT_BITS_SHIFT((uint32_t)name));
 }
 
 /*!
@@ -521,7 +521,7 @@ static inline void CLOCK_SetLowPowerEnable(bool enable)
     }
     else
     {
-        ICS->C2 &= ~ICS_C2_LP_MASK;
+        ICS->C2 &= (uint8_t)(~ICS_C2_LP_MASK);
     }
 }
 
@@ -539,7 +539,7 @@ static inline void CLOCK_SetLowPowerEnable(bool enable)
 static inline void CLOCK_SetInternalRefClkConfig(uint8_t enableMode)
 {
     /* Set internal reference clock selection. */
-    ICS->C1 = (ICS->C1 & ~(ICS_C1_IRCLKEN_MASK | ICS_C1_IREFSTEN_MASK)) | (uint8_t)enableMode;
+    ICS->C1 = (uint8_t)((ICS->C1 & ~(ICS_C1_IRCLKEN_MASK | ICS_C1_IREFSTEN_MASK)) | (uint8_t)enableMode);
 }
 
 /*!
@@ -552,7 +552,7 @@ static inline void CLOCK_SetInternalRefClkConfig(uint8_t enableMode)
  */
 static inline void CLOCK_SetFllExtRefDiv(uint8_t rdiv)
 {
-    ICS->C1 = (ICS->C1 & ~ICS_C1_RDIV_MASK) | ICS_C1_RDIV(rdiv);
+    ICS->C1 = (uint8_t)((ICS->C1 & ~ICS_C1_RDIV_MASK) | ICS_C1_RDIV(rdiv));
 }
 
 /*@}*/
@@ -575,7 +575,7 @@ static inline void CLOCK_SetOsc0MonitorMode(bool enable)
     }
     else
     {
-        ICS->C4 &= ~ICS_C4_CME_MASK;
+        ICS->C4 &= (uint8_t)(~ICS_C4_CME_MASK);
     }
 }
 
@@ -626,7 +626,7 @@ static inline void CLOCK_SetXtal0Freq(uint32_t freq)
  */
 static inline void CLOCK_SetOsc0Enable(uint8_t enable)
 {
-    OSC0->CR |= (OSC0->CR & (~(OSC_CR_OSCSTEN_MASK | OSC_CR_OSCEN_MASK))) | enable;
+    OSC0->CR |= (uint8_t)((OSC0->CR & (~(OSC_CR_OSCSTEN_MASK | OSC_CR_OSCEN_MASK))) | enable);
 }
 
 /* @} */
@@ -785,16 +785,6 @@ status_t CLOCK_BootToBelpMode(uint8_t bDiv);
  * function.
  */
 status_t CLOCK_SetIcsConfig(ics_config_t const *config);
-
-/*!
- * @brief Delay at least for several microseconds.
- *  Please note that, this API will calculate the microsecond period with the maximum
- *  supported CPU frequency, so this API will only delay for at least the given microseconds, if precise
- *  delay count was needed, please implement a new timer count to achieve this function.
- *
- * @param delay_us  Delay time in unit of microsecond.
- */
-void SDK_DelayAtLeastUs(uint32_t delay_us);
 
 /*@}*/
 
