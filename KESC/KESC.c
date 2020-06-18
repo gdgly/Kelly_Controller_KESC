@@ -78,8 +78,6 @@ LITE_FX_OS_THREAD_T ThreadTask1Second;
 LITE_FX_OS_THREAD_T ThreadComTx;			//20ms period task for communications
 
 
-
-
 /******************************************************************************/
 /*!
  * @name  	VoltageDividers
@@ -89,6 +87,7 @@ LITE_FX_OS_THREAD_T ThreadComTx;			//20ms period task for communications
 /*! @{ */
 VOLTAGE_DIVIDER_T	DividerCommon; // Battery, BackEMF,
 VOLTAGE_DIVIDER_T	DividerTemp; // LSTemp
+
 
 //R1 = 47.5k, R2 = 5.62k, DIV = 5.62/(47.5 + 5.62) = 281/2656
 //VREF = 5V, VDIV_PER_ADC = VREF/255 = 5/255
@@ -383,6 +382,20 @@ void DisableMotor1PhaseABC(void) 			{EN_1CBA_PIN_SET_OUT(0b000); SE_1CBA_PIN_SET
 void Set0PWMMotor1PhaseABC(void)		 	{PWM_1A_PIN_SET_CV(0); PWM_1B_PIN_SET_CV(0); PWM_1C_PIN_SET_CV(0); EN_1CBA_PIN_SET_OUT(0b111); SE_1CBA_PIN_SET_OUT(0b000);} // all mosfet top side off, low side on, short motor terminals for dynamic brake
 void RestPWMPolarityMotor1PhaseABC(void) 	{PWM_1ABC_PIN_SET_POL(0b000);}
 
+//// Unipolar 4q form 1
+//void CommutateMotor1PhaseAB(uint16_t pwm) {PWM_1A_PIN_SET_CV(pwm); PWM_1B_PIN_SET_CV(0); EN_1CBA_PIN_SET_OUT(0b011); SE_1CBA_PIN_SET_OUT(0b010); TriggerADCMotor1PhaseC();}
+//void CommutateMotor1PhaseAC(uint16_t pwm) {PWM_1A_PIN_SET_CV(pwm); PWM_1C_PIN_SET_CV(0); EN_1CBA_PIN_SET_OUT(0b101); SE_1CBA_PIN_SET_OUT(0b100); TriggerADCMotor1PhaseB();}
+//void CommutateMotor1PhaseBC(uint16_t pwm) {PWM_1B_PIN_SET_CV(pwm); PWM_1C_PIN_SET_CV(0); EN_1CBA_PIN_SET_OUT(0b110); SE_1CBA_PIN_SET_OUT(0b100); TriggerADCMotor1PhaseA();}
+//void CommutateMotor1PhaseBA(uint16_t pwm) {PWM_1B_PIN_SET_CV(pwm); PWM_1A_PIN_SET_CV(0); EN_1CBA_PIN_SET_OUT(0b011); SE_1CBA_PIN_SET_OUT(0b001); TriggerADCMotor1PhaseC();}
+//void CommutateMotor1PhaseCA(uint16_t pwm) {PWM_1C_PIN_SET_CV(pwm); PWM_1A_PIN_SET_CV(0); EN_1CBA_PIN_SET_OUT(0b101); SE_1CBA_PIN_SET_OUT(0b001); TriggerADCMotor1PhaseB();}
+//void CommutateMotor1PhaseCB(uint16_t pwm) {PWM_1C_PIN_SET_CV(pwm); PWM_1B_PIN_SET_CV(0); EN_1CBA_PIN_SET_OUT(0b110); SE_1CBA_PIN_SET_OUT(0b010); TriggerADCMotor1PhaseA();}
+//
+//void KESC_CommutatePhaseBA (uint16_t pwm)
+//{
+//	Waveform_CommutatePhaseBA(waveform , pwm);
+//}
+
+
 //void SetPWMMotor1_8(uint8_t pwmA, uint8_t pwmB, uint8_t pwmC) 	{PWM_1A_PIN_SET_CV((uint16_t)pwmA<<1); PWM_1B_PIN_SET_CV((uint16_t)pwmB<<1); PWM_1C_PIN_SET_CV((uint16_t)pwmC<<1);}
 void SetPWMMotor1(uint16_t pwmA, uint16_t pwmB, uint16_t pwmC) 	{PWM_1A_PIN_SET_CV(pwmA); PWM_1B_PIN_SET_CV(pwmB); PWM_1C_PIN_SET_CV(pwmC);}
 void EnablePWMMotor1(bool enA, bool enB, bool enC)				{EN_1CBA_PIN_SET_OUT(enC<<2|enB<<1|enA);}
@@ -461,6 +474,8 @@ uint8_t IndexBC;
 uint8_t IndexBA;
 uint8_t IndexCA;
 uint8_t IndexCB;
+
+
 
 void KESC_Init(void)
 {
@@ -708,4 +723,5 @@ void KESC_Loop(void)
 
 	}
 }
+
 

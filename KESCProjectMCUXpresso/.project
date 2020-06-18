@@ -53,16 +53,6 @@
 			<type>2</type>
 			<locationURI>copy_PARENT/Kelly_Library</locationURI>
 		</link>
-		<link>
-			<name>SourceGroup/KESC/Exclude/BLDCMContorlwithHallSensor</name>
-			<type>2</type>
-			<locationURI>PARENT-2-PROJECT_LOC/%5BReference%5D/KE04_LV_TWR_BLDC_HallSensor_Look-upTable/src/projects/KE04/BLDCMContorlwithHallSensor</locationURI>
-		</link>
-		<link>
-			<name>SourceGroup/KESC/Exclude/Sources</name>
-			<type>2</type>
-			<locationURI>PARENT-2-PROJECT_LOC/%5BArchive%5D/Sources</locationURI>
-		</link>
 	</linkedResources>
 	<variableList>
 		<variable>
