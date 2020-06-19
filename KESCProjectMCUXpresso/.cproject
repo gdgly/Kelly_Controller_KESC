@@ -106,10 +106,6 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/board}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/lists}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/panic}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/drivers}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/CMSIS}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/device}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/lists}&quot;"/>
 									<listOptionValue builtIn="false" value="../CMSIS"/>
 									<listOptionValue builtIn="false" value="../drivers"/>
 									<listOptionValue builtIn="false" value="../device"/>
@@ -120,7 +116,6 @@
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/Static_Code/PDD&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/Static_Code/IO_Map&quot;"/>
 									<listOptionValue builtIn="false" value="../"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Bootloader}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/External/FreeMASTER/src_common}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/External/FreeMASTER/src_platforms/Kxx}&quot;"/>
@@ -197,10 +192,6 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/board}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/lists}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/panic}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/drivers}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/CMSIS}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/device}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/lists}&quot;"/>
 									<listOptionValue builtIn="false" value="../CMSIS"/>
 									<listOptionValue builtIn="false" value="../drivers"/>
 									<listOptionValue builtIn="false" value="../device"/>
@@ -211,7 +202,6 @@
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/Static_Code/PDD&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/Static_Code/IO_Map&quot;"/>
 									<listOptionValue builtIn="false" value="../"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Bootloader}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/External/FreeMASTER/src_common}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/External/FreeMASTER/src_platforms/Kxx}&quot;"/>
@@ -228,22 +218,6 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/List}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/Shell}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/KESC}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/spi}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/timer}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/uart}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/timer_manager}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/CMSIS_driver}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/serial_manager}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/utilities/utilities}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/utilities}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/pwm}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/mem_manager}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/serial_manager/usb_cdc_adapter}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/osa}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/crc}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/common_task}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/board}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/panic}&quot;"/>
 								</option>
 								<option id="gnu.both.asm.option.warnings.nowarn.81561096" name="Suppress warnings (-W)" superClass="gnu.both.asm.option.warnings.nowarn"/>
 								<option id="gnu.both.asm.option.version.317101603" name="Announce version (-v)" superClass="gnu.both.asm.option.version"/>
@@ -391,7 +365,7 @@
 						<entry excluding="Kelly_Library/Trig8|Kelly_Library/External/FreeMASTER/src_platforms/KEAxx|Kelly_Library/External/FreeMASTER/src_platforms/S32xx|Kelly_Library/External/FreeMASTER/src_platforms/MQX|Kelly_Library/External/FreeMASTER/src_platforms/MPC57xx|Kelly_Library/External/FreeMASTER/src_platforms/MPC56xx|Kelly_Library/External/FreeMASTER/src_platforms/MPC55xx|Kelly_Library/External/FreeMASTER/src_platforms/MCF52xx|Kelly_Library/External/FreeMASTER/src_platforms/MCF51xx|Kelly_Library/External/FreeMASTER/src_platforms/HC12|Kelly_Library/External/FreeMASTER/src_platforms/HC08|Kelly_Library/External/FreeMASTER/src_platforms/56F8xxx|Kelly_Library/KellyMotorShell/KellyMotorShell.c|Kelly_Library/Protocol/KellyProtocol1.c|Kelly_Library/Protocol/Com.c|Kelly_Library/Protocol/Protocol.c|KESC/Com.c|Kelly_Library/State|Kelly_Library/KEA64/Serial.c|Kelly_Library/KEA64/CRC.c|Bootloader|KESC/Shell.c|Kelly_Library/KEA64/Console.c|KESC/Exclude|Kelly_Library/Exclude" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="SourceGroup"/>
 						<entry excluding="main.c" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="Sources"/>
 						<entry flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="Static_Code"/>
-						<entry flags="LOCAL|VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="board"/>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="device"/>
 						<entry flags="LOCAL|VALUE_WORKSPACE_PATH" kind="sourcePath" name="source"/>
 						<entry flags="LOCAL|VALUE_WORKSPACE_PATH" kind="sourcePath" name="startup"/>
 					</sourceEntries>
@@ -819,7 +793,7 @@
 						<entry excluding="Kelly_Library/Trig8|Kelly_Library/External/FreeMASTER/src_platforms/KEAxx|Kelly_Library/External/FreeMASTER/src_platforms/S32xx|Kelly_Library/External/FreeMASTER/src_platforms/MQX|Kelly_Library/External/FreeMASTER/src_platforms/MPC57xx|Kelly_Library/External/FreeMASTER/src_platforms/MPC56xx|Kelly_Library/External/FreeMASTER/src_platforms/MPC55xx|Kelly_Library/External/FreeMASTER/src_platforms/MCF52xx|Kelly_Library/External/FreeMASTER/src_platforms/MCF51xx|Kelly_Library/External/FreeMASTER/src_platforms/HC12|Kelly_Library/External/FreeMASTER/src_platforms/HC08|Kelly_Library/External/FreeMASTER/src_platforms/56F8xxx|Kelly_Library/KellyMotorShell/KellyMotorShell.c|Kelly_Library/Protocol/KellyProtocol1.c|Kelly_Library/Protocol/Com.c|Kelly_Library/Protocol/Protocol.c|KESC/Com.c|Kelly_Library/State|Kelly_Library/KEA64/Serial.c|Kelly_Library/KEA64/CRC.c|Bootloader|KESC/Shell.c|Kelly_Library/KEA64/Console.c|KESC/Exclude|Kelly_Library/Exclude" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="SourceGroup"/>
 						<entry excluding="main.c" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="Sources"/>
 						<entry flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="Static_Code"/>
-						<entry flags="LOCAL|VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="board"/>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="device"/>
 						<entry flags="LOCAL|VALUE_WORKSPACE_PATH" kind="sourcePath" name="source"/>
 						<entry flags="LOCAL|VALUE_WORKSPACE_PATH" kind="sourcePath" name="startup"/>
 					</sourceEntries>
@@ -1256,7 +1230,7 @@
 						<entry excluding="Kelly_Library/Trig8|Kelly_Library/External/FreeMASTER/src_platforms/KEAxx|Kelly_Library/External/FreeMASTER/src_platforms/S32xx|Kelly_Library/External/FreeMASTER/src_platforms/MQX|Kelly_Library/External/FreeMASTER/src_platforms/MPC57xx|Kelly_Library/External/FreeMASTER/src_platforms/MPC56xx|Kelly_Library/External/FreeMASTER/src_platforms/MPC55xx|Kelly_Library/External/FreeMASTER/src_platforms/MCF52xx|Kelly_Library/External/FreeMASTER/src_platforms/MCF51xx|Kelly_Library/External/FreeMASTER/src_platforms/HC12|Kelly_Library/External/FreeMASTER/src_platforms/HC08|Kelly_Library/External/FreeMASTER/src_platforms/56F8xxx|Kelly_Library/KellyMotorShell/KellyMotorShell.c|Kelly_Library/Protocol/KellyProtocol1.c|Kelly_Library/Protocol/Com.c|Kelly_Library/Protocol/Protocol.c|KESC/Com.c|Kelly_Library/State|Kelly_Library/KEA64/Serial.c|Kelly_Library/KEA64/CRC.c|Bootloader|KESC/Shell.c|Kelly_Library/KEA64/Console.c|KESC/Exclude|Kelly_Library/Exclude" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="SourceGroup"/>
 						<entry excluding="main.c" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="Sources"/>
 						<entry flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="Static_Code"/>
-						<entry flags="LOCAL|VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="board"/>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="device"/>
 						<entry flags="LOCAL|VALUE_WORKSPACE_PATH" kind="sourcePath" name="source"/>
 						<entry flags="LOCAL|VALUE_WORKSPACE_PATH" kind="sourcePath" name="startup"/>
 					</sourceEntries>

@@ -69,6 +69,9 @@ BLDC_CONTROLLER_T	Motor1;
 PID_T 				Motor1PID;
 MONITOR_T			Motor1Monitor;
 
+WAVEFORM_T Waveform1;
+
+
 static uint32_t LoopTimer, LoopDelta;
 BLINKY_T 			LEDPowerButton;
 
@@ -358,7 +361,7 @@ void FTM2_ISR(void)
 	//Speed_CaptureDeltaPoll(&Motor1Speed, ReadHallSensorMotor1()&0x01);
 	Speed_CaptureLongDeltaPoll(&Motor1Speed, ReadHallSensorMotor1()&0x01);
 
-	Waveform_ModulateAngleISR(Motor1.PWM, 1);
+	Waveform_ModulateAngleISR(&Waveform1, Motor1.PWM, 0);
 
 	BLDC_ProcessRunPoll(&Motor1); //if stops at same sensor state?
 
@@ -546,6 +549,7 @@ void KESC_Init(void)
 
 	Waveform_InitSinusoidalModulation
 	(
+		&Waveform1,
 		SetPWMMotor1,
 		PWM_MAX,
 		EnablePWMMotor1,
@@ -589,9 +593,11 @@ void KESC_Init(void)
 	(
 		&Motor1,
 		&Motor1Commutation,
+		&Waveform1,
 		&Motor1Speed,
 		&Motor1PID,
 		&Motor1Monitor,
+
 		DisableMotor1PhaseABC,
 		Set0PWMMotor1PhaseABC,
 		PWM_MAX
@@ -680,9 +686,9 @@ void KESC_Loop(void)
 		IndexCB
 	);
 
-	Waveform_SetMode(0);
-	Waveform_EnableSinusoidalModulation();
-	//Waveform_DisableSinusoidalModulation();
+	Waveform_SetMode(&Waveform1, 0);
+	Waveform_EnableSinusoidalModulation(&Waveform1);
+	//Waveform_DisableSinusoidalModulation(&Waveform1);
 
 
 	while(1)
