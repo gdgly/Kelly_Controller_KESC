@@ -298,12 +298,8 @@
 								<option id="gnu.c.link.option.nostdlibs.1153567834" name="No startup or default libs (-nostdlib)" superClass="gnu.c.link.option.nostdlibs" value="true" valueType="boolean"/>
 								<option id="gnu.c.link.option.strip.808444663" name="Omit all symbol information (-s)" superClass="gnu.c.link.option.strip"/>
 								<option id="gnu.c.link.option.noshared.116340156" name="No shared libraries (-static)" superClass="gnu.c.link.option.noshared"/>
-								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.c.link.option.libs.312891805" name="Libraries (-l)" superClass="gnu.c.link.option.libs" valueType="libs">
-									<listOptionValue builtIn="false" value="arm_cortexM0l_math"/>
-								</option>
-								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.c.link.option.paths.7149597" name="Library search path (-L)" superClass="gnu.c.link.option.paths" valueType="libPaths">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/libs}&quot;"/>
-								</option>
+								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="true" id="gnu.c.link.option.libs.312891805" name="Libraries (-l)" superClass="gnu.c.link.option.libs" valueType="libs"/>
+								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="true" id="gnu.c.link.option.paths.7149597" name="Library search path (-L)" superClass="gnu.c.link.option.paths" valueType="libPaths"/>
 								<option id="gnu.c.link.option.ldflags.680404778" name="Linker flags" superClass="gnu.c.link.option.ldflags"/>
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.c.link.option.other.718427429" name="Other options (-Xlinker [option])" superClass="gnu.c.link.option.other" valueType="stringList">
 									<listOptionValue builtIn="false" value="-Map=&quot;${BuildArtifactFileBaseName}.map&quot;"/>
@@ -331,7 +327,7 @@
 								<option id="com.crt.advproject.link.gcc.nanofloat.439623505" name="Enable printf float " superClass="com.crt.advproject.link.gcc.nanofloat"/>
 								<option id="com.crt.advproject.link.gcc.nanofloat.scanf.139956815" name="Enable scanf float " superClass="com.crt.advproject.link.gcc.nanofloat.scanf"/>
 								<option id="com.crt.advproject.link.toram.281429189" name="Link application to RAM" superClass="com.crt.advproject.link.toram"/>
-								<option defaultValue="com.crt.advproject.heapAndStack.mcuXpressoStyle" id="com.crt.advproject.link.memory.heapAndStack.style.777885615" name="Heap and Stack placement" superClass="com.crt.advproject.link.memory.heapAndStack.style" useByScannerDiscovery="false" valueType="enumerated"/>
+								<option defaultValue="com.crt.advproject.heapAndStack.mcuXpressoStyle" id="com.crt.advproject.link.memory.heapAndStack.style.777885615" name="Heap and Stack placement" superClass="com.crt.advproject.link.memory.heapAndStack.style" useByScannerDiscovery="false" value="com.crt.advproject.heapAndStack.mcuXpressoStyle" valueType="enumerated"/>
 								<option id="com.crt.advproject.link.stackOffset.130115090" name="Stack offset" superClass="com.crt.advproject.link.stackOffset"/>
 								<option id="com.crt.advproject.link.gcc.multicore.slave.695233509" name="Multicore configuration" superClass="com.crt.advproject.link.gcc.multicore.slave"/>
 								<option id="com.crt.advproject.link.gcc.multicore.master.793519466" name="Multicore master" superClass="com.crt.advproject.link.gcc.multicore.master"/>
@@ -476,10 +472,6 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/board}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/lists}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/panic}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/drivers}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/CMSIS}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/device}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/lists}&quot;"/>
 									<listOptionValue builtIn="false" value="../CMSIS"/>
 									<listOptionValue builtIn="false" value="../drivers"/>
 									<listOptionValue builtIn="false" value="../device"/>
@@ -490,7 +482,6 @@
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/Static_Code/PDD&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/Static_Code/IO_Map&quot;"/>
 									<listOptionValue builtIn="false" value="../"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Bootloader}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/External/FreeMASTER/src_common}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/External/FreeMASTER/src_platforms/Kxx}&quot;"/>
@@ -507,22 +498,7 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/List}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/Shell}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/KESC}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/spi}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/timer}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/uart}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/timer_manager}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/CMSIS_driver}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/serial_manager}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/utilities/utilities}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/utilities}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/pwm}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/mem_manager}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/serial_manager/usb_cdc_adapter}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/osa}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/crc}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/common_task}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/board}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/panic}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Bootloader}&quot;"/>
 									<listOptionValue builtIn="false" value="../component/serial_manager"/>
 									<listOptionValue builtIn="false" value="../utilities"/>
 									<listOptionValue builtIn="false" value="../component/lists"/>
@@ -589,10 +565,6 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/board}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/lists}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/panic}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/drivers}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/CMSIS}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/device}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/lists}&quot;"/>
 									<listOptionValue builtIn="false" value="../CMSIS"/>
 									<listOptionValue builtIn="false" value="../drivers"/>
 									<listOptionValue builtIn="false" value="../device"/>
@@ -603,7 +575,6 @@
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/Static_Code/PDD&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/Static_Code/IO_Map&quot;"/>
 									<listOptionValue builtIn="false" value="../"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Bootloader}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/External/FreeMASTER/src_common}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/External/FreeMASTER/src_platforms/Kxx}&quot;"/>
@@ -620,22 +591,7 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/List}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/Shell}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/KESC}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/spi}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/timer}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/uart}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/timer_manager}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/CMSIS_driver}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/serial_manager}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/utilities/utilities}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/utilities}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/pwm}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/mem_manager}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/serial_manager/usb_cdc_adapter}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/osa}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/crc}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/common_task}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/board}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/panic}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Bootloader}&quot;"/>
 									<listOptionValue builtIn="false" value="../component/serial_manager"/>
 									<listOptionValue builtIn="false" value="../utilities"/>
 									<listOptionValue builtIn="false" value="../component/lists"/>
@@ -906,10 +862,6 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/board}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/lists}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/panic}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/drivers}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/CMSIS}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/device}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/lists}&quot;"/>
 									<listOptionValue builtIn="false" value="../CMSIS"/>
 									<listOptionValue builtIn="false" value="../drivers"/>
 									<listOptionValue builtIn="false" value="../device"/>
@@ -920,7 +872,6 @@
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/Static_Code/PDD&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/Static_Code/IO_Map&quot;"/>
 									<listOptionValue builtIn="false" value="../"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Bootloader}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/External/FreeMASTER/src_common}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/External/FreeMASTER/src_platforms/Kxx}&quot;"/>
@@ -937,22 +888,7 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/List}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/Shell}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/KESC}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/spi}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/timer}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/uart}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/timer_manager}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/CMSIS_driver}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/serial_manager}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/utilities/utilities}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/utilities}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/pwm}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/mem_manager}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/serial_manager/usb_cdc_adapter}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/osa}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/crc}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/common_task}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/board}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/panic}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Bootloader}&quot;"/>
 									<listOptionValue builtIn="false" value="../component/serial_manager"/>
 									<listOptionValue builtIn="false" value="../utilities"/>
 									<listOptionValue builtIn="false" value="../component/lists"/>
@@ -1025,10 +961,6 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/board}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/lists}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/panic}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/drivers}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/CMSIS}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/device}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/lists}&quot;"/>
 									<listOptionValue builtIn="false" value="../CMSIS"/>
 									<listOptionValue builtIn="false" value="../drivers"/>
 									<listOptionValue builtIn="false" value="../device"/>
@@ -1039,7 +971,6 @@
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/Static_Code/PDD&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/Static_Code/IO_Map&quot;"/>
 									<listOptionValue builtIn="false" value="../"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Bootloader}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/External/FreeMASTER/src_common}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/External/FreeMASTER/src_platforms/Kxx}&quot;"/>
@@ -1056,22 +987,7 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/List}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Kelly_Library/Shell}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/KESC}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/spi}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/timer}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/uart}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/timer_manager}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/CMSIS_driver}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/serial_manager}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/utilities/utilities}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/utilities}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/pwm}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/mem_manager}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/serial_manager/usb_cdc_adapter}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/osa}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/crc}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/common_task}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/board}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/component/panic}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/SourceGroup/Bootloader}&quot;"/>
 									<listOptionValue builtIn="false" value="../component/serial_manager"/>
 									<listOptionValue builtIn="false" value="../utilities"/>
 									<listOptionValue builtIn="false" value="../component/lists"/>
@@ -1245,8 +1161,8 @@
 	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
 	<storageModule moduleId="com.nxp.mcuxpresso.core.datamodels">
 		<sdkName>SDK_2.x_MKE02Z64xxx4</sdkName>
-		<sdkVersion>2.7.0</sdkVersion>
-		<sdkComponents>middleware.baremetal.MKE02Z4;device.MKE02Z4_startup.MKE02Z4;platform.Include_common.MKE02Z4;platform.Include_core_cm0plus.MKE02Z4;device.MKE02Z4_CMSIS.MKE02Z4;platform.drivers.common.MKE02Z4;platform.drivers.clock.MKE02Z4;platform.drivers.ftm.MKE02Z4;platform.drivers.gpio_1.MKE02Z4;platform.drivers.irq.MKE02Z4;platform.drivers.uart.MKE02Z4;component.lists.MKE02Z4;platform.Include_dsp.MKE02Z4;platform.drivers.acmp_1.MKE02Z4;platform.drivers.adc.MKE02Z4;platform.drivers.flash.MKE02Z4;platform.drivers.i2c.MKE02Z4;platform.drivers.kbi.MKE02Z4;platform.drivers.pit.MKE02Z4;platform.drivers.port_ke02.MKE02Z4;platform.drivers.rtc_1.MKE02Z4;platform.drivers.spi.MKE02Z4;platform.drivers.tpm.MKE02Z4;platform.drivers.wdog8.MKE02Z4;platform.drivers.uart_cmsis.MKE02Z4;platform.CMSIS_Driver_Include.USART_CMSISInclude.MKE02Z4;platform.CMSIS_Driver_Include.Common_CMSISInclude.MKE02Z4;RTE_Device.MKE02Z4;platform.drivers.spi_cmsis.MKE02Z4;platform.CMSIS_Driver_Include.SPI_CMSISInclude.MKE02Z4;platform.drivers.i2c_cmsis.MKE02Z4;platform.CMSIS_Driver_Include.I2C_CMSISInclude.MKE02Z4;platform.CMSIS_DSP_Lib.arm_cortexM0b_math.MKE02Z4;platform.CMSIS_DSP_Lib.arm_cortexM0l_math.MKE02Z4;platform.utilities.assert.MKE02Z4;utility.debug_console.MKE02Z4;component.serial_manager.MKE02Z4;component.serial_manager_uart.MKE02Z4;platform.utilities.misc_utilities.MKE02Z4;platform.utilities.notifier.MKE02Z4;utility.shell.MKE02Z4;component.uart_adapter.MKE02Z4;component.vspi_adapter.MKE02Z4;component.tpm_adapter.MKE02Z4;component.spi_adapter.MKE02Z4;component.software_crc_adapter.MKE02Z4;component.pwm_tpm_adapter.MKE02Z4;component.pwm_ftm_adapter.MKE02Z4;component.pit_adapter.MKE02Z4;component.minispi_adapter.MKE02Z4;component.ftm_adapter.MKE02Z4;component.ecspi_adapter.MKE02Z4;component.serial_manager_usb_cdc_device_config.frdmke02z40m.MKE02Z4;component.common_task.MKE02Z4;component.osa.MKE02Z4;component.panic.MKE02Z4;component.timer_manager.MKE02Z4;component.mem_manager.MKE02Z4;</sdkComponents>
+		<sdkVersion>2.8.0</sdkVersion>
+		<sdkComponents>middleware.baremetal.MKE02Z4;device.MKE02Z4_startup.MKE02Z4;platform.Include_common.MKE02Z4;platform.Include_core_cm0plus.MKE02Z4;device.MKE02Z4_CMSIS.MKE02Z4;platform.drivers.common.MKE02Z4;platform.drivers.clock.MKE02Z4;platform.drivers.ftm.MKE02Z4;platform.drivers.gpio_1.MKE02Z4;platform.drivers.irq.MKE02Z4;platform.drivers.uart.MKE02Z4;component.lists.MKE02Z4;platform.Include_dsp.MKE02Z4;platform.drivers.acmp_1.MKE02Z4;platform.drivers.adc.MKE02Z4;platform.drivers.flash.MKE02Z4;platform.drivers.i2c.MKE02Z4;platform.drivers.kbi.MKE02Z4;platform.drivers.pit.MKE02Z4;platform.drivers.port_ke02.MKE02Z4;platform.drivers.rtc_1.MKE02Z4;platform.drivers.spi.MKE02Z4;platform.drivers.tpm.MKE02Z4;platform.drivers.wdog8.MKE02Z4;platform.drivers.uart_cmsis.MKE02Z4;platform.CMSIS_Driver_Include.USART_CMSISInclude.MKE02Z4;platform.CMSIS_Driver_Include.Common_CMSISInclude.MKE02Z4;RTE_Device.MKE02Z4;platform.drivers.spi_cmsis.MKE02Z4;platform.CMSIS_Driver_Include.SPI_CMSISInclude.MKE02Z4;platform.drivers.i2c_cmsis.MKE02Z4;platform.CMSIS_Driver_Include.I2C_CMSISInclude.MKE02Z4;platform.utilities.assert.MKE02Z4;utility.debug_console.MKE02Z4;component.serial_manager.MKE02Z4;component.serial_manager_uart.MKE02Z4;platform.utilities.misc_utilities.MKE02Z4;platform.utilities.notifier.MKE02Z4;utility.shell.MKE02Z4;component.uart_adapter.MKE02Z4;component.vspi_adapter.MKE02Z4;component.tpm_adapter.MKE02Z4;component.spi_adapter.MKE02Z4;component.software_crc_adapter.MKE02Z4;component.pwm_tpm_adapter.MKE02Z4;component.pwm_ftm_adapter.MKE02Z4;component.pit_adapter.MKE02Z4;component.minispi_adapter.MKE02Z4;component.ftm_adapter.MKE02Z4;component.ecspi_adapter.MKE02Z4;component.serial_manager_usb_cdc_device_config.frdmke02z40m.MKE02Z4;component.common_task.MKE02Z4;component.osa.MKE02Z4;component.panic.MKE02Z4;component.timer_manager.MKE02Z4;component.mem_manager.MKE02Z4;</sdkComponents>
 		<package>MKE02Z64VLH4</package>
 		<core>cm0plus</core>
 		<coreId>core0_MKE02Z64xxx4</coreId>
@@ -1263,7 +1179,7 @@
 &lt;vendor&gt;NXP&lt;/vendor&gt;&#13;
 &lt;memory can_program="true" id="Flash" is_ro="true" size="64" type="Flash"/&gt;&#13;
 &lt;memory id="RAM" size="4" type="RAM"/&gt;&#13;
-&lt;memoryInstance derived_from="Flash" driver="FTFE_2K_KE.cfx" id="PROGRAM_FLASH" location="0x00000000" size="0x00010000"/&gt;&#13;
+&lt;memoryInstance derived_from="Flash" driver="FTMRH_KE02.cfx" id="PROGRAM_FLASH" location="0x00000000" size="0x00010000"/&gt;&#13;
 &lt;memoryInstance derived_from="RAM" id="SRAM" location="0x1ffffc00" size="0x00001000"/&gt;&#13;
 &lt;/chip&gt;&#13;
 &lt;processor&gt;&#13;

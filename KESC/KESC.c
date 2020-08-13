@@ -107,6 +107,7 @@ VOLTAGE_DIVIDER_T	DividerTemp; // LSTemp
 #define R1_RATIO 	4750
 #define R2_RATIO 	562
 #define VREF		5
+#define ADC_RES		8
 #define ADC_MAX		255
 /*! @} */
 
@@ -520,7 +521,7 @@ void KESC_Init(void)
 	);
 
 	//Init software modules
-	VoltageDivider_Init(&DividerCommon, R1_RATIO, R2_RATIO, VREF, ADC_MAX);
+	VoltageDivider_Init(&DividerCommon, R1_RATIO, R2_RATIO, VREF, ADC_RES);
 	Blinky_Init(&LEDPowerButton, LEDBlinkOn, LEDBlinkOff);
 
 	//Load eeprom
@@ -687,8 +688,8 @@ void KESC_Loop(void)
 	);
 
 	Waveform_SetMode(&Waveform1, 0);
-	Waveform_EnableSinusoidalModulation(&Waveform1);
-	//Waveform_DisableSinusoidalModulation(&Waveform1);
+	//Waveform_EnableSinusoidalModulation(&Waveform1);
+	Waveform_DisableSinusoidalModulation(&Waveform1);
 
 
 	while(1)

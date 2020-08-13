@@ -3,6 +3,7 @@
 #ifndef _PRECOMPILE_CONFIG_H_
 #define _PRECOMPILE_CONFIG_H_
 
+#define MCU_KEA64
 
 #define SHELL_OPTION_USE_LIST
 #define CMDLINE_MAX_ARGS 	3
