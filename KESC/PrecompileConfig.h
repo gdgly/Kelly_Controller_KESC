@@ -13,6 +13,8 @@
 #define STATE_POINTERS_COUNT 2
 
 #define F_CPU 40000000
+#define FREQ_CPU F_CPU
+#define FREQ_BUS 20000000
 
 // ISR Map - Maps to MCUXpresso generated code. Not used for CW
 
