@@ -300,7 +300,7 @@ ICS_C2 = (uint8_t)(ICS_C2 & (uint8_t)~(uint8_t)(ICS_C2_BDIV_MASK));
     </Events>
   </Bean>
   <Bean name="FTM1" type="Init_FTM">
-    <Enabled v="Y" />
+    <Enabled v="N" />
     <Properties>
       <Component_name v="FTM1" />
       <Device v="FTM1" />
@@ -856,7 +856,7 @@ ICS_C2 = (uint8_t)(ICS_C2 & (uint8_t)~(uint8_t)(ICS_C2_BDIV_MASK));
     </Events>
   </Bean>
   <Bean name="ADC0" type="ADC_LDD">
-    <Enabled v="N" />
+    <Enabled v="Y" />
     <Properties>
       <Component_name v="ADC0" />
       <A_D_converter v="ADC" />

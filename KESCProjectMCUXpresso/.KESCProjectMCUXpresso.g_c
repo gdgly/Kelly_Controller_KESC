@@ -19,7 +19,7 @@
         <Line>PE_Const</Line>
         <Line>IO_Map</Line>
       </GenSharedModules>
-      <ShrdHeaderAge0>1351877161</ShrdHeaderAge0>
+      <ShrdHeaderAge0>1360428647</ShrdHeaderAge0>
       <ShrdCodeAge0>-1</ShrdCodeAge0>
       <ShrdAsemblAge0>-1</ShrdAsemblAge0>
       <ShrdHeaderAge1>1348035177</ShrdHeaderAge1>
@@ -46,9 +46,9 @@
         <Line>Generated_Code\Vectors.c</Line>
       </GenExtraFiles>
       <GenExtraFileSrcDir8>Repositories\lib\doxygen\</GenExtraFileSrcDir8>
-      <XtraAge9>1351877161</XtraAge9>
-      <XtraAge10>1351907529</XtraAge10>
-      <XtraAge11>1351907529</XtraAge11>
+      <XtraAge9>1360428647</XtraAge9>
+      <XtraAge10>1360428647</XtraAge10>
+      <XtraAge11>1360428647</XtraAge11>
       <GenExtraFileType11>4</GenExtraFileType11>
       <GenExtraFileType10>4</GenExtraFileType10>
       <GenExtraFileType9>4</GenExtraFileType9>
@@ -285,7 +285,7 @@
     </GenFiles>
     <SignalListFile>Documentation\KESCProjectMCUXpresso_SIGNALS.txt</SignalListFile>
     <DestinationCompiler>GNUC</DestinationCompiler>
-    <ProjectModificationStamp>184</ProjectModificationStamp>
+    <ProjectModificationStamp>188</ProjectModificationStamp>
   </Options>
   <CpuID_2>
     <Generated>true</Generated>
@@ -294,7 +294,7 @@
     <GenDriverVersion>01.04</GenDriverVersion>
     <GenEventModule>Events</GenEventModule>
     <HeaderAge>1351658987</HeaderAge>
-    <CodeAge>1351907529</CodeAge>
+    <CodeAge>1360428647</CodeAge>
     <AsemblAge>-1</AsemblAge>
     <GenNumMethods>6</GenNumMethods>
     <SetClockConfiguration>true</SetClockConfiguration>
@@ -1011,8 +1011,8 @@
     <GenComponentVersion>01.183</GenComponentVersion>
     <GenDriverVersion>01.00</GenDriverVersion>
     <GenEventModule>Events</GenEventModule>
-    <HeaderAge>-1</HeaderAge>
-    <CodeAge>-1</CodeAge>
+    <HeaderAge>1360422761</HeaderAge>
+    <CodeAge>1360422761</CodeAge>
     <AsemblAge>-1</AsemblAge>
     <GenNumMethods>21</GenNumMethods>
     <Init>true</Init>

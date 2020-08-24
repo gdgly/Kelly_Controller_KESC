@@ -186,8 +186,8 @@ void ADC_Init(void)
 	// Set HW trigger FTM2 counter init
 	/* SIM_SOPT: ADHWT=0x02 */
 	SIM_SOPT = (uint32_t) ((SIM_SOPT & (uint32_t) ~(uint32_t) (SIM_SOPT_ADHWT(0x03))) | (uint32_t) (SIM_SOPT_ADHWT(0x02)));
-	/* ADC_APCTL1: ADPC=0xE037 */
-	ADC_APCTL1 = ADC_APCTL1_ADPC(0xE037);
+//	/* ADC_APCTL1: ADPC=0xE037 */
+//	ADC_APCTL1 = ADC_APCTL1_ADPC(0xE037);
 	/* ADC_SC4: ASCANE=0,ACFSEL=0,AFDEP=0 */
 	ADC_SC4 = ADC_SC4_AFDEP(0x00) | 0x0100U;
 	/* ADC_SC3: ADIV=2,ADLSMP=0,MODE=0,ADICLK=0 */
@@ -202,6 +202,7 @@ void ADC_Init(void)
 extern MEASURE_SAMPLE_T MeasureSampleBEMFMotor1A;
 extern MEASURE_SAMPLE_T MeasureSampleBEMFMotor1B;
 extern MEASURE_SAMPLE_T MeasureSampleBEMFMotor1C;
+
 static const uint8_t ChannelsMotor1A2nd[] = {MEASURE_CHANNEL_I1_AD, MEASURE_CHANNEL_BAT_AD, MEASURE_CHANNEL_LSTEMP_AD};
 static const uint8_t ChannelsMotor1B2nd[] = {MEASURE_CHANNEL_I1_AD, MEASURE_CHANNEL_BAT_AD, MEASURE_CHANNEL_LSTEMP_AD};
 static const uint8_t ChannelsMotor1C2nd[] = {MEASURE_CHANNEL_I1_AD, MEASURE_CHANNEL_BAT_AD, MEASURE_CHANNEL_LSTEMP_AD};
@@ -213,7 +214,7 @@ MEASURE_SAMPLE_T MeasureSampleMotor1A2nd =
 {
 	.Channels.ChannelGroup = ChannelsMotor1A2nd,
 	.ChannelCount = sizeof(ChannelsMotor1A2nd),
-	.HWTrigger = true,
+	.HWTrigger = false, //use hardware gets less bemf measurements
 	.OnEndISR = OnEndADCMotor1A2nd,
 	.Overwrite = false,
 	.RepeatCount = 1,
@@ -224,7 +225,7 @@ MEASURE_SAMPLE_T MeasureSampleMotor1B2nd =
 {
 	.Channels.ChannelGroup = ChannelsMotor1B2nd,
 	.ChannelCount = sizeof(ChannelsMotor1B2nd),
-	.HWTrigger = true,
+	.HWTrigger = false,
 	.OnEndISR = OnEndADCMotor1B2nd,
 	.Overwrite = false,
 	.RepeatCount = 1,
@@ -235,7 +236,7 @@ MEASURE_SAMPLE_T MeasureSampleMotor1C2nd =
 {
 	.Channels.ChannelGroup = ChannelsMotor1C2nd,
 	.ChannelCount = sizeof(ChannelsMotor1C2nd),
-	.HWTrigger = true,
+	.HWTrigger = false,
 	.OnEndISR = OnEndADCMotor1C2nd,
 	.Overwrite = false,
 	.RepeatCount = 1,
@@ -295,9 +296,9 @@ MEASURE_SAMPLE_T MeasureSampleBEMFMotor1C =
 };
 
 //arm hw trigger on commutation
-static inline void TriggerADCMotor1PhaseA(void) { Measure_Start(&MeasureADC0, &MeasureSampleBEMFMotor1A); }//Monitor_ZeroCaptureFilterBEMF(&Motor1Monitor);}
-static inline void TriggerADCMotor1PhaseB(void) { Measure_Start(&MeasureADC0, &MeasureSampleBEMFMotor1B); }//Monitor_ZeroCaptureFilterBEMF(&Motor1Monitor);}
-static inline void TriggerADCMotor1PhaseC(void) { Measure_Start(&MeasureADC0, &MeasureSampleBEMFMotor1C); }//Monitor_ZeroCaptureFilterBEMF(&Motor1Monitor);}
+static inline void SetTriggerADCMotor1PhaseA(void) { Measure_Start(&MeasureADC0, &MeasureSampleBEMFMotor1A); }//Monitor_ZeroCaptureFilterBEMF(&Motor1Monitor);}
+static inline void SetTriggerADCMotor1PhaseB(void) { Measure_Start(&MeasureADC0, &MeasureSampleBEMFMotor1B); }//Monitor_ZeroCaptureFilterBEMF(&Motor1Monitor);}
+static inline void SetTriggerADCMotor1PhaseC(void) { Measure_Start(&MeasureADC0, &MeasureSampleBEMFMotor1C); }//Monitor_ZeroCaptureFilterBEMF(&Motor1Monitor);}
 /*! @} */
 
 
@@ -433,12 +434,12 @@ void SetPWMMotor1(uint16_t pwmA, uint16_t pwmB, uint16_t pwmC) 	{PWM_1A_PIN_SET_
 void EnablePWMMotor1(bool enA, bool enB, bool enC)				{EN_1CBA_PIN_SET_OUT(enC<<2|enB<<1|enA);}
 void InversePWMMotor1(bool invA, bool invB, bool invC)		 	{PWM_1ABC_PIN_SET_POL(invA<<2|invB<<1|invC);}
 
-void OnMotor1PhaseAB(void) {SE_1CBA_PIN_SET_OUT(0b010); TriggerADCMotor1PhaseC();};
-void OnMotor1PhaseAC(void) {SE_1CBA_PIN_SET_OUT(0b100); TriggerADCMotor1PhaseB();};
-void OnMotor1PhaseBC(void) {SE_1CBA_PIN_SET_OUT(0b100); TriggerADCMotor1PhaseA();};
-void OnMotor1PhaseBA(void) {SE_1CBA_PIN_SET_OUT(0b001); TriggerADCMotor1PhaseC();};
-void OnMotor1PhaseCA(void) {SE_1CBA_PIN_SET_OUT(0b001); TriggerADCMotor1PhaseB();};
-void OnMotor1PhaseCB(void) {SE_1CBA_PIN_SET_OUT(0b010); TriggerADCMotor1PhaseA();};
+void OnMotor1PhaseAB(void) {SE_1CBA_PIN_SET_OUT(0b010); SetTriggerADCMotor1PhaseC();};
+void OnMotor1PhaseAC(void) {SE_1CBA_PIN_SET_OUT(0b100); SetTriggerADCMotor1PhaseB();};
+void OnMotor1PhaseBC(void) {SE_1CBA_PIN_SET_OUT(0b100); SetTriggerADCMotor1PhaseA();};
+void OnMotor1PhaseBA(void) {SE_1CBA_PIN_SET_OUT(0b001); SetTriggerADCMotor1PhaseC();};
+void OnMotor1PhaseCA(void) {SE_1CBA_PIN_SET_OUT(0b001); SetTriggerADCMotor1PhaseB();};
+void OnMotor1PhaseCB(void) {SE_1CBA_PIN_SET_OUT(0b010); SetTriggerADCMotor1PhaseA();};
 /*! @} */
 
 void LEDBlinkOn(void)  	{ LED_PIN_ON();  }
